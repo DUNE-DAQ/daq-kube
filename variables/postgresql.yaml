@@ -1,0 +1,8 @@
+---
+postgresql_operator_component_value: cloudnative-pg
+
+postgresql:
+  operator_namespace: cnpg-system
+  databases:
+    database_name:
+      storage_class: local-path

@@ -1,0 +1,12 @@
+# Put this in a simple place to include for everyone
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: jmx-tweaks
+  namespace: {{ kafka.namespace }}
+data:
+  lowercaseOutputName.yml: |
+    lowercaseOutputName: true
+  lowercaseOutputLabelNames.yml: |
+    lowercaseOutputLabelNames: true

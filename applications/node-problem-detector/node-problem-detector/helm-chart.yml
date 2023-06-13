@@ -1,0 +1,8 @@
+helmChart:
+  repo: https://charts.deliveryhero.io
+  chartName: node-problem-detector
+  chartVersion: 2.3.4
+  updateConstraints: ~2.x
+  releaseName: node-problem-detector
+  namespace: '{{ node_problem_detector.namespace }}'
+  output: helm-rendered.yaml

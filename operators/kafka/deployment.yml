@@ -1,0 +1,13 @@
+---
+deployments:
+  - path: namespace
+
+  - barrier: true
+
+  - path: metrics
+    tags:
+      - monitoring
+
+  - path: strimzi
+
+  - barrier: true # make sure strimzi is done applying

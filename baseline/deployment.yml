@@ -1,0 +1,53 @@
+---
+deployments:
+  - path: kube-system
+    alwaysDeploy: true
+    skipDeleteIfTags: true
+
+  - deleteObjects: # KinD creates this, we don't use it
+      - kind: storageClass
+        name: standard
+
+  - path: prometheus-operator-crds
+    skipDeleteIfTags: true
+    tags:
+      - metrics
+      - monitoring
+      - alertmanager
+      - prometheus
+      - prometheus-operator
+
+  - barrier: true
+    message: Wait for Prometheus CRDs to settle
+
+{% if args.with_cilium %}
+  - include: cilium
+    skipDeleteIfTags: true
+{% endif %}
+
+  - include: metrics
+    skipDeleteIfTags: true
+    tags:
+      - metrics
+      - monitoring
+
+  - barrier: true
+    message: metrics need to settle so we can setup HPAs
+
+{% if args.with_dns_autoscaler %}
+  - path: dns-autoscaler
+    skipDeleteIfTags: true
+{% endif %}
+
+  - include: prometheus
+    tags:
+      - metrics
+      - monitoring
+
+  - include: local-storage
+    skipDeleteIfTags: true
+    tags:
+      - storage
+
+  - barrier: true
+    message: Make sure baseline is completely loaded

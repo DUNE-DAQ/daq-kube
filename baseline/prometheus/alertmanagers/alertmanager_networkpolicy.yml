@@ -1,0 +1,25 @@
+{% for thisone in alertmanagers %}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: alertmanager-{{ alertmanagers[thisone].name }}
+  namespace: {{ alertmanagers[thisone].namespace }}
+  labels:
+    app: alertmanager-{{ alertmanagers[thisone].name }}
+    {{ alertmanager_config_label_name }}: {{ alertmanagers[thisone].name }}
+spec:
+  ingress:
+    - ports:
+      - port: {{ alertmanagers[thisone].port }}
+  egress: # alerts may be sent to random webooks on weird ports
+    - {}
+  policyTypes:
+    - Ingress
+    - Egress
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: alertmanager
+      alertmanager: {{ alertmanagers[thisone].name }}
+...
+{% endfor %}

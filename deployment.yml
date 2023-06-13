@@ -1,0 +1,48 @@
+---
+deployments:
+  - include: baseline
+    skipDeleteIfTags: true
+
+  - barrier: true
+    message: Ensure baseline is loaded
+
+{% if args.with_operators %}
+  - include: operators
+  - barrier: true
+{% endif %}
+
+{% if args.with_applications %}
+  - include: applications
+{% endif %}
+
+{% if args.with_dune_daq %}
+  - include: dune_daq
+{% endif %}
+
+vars:
+  - file: variables/monitoring.yaml
+  - file: variables/metrics.yaml
+
+  - file: variables/cilium.yaml
+  - file: variables/kepler.yaml
+  - file: variables/local_path_provisioner.yaml
+  - file: variables/node_feature_discovery.yaml
+  - file: variables/node_problem_detector.yaml
+
+  - file: variables/alertmanager_labels.yaml
+  - file: variables/alertmanager.yaml
+  - file: variables/prometheus_labels.yaml
+  - file: variables/prometheus.yaml
+  - file: variables/grafana_labels.yaml
+  - file: variables/grafana.yaml
+
+  - file: variables/kafka.yaml
+  - file: variables/kubernetes_dashboard.yaml
+  - file: variables/postgresql.yaml
+  - file: variables/trivy.yaml
+
+  - file: variables/targets/{{ target.name }}.yaml
+
+ignoreForDiff:
+  - kind: PrometheusRule
+    fieldPath: .metadata.annotations["prometheus-operator-validated"]

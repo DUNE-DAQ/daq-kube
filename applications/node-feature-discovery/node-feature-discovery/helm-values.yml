@@ -1,0 +1,51 @@
+---
+enableNodeFeatureApi: {{ node_feature_discovery.enableNodeFeatureApi }}
+
+master:
+  resources:
+    limits:
+      cpu: 300m
+      memory: 500Mi
+    requests:
+      cpu: 100m
+      memory: 50Mi
+
+worker:
+  config:
+    core:
+     sleepInterval: {{ node_feature_discovery.worker.updateInterval }}
+  resources:
+    limits:
+      cpu: 300m
+      memory: 500Mi
+    requests:
+      cpu: 100m
+      memory: 50Mi
+
+topologyUpdater:
+  enable: {{ node_feature_discovery.topologyUpdater.enable }}
+  updateInterval:  {{ node_feature_discovery.topologyUpdater.updateInterval }}
+  createCRDs: {{ node_feature_discovery.topologyUpdater.enable }}
+  resources:
+    limits:
+      cpu: 300m
+      memory: 500Mi
+    requests:
+      cpu: 100m
+      memory: 50Mi
+
+topologyGC:
+  enable: {{ node_feature_discovery.topologyUpdater.enable }}
+  interval: {{ node_feature_discovery.topologyUpdater.updateInterval }}
+  resources:
+    limits:
+      cpu: 300m
+      memory: 500Mi
+    requests:
+      cpu: 100m
+      memory: 50Mi
+
+# TODO: figure out cert-manager
+tls:
+  enable: false
+  certManager: false

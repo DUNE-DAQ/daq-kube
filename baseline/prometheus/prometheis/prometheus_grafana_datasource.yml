@@ -1,0 +1,25 @@
+{% for thisone in prometheis %}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-datasource-prometheus-{{ prometheis[thisone].name }}
+  namespace: {{ prometheis[thisone].namespace }}
+  labels:
+    app: prometheus-{{ prometheis[thisone].name }}
+    {{ prometheus_config_label_name }}: {{ prometheis[thisone].name }}
+    {{ grafana_datasource_label_name }}: "{{ grafana_datasource_label_value }}"
+stringData:
+  prometheus-{{ prometheis[thisone].name }}.yaml: |-
+    apiVersion: 1
+    datasources:
+    - name: {{ prometheis[thisone].grafanaDatasourceName }}
+      type: prometheus
+      uid: prometheus-{{ prometheis[thisone].name }}
+      url: http://{{ prometheis[thisone].serviceName }}.{{ prometheis[thisone].namespace }}.svc.cluster.local:{{ prometheis[thisone].port }}
+      access: proxy
+      jsonData:
+        timeInterval: 30s
+        prometheusType: Prometheus
+...
+{% endfor %}

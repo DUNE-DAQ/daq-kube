@@ -1,0 +1,152 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: {{ monitoring.namespace }}
+
+resources:
+  # A bunch of dashboards, not all of them great
+  - kube-prometheus/manifests/grafana-dashboardDefinitions.yaml
+
+patches:
+  - target:
+      kind: ConfigMap
+      name: grafana-dashboard-.*
+    patch: |-
+      - op: add
+        path: /metadata/annotations
+        value: { {{ grafana_dashboard_folder_annotation }}: Kubernetes }
+      - op: add
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+        value: {{ grafana_dashboard_label_value }}
+  - target:
+      kind: ConfigMap
+      name: grafana-dashboard-grafana-overview # not a good dashboard
+    patch: |-
+      - op: remove
+        path: /metadata/annotations/{{ grafana_dashboard_folder_annotation }}
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+  - target:
+      kind: ConfigMap
+      name: grafana-dashboard-prometheus
+    patch: |-
+      - op: replace
+        path: /metadata/annotations/{{ grafana_dashboard_folder_annotation }}
+        value: Prometheus
+  - target:
+      kind: ConfigMap
+      name: grafana-dashboard-prometheus-remote-write
+    patch: |-
+      - op: replace
+        path: /metadata/annotations/{{ grafana_dashboard_folder_annotation }}
+        value: Prometheus
+  - target:
+      kind: ConfigMap
+      name: grafana-dashboard-alertmanager-overview
+    patch: |-
+      - op: replace
+        path: /metadata/annotations/{{ grafana_dashboard_folder_annotation }}
+        value: Prometheus
+  - target:
+      kind: ConfigMap
+      name: grafana-dashboard-k8s-coredns # have a replacement
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+  - target:
+      kind: ConfigMap
+      name: grafana-dashboard-apiserver # have a replacement
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+  - target:
+      kind: ConfigMap
+      name: grafana-dashboard-node-cluster-rsrc-use # have a replacement
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+  - target:
+      kind: ConfigMap
+      name: grafana-dashboard-node-rsrc-use # have a replacement
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+  - target:
+      kind: ConfigMap
+      name: grafana-dashboard-nodes # have a replacement
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+  - target:
+      kind: ConfigMap
+      name: grafana-dashboard-nodes-darwin # not required
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+  - target:
+      kind: ConfigMap
+      name: grafana-dashboard-cluster-total # not required?
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+  - target:
+      kind: ConfigMap
+      name: grafana-dashboard-k8s-resources-cluster # not required?
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+  - target:
+      kind: ConfigMap
+      name: grafana-dashboard-k8s-resources-workloads-namespace # not required?
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+  - target:
+      kind: ConfigMap
+      name: grafana-dashboard-namespace-by-pod # not required?
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+  - target:
+      kind: ConfigMap
+      name: grafana-dashboard-k8s-resources-node # not required?
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+  - target:
+      kind: ConfigMap
+      name: grafana-dashboard-k8s-resources-namespace # not required?
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+  - target:
+      kind: ConfigMap
+      name: grafana-dashboard-k8s-resources-pod # not required?
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+  - target:
+      kind: ConfigMap
+      name: grafana-dashboard-k8s-resources-workload # not required?
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+  - target:
+      kind: ConfigMap
+      name: grafana-dashboard-namespace-by-workload # not required?
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+  - target:
+      kind: ConfigMap
+      name: grafana-dashboard-pod-total # not required?
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+  - target:
+      kind: ConfigMap
+      name: grafana-dashboard-workload-total # not required?
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}

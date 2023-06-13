@@ -1,0 +1,29 @@
+{% for thisone in alertmanagers %}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Alertmanager
+metadata:
+  name: {{ alertmanagers[thisone].name }}
+  namespace: {{ alertmanagers[thisone].namespace }}
+  labels:
+    app.kubernetes.io/instance: alertmanager-{{ alertmanagers[thisone].name }}
+    {{ alertmanager_config_label_name }}: {{ alertmanagers[thisone].name }}
+spec:
+  replicas: {{ alertmanagers[thisone].replicas }}
+  # https://github.com/prometheus-operator/prometheus-operator/issues/5519
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 65536
+    runAsGroup: 65536
+    fsGroup: 65536
+    seccompProfile:
+      type: RuntimeDefault
+
+  resources: {{ alertmanagers[thisone].resources | tojson }}
+
+  alertmanagerConfiguration:
+    name: alertmanager-{{ alertmanagers[thisone].name }}-defaults
+  alertmanagerConfigNamespaceSelector: {{ alertmanagers[thisone].configNamespaceSelector | tojson }}
+  alertmanagerConfigSelector: {{ alertmanagers[thisone].configSelector | tojson }}
+...
+{% endfor %}

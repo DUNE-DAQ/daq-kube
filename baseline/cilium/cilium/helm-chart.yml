@@ -1,0 +1,10 @@
+helmChart:
+  repo: https://helm.cilium.io/
+  chartName: cilium
+  # Review the secrets under ignoreDiff before upgrade
+  # to a new feature branch
+  chartVersion: 1.13.3
+  updateConstraints: ~1.13.3
+  releaseName: cilium
+  namespace: kube-system
+  output: helm-rendered.yaml

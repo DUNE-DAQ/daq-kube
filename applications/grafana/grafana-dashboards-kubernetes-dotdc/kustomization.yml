@@ -1,0 +1,29 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: {{ monitoring.namespace }}
+
+resources:
+  - dotdc-grafana-dashboards-kubernetes/
+
+patches:
+  - target:
+      kind: ConfigMap
+    patch: |-
+      - op: remove
+        path: /metadata/annotations/grafana_folder
+      - op: remove
+        path: /metadata/labels/grafana_dashboard
+      - op: add
+        path: /metadata/annotations/{{ grafana_dashboard_folder_annotation }}
+        value: Kubernetes
+      - op: add
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+        value: "{{ grafana_dashboard_label_value }}"
+  - target:
+      kind: ConfigMap
+      name: dashboards-k8s-addons-trivy-operator
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}

@@ -1,0 +1,23 @@
+{% for thisone in prometheis %}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ prometheis[thisone].serviceName }}
+  namespace: {{ prometheis[thisone].namespace }}
+  labels:
+    app: prometheus-{{ prometheis[thisone].name }}
+    {{ prometheus_config_label_name }}: {{ prometheis[thisone].name }}
+    self-monitor: "true"
+spec:
+  type: ClusterIP
+  ports:
+    - name: {{ prometheis[thisone].portName }}
+      port: {{ prometheis[thisone].port }}
+      targetPort: 9090
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: prometheus
+    prometheus: {{ prometheis[thisone].name }}
+...
+{% endfor %}

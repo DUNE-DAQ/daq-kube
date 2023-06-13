@@ -1,0 +1,24 @@
+---
+alertmanagers:
+  main:
+    namespace: {{ monitoring.namespace }}
+    name: main
+    serviceName: alertmanager
+    url: http://alertmanager.{{ monitoring.namespace }}.svc.cluster.local
+    port: 9093
+    portName: web
+    replicas: 1
+
+    configNamespaceSelector: {}
+    configSelector:
+      matchLabels:
+        {{ alertmanager_config_label_name }}: {{ alertmanager_config_labels.default }}
+
+    # these limits should probably be tuned a bit
+    resources:
+      limits:
+        cpu: 500m
+        memory: 1Gi
+      requests:
+        cpu: 200m
+        memory: 50Mi

@@ -1,0 +1,102 @@
+---
+adminUser: admin
+adminPassword: "{{ args.grafana_admin_password }}"
+
+serviceMonitor:
+  enabled: true
+
+networkPolicy:
+  enabled: true
+
+grafana.ini:
+  dashboards:
+    default_home_dashboard_path: {{ grafana.default_dashboard }}
+  paths:
+    data: /var/lib/grafana/
+    logs: /var/log/grafana
+    plugins: /var/lib/grafana/plugins
+    provisioning: /etc/grafana/provisioning
+    temp_data_lifetime: 12h
+  server:
+    enable_gzip: true
+  database:
+    # maybe use postgresql so I can persist?
+    log_queries: false
+    query_retries: 2 # query_retries for sqlite only
+  analytics:
+    check_for_updates: true
+    check_for_plugin_updates: true
+    reporting_enabled: false
+  auth:
+    login_maximum_inactive_lifetime_duration: 13h
+    login_maximum_lifetime_duration: 10d
+    login_cookie_name: "grafana_session_{{ target.name }}"
+  auth.anonymous:
+    enabled: true # make sure to clean your cookies or else!
+    org_role: Viewer
+    org_name: Main Org.
+    hide_version: true
+  security:
+    admin_email: root@localhost.localdomain
+    disable_gravatar: true
+  users:
+    allow_sign_up: false
+    allow_org_create: false
+  log:
+    mode: console
+
+resources:
+ limits:
+   cpu: 500m
+   memory: 1Gi
+ requests:
+   cpu: 200m
+   memory: 50Mi
+
+# try not to schedule on same node as alertmanager/prometheus
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 10
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: alertmanager
+              operator: Exists
+          topologyKey: kubernetes.io/hostname
+      - weight: 20
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: prometheus
+              operator: Exists
+          topologyKey: kubernetes.io/hostname
+
+sidecar:
+  resources:
+   limits:
+     cpu: 200m
+     memory: 200Mi
+   requests:
+     cpu: 100m
+     memory: 5Mi
+
+  alerts:
+    enabled: true
+    label: "{{ grafana_alert_label_name }}"
+    labelValue: "{{ grafana_alert_label_value }}"
+    searchNamespace: ALL
+  dashboards:
+    enabled: true
+    label: "{{ grafana_dashboard_label_name }}"
+    labelValue: "{{ grafana_dashboard_label_value }}"
+    searchNamespace: ALL
+    folderAnnotation: {{ grafana_dashboard_folder_annotation }}
+    provider:
+      allowUiUpdates: false
+      foldersFromFilesStructure: true
+  datasources:
+    enabled: true
+    label: "{{ grafana_datasource_label_name }}"
+    labelValue: "{{ grafana_datasource_label_value }}"
+    searchNamespace: ALL

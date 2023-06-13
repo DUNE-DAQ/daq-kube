@@ -1,0 +1,8 @@
+helmChart:
+  repo: https://prometheus-community.github.io/helm-charts
+  chartName: kube-state-metrics
+  chartVersion: 5.7.0
+  updateConstraints: ~5.x
+  releaseName: kube-state-metrics
+  namespace: '{{ metrics.kubernetes_metrics_namespace }}'
+  output: helm-rendered.yaml

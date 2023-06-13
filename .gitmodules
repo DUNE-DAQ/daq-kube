@@ -1,0 +1,20 @@
+[submodule "dotdc-grafana-dashboards-kubernetes"]
+	path = applications/grafana/grafana-dashboards-kubernetes-dotdc/dotdc-grafana-dashboards-kubernetes
+	url = https://github.com/dotdc/grafana-dashboards-kubernetes.git
+	update = checkout
+[submodule "cloudnative-pg"]
+	path = operators/postgresql/postgresql-operator/reporting/cloudnative-pg
+	url = https://github.com/cloudnative-pg/cloudnative-pg.git
+	update = checkout
+[submodule "kube-prometheus"]
+	path = applications/grafana/grafana-dashboards-kubernetes-kube-prometheus/kube-prometheus
+	url = https://github.com/prometheus-operator/kube-prometheus.git
+	update = checkout
+[submodule "dune-daq-grafana-dashboards"]
+	path = dune_daq/grafana-dashboards/grafana-dashboards-dune-daq
+	url = https://github.com/DUNE-DAQ/grafana-dashboards.git
+	update = checkout
+[submodule "kepler"]
+	path = applications/kepler/grafana-dashboards-kepler/kepler
+	url = https://github.com/sustainable-computing-io/kepler.git
+	update = checkout

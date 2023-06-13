@@ -1,0 +1,211 @@
+node-taints node.Cilium.io/agent-not-ready=true:NoExecute   ??
+
+What about cilium featues:
+  kube-proxy replacement
+  ingress
+  gateway-api
+  socketLB
+  traffic encryption
+  service-mesh
+  multi-cluster mesh
+  localRedirectPolicy
+  cilium-NodePort
+  cilium-wellKnownIdentities
+  cilium-etcd
+  cilium-nodeinit
+  cilium-preflight
+
+Kubernetes API HA via a proxy (see kubespray loadbalancer_api)
+
+PV/PVC system? local-path, openebs, rook.io/ceph?
+
+https://velero.io/
+IPv6 only?
+
+ARGOCD - do we need DEX? I don't think so
+https://github.com/argoproj-labs/argocd-autopilot
+https://github.com/kostis-codefresh/gitops-environment-promotion
+
+https://github.com/kubevious/kubevious/blob/main/projects/DASHBOARD.md ??
+
+tool_k9s
+
+use projectContour?
+
+http://carl.schelin.org/?p=1916
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-datasource-postgresqlers
+  namespace: monitoring
+  labels:
+     grafana_datasource: import
+type: Opaque
+stringData:
+  postgresqlers.yaml: |-
+    apiVersion: 1
+    datasources:
+    - name: PostgresERS
+      type: postgres
+      url: np04-srv-023.cern.ch:30432
+      access: proxy
+      database: ApplicationDbErrorReporting
+      jsonData:
+        sslmode: "disable"
+        tlsSkipVerify: true
+        postgresVersion: 1200
+        maxIdleConns: 2
+      user: admin
+      secureJsonData:
+        password: puttherealpasswordhere # this note does not contain the real password
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-datasource-np04daqsysadmin
+  namespace: monitoring
+  labels:
+     grafana_datasource: import
+type: Opaque
+stringData:
+  np04daq_sysadmin.yaml: |-
+    apiVersion: 1
+    datasources:
+    - name: NP04DAQ_sysadmin
+      type: prometheus
+      url: http://np04-srv-009.cern.ch:9090
+      access: proxy
+      jsonData:
+        timeInterval: 30s
+        prometheusType: Prometheus
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-datasource-influxkafka
+  namespace: monitoring
+  labels:
+     grafana_datasource: import
+type: Opaque
+stringData:
+  influxkafkadatasource.yaml: |-
+    apiVersion: 1
+    datasources:
+      - name: InfluxKafka
+        type: influxdb
+        access: proxy
+        database: influxv3
+        url: http://np04-srv-023.cern.ch:31002
+        withCredentials: true
+        basicAuth: true
+        user: admin
+        basicAuthUser: admin
+        jsonData:
+          httpMode: POST
+        secureJsonData:
+          password: puttherealpasswordhere # this note does not contain the real password
+          basicAuthPassword: puttherealpasswordhere # this note does not contain the real password
+...
+
+etcd quota backend bytes == 8G for prod: https://etcd.io/docs/v3.5/dev-guide/limit/
+
+allocate-node-cidrs=true
+
+cillium disable-kube-proxy?
+
+docker proxy for NP04?
+
+docker proxy for kind?
+  - https://maelvls.dev/docker-proxy-registry-kind/
+
+https://cert-manager.io/docs/configuration/
+
+https://github.com/cilium/tetragon
+
+https://github.com/mittwald/kubernetes-secret-generator
+
+kubectl audit log??
+
+sonobuoy test layout
+
+https://github.com/monitoring-mixins/mixtool
+https://github.com/monitoring-mixins/website
+
+backups -> https://www.youtube.com/watch?v=JyzgS-KKuoo
+
+open telemetry?
+
+etcd endpoints 127.0.0.1?
+
+Is cilium a better choice? -> Hubble view? enable envoy by default?
+
+https://artifacthub.io/packages/helm/bitnami/contour-operator
+
+https://artifacthub.io/packages/helm/projectcalico/tigera-operator -> metrics???
+
+kubectl contexts
+
+vnc desktop?
+
+network policy for default charts
+
+https://artifacthub.io/packages/olm/community-operators/community-kubevirt-hyperconverged
+https://artifacthub.io/packages/krew/krew-index/virt
+
+https://knative.dev/docs/install/
+https://artifacthub.io/packages/olm/community-operators/knative-operator
+
+https://artifacthub.io/packages/olm/community-operators/elastic-cloud-eck
+
+https://artifacthub.io/packages/olm/community-operators/rook-ceph
+
+https://artifacthub.io/packages/olm/community-operators/etcd
+
+https://artifacthub.io/packages/olm/community-operators/shipwright-operator
+
+https://artifacthub.io/packages/olm/community-operators/snapscheduler
+
+https://open-cluster-management.io/
+
+https://artifacthub.io/packages/olm/community-operators/dynatrace-operator
+
+https://artifacthub.io/packages/olm/community-operators/metallb-operator
+
+https://kube-vip.io/ ?
+
+https://artifacthub.io/packages/helm/harbor/harbor
+
+https://github.com/cilium/cilium/blob/master/examples/kubernetes/addons/prometheus/monitoring-example.yaml # has a dashboard via configmap
+
+roles for https://github.com/iovisor/kubectl-trace
+
+https://medium.com/@charled.breteche/kubernetes-security-pod-security-standards-using-kyverno-cc5d9042b79a
+https://artifacthub.io/packages/search?org=kyverno&sort=relevance&page=1
+
+https://github.com/snowdrop/k8s-infra
+https://docs.ansible.com/ansible/latest/collections/kubernetes/core/index.html#plugins-in-kubernetes-core
+https://docs.ansible.com/ansible/latest/collections/community/crypto/index.html#plugins-in-community-crypto
+https://docs.ansible.com/ansible/latest/collections/community/grafana/index.html#plugins-in-community-grafana
+https://docs.ansible.com/ansible/latest/collections/community/postgresql/index.html#plugins-in-community-postgresql
+https://docs.ansible.com/ansible/latest/collections/community/mongodb/index.html#plugins-in-community-mongodb
+https://docs.ansible.com/ansible/latest/collections/ansible/netcommon/index.html#plugins-in-ansible-netcommon
+https://docs.ansible.com/ansible/latest/collections/ansible/posix/index.html#plugins-in-ansible-posix
+https://docs.ansible.com/ansible/latest/collections/ansible/utils/index.html#plugins-in-ansible-utils
+
+
+https://github.com/FairwindsOps/rbac-manager
+
+https://github.com/FairwindsOps/Polaris
+
+
+kafka:
+set xmx to 4g per best practices?
+
+https://github.com/prometheus/jmx_exporter/tree/main/example_configs # kafka and kafka-connect
+
+config entries:
+log.retention.hours=12 ? non-default, default is 168
+log.retention.bytes=6442450944 ? non-default, default is unset
+

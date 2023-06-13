@@ -1,0 +1,11 @@
+---
+grafana_dashboard_label_name: grafana_dashboard
+grafana_dashboard_label_value: 'import'
+
+grafana_datasource_label_name: grafana_datasource
+grafana_datasource_label_value: 'import'
+
+grafana_alert_label_name: grafana_alert
+grafana_alert_label_value: 'import'
+
+grafana_dashboard_folder_annotation: grafana_folder

@@ -1,0 +1,62 @@
+{% for thisone in alertmanagers %}
+---
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: alertmanager-{{ alertmanagers[thisone].name }}-defaults
+  namespace: {{ alertmanagers[thisone].namespace }}
+  labels:
+    app: alertmanager-{{ alertmanagers[thisone].name }}
+    {{ alertmanager_config_label_name }}: {{ alertmanagers[thisone].name }}
+spec:
+  receivers:
+    - name: ignore
+  route:
+    groupBy:
+      - alertname
+      - cluster
+      - namespace
+      - service
+    receiver: ignore
+#    routes:
+#    - matchers:
+#      - name: alertname
+#        matchType: =~
+#        value: InfoInhibitor|Watchdog
+#      receiver: ignore
+#      continue: false
+  inhibitRules:
+    - targetMatch: # when already in "critical/major", skip "warning/info"
+        - name: severity
+          matchType: =~
+          value: critical|major
+      sourceMatch:
+        - name: severity
+          matchType: =~
+          value: warning|info
+      equal:
+        - namespace
+        - alertname
+    - targetMatch: # when already in "warning", skip info
+        - name: severity
+          matchType: =
+          value: warning
+      sourceMatch:
+        - name: severity
+          matchType: =
+          value: info
+      equal:
+        - namespace
+        - alertname
+    - sourceMatch: # Don't alert on InfoInhibitor
+        - name: alertname
+          matchType: =~
+          value: InfoInhibitor
+      targetMatch:
+        - name: severity
+          matchType: =
+          value: info
+      equal:
+        - namespace
+...
+{% endfor %}

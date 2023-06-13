@@ -1,0 +1,30 @@
+---
+deployments:
+  - path: cilium
+    skipDeleteIfTags: true
+
+  - barrier: true
+    message: CNI needs to settle so we can allocate IP addresses
+
+# Don't replace certs on every run
+# this list needs to be maintained by hand :(
+ignoreForDiff:
+  - kind: Secret
+    namespace: kube-system
+    name: cilium-ca
+    fieldPath: .data
+
+  - kind: Secret
+    namespace: kube-system
+    name: hubble-ca-secret
+    fieldPath: .data
+
+  - kind: Secret
+    namespace: kube-system
+    name: hubble-relay-client-certs
+    fieldPath: .data
+
+  - kind: Secret
+    namespace: kube-system
+    name: hubble-server-certs
+    fieldPath: .data

@@ -1,0 +1,8 @@
+---
+deployments:
+  - path: namespace
+    alwaysDeploy: true
+
+  - barrier: true
+
+  - path: node-feature-discovery

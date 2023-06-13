@@ -1,0 +1,6 @@
+---
+kubernetes_dashboard:
+  namespace: kubernetes-dashboard
+
+  disable_ro_user: false  # setting this to `false` is a bad idea
+  deny_all_ingress: false # setting this to `false` is a bad idea

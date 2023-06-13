@@ -1,0 +1,8 @@
+helmChart:
+  repo: https://kubernetes.github.io/dashboard/
+  chartName: kubernetes-dashboard
+  chartVersion: 6.0.8
+  updateConstraints: ~6.x
+  releaseName: kubernetes-dashboard
+  namespace: '{{ kubernetes_dashboard.namespace }}'
+  output: helm-rendered.yaml

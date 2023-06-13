@@ -1,0 +1,25 @@
+{% for thisone in prometheis %}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: prometheus-{{ prometheis[thisone].name }}
+  namespace: {{ prometheis[thisone].namespace }}
+  labels:
+    app: prometheus-{{ prometheis[thisone].name }}
+    {{ prometheus_config_label_name }}: {{ prometheis[thisone].name }}
+spec:
+  ingress:
+    - ports:
+      - port: {{ prometheis[thisone].port }}
+  egress: # metrics might be on any random port
+    - {}
+  policyTypes:
+    - Ingress
+    - Egress
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/name: prometheus
+      prometheus: {{ prometheis[thisone].name }}
+...
+{% endfor %}

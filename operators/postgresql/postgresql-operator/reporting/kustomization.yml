@@ -1,0 +1,32 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: {{ postgresql.operator_namespace }}
+
+resources:
+  - cloudnative-pg/docs/src/samples/monitoring/cnpg-prometheusrule.yaml
+  - cloudnative-pg/docs/src/samples/monitoring/grafana-configmap.yaml
+  - cnpg-operator-podmonitor.yaml
+
+patches:
+  - target:
+      kind: ConfigMap
+      name: test-cnp-dashboard
+    patch: |-
+      - op: add
+        path: /metadata/annotations
+        value: { "{{ grafana_dashboard_folder_annotation }}": " PostgreSQL" }
+      - op: add
+        path: /metadata/labels
+        value: { "{{ grafana_dashboard_label_name }}": "{{ grafana_dashboard_label_value }}" }
+      - op: replace
+        path: /metadata/name
+        value: cnpg-example-dashboard
+  - target:
+      kind: PrometheusRule
+      name: cnpg-default-alerts
+    patch: |-
+      - op: add
+        path: /metadata/labels
+        value: { "{{ prometheus_rule_label_name }}": "{{ prometheus_rule_labels.postgresql }}" }

@@ -1,0 +1,5 @@
+---
+grafana:
+  component_value: grafana
+  sidecar_dashboard_folder: /tmp/dashboards
+  default_dashboard: /tmp/dashboards/home.json

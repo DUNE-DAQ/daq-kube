@@ -1,0 +1,12 @@
+---
+deployments:
+  - path: namespace
+
+  - barrier: true
+
+  - path: reporting
+    tags:
+      - grafana-dashboards-postgresql
+  - path: postgres-operator
+
+  - barrier: true

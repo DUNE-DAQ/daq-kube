@@ -1,0 +1,25 @@
+{% for thisone in alertmanagers %}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-datasource-alertmanager-{{ alertmanagers[thisone].name }}
+  namespace: {{ alertmanagers[thisone].namespace }}
+  labels:
+    app: alertmanager-{{ alertmanagers[thisone].name }}
+    {{ alertmanager_config_label_name }}: {{ alertmanagers[thisone].name }}
+    {{ grafana_datasource_label_name }}: "{{ grafana_datasource_label_value }}"
+stringData:
+  alertmanager-{{ alertmanagers[thisone].name }}.yaml: |-
+    apiVersion: 1
+    datasources:
+    - name: {{ alertmanagers[thisone].serviceName }}
+      type: alertmanager
+      uid: alertmanager-{{ alertmanagers[thisone].name }}
+      url: http://{{ alertmanagers[thisone].serviceName }}.{{ alertmanagers[thisone].namespace }}.svc.cluster.local:{{ alertmanagers[thisone].port }}
+      access: proxy
+      jsonData:
+        implementation: prometheus
+        handleGrafanaManagedAlerts: true
+...
+{% endfor %}

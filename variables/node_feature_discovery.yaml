@@ -1,0 +1,12 @@
+---
+node_feature_discovery:
+  namespace: node-feature-discovery
+
+  topologyUpdater:
+    enable: false
+    updateInterval: 2h
+
+  worker:
+    updateInterval: 2h
+
+  enableNodeFeatureApi: true

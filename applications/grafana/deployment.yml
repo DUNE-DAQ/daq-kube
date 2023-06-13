@@ -1,0 +1,13 @@
+---
+deployments:
+  - path: grafana-dashboards-kubernetes-dotdc
+    tags:
+      - grafana-dashboards
+      - grafana-dashboards-kubernetes
+
+  - path: grafana-dashboards-kubernetes-kube-prometheus
+    tags:
+      - grafana-dashboards
+      - grafana-dashboards-kubernetes
+
+  - path: grafana-server

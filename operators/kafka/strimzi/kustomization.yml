@@ -1,0 +1,45 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+commonLabels:
+  app.kubernetes.io/component: {{ strimzi_component_value }}
+  app.kubernetes.io/instance: strimzi
+
+resources:
+  - helm-rendered.yaml
+
+patches:
+{% if args.with_kafka_kraft %}
+  - target:
+      kind: ConfigMap
+      name: strimzi-zookeeper
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+{% else %}
+  - target:
+      kind: ConfigMap
+      name: strimzi-kraft
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+{% endif %}
+  - target:
+      kind: ConfigMap
+      name: strimzi-kafka-mirror-maker2
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+  - target:
+      kind: ConfigMap
+      name: strimzi-kafka-oauth
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+  - target:
+      kind: ConfigMap
+      name: strimzi-cruise-control
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}

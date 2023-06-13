@@ -1,0 +1,4 @@
+---
+metrics:
+  kubernetes_metrics_namespace: kubernetes-metrics
+  node_exporter_namespace: node-exporter

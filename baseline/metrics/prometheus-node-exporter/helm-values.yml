@@ -1,0 +1,39 @@
+---
+resources:
+  limits:
+    cpu: 500m
+    memory: 500Mi
+  requests:
+    cpu: 100m
+    memory: 50Mi
+
+nodeSelector:
+  kubernetes.io/os: linux
+
+fullnameOverride: node-exporter
+
+podLabels:
+  jobLabel: node-exporter # changing this impacts dashboards
+
+prometheus:
+  podMonitor:
+    enabled: true
+    attachMetadata:
+      node: true
+    jobLabel: jobLabel # changing this impacts dashboards
+    additionalLabels:
+      {{ prometheus_podmonitor_label_name }}: {{ prometheus_podmonitor_labels.system }}
+    relabelings:
+      - sourceLabels: [__meta_kubernetes_pod_node_name] # ensure consistent node name
+        targetLabel: nodename
+
+# https://github.com/prometheus-community/helm-charts/issues/3305
+# https://github.com/prometheus-community/helm-charts/blob/main/charts/kube-prometheus-stack/values.yaml#L1781
+extraArgs:
+    - --collector.filesystem.mount-points-exclude=^/(dev|proc|sys|var/lib/docker/.+|var/lib/kubelet/.+)($|/)
+    - --collector.filesystem.fs-types-exclude=^(autofs|binfmt_misc|bpf|cgroup2?|configfs|debugfs|devpts|devtmpfs|fusectl|hugetlbfs|iso9660|mqueue|nsfs|overlay|proc|procfs|pstore|rpc_pipefs|securityfs|selinuxfs|squashfs|sysfs|tracefs)$
+    - --collector.netclass.ignored-devices=^(lxc[a-f0-9]{12})$
+    - --collector.netdev.device-exclude=^(lxc[a-f0-9]{12})$
+
+networkPolicy:
+  enabled: true

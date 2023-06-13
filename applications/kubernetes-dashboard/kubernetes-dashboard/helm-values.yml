@@ -1,0 +1,27 @@
+---
+# There is a known issue where
+# Secret/kubernetes-dashboard-key-holder
+# loses its labels and annotations after initial startup
+# https://github.com/kubernetes/dashboard/issues/7731
+
+fullnameOverride: 'kubernetes-dashboard'
+
+metricsScraper:
+  enabled: true
+
+serviceMonitor:
+  enabled: true
+
+networkPolicy:
+  enabled: true
+  ingressDenyAll: {{ kubernetes_dashboard.deny_all_ingress }}
+
+{% if kubernetes_dashboard.disable_ro_user %}
+rbac:
+  # It is NOT RECOMMENDED to use this version in production.
+  # Instead you should review the role and remove all potentially sensitive parts such as
+  # access to persistentvolumes, pods/log etc.
+  clusterReadOnlyRole: true
+extraArgs:
+  - --enable-skip-login
+{% endif %}

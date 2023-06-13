@@ -1,0 +1,25 @@
+{% for thisone in prometheis %}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: prometheus-{{ prometheis[thisone].name }}
+  namespace: {{ prometheis[thisone].namespace }}
+  labels:
+    app: prometheus-{{ prometheis[thisone].name }}
+    {{ prometheus_config_label_name }}: {{ prometheis[thisone].name }}
+spec:
+  endpoints:
+    - path: /metrics
+      port: {{ prometheis[thisone].portName }}
+      enableHttp2: true
+  namespaceSelector:
+    matchNames:
+    - {{ prometheis[thisone].namespace }}
+  selector:
+    matchLabels:
+      app: prometheus-{{ prometheis[thisone].name }}
+      {{ prometheus_config_label_name }}: {{ prometheis[thisone].name }}
+      self-monitor: "true"
+...
+{% endfor %}

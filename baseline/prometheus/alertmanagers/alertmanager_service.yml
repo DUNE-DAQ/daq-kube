@@ -1,0 +1,23 @@
+{% for thisone in alertmanagers %}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ alertmanagers[thisone].serviceName }}
+  namespace: {{ alertmanagers[thisone].namespace }}
+  labels:
+    app: alertmanager-{{ alertmanagers[thisone].name }}
+    {{ alertmanager_config_label_name }}: {{ alertmanagers[thisone].name }}
+    self-monitor: "true"
+spec:
+  type: ClusterIP
+  ports:
+    - name: {{ alertmanagers[thisone].portName }}
+      port: {{ alertmanagers[thisone].port }}
+      targetPort: 9093
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: alertmanager
+    alertmanager: {{ alertmanagers[thisone].name }}
+...
+{% endfor %}

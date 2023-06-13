@@ -1,0 +1,8 @@
+helmChart:
+  chartName: kepler
+  chartVersion: 0.4.1
+  namespace: '{{ kepler.namespace }}'
+  output: helm-rendered.yaml
+  releaseName: kepler
+  repo: https://sustainable-computing-io.github.io/kepler-helm-chart
+  updateConstraints: ~0.x

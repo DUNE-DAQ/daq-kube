@@ -1,0 +1,43 @@
+---
+## 
+fullnameOverride: "kube-prometheus-stack"
+
+## Create default rules for monitoring the cluster
+## 
+defaultRules:
+  create: true
+
+## do create the prometheus-operator
+##
+prometheusOperator:
+  enabled: true
+  admissionWebhooks:
+    enabled: true
+  networkPolicy:
+    enabled: true
+  resources:
+    limits:
+      cpu: 300m
+      memory: 500Mi
+    requests:
+      cpu: 100m
+      memory: 50Mi
+
+## do not deploy a default monitoring setup
+## we will manage it seperately
+prometheus:
+  enabled: false
+alertmanager:
+  enabled: false
+nodeExporter:
+  enabled: false
+kubeStateMetrics:
+  enabled: false
+
+## do not deploy the grafana server here
+## we will manage it seperately
+grafana:
+  enabled: false
+
+## Make sure things have workable names
+cleanPrometheusOperatorObjectNames: true

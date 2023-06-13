@@ -1,0 +1,141 @@
+---
+# What about:
+#  kube-proxy replacement
+#  ingress
+#  gateway-api
+#  socketLB
+#  traffic encryption
+#  service-mesh
+#  multi-cluster mesh
+#  localRedirectPolicy
+#  cilium-NodePort
+#  cilium-wellKnownIdentities
+#  cilium-etcd
+#  cilium-nodeinit
+#  cilium-preflight
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 4Gi
+  requests:
+    cpu: 100m
+    memory: 512Mi
+
+resourceQuotas:
+  enabled: true
+
+annotateK8sNode: true
+logSystemLoad: true
+
+cluster:
+  name: "{{ target.name }}"
+
+monitor:
+  enabled: true
+
+pprof:
+  enabled: true
+
+bandwidthManager:
+  enabled: true
+
+pmtuDiscovery:
+  enabled: true
+
+prometheus:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    trustCRDsExist: true
+    labels:
+      "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.system }}"
+
+dashboards:
+  enabled: true
+  label: "{{ grafana_dashboard_label_name }}"
+  labelValue: "{{ grafana_dashboard_label_value }}"
+  annotations:
+    "{{ grafana_dashboard_folder_annotation }}": Cilium
+
+hubble:
+  enabled: true
+  metrics:
+    enabled:
+      - dns:query
+      - drop
+      - tcp
+      - flow
+      - icmp
+      - http
+    serviceMonitor:
+      enabled: true
+      labels:
+        "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.system }}"
+  dashboards:
+    enabled: true
+    label: "{{ grafana_dashboard_label_name }}"
+    labelValue: "{{ grafana_dashboard_label_value }}"
+    annotations:
+      "{{ grafana_dashboard_folder_annotation }}": Cilium
+  tls:
+    auto:
+      enabled: true
+      method: cronJob # maybe certmanager one day....
+  relay:
+    enabled: true
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 1Gi
+      requests:
+        cpu: 100m
+        memory: 64Mi
+    prometheus:
+      enabled: true
+      serviceMonitor:
+        enabled: true
+        labels:
+          "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.system }}"
+  ui:
+    enabled: true
+    backend:
+      resources:
+        limits:
+          cpu: 1000m
+          memory: 1Gi
+        requests:
+          cpu: 100m
+          memory: 64Mi
+    frontend:
+      resources:
+        limits:
+          cpu: 1000m
+          memory: 1Gi
+        requests:
+          cpu: 100m
+          memory: 64Mi
+
+operator:
+  enabled: true
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+    requests:
+      cpu: 100m
+      memory: 64Mi
+  pprof:
+    enabled: true
+  prometheus:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      labels:
+        "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.system }}"
+  dashboards:
+    enabled: true
+    label: "{{ grafana_dashboard_label_name }}"
+    labelValue: "{{ grafana_dashboard_label_value }}"
+    annotations:
+      "{{ grafana_dashboard_folder_annotation }}": Cilium

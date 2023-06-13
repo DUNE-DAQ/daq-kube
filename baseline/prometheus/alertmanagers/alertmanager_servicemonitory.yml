@@ -1,0 +1,25 @@
+{% for thisone in alertmanagers %}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: alertmanager-{{ alertmanagers[thisone].name }}
+  namespace: {{ alertmanagers[thisone].namespace }}
+  labels:
+    app: alertmanager-{{ alertmanagers[thisone].name }}
+    {{ alertmanager_config_label_name }}: {{ alertmanagers[thisone].name }}
+spec:
+  endpoints:
+    - path: /metrics
+      port: {{ alertmanagers[thisone].portName }}
+      enableHttp2: true
+  namespaceSelector:
+    matchNames:
+    - {{ alertmanagers[thisone].namespace }}
+  selector:
+    matchLabels:
+      app: alertmanager-{{ alertmanagers[thisone].name }}
+      {{ alertmanager_config_label_name }}: {{ alertmanagers[thisone].name }}
+      self-monitor: "true"
+...
+{% endfor %}

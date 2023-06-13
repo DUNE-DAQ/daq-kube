@@ -1,0 +1,11 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - alertmanager_config_default.yml
+  - alertmanager_grafana_datasource.yml
+  - alertmanager_networkpolicy.yml
+  - alertmanager_servicemonitory.yml
+  - alertmanager_service.yml
+  - alertmanager.yml

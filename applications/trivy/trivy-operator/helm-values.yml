@@ -1,0 +1,5 @@
+---
+serviceMonitor:
+  enabled: true
+  labels:
+    {{ prometheus_servicemonitor_label_name }}: {{ prometheus_servicemonitor_labels.trivy }}

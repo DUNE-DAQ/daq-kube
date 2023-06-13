@@ -1,0 +1,27 @@
+https://docs.kafka-ui.provectus.io/configuration/helm-charts/quick-start ?
+
+should we have kafka-exporter and kafka-bridge too?
+
+kafka cruise control proposal.expiration.ms
+  cruiseControl:
+    config:
+      metadata.max.age.ms: 300000?
+    resources:
+      requests:
+        cpu: 1
+        memory: 512Mi
+      limits:
+        cpu: 2
+        memory: 2Gi
+    logging:
+        type: inline
+        loggers:
+          rootLogger.level: "INFO"
+    metricsConfig: # (10)
+      type: jmxPrometheusExporter
+      valueFrom:
+        configMapKeyRef:
+          name: cruise-control-metrics
+          key: metrics-config.yml
+
+https://github.com/linkedin/cruise-control#quick-start do I need the manual steps?

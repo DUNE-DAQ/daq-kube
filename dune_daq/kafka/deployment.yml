@@ -1,0 +1,9 @@
+---
+deployments:
+  - path: namespace
+
+  - barrier: true
+
+  - path: metrics
+
+  - path: kafka-server

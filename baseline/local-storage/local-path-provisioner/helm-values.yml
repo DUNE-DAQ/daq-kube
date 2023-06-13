@@ -1,0 +1,23 @@
+---
+resources:
+  limits:
+    cpu: 300m
+    memory: 500Mi
+  requests:
+    cpu: 100m
+    memory: 50Mi
+
+nodePathMap: {{ local_path_provisioner.nodePathMap | tojson }}
+
+storageClass:
+  name: {{ local_path_provisioner.storage_class_name }}
+  defaultClass: {{ local_path_provisioner.is_default_class }}
+  reclaimPolicy: Retain
+
+resources:
+  limits:
+    cpu: 300m
+    memory: 500Mi
+  requests:
+    cpu: 100m
+    memory: 50Mi

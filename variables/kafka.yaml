@@ -1,0 +1,13 @@
+---
+strimzi_component_value: strimzi
+
+kafka:
+  operator_namespace: strimzi-kafka
+  namespace: kafka
+  replicas: 1
+  storage_class: local-path
+  storage_size: 10Gi
+  zookeeper_storage_size: 3Gi
+  with_bridge: false
+  with_connect: false
+  with_mirrormaker: false

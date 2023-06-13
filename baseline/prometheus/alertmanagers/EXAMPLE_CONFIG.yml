@@ -1,0 +1,25 @@
+---
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: for-alertname-example
+  namespace: monitoring
+  labels:
+    prometheus.io/alertmanager: default
+spec:
+  route:
+    receiver: my_email@address
+    groupBy:
+      - job
+    matchers:
+      - matchType: =~
+        name: alertname
+        value: example
+
+  receivers:
+    - name: my_email@address
+      emailConfigs:
+        - to: my_email@address
+          from: someone@address
+          sendResolved: true
+          smarthost: smtp.local:587

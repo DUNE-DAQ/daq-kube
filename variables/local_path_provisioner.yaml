@@ -1,0 +1,10 @@
+---
+local_path_provisioner_component_value: local-path-provisioner
+local_path_provisioner:
+  namespace: local-path-storage
+  storage_class_name: local-path
+  is_default_class: {{ args.local_path_is_default_storageclass }}
+  nodePathMap:
+    - node: DEFAULT_PATH_FOR_NON_LISTED_NODES
+      paths:
+        - /var/local-path-provisioner

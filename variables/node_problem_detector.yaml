@@ -1,0 +1,3 @@
+---
+node_problem_detector:
+  namespace: node-problem-detector

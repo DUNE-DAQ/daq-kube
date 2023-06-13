@@ -1,0 +1,24 @@
+---
+resources:
+  limits:
+    cpu: 300m
+    memory: 500Mi
+  requests:
+    cpu: 100m
+    memory: 50Mi
+
+prometheus:
+  monitor:
+    enabled: true
+    honorLabels: true
+
+extraArgs:
+  - --enable-gzip-encoding
+
+networkPolicy:
+  enabled: true
+  egress:
+    - {}
+
+selfMonitor:
+  enabled: true

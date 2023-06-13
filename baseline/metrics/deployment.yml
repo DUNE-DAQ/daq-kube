@@ -1,0 +1,11 @@
+---
+deployments:
+  - path: namespace
+
+  - barrier: true
+
+  - path: metrics-server
+  - path: kube-state-metrics
+  - path: prometheus-node-exporter
+    tags:
+      - node-exporter

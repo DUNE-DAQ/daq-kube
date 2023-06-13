@@ -1,0 +1,10 @@
+---
+deployments:
+  - path: namespace
+    alwaysDeploy: true
+
+  - barrier: true
+
+  - path: kepler
+
+  - path: grafana-dashboards-kepler

@@ -1,0 +1,48 @@
+---
+prometheus_operator_namespace: kube-prometheus
+prometheis: # this is the plural of prometheus
+  main:
+    namespace: {{ monitoring.namespace }}
+    name: main
+    serviceName: prometheus
+    grafanaDatasourceName: prometheus-{{ target.name }}
+    url: http://prometheus.{{ monitoring.namespace }}.svc.cluster.local
+    port: 9090
+    portName: web
+    replicas: 1
+    retention: 45d
+    alertmanagers:
+      - namespace: {{ alertmanagers.main.namespace }}
+        name: {{ alertmanagers.main.serviceName }}
+        port: {{ alertmanagers.main.portName }}
+
+    # try not to schedule on same node as alertmanager
+    affinity:
+      podAntiAffinity:
+        preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: alertmanager
+                  operator: Exists
+              topologyKey: kubernetes.io/hostname
+
+    # these limits should probably be tuned a bit
+    resources:
+      limits:
+        cpu: 400m
+        memory: 1Gi
+      requests:
+        cpu: 200m
+        memory: 50Mi
+
+    # these selectors should probably be set to rational filters
+    serviceMonitorNamespaceSelector: {}
+    serviceMonitorSelector: {}
+    podMonitorNamespaceSelector: {}
+    podMonitorSelector: {}
+    probeNamespaceSelector: {}
+    probeSelector: {}
+    ruleNamespaceSelector: {}
+    ruleSelector: {}

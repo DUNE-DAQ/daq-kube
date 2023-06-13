@@ -1,0 +1,50 @@
+{% for thisone in prometheis %}
+---
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: {{ prometheis[thisone].name }}
+  namespace: {{ prometheis[thisone].namespace }}
+  labels:
+    app.kubernetes.io/instance: prometheus-{{ prometheis[thisone].name }}
+    {{ prometheus_config_label_name }}: {{ prometheis[thisone].name }}
+    prometheus: {{ prometheis[thisone].name }}
+spec:
+  alerting:
+    alertmanagers: {{ prometheis[thisone].alertmanagers | tojson }}
+
+  # try not to schedule on same node as alertmanager
+  affinity: {{ prometheis[thisone].affinity | tojson }}
+
+  enableAdminAPI: false
+  hostNetwork: false
+
+  # https://github.com/prometheus-operator/prometheus-operator/issues/5519
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 65536
+    runAsGroup: 65536
+    fsGroup: 65536
+    seccompProfile:
+      type: RuntimeDefault
+
+  portName: {{ prometheis[thisone].portName }}
+  replicas: {{ prometheis[thisone].replicas }}
+  retention: {{ prometheis[thisone].retention }}
+  walCompression: true
+  disableCompaction: false
+
+  serviceAccountName: prometheus-{{ prometheis[thisone].name }}
+
+  resources: {{ prometheis[thisone].resources | tojson }}
+
+  serviceMonitorNamespaceSelector: {{ prometheis[thisone].serviceMonitorNamespaceSelector | tojson }}
+  serviceMonitorSelector: {{ prometheis[thisone].serviceMonitorSelector | tojson }}
+  podMonitorNamespaceSelector: {{ prometheis[thisone].podMonitorNamespaceSelector | tojson }}
+  podMonitorSelector: {{ prometheis[thisone].podMonitorSelector | tojson }}
+  probeNamespaceSelector: {{ prometheis[thisone].probeNamespaceSelector | tojson }}
+  probeSelector: {{ prometheis[thisone].probeSelector | tojson }}
+  ruleNamespaceSelector: {{ prometheis[thisone].ruleNamespaceSelector | tojson }}
+  ruleSelector: {{ prometheis[thisone].ruleSelector | tojson }}
+...
+{% endfor %}

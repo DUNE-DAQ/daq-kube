@@ -1,0 +1,11 @@
+---
+deployments:
+  - include: kafka
+
+  - include: postgresql
+    tags:
+      - postgres
+
+# operators should always end in a barrier
+# that way things have time to settle
+  - barrier: true
