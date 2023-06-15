@@ -15,13 +15,6 @@
   {{- end }}
 {{- end }}
 
-{{/* validate service monitoring CRDs */}}
-{{- if and .Values.prometheus.enabled (or .Values.prometheus.serviceMonitor.enabled .Values.operator.prometheus.serviceMonitor.enabled) }}
-  {{- if not (.Capabilities.APIVersions.Has "monitoring.coreos.com/v1") }}
-      {{ fail "Service Monitor requires monitoring.coreos.com/v1 CRDs. Please refer to https://github.com/prometheus-operator/prometheus-operator/blob/main/example/prometheus-operator-crd/monitoring.coreos.com_servicemonitors.yaml" }}
-  {{- end }}
-{{- end }}
-
 {{- if and .Values.hubble.enabled .Values.hubble.tls.enabled .Values.hubble.tls.auto.enabled (eq .Values.hubble.tls.auto.method "certmanager") }}
   {{- if not .Values.hubble.tls.auto.certManagerIssuerRef }}
     {{ fail "Hubble TLS certgen method=certmanager requires that user specifies .Values.hubble.tls.auto.certManagerIssuerRef" }}
