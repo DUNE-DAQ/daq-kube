@@ -1,6 +1,7 @@
 ---
 # What about:
 #  kube-proxy replacement
+#  bpf: flags in helm chart
 #  ingress
 #  gateway-api
 #  socketLB
@@ -41,6 +42,11 @@ bandwidthManager:
 
 pmtuDiscovery:
   enabled: true
+
+bpf:
+  hostLegacyRouting: false
+  masquerade: true
+  tproxy: true
 
 prometheus:
   enabled: true
