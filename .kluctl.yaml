@@ -26,7 +26,7 @@ args:
     default: false
   - name: with_kafka_kraft
     default: false
-  - name: local_path_is_default_storageclass
+  - name: with_local_path_as_default_storageclass
     default: false
 
 targets:
@@ -35,7 +35,7 @@ targets:
     args:
       with_cilium: false
       with_kafka_kraft: true
-      local_path_is_default_storageclass: true
+      with_local_path_as_default_storageclass: true
 
   - name: np04-services
     context: kubernetes-admin@np04-services
