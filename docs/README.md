@@ -51,15 +51,15 @@ This is a somewhat opinionated feature list.
 
 The `baseline/metrics` folder contains:
 
-* kubernetes metrics-server for providing kubernetes metrics to kubernetes
-* kubernetes prometheus exporter (kube-state-metrics) for providing kubernetes metrics to prometheus
-* prometheus-node-exporter for providing host metrics to prometheus
+* kubernetes `metrics-server` for providing kubernetes metrics to kubernetes
+* kubernetes prometheus exporter (`kube-state-metrics`) for providing kubernetes metrics to prometheus
+* `prometheus-node-exporter` for providing host metrics to prometheus
 
 ### Operators
 
-The (kubernetes operator pattern)[https://kubernetes.io/docs/concepts/extend-kubernetes/operator/] is a useful way to deploy highly complex applications with clear integration points.
+The [kubernetes operator pattern](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) is a useful way to deploy highly complex applications with clear integration points.
 
-When an operator is maintained by a healthy community it should be strongly considered before using a helm manifest for the application.
+When an operator is maintained by a healthy community it should be strongly considered before using a helm manifest for the application.  The end of the influxdb operator is a point of worry.
 
 It should be safe to deploy operators on all clusters even if you do not intend to use its feature set.  Each operator has a resource cost.
 
