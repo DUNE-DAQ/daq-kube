@@ -11,9 +11,7 @@ deployments:
   - barrier: true
 {% endif %}
 
-{% if args.with_applications %}
   - include: applications
-{% endif %}
 
 {% if args.with_dune_daq %}
   - include: dune_daq
