@@ -1,0 +1,16 @@
+---
+deployments:
+  - path: namespace
+    alwaysDeploy: true
+    skipDeleteIfTags: true
+    tags:
+      - cvmfs
+      - storage
+
+  - barrier: true
+
+  - path: cvmfs-csi
+    skipDeleteIfTags: true
+    tags:
+      - cvmfs
+      - storage

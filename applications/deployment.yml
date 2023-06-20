@@ -30,6 +30,10 @@ deployments:
   - include: nfs-storage
 {% endif %}
 
+{% if args.with_cvmfs_csi %}
+  - include: cvmfs-csi
+{% endif %}
+
 {% if args.with_grafana %}
   - barrier: true
     message: "Let grafana dashboard config maps finish loading"

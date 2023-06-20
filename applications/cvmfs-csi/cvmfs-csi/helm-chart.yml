@@ -1,0 +1,8 @@
+helmChart:
+  repo: https://registry.cern.ch/chartrepo/cern
+  chartName: cvmfs-csi
+  chartVersion: 2.1.1
+  updateConstraints: ~2.x
+  releaseName: cvmfs-csi
+  namespace: "{{ cvmfs_csi.namespace }}"
+  output: helm-rendered.yaml

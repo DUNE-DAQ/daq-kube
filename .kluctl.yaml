@@ -4,6 +4,8 @@ discriminator: "dune-daq-{{ target.name }}"
 args:
   - name: with_cilium
     default: true
+  - name: with_cvmfs_csi
+    default: true
   - name: with_dns_autoscaler
     default: true
   - name: with_dune_daq

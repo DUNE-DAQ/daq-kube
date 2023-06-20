@@ -1,0 +1,5 @@
+---
+cvmfs_csi:
+  namespace: cvmfs-csi
+
+# TODO:  make the CVMFS mounts we need

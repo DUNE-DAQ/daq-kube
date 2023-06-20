@@ -1,0 +1,41 @@
+---
+cache:
+  local:
+    cvmfsQuotaLimit: 1000 # TODO: pick a value for this
+
+nodeplugin:
+  plugin:
+    resources:
+      limits:
+        cpu: 300m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+  automount:
+    resources:
+      limits:
+        cpu: 300m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+  singlemount:
+    resources:
+      limits:
+        cpu: 300m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+  registrar:
+    resources:
+      limits:
+        cpu: 300m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+
+
+# https://github.com/cvmfs-contrib/cvmfs-csi/pull/92
