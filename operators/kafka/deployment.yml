@@ -10,4 +10,5 @@ deployments:
 
   - path: strimzi
 
-  - barrier: true # make sure strimzi is done applying
+  - barrier: true
+    message: wait for operator to settle
