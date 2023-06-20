@@ -8,6 +8,7 @@ deployments:
 
 # Don't replace certs on every run
 # this list needs to be maintained by hand :(
+# TODO: is this true, should these be excluded?
 ignoreForDiff:
   - kind: Secret
     namespace: kube-system
