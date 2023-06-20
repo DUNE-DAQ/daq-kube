@@ -2,6 +2,7 @@ https://github.com/cloudnative-pg/cloudnative-pg
 
 kubectl krew install cnpg
 cpng operator ha mode?
+backups?
 
 set pg time to UTC
 set pg lang/colate to??? C?
