@@ -15,6 +15,9 @@ deployments:
 
 {% if args.with_dune_daq %}
   - include: dune_daq
+    tags:
+      - dune
+      - daq
 {% endif %}
 
 vars:

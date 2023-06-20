@@ -31,7 +31,15 @@ args:
   - name: with_local_path_as_default_storageclass
     default: false
 
-  - name: grafana_admin_password # This should be customized as an argument for your needs
+  ### This should be customized as an argument for your needs
+  ### FIXME:
+  ### these should probably lose the default for non-pocket
+  ### users and thus force folks to set a specific password
+  ### to increase the chances that these are secure in production
+  - name: grafana_admin_password
+    default: run4evah
+
+  - name: daqconfig_mongodb_root_password
     default: run4evah
 
 targets:
@@ -43,6 +51,7 @@ targets:
       with_local_path_as_default_storageclass: true
       with_nfs_storage: false
       grafana_admin_password: run4evah
+      daqconfig_mongodb_root_password: run4evah
 
   - name: np04-services
     context: kubernetes-admin@np04-services

@@ -1,0 +1,10 @@
+---
+deployments:
+  - path: namespace
+
+  - barrier: true
+
+  - path: mongodb
+
+vars:
+  - file: variables/variables/daqconfig.yaml

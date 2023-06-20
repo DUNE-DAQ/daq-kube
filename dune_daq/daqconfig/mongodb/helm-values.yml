@@ -1,0 +1,35 @@
+---
+architecture: standalone
+
+directoryPerDB: true
+
+useStatefulSet: true
+
+auth:
+  rootUser: root
+  rootPassword: {{ args.daqconfig_mongodb_root_password }}
+
+serviceBindings:
+  enabled: true
+
+metrics: # TODO https://github.com/percona/grafana-dashboards/tree/main/dashboards/MongoDB
+  enabled: true
+  compatibleMode: false # skip old metrics
+  collector:
+    all: true
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limit:
+      cpu: 300m
+      memory: 512Mi
+  serviceMonitor:
+    enabled: true
+    labels:
+      "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.dune }}"
+  prometheusRule: # setup alerting rules here and then enable it
+    enabled: false
+    rules: []
+    additionalLabels:
+      "{{ prometheus_rule_label_name }}": "{{ prometheus_rule_labels.dune }}"
