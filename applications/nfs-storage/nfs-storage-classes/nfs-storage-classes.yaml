@@ -1,0 +1,6 @@
+{% if nfs_storage_classes is defined %}
+{% for key, value in nfs_storage_classes.items() %}
+---
+FINISH ME:
+{% endfor %}
+{% endif %}

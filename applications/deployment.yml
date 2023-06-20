@@ -26,6 +26,10 @@ deployments:
   - include: kubernetes-dashboard
 {% endif %}
 
+{% if args.with_nfs_storage %}
+  - include: nfs-storage
+{% endif %}
+
 {% if args.with_grafana %}
   - barrier: true
     message: "Let grafana dashboard config maps finish loading"

@@ -36,6 +36,7 @@ vars:
 
   - file: variables/kafka.yaml
   - file: variables/kubernetes_dashboard.yaml
+  - file: variables/nfs_subdir_external_provisioner.yaml
   - file: variables/postgresql.yaml
   - file: variables/trivy.yaml
 

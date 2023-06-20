@@ -16,6 +16,8 @@ args:
     default: true
   - name: with_kubernetes_dashboard
     default: true
+  - name: with_nfs_storage
+    default: true
   - name: with_node_feature_discovery
     default: true
   - name: with_node_problem_detector
@@ -36,6 +38,7 @@ targets:
       with_cilium: false
       with_kafka_kraft: true
       with_local_path_as_default_storageclass: true
+      with_nfs_storage: false
 
   - name: np04-services
     context: kubernetes-admin@np04-services
