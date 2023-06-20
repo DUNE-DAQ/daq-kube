@@ -28,10 +28,16 @@ deployments:
 
 {% if args.with_nfs_storage %}
   - include: nfs-storage
+    tags:
+      - nfs
+      - storage
 {% endif %}
 
 {% if args.with_cvmfs_csi %}
   - include: cvmfs-csi
+    tags:
+      - cvmfs
+      - storage
 {% endif %}
 
 {% if args.with_grafana %}

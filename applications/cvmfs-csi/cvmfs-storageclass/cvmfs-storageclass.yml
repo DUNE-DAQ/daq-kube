@@ -1,0 +1,13 @@
+{% for repo in cvmfs_csi.specificRepositoryStorageClasses %}
+# Move to:
+# https://github.com/cvmfs-contrib/cvmfs-csi/pull/92
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: {{ repo.name }}
+parameters:
+  repository: {{ repo.repository }}
+provisioner: cvmfs.csi.cern.ch
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+{% endfor %}

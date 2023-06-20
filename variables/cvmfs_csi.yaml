@@ -1,5 +1,6 @@
 ---
 cvmfs_csi:
   namespace: cvmfs-csi
-
-# TODO:  make the CVMFS mounts we need
+  specificRepositoryStorageClasses:
+    - name: dunedaq.opensciencegrid.org
+      repository: dunedaq.opensciencegrid.org

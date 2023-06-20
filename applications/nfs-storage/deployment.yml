@@ -3,19 +3,13 @@ deployments:
   - path: namespace
     alwaysDeploy: true
     skipDeleteIfTags: true
-    tags:
-      - storage
 
   - barrier: true
 
   - path: nfs-subdir-external-provisioner
     skipDeleteIfTags: true
-    tags:
-      - storage
 
   - barrier: true
     message: wait for nfs-subdir to settle
 
-  - path: nfs-storage-classes
-    tags:
-      - storage
+  - path: nfs-storageclass
