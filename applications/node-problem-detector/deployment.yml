@@ -6,3 +6,6 @@ deployments:
   - barrier: true
 
   - path: node-problem-detector
+
+vars:
+  - file: variables/node_problem_detector.yaml

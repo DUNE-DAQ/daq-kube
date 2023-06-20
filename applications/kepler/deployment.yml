@@ -8,3 +8,6 @@ deployments:
   - path: kepler
 
   - path: grafana-dashboards-kepler
+
+vars:
+  - file: variables/kepler.yaml

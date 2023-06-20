@@ -12,3 +12,6 @@ deployments:
     skipDeleteIfTags: true
     tags:
       - storage
+
+vars:
+  - file: variables/local_path_provisioner.yaml

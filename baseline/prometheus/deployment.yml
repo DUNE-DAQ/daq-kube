@@ -38,3 +38,7 @@ deployments:
       - monitoring
       - prometheus
       - alertmanager
+
+vars:
+  - file: variables/alertmanager.yaml
+  - file: variables/prometheus.yaml

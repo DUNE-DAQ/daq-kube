@@ -6,3 +6,6 @@ deployments:
   - barrier: true
 
   - path: trivy-operator
+
+vars:
+  - file: variables/trivy.yaml

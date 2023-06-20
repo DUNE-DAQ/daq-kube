@@ -13,3 +13,6 @@ deployments:
     message: wait for cvmfs-csi to settle
 
   - path: cvmfs-storageclass
+
+vars:
+  - file: variables/cvmfs_csi.yaml

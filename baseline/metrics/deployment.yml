@@ -9,3 +9,6 @@ deployments:
   - path: prometheus-node-exporter
     tags:
       - node-exporter
+
+vars:
+  - file: variables/metrics.yaml

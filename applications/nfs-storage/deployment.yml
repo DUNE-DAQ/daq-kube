@@ -13,3 +13,6 @@ deployments:
     message: wait for nfs-subdir to settle
 
   - path: nfs-storageclass
+
+vars:
+    - file: variables/nfs_subdir_external_provisioner.yaml

@@ -6,3 +6,6 @@ deployments:
   - barrier: true
 
   - path: node-feature-discovery
+
+vars:
+  - file: variables/node_feature_discovery.yaml

@@ -6,6 +6,9 @@ deployments:
   - barrier: true
     message: CNI needs to settle so we can allocate IP addresses
 
+vars:
+  - file: variables/cilium.yaml
+
 # Don't replace certs on every run
 # this list needs to be maintained by hand :(
 # TODO: is this true, should these be excluded?

@@ -19,26 +19,14 @@ deployments:
 
 vars:
   - file: variables/monitoring.yaml
-  - file: variables/metrics.yaml
-
-  - file: variables/cilium.yaml
-  - file: variables/kepler.yaml
-  - file: variables/local_path_provisioner.yaml
-  - file: variables/node_feature_discovery.yaml
-  - file: variables/node_problem_detector.yaml
 
   - file: variables/alertmanager_labels.yaml
-  - file: variables/alertmanager.yaml
   - file: variables/prometheus_labels.yaml
-  - file: variables/prometheus.yaml
   - file: variables/grafana_labels.yaml
-  - file: variables/grafana.yaml
 
-  - file: variables/kafka.yaml
-  - file: variables/kubernetes_dashboard.yaml
-  - file: variables/nfs_subdir_external_provisioner.yaml
-  - file: variables/postgresql.yaml
-  - file: variables/trivy.yaml
+  - file: variables/kafka.yaml # figure out how to store these better
+  - file: variables/minio.yaml # figure out how to store these better
+  - file: variables/postgresql.yaml # figure out how to store these better
 
   - file: variables/targets/{{ target.name }}.yaml
 
