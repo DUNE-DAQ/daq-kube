@@ -12,8 +12,6 @@ args:
     default: true
   - name: with_grafana
     default: true
-  - name: grafana_admin_password # This should be customized as an argument for your needs
-    default: run4evah
   - name: with_kepler
     default: true
   - name: with_kubernetes_dashboard
@@ -33,6 +31,9 @@ args:
   - name: with_local_path_as_default_storageclass
     default: false
 
+  - name: grafana_admin_password # This should be customized as an argument for your needs
+    default: run4evah
+
 targets:
   - name: pocket
     context: kind-pocketdune
@@ -41,6 +42,7 @@ targets:
       with_kafka_kraft: true
       with_local_path_as_default_storageclass: true
       with_nfs_storage: false
+      grafana_admin_password: run4evah
 
   - name: np04-services
     context: kubernetes-admin@np04-services
