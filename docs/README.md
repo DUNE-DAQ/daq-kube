@@ -13,6 +13,12 @@ This repository uses submodules to track external repos.  To clone this reposito
 git clone https://github.com/DUNE-DAQ/daq-kube.git --recursive
 ```
 
+**OR**
+
+```shell
+git clone https://github.com/DUNE-DAQ/daq-kube.git ; cd daq-kube ; git submodule update --init
+```
+
 This will pull down a number of external repositories and set them up as expected.
 
 ### Fetch kluctl
