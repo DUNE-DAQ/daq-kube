@@ -54,6 +54,7 @@ spec:
             runAsGroup: 10000       
             runAsNonRoot: true      
             allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: false # writes to /configconfig.py
             seccompProfile:         
               type: RuntimeDefault  
             capabilities:           
