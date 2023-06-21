@@ -22,30 +22,30 @@ spec:
         app.kubernetes.io/component: config-utility
         app.kubernetes.io/instance: {{ target.name }}
     spec:
-    - containers:
-        image: docker.io/plaso/daqconfig-service:latest
-        name: daqconfig-service
-        ports:
-          - containerPort: 5003
-            name: daqconfig
-        env:
-          - name: MONGO_HOST
-            valueFrom:
-              secretKeyRef:
-                name: mongodb-svcbind-root
-                key: host
-          - name: MONGO_PORT
-            valueFrom:
-              secretKeyRef:
-                name: mongodb-svcbind-root
-                key: port
-          - name: MONGO_USER
-            valueFrom:
-              secretKeyRef:
-                name: mongodb-svcbind-root
-                key: username
-          - name: MONGO_PASS
-            valueFrom:
-              secretKeyRef:
-                name: mongodb-svcbind-root
-                key: password
+      containers:
+        - name: daqconfig-service
+          image: docker.io/plaso/daqconfig-service:latest
+          ports:
+            - containerPort: 5003
+              name: daqconfig
+          env:
+            - name: MONGO_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-svcbind-root
+                  key: host
+            - name: MONGO_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-svcbind-root
+                  key: port
+            - name: MONGO_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-svcbind-root
+                  key: username
+            - name: MONGO_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-svcbind-root
+                  key: password
