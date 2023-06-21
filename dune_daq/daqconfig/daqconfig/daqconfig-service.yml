@@ -14,6 +14,6 @@ spec:
     app.kubernetes.io/component: config-utility
     app.kubernetes.io/instance: {{ target.name }}
   ports:
-    - protocol: tcp
+    - protocol: TCP
       port: 5003
       targetPort: daqconfig

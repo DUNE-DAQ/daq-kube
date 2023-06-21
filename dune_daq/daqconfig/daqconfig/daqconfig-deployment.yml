@@ -22,7 +22,7 @@ spec:
         app.kubernetes.io/component: config-utility
         app.kubernetes.io/instance: {{ target.name }}
     spec:
-      containers:
+    - containers:
         image: docker.io/plaso/daqconfig-service:latest
         name: daqconfig-service
         ports:

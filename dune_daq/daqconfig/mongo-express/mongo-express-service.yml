@@ -14,6 +14,6 @@ spec:
     app.kubernetes.io/component: mongodb-express
     app.kubernetes.io/instance: mongodb-express
   ports:
-    - protocol: tcp
+    - protocol: TCP
       port: 8081
       targetPort: mongo-express
