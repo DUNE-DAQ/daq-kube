@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb-express
+  namespace: {{ DUNE_daqconfig.namespace }}
+  labels:
+    app.kubernetes.io/app: mongodb-express
+    app.kubernetes.io/component: mongodb-express
+    app.kubernetes.io/instance: mongodb-express
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/app: mongodb-express
+      app.kubernetes.io/component: mongodb-express
+      app.kubernetes.io/instance: mongodb-express
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/app: mongodb-express
+        app.kubernetes.io/component: mongodb-express
+        app.kubernetes.io/instance: mongodb-express
+    spec:
+      containers:
+        - name: mongodb-express
+          image: docker.io/library/mongo-express
+          ports:
+            - containerPort: 8081
+              name: mongo-express
+          env:
+            - name: ME_CONFIG_MONGODB_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: mongodb-svcbind-root
+                  key: uri
+            - name: ME_CONFIG_OPTIONS_NO_DELETE
+              value: "true"
+            - name: ME_CONFIG_OPTIONS_READONLY
+              value: "true"

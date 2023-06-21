@@ -5,6 +5,7 @@ deployments:
   - barrier: true
 
   - path: mongodb
+  - path: mongo-express
 
 vars:
   - file: variables/daqconfig.yaml

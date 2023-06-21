@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb-express
+  namespace: {{ DUNE_daqconfig.namespace }}
+  labels:
+    app.kubernetes.io/app: mongodb-express
+    app.kubernetes.io/component: mongodb-express
+    app.kubernetes.io/instance: mongodb-express
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/app: mongodb-express
+      app.kubernetes.io/component: mongodb-express
+      app.kubernetes.io/instance: mongodb-express
+  ports:
+    - protocol: tcp
+      port: 8081
+      targetPort: mongo-express
