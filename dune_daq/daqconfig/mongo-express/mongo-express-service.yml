@@ -10,10 +10,9 @@ metadata:
     app.kubernetes.io/instance: mongodb-express
 spec:
   selector:
-    matchLabels:
-      app.kubernetes.io/app: mongodb-express
-      app.kubernetes.io/component: mongodb-express
-      app.kubernetes.io/instance: mongodb-express
+    app.kubernetes.io/app: mongodb-express
+    app.kubernetes.io/component: mongodb-express
+    app.kubernetes.io/instance: mongodb-express
   ports:
     - protocol: tcp
       port: 8081

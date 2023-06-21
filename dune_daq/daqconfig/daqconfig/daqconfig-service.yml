@@ -10,10 +10,9 @@ metadata:
   namespace: {{ DUNE_daqconfig.namespace }}
 spec:
   selector:
-    matchLabels:
-      app.kubernetes.io/app: config-utility
-      app.kubernetes.io/component: config-utility
-      app.kubernetes.io/instance: {{ target.name }}
+    app.kubernetes.io/app: config-utility
+    app.kubernetes.io/component: config-utility
+    app.kubernetes.io/instance: {{ target.name }}
   ports:
     - protocol: tcp
       port: 5003
