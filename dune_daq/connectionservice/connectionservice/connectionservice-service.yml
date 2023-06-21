@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: connectionservice
+  namespace: {{ DUNE_connectionservice.namespace }}
+  labels:
+    app.kubernetes.io/app: connectionservice
+    app.kubernetes.io/component: connectionservice
+    app.kubernetes.io/instance: {{ target.name }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/app: connectionservice
+      app.kubernetes.io/component: connectionservice
+      app.kubernetes.io/instance: {{ target.name }}
+  type: ClusterIP
+  ports:
+    - containerPort: 5000
+      protocol: TCP
+      name: connectionservice

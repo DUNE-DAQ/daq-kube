@@ -2,6 +2,7 @@
 deployments:
   - path: grafana-dashboards
 
+  - path: connectionservice
   - include: daqconfig
 
   - path: node-ports
