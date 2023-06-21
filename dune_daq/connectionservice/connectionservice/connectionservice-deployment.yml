@@ -29,5 +29,10 @@ spec:
         - containerPort: 5000
           protocol: TCP
           name: connectionservice
+        resources:
+          limits:
+            memory: 512Mi
+          requests:
+            memory: 8Mi
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
