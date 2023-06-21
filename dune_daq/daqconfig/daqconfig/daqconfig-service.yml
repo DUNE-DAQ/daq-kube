@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/app: config-utility
+    app.kubernetes.io/component: config-utility
+    app.kubernetes.io/instance: {{ target.name }}
+  name: daqconfig
+  namespace: {{ DUNE_daqconfig.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/app: config-utility
+      app.kubernetes.io/component: config-utility
+      app.kubernetes.io/instance: {{ target.name }}
+  ports:
+    - protocol: tcp
+      port: 5003
+      targetPort: daqconfig

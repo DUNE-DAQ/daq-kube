@@ -10,6 +10,7 @@ deployments:
     message: make sure mongodb is setup for daqconfig container
 
   - path: mongo-express
+  - path: daqconfig
 
 vars:
   - file: variables/daqconfig.yaml

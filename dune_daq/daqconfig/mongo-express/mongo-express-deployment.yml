@@ -31,7 +31,7 @@ spec:
           env:
             - name: ME_CONFIG_MONGODB_URL
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   name: mongodb-svcbind-root
                   key: uri
             - name: ME_CONFIG_OPTIONS_NO_DELETE

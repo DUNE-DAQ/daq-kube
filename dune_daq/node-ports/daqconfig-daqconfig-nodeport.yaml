@@ -1,0 +1,18 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: daqconfig-nodeport
+  namespace: daqconfig
+spec:
+  ports:
+  - name: daqconfig
+    port: 5003
+    protocol: TCP
+    targetPort: daqconfig
+    nodePort: 31011
+  selector:
+    app.kubernetes.io/app: config-utility
+    app.kubernetes.io/component: config-utility
+    app.kubernetes.io/instance: {{ target.name }}
+  type: NodePort
