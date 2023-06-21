@@ -1,8 +1,8 @@
 helmChart:
-  repo: https://cloudnative-pg.github.io/charts
   chartName: cloudnative-pg
-  chartVersion: 0.18.0
-  updateConstraints: ~0.18.x
-  releaseName: cnpg
+  chartVersion: 0.18.1
   namespace: '{{ postgresql.operator_namespace }}'
   output: helm-rendered.yaml
+  releaseName: cnpg
+  repo: https://cloudnative-pg.github.io/charts
+  updateConstraints: ~0.18.x

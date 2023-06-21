@@ -1,8 +1,8 @@
 helmChart:
-  repo: https://operator.min.io/
   chartName: operator
-  chartVersion: 4.3.7
-  updateConstraints: ~4.x
-  releaseName: minio-operator
-  namespace: "{{ minio.operator_namespace }}"
+  chartVersion: 4.5.8
+  namespace: '{{ minio.operator_namespace }}'
   output: helm-rendered.yaml
+  releaseName: minio-operator
+  repo: https://operator.min.io/
+  updateConstraints: ~4.x
