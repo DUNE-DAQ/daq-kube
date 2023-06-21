@@ -53,6 +53,7 @@ spec:
             runAsUser: 10000        
             runAsGroup: 10000       
             runAsNonRoot: true      
+            allowPrivilegeEscalation: false
             seccompProfile:         
               type: RuntimeDefault  
             capabilities:           
@@ -60,4 +61,3 @@ spec:
                 - ALL               
       securityContext:              
         fsGroup: 10000              
-        allowPrivilegeEscalation: false
