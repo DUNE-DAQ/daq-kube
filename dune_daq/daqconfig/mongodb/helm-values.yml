@@ -23,7 +23,7 @@ metrics: # TODO https://github.com/percona/grafana-dashboards/tree/main/dashboar
     requests:
       cpu: 100m
       memory: 128Mi
-    limit:
+    limits:
       cpu: 300m
       memory: 512Mi
   serviceMonitor:
