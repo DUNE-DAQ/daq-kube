@@ -15,6 +15,8 @@ serviceBindings:
 metrics: # TODO https://github.com/percona/grafana-dashboards/tree/main/dashboards/MongoDB
   enabled: true
   compatibleMode: false # skip old metrics
+  username: metrics
+  # password:
   collector:
     all: true
   resources:
