@@ -1,3 +1,4 @@
 ---
 deployments:
   - path: grafana-dashboards
+  - path: node-ports
