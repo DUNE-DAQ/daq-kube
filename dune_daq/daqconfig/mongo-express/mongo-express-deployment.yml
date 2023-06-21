@@ -43,6 +43,7 @@ spec:
             runAsGroup: 10000
             runAsNonRoot: true
             allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
             seccompProfile:
               type: RuntimeDefault
             capabilities:
@@ -50,4 +51,3 @@ spec:
                 - ALL
       securityContext:
         fsGroup: 10000
-        readOnlyRootFilesystem: true
