@@ -13,6 +13,7 @@ spec:
     app.kubernetes.io/app: config-utility
     app.kubernetes.io/component: config-utility
     app.kubernetes.io/instance: {{ target.name }}
+  type: ClusterIP
   ports:
     - protocol: TCP
       port: 5003
