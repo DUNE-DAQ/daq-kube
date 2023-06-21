@@ -29,7 +29,7 @@ spec:
           - containerPort: 5003
             name: daqconfig
         env:
-          - name: MONGO_HOST:
+          - name: MONGO_HOST
             valueFrom:
               secretKeyRef:
                 name: mongodb-svcbind-root
