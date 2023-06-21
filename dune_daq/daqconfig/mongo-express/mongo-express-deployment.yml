@@ -38,3 +38,16 @@ spec:
               value: "true"
             - name: ME_CONFIG_OPTIONS_READONLY
               value: "true"
+          securityContext:
+            runAsUser: 10000
+            runAsGroup: 10000
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              drop:
+                - ALL
+      securityContext:
+        fsGroup: 10000
+        allowPrivilegeEscalation: false
+        readOnlyRootFilesystem: true

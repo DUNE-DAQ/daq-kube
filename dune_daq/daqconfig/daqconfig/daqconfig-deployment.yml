@@ -49,3 +49,15 @@ spec:
                 secretKeyRef:
                   name: mongodb-svcbind-root
                   key: password
+          securityContext:          
+            runAsUser: 10000        
+            runAsGroup: 10000       
+            runAsNonRoot: true      
+            seccompProfile:         
+              type: RuntimeDefault  
+            capabilities:           
+              drop:                 
+                - ALL               
+      securityContext:              
+        fsGroup: 10000              
+        allowPrivilegeEscalation: false
