@@ -34,6 +34,8 @@ spec:
                 secretKeyRef:
                   name: mongodb-svcbind-root
                   key: uri
+            - name: ME_CONFIG_MONGODB_ENABLE_ADMIN
+              value: "false"
             - name: ME_CONFIG_OPTIONS_NO_DELETE
               value: "true"
             - name: ME_CONFIG_OPTIONS_READONLY
