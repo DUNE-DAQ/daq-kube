@@ -5,7 +5,17 @@ deployments:
   - barrier: true
 
   - path: mongodb
+
+  - barrier: true
+    message: make sure mongodb is setup for daqconfig container
+
   - path: mongo-express
 
 vars:
   - file: variables/daqconfig.yaml
+
+ignoreForDiff:
+  - kind: Secret # don't constantly change the metrics user password
+    namespace: {{ DUNE_daqconfig.namespace }}
+    name: mongodb
+    fieldPath: .data["mongodb-metrics-password"]
