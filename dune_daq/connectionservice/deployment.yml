@@ -1,9 +1,5 @@
 ---
 deployments:
-  - path: namespace
-
-  - barrier: true
-
   - path: connectionservice
 
 vars:
