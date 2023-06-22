@@ -33,7 +33,7 @@ The `.kluctl.yaml` file lists the deployment targets we've configured.  The `con
 
 ***NOTE:*** You cannot deploy a target to a context other than the one defined in `.kluctl.yaml`.
 
-To see what targets are defined you can run `kluctl list-targets`.
+To see what targets are defined you can run `kluctl list-targets` to see the `name` and defaults for each target.
 
 For example: `kluctl deploy -t pocket`
 
