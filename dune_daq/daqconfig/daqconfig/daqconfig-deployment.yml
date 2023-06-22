@@ -1,4 +1,5 @@
 ---
+# rebase off of https://github.com/DUNE-DAQ/microservices/pull/40
 apiVersion: apps/v1
 kind: Deployment
 metadata:
