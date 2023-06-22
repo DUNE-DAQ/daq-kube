@@ -23,12 +23,12 @@ spec:
         app.kubernetes.io/instance: {{ target.name }}
     spec:
       containers:
-      - image: dunedaq/pocket-connectivityserver:1.0.0
+      - image: docker.io/dunedaq/pocket-connectivityserver:1.0.0
         name: connectionservice
         ports:
         - containerPort: 5000
           protocol: TCP
-          name: connectionservice
+          name: http
         resources:
           limits:
             memory: 512Mi

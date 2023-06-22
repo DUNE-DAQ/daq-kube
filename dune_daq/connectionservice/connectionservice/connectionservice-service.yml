@@ -18,4 +18,5 @@ spec:
   ports:
     - containerPort: 5000
       protocol: TCP
-      name: connectionservice
+      name: http
+      targetPort: 5000
