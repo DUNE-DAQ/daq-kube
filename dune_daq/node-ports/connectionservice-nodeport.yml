@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: connectionservice-nodeport
-  namespace: connectionservice
+  namespace: connections
   labels:
     app.kubernetes.io/app: connectionservice
     app.kubernetes.io/component: connectionservice
