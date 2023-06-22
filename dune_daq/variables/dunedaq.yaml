@@ -1,0 +1,4 @@
+dunedaq:
+  specificCVMFSRepositoryStorageClasses:
+    - name: dunedaq.opensciencegrid.org
+      repository: dunedaq.opensciencegrid.org

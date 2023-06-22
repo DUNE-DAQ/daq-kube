@@ -1,6 +1,3 @@
 ---
 cvmfs_csi:
   namespace: cvmfs-csi
-  specificRepositoryStorageClasses:
-    - name: dunedaq.opensciencegrid.org
-      repository: dunedaq.opensciencegrid.org

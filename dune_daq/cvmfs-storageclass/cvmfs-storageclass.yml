@@ -1,4 +1,4 @@
-{% for repo in cvmfs_csi.specificRepositoryStorageClasses %}
+{% for repo in dunedaq.specificCVMFSRepositoryStorageClasses %}
 # Move to:
 # https://github.com/cvmfs-contrib/cvmfs-csi/pull/92
 apiVersion: storage.k8s.io/v1

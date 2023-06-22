@@ -5,4 +5,14 @@ deployments:
   - include: connectionservice
   - include: daqconfig
 
+{% if args.with_cvmfs_csi %}
+  - path: cvmfs-storageclass
+    tags:
+      - cvmfs
+      - storage
+{% endif %}
+
   - path: node-ports
+
+vars:
+  - file: variables/dunedaq.yaml
