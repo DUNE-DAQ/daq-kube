@@ -21,4 +21,4 @@ name: kepler
 sources:
 - https://github.com/sustainable-computing-io/kepler
 type: application
-version: 0.4.1
+version: 0.4.2
