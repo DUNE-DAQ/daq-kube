@@ -1,5 +1,5 @@
 ---
-# Modified from https://github.com/DUNE-DAQ/microservices/blob/develop/connection-service/connectivityserver.yaml
+# Modified from https://github.com/DUNE-DAQ/connectivityserver/blob/develop/deploy/connectivityserver.yaml
 apiVersion: v1
 kind: Namespace
 metadata:
