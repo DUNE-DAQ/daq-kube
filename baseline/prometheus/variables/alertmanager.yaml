@@ -25,6 +25,6 @@ alertmanagers:
     storage:
       volumeClaimTemplate:
         spec:
-        resources:
-          requests:
-            storage: 10Gi
+          resources:
+            requests:
+              storage: 2Gi

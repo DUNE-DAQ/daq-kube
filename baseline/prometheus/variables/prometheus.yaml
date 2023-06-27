@@ -39,9 +39,9 @@ prometheis: # this is the plural of prometheus
     storage:
       volumeClaimTemplate:
         spec:
-        resources:
-          requests:
-            storage: 20Gi
+          resources:
+            requests:
+              storage: 20Gi
 
     # these selectors should probably be set to rational filters
     serviceMonitorNamespaceSelector: {}
