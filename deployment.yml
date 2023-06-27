@@ -3,6 +3,7 @@ deployments:
   - include: baseline
     skipDeleteIfTags: true
 
+{% if ! args.with_cni_only %}
   - barrier: true
     message: Ensure baseline is loaded
 
@@ -18,6 +19,7 @@ deployments:
     tags:
       - dune
       - daq
+{% endif %}
 {% endif %}
 
 vars:
