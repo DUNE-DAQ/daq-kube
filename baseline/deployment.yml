@@ -25,7 +25,7 @@ deployments:
     skipDeleteIfTags: true
 {% endif %}
 
-{% if args.with_cni_only %}
+{% if not args.with_cni_only %}
   - include: metrics
     skipDeleteIfTags: true
     tags:

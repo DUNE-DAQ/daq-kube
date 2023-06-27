@@ -3,7 +3,7 @@ deployments:
   - include: baseline
     skipDeleteIfTags: true
 
-{% if ! args.with_cni_only %}
+{% if not args.with_cni_only %}
   - barrier: true
     message: Ensure baseline is loaded
 
