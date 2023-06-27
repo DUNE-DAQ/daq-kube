@@ -36,6 +36,12 @@ prometheis: # this is the plural of prometheus
       requests:
         cpu: 200m
         memory: 50Mi
+    storage:
+      volumeClaimTemplate:
+        spec:
+        resources:
+          requests:
+            storage: 20Gi
 
     # these selectors should probably be set to rational filters
     serviceMonitorNamespaceSelector: {}

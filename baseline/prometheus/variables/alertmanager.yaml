@@ -22,3 +22,9 @@ alertmanagers:
       requests:
         cpu: 200m
         memory: 50Mi
+    storage:
+      volumeClaimTemplate:
+        spec:
+        resources:
+          requests:
+            storage: 10Gi
