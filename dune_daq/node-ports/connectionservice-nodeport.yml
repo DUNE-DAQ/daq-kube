@@ -16,8 +16,7 @@ spec:
       targetPort: connectionservice
       nodePort: 30005
   selector:
-    matchLabels:
-      app.kubernetes.io/app: connectionservice
-      app.kubernetes.io/component: connectionservice
-      app.kubernetes.io/instance: {{ target.name }}
+    app.kubernetes.io/app: connectionservice
+    app.kubernetes.io/component: connectionservice
+    app.kubernetes.io/instance: {{ target.name }}
   type: NodePort
