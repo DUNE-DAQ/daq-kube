@@ -9,14 +9,15 @@ metadata:
     app.kubernetes.io/component: connectionservice
     app.kubernetes.io/instance: {{ target.name }}
 spec:
+  ports:
+    - name: connectionservice
+      protocol: TCP
+      port: 5000
+      targetPort: connectionservice
+      nodePort: 30005
   selector:
     matchLabels:
       app.kubernetes.io/app: connectionservice
       app.kubernetes.io/component: connectionservice
       app.kubernetes.io/instance: {{ target.name }}
   type: NodePort
-  ports:
-    - containerPort: 5000
-      protocol: TCP
-      name: connectionservice
-      nodePort: 30005
