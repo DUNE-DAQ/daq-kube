@@ -12,6 +12,10 @@ auth:
 serviceBindings:
   enabled: true
 
+persistence:
+  enabled: true
+  # storageClass: when unset uses default class
+
 metrics: # TODO https://github.com/percona/grafana-dashboards/tree/main/dashboards/MongoDB
   enabled: true
   compatibleMode: false # skip old metrics
