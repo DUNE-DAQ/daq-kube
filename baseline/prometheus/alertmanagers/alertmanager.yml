@@ -20,6 +20,9 @@ spec:
       type: RuntimeDefault
 
   resources: {{ alertmanagers[thisone].resources | tojson }}
+  {% if alertmanagers[thisone].storage is defined %}
+  storage: {{ alertmanagers[thisone].storage | tojson }}
+  {% endif %}
 
   alertmanagerConfiguration:
     name: alertmanager-{{ alertmanagers[thisone].name }}-defaults

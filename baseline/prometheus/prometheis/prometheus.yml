@@ -37,6 +37,9 @@ spec:
   serviceAccountName: prometheus-{{ prometheis[thisone].name }}
 
   resources: {{ prometheis[thisone].resources | tojson }}
+  {% if prometheis[thisone].storage is defined %}
+  storage: {{ prometheis[thisone].storage | tojson }}
+  {% endif %}
 
   serviceMonitorNamespaceSelector: {{ prometheis[thisone].serviceMonitorNamespaceSelector | tojson }}
   serviceMonitorSelector: {{ prometheis[thisone].serviceMonitorSelector | tojson }}
