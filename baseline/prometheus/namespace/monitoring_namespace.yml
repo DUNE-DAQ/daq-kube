@@ -6,6 +6,7 @@ metadata:
   labels:
     # grafana needs run-as-root to chown
     #   https://github.com/grafana/helm-charts/issues/2355
+    # influxdb 1.0 isn't worth the effort to make restricted
     pod-security.kubernetes.io/enforce: baseline
     pod-security.kubernetes.io/enforce-version: latest
     pod-security.kubernetes.io/audit: restricted
