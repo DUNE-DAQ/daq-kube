@@ -8,6 +8,11 @@ serviceMonitor:
 networkPolicy:
   enabled: true
 
+useStatefulSet: true
+
+persistence:
+  enabled: false
+
 grafana.ini:
   dashboards:
     default_home_dashboard_path: {{ grafana.default_dashboard }}
