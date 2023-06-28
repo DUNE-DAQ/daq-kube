@@ -12,7 +12,7 @@ alertmanagers:
     configNamespaceSelector: {}
     configSelector:
       matchLabels:
-        {{ alertmanager_config_label_name }}: {{ alertmanager_config_labels.default }}
+        {{ alertmanager_config_label_name }}: {{ alertmanager_config_labels.main }}
 
     # these limits should probably be tuned a bit
     resources:
