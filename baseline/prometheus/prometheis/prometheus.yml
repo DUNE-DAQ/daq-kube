@@ -25,6 +25,7 @@ spec:
     runAsUser: 65536
     runAsGroup: 65536
     fsGroup: 65536
+    fsGroupChangePolicy: "OnRootMismatch"
     seccompProfile:
       type: RuntimeDefault
 
