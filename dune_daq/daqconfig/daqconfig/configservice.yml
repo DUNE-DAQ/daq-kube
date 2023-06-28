@@ -1,5 +1,6 @@
 ---
 # Modified from https://github.com/DUNE-DAQ/microservices/configservice/XXXYYYZZZ
+#
 apiVersion: v1
 kind: Namespace
 metadata:

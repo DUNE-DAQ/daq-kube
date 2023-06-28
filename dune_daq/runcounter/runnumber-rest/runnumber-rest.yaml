@@ -1,0 +1,45 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/app: runnumber-rest
+    app.kubernetes.io/component: runnumber-rest
+  name: runnumber-rest
+  namespace: {{ DUNE_runcounter.namespace }}
+spec:
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app.kubernetes.io/app: runnumber-rest
+      app.kubernetes.io/component: runnumber-rest
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/app: runnumber-rest
+        app.kubernetes.io/component: runnumber-rest
+    spec:
+      containers:
+      - image: ghcr.io/dune-daq/pocket-runnumber-rest:0.8 # this tag is different than standard
+        name: runnumber-rest
+        envFrom:
+        - secretRef:
+            name: runnumber-rest-secrets
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+        resources: {} # reasonible values should be set here
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          runAsGroup: 11000
+          runAsNonRoot: true
+          runAsUser: 11000
+          seccompProfile:
+            type: RuntimeDefault
+      securityContext:
+        fsGroup: 11000

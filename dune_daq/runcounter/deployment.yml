@@ -1,0 +1,11 @@
+---
+deployments:
+  - path: namespace
+
+  - barrier: true
+
+  - path: runnumber-rest
+  - path: runregistry-rest
+
+vars:
+  - file: variables/runcounter.yaml

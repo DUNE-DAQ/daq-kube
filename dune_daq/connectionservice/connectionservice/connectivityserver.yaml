@@ -1,5 +1,6 @@
 ---
 # Modified from https://github.com/DUNE-DAQ/connectivityserver/blob/develop/deploy/connectivityserver.yaml
+#
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -18,6 +19,7 @@ metadata:
   labels:
     app.kubernetes.io/app: connectionservice
     app.kubernetes.io/component: connectionservice
+    app.kubernetes.io/instance: {{ target.name }}
   name: connectionservice
   namespace: {{ DUNE_connectionservice.namespace }}
 spec:
@@ -31,6 +33,7 @@ spec:
       labels:
         app.kubernetes.io/app: connectionservice
         app.kubernetes.io/component: connectionservice
+        app.kubernetes.io/instance: {{ target.name }}
     spec:
       containers:
       - image: docker.io/dunedaq/pocket-connectivityserver:1.0.0
@@ -65,6 +68,7 @@ metadata:
   labels:
     app.kubernetes.io/app: connectionservice
     app.kubernetes.io/component: connectionservice
+    app.kubernetes.io/instance: {{ target.name }}
   name: connectionservice
   namespace: {{ DUNE_connectionservice.namespace }}
 spec:
@@ -76,4 +80,5 @@ spec:
   selector:
     app.kubernetes.io/app: connectionservice
     app.kubernetes.io/component: connectionservice
+    app.kubernetes.io/instance: {{ target.name }}
   type: ClusterIP
