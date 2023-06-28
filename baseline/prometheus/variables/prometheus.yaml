@@ -39,6 +39,7 @@ prometheis: # this is the plural of prometheus
     storage:
       volumeClaimTemplate:
         spec:
+          accessModes: ["ReadWriteOnce"]
           resources:
             requests:
               storage: 20Gi
