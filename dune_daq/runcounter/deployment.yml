@@ -13,4 +13,4 @@ deployments:
   - path: runregistry-rest
 
 vars:
-  - file: variables/runcounter.yaml
+  - file: variables/runcounter.yml
