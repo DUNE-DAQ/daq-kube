@@ -1,6 +1,4 @@
 ---
-# Modified from https://github.com/DUNE-DAQ/connectivityserver/blob/develop/deploy/connectivityserver.yaml
-#
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -11,7 +9,7 @@ metadata:
     pod-security.kubernetes.io/enforce-version: latest
     pod-security.kubernetes.io/warn: restricted
     pod-security.kubernetes.io/warn-version: latest
-  name: {{ DUNE_connectionservice.namespace }}
+  name: connections
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -19,9 +17,8 @@ metadata:
   labels:
     app.kubernetes.io/app: connectionservice
     app.kubernetes.io/component: connectionservice
-    app.kubernetes.io/instance: {{ target.name }}
   name: connectionservice
-  namespace: {{ DUNE_connectionservice.namespace }}
+  namespace: connections
 spec:
   minReadySeconds: 5
   selector:
@@ -33,7 +30,6 @@ spec:
       labels:
         app.kubernetes.io/app: connectionservice
         app.kubernetes.io/component: connectionservice
-        app.kubernetes.io/instance: {{ target.name }}
     spec:
       containers:
       - image: docker.io/dunedaq/pocket-connectivityserver:1.0.0
@@ -68,9 +64,8 @@ metadata:
   labels:
     app.kubernetes.io/app: connectionservice
     app.kubernetes.io/component: connectionservice
-    app.kubernetes.io/instance: {{ target.name }}
   name: connectionservice
-  namespace: {{ DUNE_connectionservice.namespace }}
+  namespace: connections
 spec:
   ports:
   - name: http
@@ -80,5 +75,4 @@ spec:
   selector:
     app.kubernetes.io/app: connectionservice
     app.kubernetes.io/component: connectionservice
-    app.kubernetes.io/instance: {{ target.name }}
   type: ClusterIP
