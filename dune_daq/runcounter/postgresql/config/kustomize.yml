@@ -6,8 +6,6 @@ namespace: '{{ DUNE_runcounter.namespace }}'
 generatorOptions:
   disableNameSuffixHash: true
 
-# from : https://github.com/DUNE-DAQ/microservices/blob/develop/runnumber-rest/runnum_table.sql
-
 configMapGenerator:
   - name: runnum-table-sql
-    files: [ runnum_table.sql ]
+    files: [ runnum_table.sql ] # from https://github.com/DUNE-DAQ/microservices/blob/develop/runnumber-rest/runnum_table.sql
