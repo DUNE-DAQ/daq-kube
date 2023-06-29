@@ -30,7 +30,7 @@ metrics:
     enabled: true
     labels:
       jobLabel: postgresql-runcounter
-      "{{ prometheus_servicemonitor_labels }}": "{{ prometheus_servicemonitor_labels.dune }}"
+      "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.dune }}"
     jobLabel: jobLabel
   prometheusRule: # setup alerting rules here and then enable it
     enabled: false
