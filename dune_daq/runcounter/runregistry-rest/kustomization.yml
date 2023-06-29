@@ -5,4 +5,4 @@ kind: Kustomization
 namespace: {{ DUNE_runcounter.namespace }}
 
 resources:
-  - runregistry-rest.yaml # https://github.com/DUNE-DAQ/microservices/blob/develop/runregistry-rest/kubernetes.yaml
+  - runregistry.yml # https://raw.githubusercontent.com/DUNE-DAQ/microservices/develop/runregistry-rest/runregistry.yml

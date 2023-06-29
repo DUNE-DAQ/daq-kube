@@ -1,9 +1,7 @@
 ---
-# Modified from https://github.com/DUNE-DAQ/microservices/blob/develop/runregistry-rest/kubernetes.yaml
-#
 # You must still deploy your database with its manifests from upstream
 # and create a secret called runregistry-rest-database - CF. servicebinding.io
-#   containing keys: hostname, port, dbname
+#   containing keys: hostname, port, dbname,  username, password
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -11,20 +9,18 @@ metadata:
     app.kubernetes.io/app: runregistry-rest
     app.kubernetes.io/component: runregistry-rest
   name: runregistry-rest
-  namespace: {{ DUNE_runcounter.namespace }}
+  namespace: runcounter
 spec:
   selector:
     matchLabels:
       app.kubernetes.io/app: runregistry-rest
       app.kubernetes.io/component: runregistry-rest
-      app.kubernetes.io/instance: {{ target.name }}
   minReadySeconds: 5
   template:
     metadata:
       labels:
         app.kubernetes.io/app: runregistry-rest
         app.kubernetes.io/component: runregistry-rest
-        app.kubernetes.io/instance: {{ target.name }}
     spec:
       containers:
       - env:
@@ -94,9 +90,8 @@ metadata:
   labels:
     app.kubernetes.io/app: runregistry-rest
     app.kubernetes.io/component: runregistry-rest
-    app.kubernetes.io/instance: {{ target.name }}
   name: runregistry-rest
-  namespace: {{ DUNE_runcounter.namespace }}
+  namespace: runcounter
 spec:
   ports:
   - name: http
@@ -106,5 +101,4 @@ spec:
   selector:
     app.kubernetes.io/app: runregistry-rest
     app.kubernetes.io/component: runregistry-rest
-    app.kubernetes.io/instance: {{ target.name }}
   type: ClusterIP
