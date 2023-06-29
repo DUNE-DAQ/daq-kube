@@ -4,6 +4,7 @@ deployments:
 
   - include: connectionservice
   - include: daqconfig
+  - include: runcounter
 
 {% if args.with_cvmfs_csi %}
   - path: cvmfs-storageclass
