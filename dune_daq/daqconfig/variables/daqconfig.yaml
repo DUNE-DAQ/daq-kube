@@ -1,7 +1,12 @@
 ---
 DUNE_daqconfig:
   namespace: daqconfig
-  mongodb_root_user: root
-  mongodb_root_password: {{ args.daqconfig_mongodb_root_password }}
-  mongodb_databases:
+  mongodb_authentication:
+    rootUser: root
+    rootPassword: {{ args.daqconfig_mongodb_root_password }}
+    usernames:
+    - daqconfigdb
+    passwords:
+    - {{ args.daqconfig_mongodb_daqconfigdb_password }}
+    databases:
     - daqconfigdb
