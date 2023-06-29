@@ -14,3 +14,6 @@ ignoreForDiff: # don't keep changing the postgresql password
   - kind: Secret
     name: runcounter-postgresql-svcbind-postgres
     fieldPath: .data.uri
+  - kind: Secret
+    name: runcounter-postgresql
+    fieldPath: .data["postgres-password"]
