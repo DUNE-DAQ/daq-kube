@@ -8,4 +8,4 @@ generatorOptions:
 
 configMapGenerator:
   - name: runnum-table-sql
-    files: [ runnum_table.sql ] # from https://github.com/DUNE-DAQ/microservices/blob/develop/runnumber-rest/runnum_table.sql
+    files: [ ./runnum_table.sql ] # from https://github.com/DUNE-DAQ/microservices/blob/develop/runnumber-rest/runnum_table.sql
