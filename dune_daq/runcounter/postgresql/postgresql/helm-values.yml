@@ -42,3 +42,8 @@ networkPolicy:
   enabled: true
   metrics:
     enabled: true
+  ingressRules:
+    primaryAccessOnlyFrom:
+      enabled: true
+      namespaceSelector:
+        name: {{ DUNE_runcounter.namespace }}
