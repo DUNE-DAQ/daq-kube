@@ -2,7 +2,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: {{ DUNE_runcounter.namespace }}
+namespace: {{ DUNE_connectionservice.namespace }}
 
 resources:
   - connectivityserver.yaml # https://github.com/DUNE-DAQ/connectivityserver/blob/develop/deploy/connectivityserver.yaml
