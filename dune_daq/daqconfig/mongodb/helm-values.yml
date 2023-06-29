@@ -6,8 +6,8 @@ directoryPerDB: true
 useStatefulSet: true
 
 auth:
-  rootUser: root
-  rootPassword: {{ args.daqconfig_mongodb_root_password }}
+  rootUser: {{ DUNE_daqconfig.mongodb_root_user }}
+  rootPassword: {{ DUNE_daqconfig.mongodb_root_password }}
 
 serviceBindings:
   enabled: true

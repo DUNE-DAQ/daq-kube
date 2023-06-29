@@ -1,3 +1,6 @@
 ---
 DUNE_runcounter:
   namespace: runcounter
+  postgresql_database_name: runcounter
+  postgresql_database_username: runcounter
+  postgresql_database_password: "{{ args.runcounter_postgresql_password }}"

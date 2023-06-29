@@ -1,0 +1,44 @@
+---
+auth:
+  username: "{{ DUNE_runcounter.postgresql_database_username }}"
+  password: "{{ DUNE_runcounter.postgresql_database_password }}"
+  database: "{{ DUNE_runcounter.postgresql_database_name }}"
+
+architecture: standalone
+
+serviceBindings:
+  enabled: true
+
+primary:
+  initdb:
+    args: '--data-checksums --locale=en_US.UTF-8'
+    scriptsConfigMap: runnum-table-sql
+
+  persistence:
+    size: 4Gi
+
+metrics:
+  enabled: true
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 300m
+      memory: 512Mi
+  serviceMonitor:
+    enabled: true
+    labels:
+      jobLabel: postgresql-runcounter
+      "{{ prometheus_servicemonitor_labels }}": "{{ prometheus_servicemonitor_labels.dune }}"
+    jobLabel: jobLabel
+  prometheusRule: # setup alerting rules here and then enable it
+    enabled: false
+    rules: []
+    labels:
+      "{{ prometheus_rule_label_name }}": "{{ prometheus_rule_labels.dune }}"
+
+networkPolicy:
+  enabled: true
+  metrics:
+    enabled: true

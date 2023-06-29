@@ -28,7 +28,11 @@ spec:
         ports:
         - containerPort: 5000
           protocol: TCP
-        resources: {} # reasonible values should be set here
+        resources:
+          limits:
+            memory: 1Gi
+          requests:
+            memory: 8Mi
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
         securityContext:

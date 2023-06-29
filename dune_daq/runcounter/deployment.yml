@@ -4,6 +4,11 @@ deployments:
 
   - barrier: true
 
+  - include: postgresql
+
+  - barrier: true
+    message: make sure database is up
+
   - path: runnumber-rest
   - path: runregistry-rest
 

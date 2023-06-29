@@ -1,0 +1,8 @@
+---
+deployments:
+  - path: config
+
+  - barrier: true
+    message: Make sure the config elements exist before we use them
+
+  - path: postgresql
