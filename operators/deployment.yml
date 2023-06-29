@@ -1,11 +1,22 @@
 ---
 deployments:
+{% if args.with_strimzi_kafka_operator %}
   - include: kafka
+{% endif %}
 
+{% if args.with_cnpg_operator %}
   - include: postgresql
     tags:
       - postgres
+      - cnpg
+{% endif %}
+
+{% if args.with_minio_operator %}
+  - include: minio
+    tags:
+      - storage
+{% endif %}
 
 # operators should always end in a barrier
-# that way things have time to settle
   - barrier: true
+    message: make sure operators have time to settle

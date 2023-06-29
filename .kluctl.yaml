@@ -8,6 +8,8 @@ args:
     default: false
   - name: with_cvmfs_csi
     default: true
+  - name: with_cnpg_operator
+    default: false
   - name: with_dns_autoscaler
     default: true
   - name: with_dune_daq
@@ -18,16 +20,20 @@ args:
     default: true
   - name: with_kubernetes_dashboard
     default: true
+  - name: with_minio_operator
+    default: false
   - name: with_nfs_storage
     default: true
   - name: with_node_feature_discovery
     default: true
   - name: with_node_problem_detector
     default: false
-  - name: with_operators
+  - name: with_strimzi_kafka_operator
     default: true
   - name: with_trivy
     default: false
+
+  # Feature flags for included manifests
   - name: with_kafka_kraft
     default: false
   - name: with_local_path_as_default_storageclass

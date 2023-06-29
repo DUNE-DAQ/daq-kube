@@ -7,10 +7,8 @@ deployments:
   - barrier: true
     message: Ensure baseline is loaded
 
-{% if args.with_operators %}
   - include: operators
   - barrier: true
-{% endif %}
 
   - include: applications
 
