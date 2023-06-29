@@ -8,6 +8,7 @@ useStatefulSet: true
 auth:
   rootUser: {{ DUNE_daqconfig.mongodb_root_user }}
   rootPassword: {{ DUNE_daqconfig.mongodb_root_password }}
+  databases: {{DUNE_daqconfig.mongodb_databases | tojson }}
 
 serviceBindings:
   enabled: true
