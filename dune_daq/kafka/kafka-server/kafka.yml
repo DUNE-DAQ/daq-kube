@@ -7,7 +7,7 @@ metadata:
 spec:
   entityOperator:
     userOperator: {}
-    # topicOperator: {} # topicOperator not supported on KRaft?
+    # topicOperator: {} # topicOperator not supported on KRaft? - https://github.com/strimzi/proposals/pull/76
   kafkaExporter:
     topicRegex: ".*"
     groupRegex: ".*"
@@ -15,16 +15,16 @@ spec:
     replicas: {{ DUNE_kafka.replicas }}
     resources:
       requests:
-        cpu: 1
+        cpu: 500m
         memory: 8Gi # kafka with less than 8Gi is not recommended
-      limits:
-        cpu: 2
-        memory: 12Gi
+      limits: # these limits are random guess work
+        cpu: 4
+        memory: 10Gi
     logging:
       type: inline
       loggers:
         kafka.root.logger.level: WARN
-    jvmOptions:
+    jvmOptions: # set these to match the requested memory
       -Xms: 8192m
       -Xmx: 8192m
     listeners:
