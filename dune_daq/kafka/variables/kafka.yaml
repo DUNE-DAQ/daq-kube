@@ -6,7 +6,9 @@ DUNE_kafka:
   protocol_version: "3.5"
   entityOperator:
     userOperator: {}
-    # topicOperator: {}
+{% if not strimzi.with_kafka_kraft %}
+    topicOperator: {}
+{% endif %}
   kafkaExporter:
     topicRegex: ".*"
     groupRegex: ".*"
