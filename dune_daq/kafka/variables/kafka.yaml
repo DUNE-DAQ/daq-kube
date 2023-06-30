@@ -4,12 +4,3 @@ DUNE_kafka:
   replicas: 1
   version: "3.5.0"
   protocol_version: "3.5"
-  entityOperator:
-    userOperator: {}
-{% if not strimzi.with_kafka_kraft %}
-    topicOperator: {}
-{% endif %}
-  kafkaExporter:
-    topicRegex: ".*"
-    groupRegex: ".*"
-

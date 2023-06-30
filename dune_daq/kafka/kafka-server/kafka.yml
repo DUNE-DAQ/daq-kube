@@ -5,8 +5,14 @@ metadata:
   name: {{ DUNE_kafka.name }}
   namespace: {{ DUNE_kafka.namespace }}
 spec:
-  entityOperator: {{ DUNE_kafka.entityOperator | tojson }}
-  kafkaExporter: {{ DUNE_kafka.kafkaExporter | tojson }}
+  entityOperator:
+    userOperator: {}
+{% if not strimzi.with_kafka_kraft %}
+    topicOperator: {}
+{% endif %}
+  kafkaExporter:
+    topicRegex: ".*"
+    groupRegex: ".*"
   kafka:
     replicas: {{ DUNE_kafka.replicas }}
     resources:
