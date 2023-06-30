@@ -1,6 +1,4 @@
 ---
-# Modified from https://github.com/DUNE-DAQ/microservices/configservice/XXXYYYZZZ
-#
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -11,19 +9,20 @@ metadata:
     pod-security.kubernetes.io/enforce-version: latest
     pod-security.kubernetes.io/warn: baseline
     pod-security.kubernetes.io/warn-version: latest
-  name: {{ DUNE_daqconfig.namespace }}
+  name: daqconfig
 ---
 # You must still deploy mongodb with its manifests from upstream
-# and create a secret called mongodb-svcbind-root with the required keys
+# and create a secret called mongodb-svcbind-daqconfig with the required keys.
+# The ServiceBinding secret from bitnami is such a secret.
+# https://github.com/bitnami/charts/issues/17411
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
     app.kubernetes.io/app: config-utility
     app.kubernetes.io/component: config-utility
-    app.kubernetes.io/instance: {{ target.name }}
   name: config-utility
-  namespace: {{ DUNE_daqconfig.namespace }}
+  namespace: daqconfig
 spec:
   replicas: 1
   selector:
@@ -35,10 +34,9 @@ spec:
       labels:
         app.kubernetes.io/app: config-utility
         app.kubernetes.io/component: config-utility
-        app.kubernetes.io/instance: {{ target.name }}
     spec:
       containers:
-      - env:
+      - env: # https://github.com/bitnami/charts/issues/17411
         - name: MONGO_HOST
           valueFrom:
             secretKeyRef:
@@ -59,6 +57,8 @@ spec:
             secretKeyRef:
               key: password
               name: mongodb-svcbind-root
+        - name: MONGO_DBNAME
+          value: daqconfigdb
         image: ghcr.io/dune-daq/daqconfig-service:v1.0.1
         name: daqconfig-service
         ports:
@@ -88,9 +88,8 @@ metadata:
   labels:
     app.kubernetes.io/app: config-utility
     app.kubernetes.io/component: config-utility
-    app.kubernetes.io/instance: {{ target.name }}
   name: daqconfig
-  namespace: {{ DUNE_daqconfig.namespace }}
+  namespace: daqconfig
 spec:
   ports:
   - port: 5003
@@ -99,5 +98,4 @@ spec:
   selector:
     app.kubernetes.io/app: config-utility
     app.kubernetes.io/component: config-utility
-    app.kubernetes.io/instance: {{ target.name }}
   type: ClusterIP
