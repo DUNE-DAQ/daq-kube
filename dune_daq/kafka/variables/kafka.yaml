@@ -1,3 +1,4 @@
+---
 DUNE_kafka:
   namespace: kafka
   name: dune-daq
