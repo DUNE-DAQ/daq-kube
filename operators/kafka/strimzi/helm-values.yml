@@ -1,9 +1,7 @@
 ---
 # Apache Kafka is "stable" with KRaft but
 # you cannot upgrade from one version of kafka to the next with Kraft
-# so, unless we want to lockin forever no +UseKRaft for us
-# in production right now, but it is fine for disposable dev
-{% if args.with_kafka_kraft %}
+{% if strimzi.with_kafka_kraft %}
 featureGates: '+StableConnectIdentities,+UseKRaft'
 {% else %}
 featureGates: '+StableConnectIdentities'

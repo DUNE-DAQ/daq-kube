@@ -33,9 +33,9 @@ args:
   - name: with_trivy
     default: false
 
-  # Feature flags for included manifests
+  ### Feature flags for included manifests
   - name: with_kafka_kraft
-    default: false
+    default: true
   - name: with_local_path_as_default_storageclass
     default: false
 
@@ -62,7 +62,6 @@ targets:
     context: kind-pocketdune
     args:
       with_cilium: false
-      with_kafka_kraft: true
       with_local_path_as_default_storageclass: true
       with_nfs_storage: false
       grafana_admin_password: run4evah

@@ -12,3 +12,6 @@ deployments:
 
   - barrier: true
     message: wait for operator to settle
+
+vars:
+  - file: variables/strimzi.yaml
