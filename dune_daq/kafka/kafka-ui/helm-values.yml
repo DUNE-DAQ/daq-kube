@@ -1,4 +1,7 @@
 yamlApplicationConfig:
+  dynamic:
+    config:
+      enabled: true
   kafka:
     clusters:
       - name: {{ DUNE_kafka.name }}:
