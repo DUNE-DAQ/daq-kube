@@ -3,5 +3,5 @@ DUNE_kafka:
   namespace: kafka
   name: dune-daq
   replicas: 1
-  version: "3.5.0"
-  protocol_version: "3.5"
+  version: "3.4.0"
+  protocol_version: "3.4"
