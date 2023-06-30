@@ -47,7 +47,7 @@ args:
   - name: grafana_admin_password
     default: run4evah
 
-  - name: daqconfig_mongodb_daqconfigdb_password
+  - name: daqconfig_mongodb_daqconfig_password
     default: run4evah
 
   - name: daqconfig_mongodb_root_password
@@ -67,7 +67,7 @@ targets:
       with_nfs_storage: false
       grafana_admin_password: run4evah
       daqconfig_mongodb_root_password: run4evah
-      daqconfig_mongodb_daqconfigdb_password: run4evah
+      daqconfig_mongodb_daqconfig_password: run4evah
       runcounter_postgresql_password: run4evah
 
   - name: np04-services
