@@ -8,5 +8,9 @@ deployments:
 
   - path: kafka-server
 
+{% if args.with_kafka_ui %}
+  - path: kafka-ui
+{% endif %}
+
 vars:
   - file: variables/kafka.yaml

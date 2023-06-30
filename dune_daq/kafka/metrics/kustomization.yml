@@ -9,3 +9,11 @@ resources:
   - entity-operator-metrics.yaml # https://github.com/strimzi/strimzi-kafka-operator/blob/main/examples/metrics/prometheus-install/strimzi-pod-monitor.yaml
   - kafka-resources-metrics.yaml # https://github.com/strimzi/strimzi-kafka-operator/blob/main/examples/metrics/prometheus-install/strimzi-pod-monitor.yaml
   - jmx-exporter-kafka.yaml # https://github.com/strimzi/strimzi-kafka-operator/blob/main/examples/metrics/kafka-metrics.yaml
+
+patches:
+  - type:
+      kind: PodMonitor
+    patch: |-
+      - op: replace
+        path: /spec/namespaceSelector/matchNames
+        value: [ {{ DUNE_kafka.namespace }} ]

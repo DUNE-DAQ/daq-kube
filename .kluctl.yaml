@@ -36,6 +36,8 @@ args:
   ### Feature flags for included manifests
   - name: with_kafka_kraft
     default: true
+  - name: with_kafka_ui
+    default: true
   - name: with_local_path_as_default_storageclass
     default: false
 
