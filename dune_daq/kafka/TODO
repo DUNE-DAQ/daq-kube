@@ -1,6 +1,6 @@
 https://docs.kafka-ui.provectus.io/configuration/helm-charts/quick-start ?
 
-should we have kafka-exporter and kafka-bridge too?
+should we have kafka-connect and kafka-bridge too?
 
 kafka cruise control proposal.expiration.ms
   cruiseControl:

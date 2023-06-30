@@ -5,6 +5,7 @@ deployments:
   - include: connectionservice
   - include: daqconfig
   - include: runcounter
+  - include: kafka
 
 {% if args.with_cvmfs_csi %}
   - path: cvmfs-storageclass

@@ -1,13 +1,10 @@
-# from https://github.com/strimzi/strimzi-kafka-operator/blob/main/examples/metrics/prometheus-install/strimzi-pod-monitor.yaml
 ---
 apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   name: kafka-resources-metrics
-  namespace: {{ kafka.namespace }}
   labels:
     app: strimzi
-    {{ prometheus_podmonitor_label_name }}: {{ prometheus_podmonitor_labels.kafka }}
 spec:
   selector:
     matchExpressions:
@@ -16,7 +13,7 @@ spec:
         values: ["Kafka", "KafkaConnect", "KafkaMirrorMaker", "KafkaMirrorMaker2"]
   namespaceSelector:
     matchNames:
-      - {{ kafka.namespace }}
+      - myproject
   podMetricsEndpoints:
   - path: /metrics
     port: tcp-prometheus

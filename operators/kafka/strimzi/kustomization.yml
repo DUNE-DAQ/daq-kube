@@ -5,6 +5,7 @@ kind: Kustomization
 resources:
   - helm-rendered.yaml
 
+# disable dashboards for components we are not using
 patches:
 {% if strimzi.with_kafka_kraft %}
   - target:
@@ -23,6 +24,24 @@ patches:
 {% endif %}
   - target:
       kind: ConfigMap
+      name: strimzi-kafka-bridge
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+  - target:
+      kind: ConfigMap
+      name: strimzi-kafka-connect
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+  - target:
+      kind: ConfigMap
+      name: strimzi-cruise-control
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+  - target:
+      kind: ConfigMap
       name: strimzi-kafka-mirror-maker2
     patch: |-
       - op: remove
@@ -30,12 +49,6 @@ patches:
   - target:
       kind: ConfigMap
       name: strimzi-kafka-oauth
-    patch: |-
-      - op: remove
-        path: /metadata/labels/{{ grafana_dashboard_label_name }}
-  - target:
-      kind: ConfigMap
-      name: strimzi-cruise-control
     patch: |-
       - op: remove
         path: /metadata/labels/{{ grafana_dashboard_label_name }}

@@ -2,22 +2,26 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: Kafka
 metadata:
-  name: dune-daq
-  namespace: {{ kafka.namespace }}
+  name: {{ DUNE_kafka.name }}
+  namespace: {{ DUNE_kafka.namespace }}
 spec:
-  entityOperator:
-    topicOperator: {}
-    userOperator: {}
-  kafkaExporter:
-    topicRegex: ".*"
-    groupRegex: ".*"
+  entityOperator: {{ DUNE_kafka.entityOperator | tojson }}
+  kafkaExporter: {{ DUNE_kafka.kafkaExporter | tojson }}
   kafka:
-    replicas: {{ kafka.replicas }}
+    replicas: {{ DUNE_kafka.replicas }}
+    resources:
+      requests:
+        cpu: 1
+        memory: 8Gi # kafka with less than 8Gi is not recommended
+      limits:
+        cpu: 2
+        memory: 12Gi
     logging:
       type: inline
       loggers:
         kafka.root.logger.level: WARN
     jvmOptions:
+      -Xms: 8192m
       -Xmx: 8192m
     listeners:
       - name: plain
@@ -32,49 +36,36 @@ spec:
         tls: true
         configuration:
           useServiceDnsDomain: true
-    version: 3.4.0
+    version: {{ DUNE_kafka.version }}
     config:
-      inter.broker.protocol.version: "3.4"
+      inter.broker.protocol.version: "{{ DUNE_kafka.protocol_version }}"
 
-      log.retention.bytes: 6442450944 # no default upper size limit, set one
-      default.replication.factor: {{ kafka.replicas }}
-      offsets.topic.replication.factor: {{ kafka.replicas }}
-      transaction.state.log.replication.factor: {{ kafka.replicas }}
-{% if kafka.replicas < 3 %}
+      log.retention.bytes: 6442450944 # no default upper size limit, set to 6Gi
+      default.replication.factor: {{ DUNE_kafka.replicas }}
+      offsets.topic.replication.factor: {{ DUNE_kafka.replicas }}
+      transaction.state.log.replication.factor: {{ DUNE_kafka.replicas }}
+{% if DUNE_kafka.replicas < 3 %}
       # replication only makes sense if there are 3 or more brokers
       transaction.state.log.min.isr: 1
       min.insync.replicas: 1
 {% else %}
+      # replicate to n-1 for stability at small replica counts
       transaction.state.log.min.isr: {{ kafka.replicas - 1 }}
       min.insync.replicas: {{ kafka.replicas - 1 }}
 {% endif %}
-    storage:
-      type: persistent-claim
-      class: {{ kafka.storage_class }}
-      size: {{ kafka.storage_size }}
-      deleteClaim: false
     metricsConfig:
       type: jmxPrometheusExporter
       valueFrom:
         configMapKeyRef:
           name: kafka-metrics
           key: kafka-metrics-config.yml
-  zookeeper:
+    storage: # no persistance requested
+      type: ephemeral
+  zookeeper: # this stanza is still required even in KRaft mode
 {% if kafka.replicas < 3 %}
     replicas: 1
 {% else %}
     replicas: 3
 {% endif %}
     storage:
-      type: persistent-claim
-      class: {{ kafka.storage_class }}
-      size: {{ kafka.zookeeper_storage_size }}
-      deleteClaim: false
-{% if not args.with_kafka_kraft %}
-    metricsConfig:
-      type: jmxPrometheusExporter
-      valueFrom:
-        configMapKeyRef:
-          name: zookeeper-metrics
-          key: zookeeper-metrics-config.yml
-{% endif %}
+      type: ephemeral
