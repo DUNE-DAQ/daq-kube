@@ -10,4 +10,3 @@ deployments:
 
 vars:
   - file: variables/kafka.yaml
-  - file: ../../operators/kafka/variables/strimzi.yaml
