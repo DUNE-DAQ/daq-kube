@@ -1,12 +1,12 @@
 yamlApplicationConfig:
-  dynamic:
-    config:
-      enabled: true
   kafka:
     clusters:
       - name: {{ DUNE_kafka.name }}
         bootstrapServers: {{DUNE_kafka.name }}-kafka-bootstrap:9092
         readOnly: false
+
+env:
+  DYNAMIC_CONFIG_ENABLED: "true"
 
 resources:
   limits:
