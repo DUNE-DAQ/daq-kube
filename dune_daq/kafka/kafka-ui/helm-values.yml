@@ -1,0 +1,28 @@
+yamlApplicationConfig:
+  kafka:
+    clusters:
+      - name: {{ DUNE_kafka.name }}:
+        bootstrapServers: dune-daq-kafka-bootstrap:9092
+        readOnly: false
+
+resources:
+  limits:
+    cpu: 400m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 64Mi
+
+podSecurityContext: # https://github.com/provectus/kafka-ui-charts/pull/10
+  fsGroup: 2000
+securityContext: # https://github.com/provectus/kafka-ui-charts/pull/10
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+    - ALL
+  runAsGroup: 2000
+  runAsNonRoot: true
+  runAsUser: 1000
+  seccompProfile:
+    type: RuntimeDefault
+

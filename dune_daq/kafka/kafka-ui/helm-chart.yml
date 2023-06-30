@@ -1,0 +1,8 @@
+helmChart:
+  chartName: kafka-ui
+  chartVersion: 0.7.2
+  namespace: '{{ DUNE_kafka.namespace }}'
+  output: helm-rendered.yaml
+  releaseName: kafka-ui
+  repo: https://provectus.github.io/kafka-ui-charts
+  updateConstraints: ~0.x
