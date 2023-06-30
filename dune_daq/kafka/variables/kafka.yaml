@@ -5,6 +5,3 @@ DUNE_kafka:
   replicas: 1
   version: "3.5.0"
   protocol_version: "3.5"
-
-strimzi:
-  with_kafka_kraft: {{ args.with_kafka_kraft }}
