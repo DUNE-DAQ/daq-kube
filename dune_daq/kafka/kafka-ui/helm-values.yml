@@ -6,7 +6,8 @@ yamlApplicationConfig:
         readOnly: false
 
 env:
-  DYNAMIC_CONFIG_ENABLED: "true"
+  - name: DYNAMIC_CONFIG_ENABLED
+    value: "true"
 
 resources:
   limits:
