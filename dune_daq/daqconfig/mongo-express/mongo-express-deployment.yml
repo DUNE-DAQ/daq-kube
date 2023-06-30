@@ -25,7 +25,7 @@ spec:
       containers:
         - name: mongodb-express
           # https://github.com/mongo-express/mongo-express/issues/1170
-          image: docker.io/library/mongo-express:0.54.0
+          image: docker.io/library/mongo-express
           ports:
             - containerPort: 8081
               name: mongo-express
