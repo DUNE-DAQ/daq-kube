@@ -4,6 +4,10 @@ yamlApplicationConfig:
       - name: {{ DUNE_kafka.name }}
         bootstrapServers: {{DUNE_kafka.name }}-kafka-bootstrap:9092
         readOnly: false
+        properties:
+          security.protocol: SASL_PLAINTEXT
+          sasl.mechanism: PLAIN
+          sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="ddd" password="eee";
 
 env:
   - name: DYNAMIC_CONFIG_ENABLED
