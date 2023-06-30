@@ -11,7 +11,7 @@ resources:
   - jmx-exporter-kafka.yaml # https://github.com/strimzi/strimzi-kafka-operator/blob/main/examples/metrics/kafka-metrics.yaml
 
 patches:
-  - type:
+  - target:
       kind: PodMonitor
     patch: |-
       - op: replace
