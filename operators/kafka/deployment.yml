@@ -9,6 +9,7 @@ deployments:
       - monitoring
 
   - path: strimzi
+    waitReadiness: true
 
   - barrier: true
     message: wait for operator to settle
