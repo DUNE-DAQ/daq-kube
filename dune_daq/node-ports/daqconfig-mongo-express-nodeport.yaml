@@ -2,6 +2,10 @@
 apiVersion: v1
 kind: Service
 metadata:
+  labels:
+    app.kubernetes.io/component: mongo-express
+    app.kubernetes.io/instance: mongo-express
+    app.kubernetes.io/name: mongo-express
   name: mongo-express-nodeport
   namespace: daqconfig
 spec:

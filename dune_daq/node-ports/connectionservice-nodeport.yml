@@ -2,12 +2,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: connectionservice-nodeport
-  namespace: connections
   labels:
     app.kubernetes.io/app: connectionservice
     app.kubernetes.io/component: connectionservice
-    app.kubernetes.io/instance: {{ target.name }}
+  name: connectionservice-nodeport
+  namespace: connections
 spec:
   ports:
     - name: connectionservice
@@ -18,5 +17,4 @@ spec:
   selector:
     app.kubernetes.io/app: connectionservice
     app.kubernetes.io/component: connectionservice
-    app.kubernetes.io/instance: {{ target.name }}
   type: NodePort

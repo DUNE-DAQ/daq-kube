@@ -18,4 +18,3 @@ spec:
   selector:
     app.kubernetes.io/app: runregistry-rest
     app.kubernetes.io/component: runregistry-rest
-    app.kubernetes.io/instance: {{ target.name }}
