@@ -7,3 +7,6 @@ deployments:
   - path: metrics
 
   - path: kafka-server
+
+vars:
+  - file: variables/kafka.yaml
