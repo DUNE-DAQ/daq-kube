@@ -31,9 +31,9 @@ metrics: # TODO https://github.com/percona/grafana-dashboards/tree/main/dashboar
   serviceMonitor:
     enabled: true
     labels:
-      "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.dune }}"
+      "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.mongodb }}"
   prometheusRule: # setup alerting rules here and then enable it
     enabled: false
     rules: []
     additionalLabels:
-      "{{ prometheus_rule_label_name }}": "{{ prometheus_rule_labels.dune }}"
+      "{{ prometheus_rule_label_name }}": "{{ prometheus_rule_labels.mongodb }}"

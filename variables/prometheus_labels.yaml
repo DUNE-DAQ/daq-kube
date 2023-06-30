@@ -5,7 +5,8 @@ prometheus_stack_component_value: kube-prometheus-stack
 prometheus_servicemonitor_label_name: prometheus.io/servicemonitor
 prometheus_servicemonitor_labels:
   system: system-metrics
-  kafka: prometheus-metrics
+  kafka: kafka-metrics
+  mongodb: mongodb-metrics
   postgresql: postgresql-metrics
   trivy: trivy-metrics
   dune: dune-metrics
@@ -13,7 +14,8 @@ prometheus_servicemonitor_labels:
 prometheus_podmonitor_label_name: prometheus.io/podmonitor
 prometheus_podmonitor_labels:
   system: system-metrics
-  kafka: prometheus-metrics
+  kafka: kafka-metrics
+  mongodb: mongodb-metrics
   postgresql: postgresql-metrics
   trivy: trivy-metrics
   dune: dune-metrics
@@ -21,7 +23,8 @@ prometheus_podmonitor_labels:
 prometheus_probe_label_name: prometheus.io/probe
 prometheus_probe_labels:
   system: system-metrics
-  kafka: prometheus-metrics
+  kafka: kafka-metrics
+  mongodb: mongodb-metrics
   postgresql: postgresql-metrics
   trivy: trivy-metrics
   dune: dune-metrics
@@ -29,7 +32,8 @@ prometheus_probe_labels:
 prometheus_rule_label_name: prometheus.io/rule
 prometheus_rule_labels:
   system: system-rules
-  kafka: prometheus-rules
+  kafka: kafka-rules
+  mongodb: mongodb-metrics
   postgresql: postgresql-rules
   trivy: trivy-rules
   dune: dune-metrics
