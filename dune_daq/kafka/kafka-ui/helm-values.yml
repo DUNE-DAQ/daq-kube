@@ -4,8 +4,8 @@ yamlApplicationConfig:
       enabled: true
   kafka:
     clusters:
-      - name: {{ DUNE_kafka.name }}:
-        bootstrapServers: dune-daq-kafka-bootstrap:9092
+      - name: {{ DUNE_kafka.name }}
+        bootstrapServers: {{DUNE_kafka.name }}-kafka-bootstrap:9092
         readOnly: false
 
 resources:
