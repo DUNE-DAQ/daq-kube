@@ -41,12 +41,11 @@ affinity:
             values:
             - "influxdb"
         namespaceSelector:
-          labelSelector:
-            matchExpressions: 
-            - key: name
-              operator: In
-              values:
-              - {{ opmon.namespace }}
+          matchExpressions: 
+          - key: name
+            operator: In
+            values:
+            - {{ opmon.namespace }}
         topologyKey: kubernetes.io/hostname
 
 metrics:
