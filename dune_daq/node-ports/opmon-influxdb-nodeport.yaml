@@ -1,0 +1,20 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/instance: influxdb
+    app.kubernetes.io/name: influxdb
+  name: opmon-influxdb-nodeport
+  namespace: opmon
+spec:
+  ports:
+  - name: service
+    nodePort: 31002
+    port: 8086
+    protocol: TCP
+    targetPort: 8086
+  selector:
+    app.kubernetes.io/instance: influxdb
+    app.kubernetes.io/name: influxdb
+  type: NodePort
