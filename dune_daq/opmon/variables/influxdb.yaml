@@ -1,5 +1,4 @@
 ---
-# are we using user 'user'?
 influxdb:
   admin_username: dune
   admin_password: {{ args.opmon_influxdb_admin_password }}
