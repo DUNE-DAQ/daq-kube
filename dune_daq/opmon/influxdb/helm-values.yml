@@ -5,7 +5,7 @@ setDefaultUser:
     username: {{ influxdb.admin_username }}
     password: {{ influxdb.admin_password }}
 
-env: {{ inflxdb.env | tojson }}
+env: {{ influxdb.env | tojson }}
 
 persistence:
   enabled: true
