@@ -1,4 +1,1 @@
-grafana:
-  default_dashboard: /tmp/dashboards/DUNE/daq_overview.json
-
 nfs_storage_classes: {} # TODO, fill me out

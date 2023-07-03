@@ -26,6 +26,7 @@ vars:
   - file: variables/alertmanager_labels.yaml
   - file: variables/prometheus_labels.yaml
   - file: variables/grafana_labels.yaml
+  - file: variables/grafana_default_dashboard.yaml
 
   - file: variables/kafka.yaml # figure out how to store these better
   - file: variables/minio.yaml # figure out how to store these better
