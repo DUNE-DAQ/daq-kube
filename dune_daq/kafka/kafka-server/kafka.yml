@@ -43,7 +43,8 @@ spec:
     version: {{ dunedaq.kafka.version }}
     config:
       inter.broker.protocol.version: "{{ dunedaq.kafka.protocol_version }}"
-
+      auto.create.topics.enable: false # make each topic by hand so we know what is out there
+      log.cleanup.policy: "compact,delete" # ensure last value stays, but cleanup old elements
       log.retention.bytes: 6442450944 # no default upper size limit, set to 6Gi
       default.replication.factor: {{ DUNE_kafka.replicas }}
       offsets.topic.replication.factor: {{ DUNE_kafka.replicas }}
@@ -53,9 +54,9 @@ spec:
       transaction.state.log.min.isr: 1
       min.insync.replicas: 1
 {% else %}
-      # replicate to n-1 for stability at small replica counts
-      transaction.state.log.min.isr: {{ DUNE_kafka.replicas - 1 }}
-      min.insync.replicas: {{ DUNE_kafka.replicas - 1 }}
+      # replicate to n/2 for stability at small replica counts
+      transaction.state.log.min.isr: {{ (DUNE_kafka.replicas / 2)  | round | int }}
+      min.insync.replicas: {{ (DUNE_kafka.replicas / 2) | round | int }}
 {% endif %}
     metricsConfig:
       type: jmxPrometheusExporter
