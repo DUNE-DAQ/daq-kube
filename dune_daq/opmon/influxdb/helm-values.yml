@@ -14,7 +14,6 @@ persistence:
 securityContext:
   runAsUser: 1999
   runAsNonRoot: true
-  allowPrivilegeEscalation: false
   seccompProfile:
     type: RuntimeDefault
   capabilities:
