@@ -15,7 +15,7 @@ config:
       listen: {{ telegraf.prometheus_port }}
     influxdb: # influxdb_v1, need to switch to v2
       urls:
-      - 'influxdb.opmon:8086'
+        - 'http://influxdb.opmon.svc:8086'
       database: {{ telegraf.influxdb_database }}
       username: {{ telegraf.influxdb_username }}
       password: "{{ telegraf.influxdb_password }}"
