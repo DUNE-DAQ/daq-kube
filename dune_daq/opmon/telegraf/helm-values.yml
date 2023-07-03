@@ -32,10 +32,8 @@ affinity:
             values:
             - "{{ dunedaq.kafka.name }}"
         namespaceSelector:
-          matchExpressions:
-          - key: name
-            operator: In
-            value: {{ dunedaq.kafka.namespace }}
+          matchLabels:
+            name: {{ dunedaq.kafka.namespace }}
         topologyKey: kubernetes.io/hostname
     - weight: 90
       podAffinityTerm:
@@ -46,11 +44,8 @@ affinity:
             values:
             - "influxdb"
         namespaceSelector:
-          matchExpressions: 
-          - key: name
-            operator: In
-            values:
-            - {{ opmon.namespace }}
+          matchLabels:
+            name: {{ opmon.namespace }}
         topologyKey: kubernetes.io/hostname
 
 resources:
