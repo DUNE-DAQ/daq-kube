@@ -17,7 +17,7 @@ deployments:
   - barrier: true
     message: Let services all catch up
 
-  - path: opmon
+  - include: opmon
 
   - path: node-ports
 
