@@ -1,7 +1,7 @@
 helmChart:
   chartName: kafka-ui
   chartVersion: 0.7.2
-  namespace: '{{ DUNE_kafka.namespace }}'
+  namespace: '{{ dunedaq.kafka.namespace }}'
   output: helm-rendered.yaml
   releaseName: kafka-ui
   repo: https://provectus.github.io/kafka-ui-charts
