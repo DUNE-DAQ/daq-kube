@@ -11,16 +11,6 @@ persistence:
   enabled: true
   size: 8Gi # this size is guess work
 
-affinity:
-  podAntiAffinity:
-    preferredDuringSchedulingIgnoredDuringExecution:
-    - labelSelector:
-        matchExpressions: # try to schedule away from Kafka
-        - key: "strimzi.io/cluster"
-          operator: In
-          values:
-          - "{{ dunedaq.kafka.name }}"
-
 securityContext:
   runAsUser: 1999
   runAsNonRoot: true
@@ -30,3 +20,15 @@ securityContext:
   capabilities:
     drop:
       - ALL
+
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 100
+      podAffinityTerm:
+        labelSelector:
+          matchExpressions: # try to schedule away from Kafka
+          - key: "strimzi.io/cluster"
+            operator: In
+            values:
+            - "{{ dunedaq.kafka.name }}"

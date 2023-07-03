@@ -33,3 +33,15 @@ securityContext: # https://github.com/provectus/kafka-ui-charts/pull/10
   runAsUser: 100
   seccompProfile:
     type: RuntimeDefault
+
+affinity:
+  podAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 100
+      podAffinityTerm:
+        labelSelector:
+          matchExpressions: # try to schedule near Kafka
+          - key: "strimzi.io/cluster"
+            operator: In
+            values:
+            - "{{ dunedaq.kafka.name }}"
