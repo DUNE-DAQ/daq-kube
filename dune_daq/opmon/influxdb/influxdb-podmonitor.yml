@@ -11,4 +11,4 @@ spec:
     matchLabels:
       app.kubernetes.io/instance: influxdb
   podMetricsEndpoints:
-    - port:  8086
+    - port: api
