@@ -12,7 +12,7 @@ config:
 
   outputs:
   - prometheus_client: # for prometheus
-      listen: {{ telegraf.prometheus_port }}
+      listen: "{{ telegraf.prometheus_port }}"
   - influxdb: # influxdb_v1, need to switch to v2
       urls: 
         - http://influxdb.{{ opmon.namespace }}.svc:8086
