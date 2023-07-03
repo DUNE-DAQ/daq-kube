@@ -10,7 +10,7 @@ spec:
   endpoints:
     - interval: 30s
       path: /metrics
-      port: http
+      port: prometheus-client
       relabelings:
         - action: replace
           regex: (.*)
@@ -28,5 +28,3 @@ spec:
     matchLabels:
       app.kubernetes.io/instance: telegraf
       app.kubernetes.io/name: telegraf
-  endpoints:
-    - port: prometheus-client
