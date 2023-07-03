@@ -22,10 +22,3 @@ alertmanagers:
       requests:
         cpu: 200m
         memory: 50Mi
-    storage:
-      volumeClaimTemplate:
-        spec:
-          accessModes: ["ReadWriteOnce"]
-          resources:
-            requests:
-              storage: 2Gi
