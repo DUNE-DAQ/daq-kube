@@ -4,4 +4,4 @@ kind: Kustomization
 
 resources:
   - helm-rendered.yaml
-  - telegraf-podmonitor.yml
+  - telegraf-servicemonitor.yml
