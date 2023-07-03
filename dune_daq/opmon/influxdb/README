@@ -1,0 +1,2 @@
+This should all move to influxdb2 and discard everything in this directory
+Should probably find a way to get service metrics

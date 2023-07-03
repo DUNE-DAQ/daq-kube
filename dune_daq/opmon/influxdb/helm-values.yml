@@ -1,0 +1,32 @@
+---
+setDefaultUser:
+  enabled: true
+  user:
+    username: {{ influxdb.admin_username }}
+    password: {{ influxdb.admin_password }}
+
+env: {{ inflxdb.env | tojson }}
+
+persistence:
+  enabled: true
+  size: 8Gi # this size is guess work
+
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - labelSelector:
+        matchExpressions: # try to schedule away from Kafka
+        - key: "strimzi.io/cluster"
+          operator: In
+          values:
+          - "{{ dunedaq.kafka.name }}"
+
+securityContext:
+  runAsUser: 1999
+  runAsNonRoot: true
+  allowPrivilegeEscalation: false
+  seccompProfile:
+    type: RuntimeDefault
+  capabilities:
+    drop:
+      - ALL

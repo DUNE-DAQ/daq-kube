@@ -1,0 +1,25 @@
+---
+influxdb:
+  admin_username: dune
+  admin_password: {{ args.opmon_influxdb_admin_password }}
+  env:
+    - name: INFLUXDB_DB
+      value: {{ opmon.influxdb_database }}
+    - name: INFLUXDB_USER # is this user used?
+      value: user
+    - name: INFLUXDB_USER_PASSWORD
+      value: {{ args.opmon_influxdb_user_influxdb_password }}
+    - name: INFLUXDB_READ_USER
+      value: {{ opmon.influxdb_ro_username }}
+    - name: INFLUXDB_READ_USER_PASSWORD
+      value: {{ opmon.influxdb_ro_password }}
+    - name: INFLUXDB_WRITE_USER
+      value: {{ telegraf.influxdb_username }}
+    - name: INFLUXDB_WRITE_USER_PASSWORD
+      value: {{ telegraf.influxdb_password }}
+    - name: INFLUXDB_HTTP_AUTH_ENABLED
+      value: "false" # Disable auth?? Why are we making users then?
+    - name: INFLUXDB_URL
+      value: "http://influxdb.opmon:8086" # is this used?
+    - name: INFLUXDB_HOST
+      value: "influxdb.opmon" # is this used?

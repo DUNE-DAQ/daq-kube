@@ -1,0 +1,46 @@
+---
+config:
+  inputs:
+    kafka_consumer:
+      brokers:
+        - {{ dunedaq.kafka.name }}-kafka-bootstrap.{{ dunedaq.kafka.namespace }}:9092
+      topics:
+        - {{ opmon.kafka_topic }}
+      client_id: 'opmon-telegraf'
+      version: "{{ dunedaq.kafka.version }}"
+      data_format: json_v2
+
+  outputs:
+    prometheus_client: # for prometheus
+      listen: {{ telegraf.prometheus_port }}
+    influxdb: # influxdb_v1, need to switch to v2
+      urls:
+      - 'influxdb.opmon:8086'
+      database: {{ telegraf.influxdb_database }}
+      username: {{ telegraf.influxdb_username }}
+      password: "{{ telegraf.influxdb_password }}"
+
+affinity:
+  podAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - labelSelector:
+        matchExpressions: # try to schedule near Kafka
+        - key: "strimzi.io/cluster"
+          operator: In
+          values:
+          - "{{ dunedaq.kafka.name }}"
+
+metrics:
+  health:
+    enabled: true
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 500Mi
+  requests:
+    cpu: 100m
+    memory: 50Mi
+
+nodeSelector:
+  kubernetes.io/os: linux

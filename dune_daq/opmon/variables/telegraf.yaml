@@ -1,0 +1,7 @@
+---
+telegraf:
+  namespace: telegraf
+  prometheus_port: 9126
+  influxdb_username: telegraf
+  influxdb_password: {{ args.opmon_telegraf_user_influxdb_password }}
+  influxdb_database: {{ opmon.influxdb_database }}

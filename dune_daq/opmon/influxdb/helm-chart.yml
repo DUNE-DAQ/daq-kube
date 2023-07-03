@@ -1,0 +1,8 @@
+helmChart:
+  chartName: influxdb
+  chartVersion: 4.12.4
+  namespace: '{{ opmon.namespace }}'
+  output: helm-rendered.yaml
+  releaseName: influxdb
+  repo: https://helm.influxdata.com/
+  updateConstraints: ~4.x

@@ -1,0 +1,7 @@
+---
+opmon:
+  kafka_topic: opmon
+  namespace: opmon
+  influxdb_database: influxv3 # this really should be a better name
+  influxdb_ro_username: readonly
+  influxdb_ro_password: readonly

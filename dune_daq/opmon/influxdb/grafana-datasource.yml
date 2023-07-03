@@ -1,0 +1,27 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    {{ grafana_datasource_label_name }}: {{ grafana_datasource_label_value }}
+  name: grafana-datasource-{{ opmon.influxdb_database }}
+  namespace: {{ opmon.namespace }}
+type: Opaque
+stringData:
+  datasource_opmon_influxdb_{{ opmon.influxdb_database }}.yaml: |-
+    apiVersion: 1
+    datasources:
+      - name: InfluxKafka
+        type: influxdb
+        access: proxy
+        database: {{ opmon.influxdb_database }}
+        url:  "http://influxdb.{{ opmon.namespace }}:8086"
+        withCredentials: true
+        basicAuth: true
+        user: {{ opmon.influxdb_ro_username }}
+        basicAuthUser: {{ opmon.influxdb_ro_username }}
+        jsonData:
+          httpMode: POST
+        secureJsonData:
+          password: {{ opmon.influxdb_ro_password }}
+          basicAuthPassword: {{ opmon.influxdb_ro_password }}

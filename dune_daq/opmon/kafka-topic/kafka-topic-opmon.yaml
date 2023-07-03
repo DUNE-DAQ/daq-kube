@@ -1,0 +1,11 @@
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  labels:
+    strimzi.io/cluster: {{ dunedaq.kafka.name }}
+  name: {{ opmon.kafka_topic }}
+  namespace: {{ dunedaq.kafka.namespace }}
+spec:
+  partitions: 1
+  replicas: 1

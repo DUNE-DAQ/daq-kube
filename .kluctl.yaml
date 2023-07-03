@@ -58,6 +58,15 @@ args:
   - name: runcounter_postgresql_password
     default: run4evah
 
+  - name: opmon_influxdb_user_influxdb_password
+    default: dunedaq
+
+  - name: opmon_telegraf_user_influxdb_password
+    default: run4evah
+
+  - name: opmon_influxdb_admin_password
+    default: run4evah
+
 
 targets:
   - name: pocket
@@ -69,6 +78,9 @@ targets:
       grafana_admin_password: run4evah
       daqconfig_mongodb_root_password: run4evah
       daqconfig_mongodb_daqconfig_password: run4evah
+      opmon_influxdb_user_influxdb_password: dunedaq
+      opmon_telegraf_user_influxdb_password: run4evah
+      opmon_influxdb_admin_password: run4evah
       runcounter_postgresql_password: run4evah
 
   - name: np04-services

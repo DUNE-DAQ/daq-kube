@@ -1,0 +1,14 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  labels:
+    {{ prometheus_podmonitor_label_name }}: {{ prometheus_podmonitor_labels.dune }}
+  name: influxdb
+  namespace: {{ opmon.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: influxdb
+  podMetricsEndpoints:
+    - port:  8086
