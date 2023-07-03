@@ -1,7 +1,7 @@
 ---
 config:
   inputs:
-    kafka_consumer:
+  - kafka_consumer:
       brokers:
         - {{ dunedaq.kafka.name }}-kafka-bootstrap.{{ dunedaq.kafka.namespace }}:9092
       topics:
@@ -11,11 +11,11 @@ config:
       data_format: json_v2
 
   outputs:
-    prometheus_client: # for prometheus
+  - prometheus_client: # for prometheus
       listen: {{ telegraf.prometheus_port }}
-    influxdb: # influxdb_v1, need to switch to v2
-      urls:
-        - 'http://influxdb.opmon.svc:8086'
+  - influxdb: # influxdb_v1, need to switch to v2
+      urls: 
+        - http://influxdb.{{ opmon.namespace }}.svc:8086
       database: {{ telegraf.influxdb_database }}
       username: {{ telegraf.influxdb_username }}
       password: "{{ telegraf.influxdb_password }}"
@@ -52,10 +52,6 @@ affinity:
             values:
             - {{ opmon.namespace }}
         topologyKey: kubernetes.io/hostname
-
-metrics:
-  health:
-    enabled: true
 
 resources:
   limits:
