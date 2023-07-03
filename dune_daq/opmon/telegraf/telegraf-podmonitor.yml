@@ -11,4 +11,4 @@ spec:
     matchLabels:
       app.kubernetes.io/instance: telegraf
   podMetricsEndpoints:
-    - port: {{ telegraf.prometheus_port }}
+    - port: "{{ telegraf.prometheus_port }}"
