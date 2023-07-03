@@ -16,9 +16,6 @@ securityContext:
   runAsNonRoot: true
   seccompProfile:
     type: RuntimeDefault
-  capabilities:
-    drop:
-      - ALL
 
 affinity:
   podAntiAffinity:
