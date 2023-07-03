@@ -21,9 +21,9 @@ spec:
       scheme: http
       scrapeTimeout: 5s
   jobLabel: app.kubernetes.io/name
-    namespaceSelector:
-      matchNames:
-        - {{ telegraf.namespace }}
+  namespaceSelector:
+    matchNames:
+      - {{ telegraf.namespace }}
   selector:
     matchLabels:
       app.kubernetes.io/instance: telegraf
