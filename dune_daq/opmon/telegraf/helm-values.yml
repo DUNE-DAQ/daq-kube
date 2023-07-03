@@ -32,15 +32,22 @@ affinity:
             values:
             - "{{ dunedaq.kafka.name }}"
         topologyKey: kubernetes.io/hostname
-#    - weight: 90
-#      podAffinityTerm:
-#        labelSelector:
-#          matchExpressions: # try to schedule near Influxdb
-#          - key: ""
-#            operator: In
-#            values:
-#            - ""
-#        topologyKey: kubernetes.io/hostname
+    - weight: 90
+      podAffinityTerm:
+        labelSelector:
+          matchExpressions: # try to schedule near Influxdb
+          - key: "app.kubernetes.io/instance"
+            operator: In
+            values:
+            - "influxdb"
+        namespaceSelector:
+          labelSelector:
+            matchExpressions: 
+            - key: name
+              operator: In
+              values:
+              - {{ opmon.namespace }}
+        topologyKey: kubernetes.io/hostname
 
 metrics:
   health:
