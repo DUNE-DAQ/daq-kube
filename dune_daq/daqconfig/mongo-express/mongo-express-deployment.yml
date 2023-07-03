@@ -36,7 +36,7 @@ spec:
                   name: mongodb-svcbind-root
                   key: uri
             - name: ME_CONFIG_MONGODB_ENABLE_ADMIN
-              value: "true"
+              value: "true" # should be false once we fix credentials
             - name: ME_CONFIG_OPTIONS_NO_DELETE
               value: "true"
             - name: ME_CONFIG_OPTIONS_READONLY
