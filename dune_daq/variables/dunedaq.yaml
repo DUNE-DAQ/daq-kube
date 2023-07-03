@@ -2,3 +2,8 @@ dunedaq:
   specificCVMFSRepositoryStorageClasses:
     - name: dunedaq.opensciencegrid.org
       repository: dunedaq.opensciencegrid.org
+  kafka:
+    namespace: kafka
+    name: dune-daq
+    version: "3.4.0"
+    protocol_version: "3.4"

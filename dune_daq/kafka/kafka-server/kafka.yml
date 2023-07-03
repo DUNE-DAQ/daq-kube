@@ -2,8 +2,8 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: Kafka
 metadata:
-  name: {{ DUNE_kafka.name }}
-  namespace: {{ DUNE_kafka.namespace }}
+  name: {{ dunedaq.kafka.name }}
+  namespace: {{ dunedaq.kafka.namespace }}
 spec:
   entityOperator:
     userOperator: {}
@@ -40,9 +40,9 @@ spec:
         tls: true
         configuration:
           useServiceDnsDomain: true
-    version: {{ DUNE_kafka.version }}
+    version: {{ dunedaq.kafka.version }}
     config:
-      inter.broker.protocol.version: "{{ DUNE_kafka.protocol_version }}"
+      inter.broker.protocol.version: "{{ dunedaq.kafka.protocol_version }}"
 
       log.retention.bytes: 6442450944 # no default upper size limit, set to 6Gi
       default.replication.factor: {{ DUNE_kafka.replicas }}
@@ -54,8 +54,8 @@ spec:
       min.insync.replicas: 1
 {% else %}
       # replicate to n-1 for stability at small replica counts
-      transaction.state.log.min.isr: {{ kafka.replicas - 1 }}
-      min.insync.replicas: {{ kafka.replicas - 1 }}
+      transaction.state.log.min.isr: {{ DUNE_kafka.replicas - 1 }}
+      min.insync.replicas: {{ DUNE_kafka.replicas - 1 }}
 {% endif %}
     metricsConfig:
       type: jmxPrometheusExporter
@@ -66,7 +66,7 @@ spec:
     storage: # no persistance requested
       type: ephemeral
   zookeeper: # this stanza is still required even in KRaft mode
-{% if kafka.replicas < 3 %}
+{% if DUNE_kafka.replicas < 3 %}
     replicas: 1
 {% else %}
     replicas: 3

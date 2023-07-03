@@ -2,7 +2,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: {{ DUNE_kafka.namespace }}
+namespace: {{ dunedaq.kafka.namespace }}
 
 resources:
   - cluster-operator-metrics.yaml # https://github.com/strimzi/strimzi-kafka-operator/blob/main/examples/metrics/prometheus-install/strimzi-pod-monitor.yaml
@@ -16,4 +16,4 @@ patches:
     patch: |-
       - op: replace
         path: /spec/namespaceSelector/matchNames
-        value: [ {{ DUNE_kafka.namespace }} ]
+        value: [ {{ dunedaq.kafka.namespace }} ]

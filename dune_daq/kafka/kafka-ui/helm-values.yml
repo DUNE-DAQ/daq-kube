@@ -1,8 +1,8 @@
 yamlApplicationConfig:
   kafka:
     clusters:
-      - name: {{ DUNE_kafka.name }}
-        bootstrapServers: {{DUNE_kafka.name }}-kafka-bootstrap:9092
+      - name: {{ dunedaq.kafka.name }}
+        bootstrapServers: {{ dunedaq.kafka.name }}-kafka-bootstrap:9092
         readOnly: false
 #        properties:
 #          security.protocol: SASL_PLAINTEXT
@@ -33,4 +33,3 @@ securityContext: # https://github.com/provectus/kafka-ui-charts/pull/10
   runAsUser: 100
   seccompProfile:
     type: RuntimeDefault
-
