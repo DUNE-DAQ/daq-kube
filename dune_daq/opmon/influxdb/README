@@ -1,2 +1,3 @@
 This should all move to influxdb2 and discard everything in this directory
-Should probably find a way to get service metrics
+
+The influxdb v1 helm chart has some errors under `telegraf.config.outputs` and `telegraf.config.inputs`

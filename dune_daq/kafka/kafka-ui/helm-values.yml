@@ -45,3 +45,4 @@ affinity:
             operator: In
             values:
             - "{{ dunedaq.kafka.name }}"
+        topologyKey: kubernetes.io/hostname
