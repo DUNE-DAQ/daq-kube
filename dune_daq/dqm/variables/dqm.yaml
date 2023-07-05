@@ -9,3 +9,7 @@ dqm:
   - dunedqm-incommingchannel2
   - dunedqm-platforminputs
   - dunedqm-processedchannel1
+  backend:
+    admin_username: admin
+    admin_password: {{ args.dqm_backend_admin_password }}
+    allowed_hosts: {{ dqm_backend_allowed_hosts }}

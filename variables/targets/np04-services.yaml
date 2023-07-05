@@ -1,1 +1,2 @@
 nfs_storage_classes: {} # TODO, fill me out
+dqm_backend_allowed_hosts: 'np04-srv-*.cern.ch'

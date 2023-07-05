@@ -57,6 +57,9 @@ args:
   - name: daqconfig_mongodb_root_password
     default: run4evah
 
+  - name: dqm_backend_admin_password
+    default: admin
+
   - name: runcounter_postgresql_password
     default: run4evah
 
@@ -80,6 +83,7 @@ targets:
       grafana_admin_password: run4evah
       daqconfig_mongodb_root_password: run4evah
       daqconfig_mongodb_daqconfig_password: run4evah
+      dqm_backend_admin_password: admin
       opmon_influxdb_user_influxdb_password: dunedaq
       opmon_telegraf_user_influxdb_password: run4evah
       opmon_influxdb_admin_password: run4evah

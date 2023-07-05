@@ -1,2 +1,2 @@
 ---
-{}
+dqm_backend_allowed_hosts: '*'

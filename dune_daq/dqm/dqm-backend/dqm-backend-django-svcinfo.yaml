@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: dqm-backend-django-svcinfo
+  namespace: dqm
+data:
+  username: {{ dqm.backend.admin_username }}
+  password: {{ dqm.backend.admin_password }}
+  allowed_hosts: {{ dqm.backend.allowed_hosts }}
