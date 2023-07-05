@@ -40,6 +40,8 @@ args:
     default: true
   - name: with_local_path_as_default_storageclass
     default: false
+  - name: with_mongo_express
+    default: true
 
   ### This should be customized as an argument for your needs
   ### FIXME:
