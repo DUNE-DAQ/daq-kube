@@ -40,6 +40,13 @@ spec:
         tls: true
         configuration:
           useServiceDnsDomain: true
+      - name: external
+        port:  9092
+        type: nodeport
+        tls: false
+        configuration:
+          bootstrap:
+            nodePort: 30092
     version: "{{ dunedaq.kafka.version }}"
     config:
       inter.broker.protocol.version: "{{ dunedaq.kafka.protocol_version }}"
