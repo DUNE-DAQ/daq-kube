@@ -1,0 +1,45 @@
+---
+architecture: standalone
+
+serviceBindings:
+  enabled: true
+
+auth:
+  enabled: false # my heart breaks, but dqm-backend doesn't have auth code
+
+networkPolicy: # since no auth, use network policy to restrict access
+  enabled: true
+  allowExternal: false
+  ingressNSPodMatchLabels:
+    - app.kubernetes.io/app: dqm
+
+master:
+  persistence:
+    enabled: true
+    # storageClass: when unset uses default class
+  resource: # this is guess work
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 300m
+      memory: 512Mi
+
+metrics:
+  enabled: true
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 300m
+      memory: 512Mi
+  serviceMonitor:
+    enabled: true
+    labels:
+      "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.redis }}"
+  prometheusRule: # setup alerting rules here and then enable it
+    enabled: false
+    rules: []
+    additionalLabels:
+      "{{ prometheus_rule_label_name }}": "{{ prometheus_rule_labels.redis }}"

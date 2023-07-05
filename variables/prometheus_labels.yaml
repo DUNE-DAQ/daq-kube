@@ -8,6 +8,7 @@ prometheus_servicemonitor_labels:
   kafka: kafka-metrics
   mongodb: mongodb-metrics
   postgresql: postgresql-metrics
+  redis: redis-metrics
   trivy: trivy-metrics
   dune: dune-metrics
 
@@ -17,6 +18,7 @@ prometheus_podmonitor_labels:
   kafka: kafka-metrics
   mongodb: mongodb-metrics
   postgresql: postgresql-metrics
+  redis: redis-metrics
   trivy: trivy-metrics
   dune: dune-metrics
 
@@ -26,6 +28,7 @@ prometheus_probe_labels:
   kafka: kafka-metrics
   mongodb: mongodb-metrics
   postgresql: postgresql-metrics
+  redis: redis-metrics
   trivy: trivy-metrics
   dune: dune-metrics
 
@@ -35,5 +38,6 @@ prometheus_rule_labels:
   kafka: kafka-rules
   mongodb: mongodb-metrics
   postgresql: postgresql-rules
+  redis: redis-metrics
   trivy: trivy-rules
   dune: dune-metrics

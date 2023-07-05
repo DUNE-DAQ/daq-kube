@@ -1,0 +1,10 @@
+---
+deployments:
+  - path: namespace
+
+  - barrier: true
+
+  - path: redis
+
+vars:
+  - file: variables/dqm.yaml
