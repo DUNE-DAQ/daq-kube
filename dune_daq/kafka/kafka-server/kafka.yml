@@ -41,7 +41,7 @@ spec:
         configuration:
           useServiceDnsDomain: true
       - name: external
-        port:  9092
+        port:  9094
         type: nodeport
         tls: false
         configuration:
