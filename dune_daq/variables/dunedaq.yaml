@@ -5,5 +5,7 @@ dunedaq:
   kafka:
     namespace: kafka
     name: dune-daq
+    bootstrap_brokers:
+      - dune-daq-kafka-bootstrap.kafka:9092
     version: "3.4.0"
     protocol_version: "3.4"

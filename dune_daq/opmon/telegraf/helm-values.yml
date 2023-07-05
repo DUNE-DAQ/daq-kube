@@ -2,12 +2,10 @@
 config:
   inputs:
   - kafka_consumer:
-      brokers:
-        - {{ dunedaq.kafka.name }}-kafka-bootstrap.{{ dunedaq.kafka.namespace }}:9092
-      topics:
-        - {{ opmon.kafka_topic }}
-      client_id: 'opmon-telegraf'
+      brokers: {{ dunedaq.kafka.bootstrap_brokers | tojson }}
+      topics: {{ telegraf.kafka_topics | tojson }}
       version: "{{ dunedaq.kafka.version }}"
+      client_id: 'opmon-telegraf'
       data_format: json_v2
 
   outputs:
