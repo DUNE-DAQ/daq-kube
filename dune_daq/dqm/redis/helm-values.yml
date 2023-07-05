@@ -11,7 +11,7 @@ networkPolicy: # since no auth, use network policy to restrict access
   enabled: true
   allowExternal: false
   ingressNSPodMatchLabels:
-    - app.kubernetes.io/app: dqm
+    app.kubernetes.io/app: dqm
 
 master:
   persistence:
