@@ -15,8 +15,7 @@ networkPolicy: # since no auth, use network policy to restrict access
 
 master:
   persistence:
-    enabled: true
-    # storageClass: when unset uses default class
+    enabled: false
   resource: # this is guess work
     requests:
       cpu: 100m
