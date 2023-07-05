@@ -1,6 +1,8 @@
 ---
 opmon:
-  kafka_topic: opmon
+  kafka_topics:
+    - opmon
+    - kafkaopmon-reporting
   namespace: opmon
   influxdb_database: influxv3 # the database should have a better name
   influxdb_ro_username: readonly

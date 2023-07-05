@@ -1,11 +1,14 @@
+{% for thistopic in opmon.kafka_topics %}
 ---
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
   labels:
     strimzi.io/cluster: {{ dunedaq.kafka.name }}
-  name: {{ opmon.kafka_topic }}
+  name: {{ thistopic }}
   namespace: {{ dunedaq.kafka.namespace }}
 spec:
   partitions: 1
   replicas: 1
+...
+{% endfor %}
