@@ -1,0 +1,5 @@
+---
+ers:
+  namespace: ers
+  kafka_topics:
+    - erskafka-reporting
