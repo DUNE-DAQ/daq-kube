@@ -5,6 +5,7 @@ deployments:
   - barrier: true
 
   - path: redis
+  - path: kafka_topic
 
 vars:
   - file: variables/dqm.yaml

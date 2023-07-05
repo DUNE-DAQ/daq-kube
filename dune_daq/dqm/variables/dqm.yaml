@@ -1,3 +1,11 @@
 ---
 dqm:
   namespace: dqm
+  kafka_topics:
+  - testdunedqm # is testdunedqm needed?
+  - dune-dqm-messenger
+  - dune-dqm-messages
+  - dunedqm-incommingchannel1
+  - dunedqm-incommingchannel2
+  - dunedqm-platforminputs
+  - dunedqm-processedchannel1
