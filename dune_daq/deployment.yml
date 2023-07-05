@@ -8,7 +8,7 @@ deployments:
   - include: kafka
 
 {% if args.with_cvmfs_csi %}
-  - path: cvmfs-storageclass
+  - path: cvmfs_storageclass
     tags:
       - cvmfs
       - storage

@@ -6,6 +6,7 @@ deployments:
 
   - path: redis
   - path: kafka_topic
+  - path: dqm-backend
 
 vars:
   - file: variables/dqm.yaml
