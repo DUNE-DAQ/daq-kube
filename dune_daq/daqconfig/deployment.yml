@@ -20,5 +20,5 @@ vars:
 
 ignoreForDiff:
   - kind: Secret # don't constantly change the metrics user password
-    name: mongodb
+    name: daqconfig-mongodb
     fieldPath: .data["mongodb-metrics-password"]

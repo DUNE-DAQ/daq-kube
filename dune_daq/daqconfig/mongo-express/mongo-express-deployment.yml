@@ -33,7 +33,7 @@ spec:
             - name: ME_CONFIG_MONGODB_URL
               valueFrom:
                 secretKeyRef:
-                  name: mongodb-svcbind-root
+                  name: daqconfig-mongodb-svcbind-root
                   key: uri
             - name: ME_CONFIG_MONGODB_ENABLE_ADMIN
               value: "true" # should be false once we fix credentials

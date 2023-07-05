@@ -41,22 +41,22 @@ spec:
           valueFrom:
             secretKeyRef:
               key: host
-              name: mongodb-svcbind-root
+              name: daqconfig-mongodb-svcbind-root
         - name: MONGO_PORT
           valueFrom:
             secretKeyRef:
               key: port
-              name: mongodb-svcbind-root
+              name: daqconfig-mongodb-svcbind-root
         - name: MONGO_USER
           valueFrom:
             secretKeyRef:
               key: username
-              name: mongodb-svcbind-root
+              name: daqconfig-mongodb-svcbind-root
         - name: MONGO_PASS
           valueFrom:
             secretKeyRef:
               key: password
-              name: mongodb-svcbind-root
+              name: daqconfig-mongodb-svcbind-root
         - name: MONGO_DBNAME
           value: daqconfigdb
         image: ghcr.io/dune-daq/daqconfig-service:v1.0.1
