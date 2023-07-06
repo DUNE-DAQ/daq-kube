@@ -1,5 +1,5 @@
 helmChart:
-  chartVersion: 12.6.2
+  chartVersion: 12.6.3
   namespace: '{{ DUNE_ers.namespace }}'
   output: helm-rendered.yaml
   releaseName: ers-postgresql
