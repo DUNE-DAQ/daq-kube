@@ -11,6 +11,14 @@ persistence:
   enabled: true
   size: 8Gi # this size is guess work
 
+resources: # this is guess work
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 1000m
+    memory: 1Gi
+
 securityContext:
   runAsUser: 1999
   runAsNonRoot: true
