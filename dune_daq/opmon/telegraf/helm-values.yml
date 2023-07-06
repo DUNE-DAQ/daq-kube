@@ -47,12 +47,9 @@ affinity:
         topologyKey: kubernetes.io/hostname
 
 resources:
-  limits:
-    cpu: 500m
-    memory: 500Mi
   requests:
-    cpu: 100m
-    memory: 50Mi
+    cpu: 50m
+    memory: 32Mi
 
 nodeSelector:
   kubernetes.io/os: linux
