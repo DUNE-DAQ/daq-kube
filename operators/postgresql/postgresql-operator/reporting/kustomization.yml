@@ -5,8 +5,8 @@ kind: Kustomization
 namespace: {{ postgresql.operator_namespace }}
 
 resources:
-  - cloudnative-pg/docs/src/samples/monitoring/cnpg-prometheusrule.yaml
-  - cloudnative-pg/docs/src/samples/monitoring/grafana-configmap.yaml
+  - cloudnative-pg-dashboards/cnpg-prometheusrule.yaml
+  - cloudnative-pg-dashboards/grafana-configmap.yaml
   - cnpg-operator-podmonitor.yaml
 
 patches:

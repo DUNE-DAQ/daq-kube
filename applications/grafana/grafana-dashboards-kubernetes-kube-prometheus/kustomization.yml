@@ -6,7 +6,7 @@ namespace: {{ monitoring.namespace }}
 
 resources:
   # A bunch of dashboards, not all of them great
-  - kube-prometheus/manifests/grafana-dashboardDefinitions.yaml
+  - kube-prometheus-manifests/grafana-dashboardDefinitions.yaml
 
 patches:
   - target:

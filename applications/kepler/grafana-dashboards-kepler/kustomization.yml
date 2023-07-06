@@ -13,4 +13,4 @@ commonAnnotations:
 
 configMapGenerator:
   - name: kepler-dashboard-kepler-exporter
-    files: [ kepler/grafana-dashboards/Kepler-Exporter.json ]
+    files: [ grafana-dashboards-kepler/Kepler-Exporter.json ]
