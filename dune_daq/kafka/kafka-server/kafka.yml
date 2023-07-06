@@ -6,8 +6,22 @@ metadata:
   namespace: {{ dunedaq.kafka.namespace }}
 spec:
   entityOperator:
-    userOperator: {}
-    topicOperator: {} # topicOperator not supported on KRaft? - https://github.com/strimzi/proposals/pull/76
+    userOperator:
+      resources:
+        requests:
+          cpu: 50m
+          memory: 64Mi
+        limits:
+          cpu: 400m
+          memory: 512Mi
+    topicOperator: # topicOperator not supported on KRaft? - https://github.com/strimzi/proposals/pull/76
+      resources:
+        requests:
+          cpu: 50m
+          memory: 64Mi
+        limits:
+          cpu: 400m
+          memory: 512Mi
   kafkaExporter:
     topicRegex: ".*"
     groupRegex: ".*"
@@ -81,3 +95,10 @@ spec:
 {% endif %}
     storage:
       type: ephemeral
+    resources:
+      requests:
+        cpu: 200m
+        memory: 128Mi
+      limits:
+        memory: 8Gi
+        cpu: "2"
