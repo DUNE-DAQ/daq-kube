@@ -16,6 +16,7 @@ networkPolicy: # since no auth, use network policy to restrict access
 master:
   persistence:
     enabled: false
+  disableCommands: [] # dqm-redis expects the FLUSHDB commands to work
   resource: # this is guess work
     requests:
       cpu: 100m
