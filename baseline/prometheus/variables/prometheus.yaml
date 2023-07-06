@@ -35,7 +35,7 @@ prometheis: # this is the plural of prometheus
         memory: 1Gi
       requests:
         cpu: 200m
-        memory: 50Mi
+        memory: 64Mi
     storage:
       volumeClaimTemplate:
         spec:
