@@ -119,6 +119,26 @@ spec:
           value: /mnt/data/Database
         - name: PATH_DATABASE_RESULTS
           value: /mnt/data/Database-results
+        - name: REDIS_HOST
+          valueFrom:
+            secretKeyRef:
+              key: host
+              name: dqm-redis-svcbind
+        - name: REDIS_PORT
+          valueFrom:
+            secretKeyRef:
+              key: port
+              name: dqm-redis-svcbind
+        - name: KAFKA_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: host
+              name: dqm-kafka-svcbind
+        - name: KAFKA_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: host
+              name: dqm-kafka-svcbind
         volumeMounts:
         - name: dqm-db-dir
           mountPath: /mnt/data/Database
