@@ -4,13 +4,22 @@ cache:
     cvmfsQuotaLimit: 1000 # TODO: pick a value for this
 
 controllerplugin:
-  resources:
-    limits:
-      cpu: 300m
-      memory: 512Mi
-    requests:
-      cpu: 50m
-      memory: 64Mi
+  plugin:
+    resources:
+      limits:
+        cpu: 300m
+        memory: 512Mi
+      requests:
+        cpu: 50m
+        memory: 64Mi
+  provisioner:
+    resources:
+      limits:
+        cpu: 300m
+        memory: 512Mi
+      requests:
+        cpu: 50m
+        memory: 64Mi
 
 nodeplugin:
   plugin:
