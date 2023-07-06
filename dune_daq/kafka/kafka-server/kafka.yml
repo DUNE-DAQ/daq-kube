@@ -28,17 +28,14 @@ spec:
   kafka:
     replicas: {{ DUNE_kafka.replicas }}
     resources:
-      requests:
+      requests: # this is guess work
         cpu: 100m
         memory: 1Gi
-      limits: # these limits are random guess work
-        cpu: 4
-        memory: 10Gi
     logging:
       type: inline
       loggers:
         kafka.root.logger.level: WARN
-    jvmOptions: # set these to match the requested memory
+    jvmOptions: # Tuning suggest 8Gi max?
       -Xms: 1024m
       -Xmx: 8192m
     listeners:
@@ -99,6 +96,6 @@ spec:
       requests:
         cpu: 200m
         memory: 128Mi
-      limits:
+      limits: # this is guess work
         memory: 8Gi
         cpu: "2"

@@ -15,9 +15,7 @@ resources: # this is guess work
   requests:
     cpu: 50m
     memory: 64Mi
-  limits:
-    cpu: 1000m
-    memory: 1Gi
+  limits: {}
 
 securityContext:
   runAsUser: 1999

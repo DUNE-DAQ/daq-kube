@@ -16,6 +16,11 @@ primary:
   persistence: # this is guess work
     size: 4Gi
 
+resources: # this is guess work
+  requests:
+    cpu: 100m
+    memory: 64Mi
+
 metrics:
   enabled: true
   resources: # this is guess work
