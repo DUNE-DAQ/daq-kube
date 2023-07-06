@@ -1,5 +1,5 @@
 ---
-opmon:
+DUNE_opmon:
   kafka_topics:
     - opmon
     - kafkaopmon-reporting

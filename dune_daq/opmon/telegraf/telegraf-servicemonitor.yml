@@ -5,7 +5,7 @@ metadata:
   labels:
     {{ prometheus_podmonitor_label_name }}: {{ prometheus_podmonitor_labels.dune }}
   name: telegraf
-  namespace: {{ telegraf.namespace }}
+  namespace: {{ OPMON_telegraf.namespace }}
 spec:
   endpoints:
     - interval: 30s
@@ -23,7 +23,7 @@ spec:
   jobLabel: app.kubernetes.io/name
   namespaceSelector:
     matchNames:
-      - {{ telegraf.namespace }}
+      - {{ OPMON_telegraf.namespace }}
   selector:
     matchLabels:
       app.kubernetes.io/instance: telegraf

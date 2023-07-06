@@ -2,10 +2,10 @@
 setDefaultUser:
   enabled: true
   user:
-    username: {{ influxdb.admin_username }}
-    password: {{ influxdb.admin_password }}
+    username: {{ OPMON_influxdb.admin_username }}
+    password: {{ OPMON_influxdb.admin_password }}
 
-env: {{ influxdb.env | tojson }}
+env: {{ OPMON_influxdb.env | tojson }}
 
 persistence:
   enabled: true

@@ -3,20 +3,20 @@ config:
   inputs:
   - kafka_consumer:
       brokers: {{ dunedaq.kafka.bootstrap_brokers | tojson }}
-      topics: {{ telegraf.kafka_topics | tojson }}
+      topics: {{ OPMON_telegraf.kafka_topics | tojson }}
       version: "{{ dunedaq.kafka.version }}"
       client_id: 'opmon-telegraf'
       data_format: json_v2
 
   outputs:
   - prometheus_client: # for prometheus
-      listen: ":{{ telegraf.prometheus_port }}"
+      listen: ":{{ OPMON_telegraf.prometheus_port }}"
   - influxdb: # influxdb_v1, need to switch to v2
       urls: 
-        - http://influxdb.{{ opmon.namespace }}.svc:8086
-      database: {{ telegraf.influxdb_database }}
-      username: {{ telegraf.influxdb_username }}
-      password: "{{ telegraf.influxdb_password }}"
+        - http://influxdb.{{ DUNE_opmon.namespace }}.svc:8086
+      database: {{ OPMON_telegraf.influxdb_database }}
+      username: {{ OPMON_telegraf.influxdb_username }}
+      password: "{{ OPMON_telegraf.influxdb_password }}"
 
 affinity:
   podAffinity:
@@ -43,7 +43,7 @@ affinity:
             - "influxdb"
         namespaceSelector:
           matchLabels:
-            name: {{ opmon.namespace }}
+            name: {{ DUNE_opmon.namespace }}
         topologyKey: kubernetes.io/hostname
 
 resources:

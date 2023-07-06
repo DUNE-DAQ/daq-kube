@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: {{ opmon.namespace }}
+  name: {{ DUNE_opmon.namespace }}
   labels: # influxdb v1 chart isn't restricted compatible
     pod-security.kubernetes.io/enforce: baseline
     pod-security.kubernetes.io/enforce-version: latest

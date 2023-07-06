@@ -1,19 +1,19 @@
 ---
-influxdb:
+OPMON_influxdb:
   admin_username: dune
   admin_password: {{ args.opmon_influxdb_admin_password }}
   env:
     - name: INFLUXDB_DB
-      value: {{ opmon.influxdb_database }}
+      value: {{ DUNE_opmon.influxdb_database }}
     - name: INFLUXDB_USER # is this user used?
       value: user
     - name: INFLUXDB_USER_PASSWORD
       value: {{ args.opmon_influxdb_user_influxdb_password }}
     - name: INFLUXDB_READ_USER
-      value: {{ opmon.influxdb_ro_username }}
+      value: {{ DUNE_opmon.influxdb_ro_username }}
     - name: INFLUXDB_READ_USER_PASSWORD
-      value: {{ opmon.influxdb_ro_password }}
+      value: {{ DUNE_opmon.influxdb_ro_password }}
     - name: INFLUXDB_WRITE_USER
-      value: {{ telegraf.influxdb_username }}
+      value: {{ OPMON_telegraf.influxdb_username }}
     - name: INFLUXDB_WRITE_USER_PASSWORD
-      value: {{ telegraf.influxdb_password }}
+      value: {{ OPMON_telegraf.influxdb_password }}
