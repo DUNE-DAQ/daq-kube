@@ -15,7 +15,7 @@ spec:
     replicas: {{ DUNE_kafka.replicas }}
     resources:
       requests:
-        cpu: 500m
+        cpu: 100m
         memory: 1Gi
       limits: # these limits are random guess work
         cpu: 4
