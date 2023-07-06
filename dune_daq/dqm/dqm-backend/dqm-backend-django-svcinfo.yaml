@@ -6,5 +6,5 @@ metadata:
   namespace: dqm
 data:
   username: {{ dqm.backend.admin_username }}
-  password: {{ dqm.backend.admin_password }}
-  allowed_hosts: {{ dqm.backend.allowed_hosts }}
+  password: "{{ dqm.backend.admin_password }}"
+  allowed_hosts: "{{ dqm.backend.allowed_hosts }}"
