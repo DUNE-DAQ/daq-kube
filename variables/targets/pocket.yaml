@@ -1,1 +1,1 @@
-dqm_backend_allowed_hosts: '*'
+dqm_backend_allowed_hosts: "'*'"
