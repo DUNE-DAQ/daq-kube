@@ -8,4 +8,4 @@ metadata:
   namespace: dqm
 data:
   host: {{ dunedaq.kafka.name }}.{{ dunedaq.kafka.namespace }}.svc
-  port: 9092
+  port: "9092"
