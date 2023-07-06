@@ -5,7 +5,7 @@ deployments:
   - barrier: true
 
   - path: redis
-  - path: kafka_topic
+  - path: kafka-topic
   - path: dqm-backend
 
 vars:
