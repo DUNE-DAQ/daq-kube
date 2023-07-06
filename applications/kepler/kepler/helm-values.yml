@@ -1,12 +1,11 @@
 ---
-master:
-  resources:
-    limits:
-      cpu: 300m
-      memory: 500Mi
-    requests:
-      cpu: 100m
-      memory: 50Mi
+resources:
+  limits:
+    cpu: 300m
+    memory: 500Mi
+  requests:
+    cpu: 10m
+    memory: 5Mi
 
 serviceMonitor:
   enabled: true
