@@ -9,6 +9,7 @@ deployments:
         name: standard
 
   - path: prometheus-operator-crds
+    alwaysDeploy: true
     skipDeleteIfTags: true
     tags:
       - metrics
@@ -22,10 +23,11 @@ deployments:
 
 {% if args.with_cilium %}
   - include: cilium
+    tags:
+      - cni
     skipDeleteIfTags: true
 {% endif %}
 
-{% if not args.with_cni_only %}
   - include: metrics
     skipDeleteIfTags: true
     tags:
@@ -49,7 +51,6 @@ deployments:
     skipDeleteIfTags: true
     tags:
       - storage
-{% endif %}
 
   - barrier: true
     message: Make sure baseline is completely loaded

@@ -2,10 +2,12 @@
 discriminator: "dune-daq-{{ target.name }}"
 
 args:
+  - name: with_applications
+    default: true
+  - name: with_baseline
+    default: true
   - name: with_cilium
     default: true
-  - name: with_cni_only
-    default: false
   - name: with_cvmfs_csi
     default: true
   - name: with_cnpg_operator
