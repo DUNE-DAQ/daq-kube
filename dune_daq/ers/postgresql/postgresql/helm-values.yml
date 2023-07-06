@@ -1,8 +1,8 @@
 ---
 auth:
-  username: "{{ DUNE_runcounter.postgresql_database_username }}"
-  password: "{{ DUNE_runcounter.postgresql_database_password }}"
-  database: "{{ DUNE_runcounter.postgresql_database_name }}"
+  username: "{{ DUNE_ers.postgresql_database_username }}"
+  password: "{{ DUNE_ers.postgresql_database_password }}"
+  database: "{{ DUNE_ers.postgresql_database_name }}"
 
 architecture: standalone
 
@@ -12,14 +12,13 @@ serviceBindings:
 primary:
   initdb:
     args: '--data-checksums --locale=en_US.UTF-8'
-    scriptsConfigMap: runnum-table-sql
 
-  persistence:
+  persistence: # this is guess work
     size: 4Gi
 
 metrics:
   enabled: true
-  resources:
+  resources: # this is guess work
     requests:
       cpu: 100m
       memory: 128Mi
@@ -29,7 +28,7 @@ metrics:
   serviceMonitor:
     enabled: true
     labels:
-      jobLabel: postgresql-runcounter
+      jobLabel: postgresql-ers
       "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.postgresql }}"
     jobLabel: jobLabel
   prometheusRule: # setup alerting rules here and then enable it

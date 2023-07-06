@@ -15,11 +15,11 @@ primary:
     scriptsConfigMap: runnum-table-sql
 
   persistence:
-    size: 4Gi
+    size: 4Gi # this is guesswork
 
 metrics:
   enabled: true
-  resources:
+  resources: # this is guesswork
     requests:
       cpu: 100m
       memory: 128Mi
