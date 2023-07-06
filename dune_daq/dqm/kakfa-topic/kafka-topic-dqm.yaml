@@ -1,4 +1,4 @@
-{% for thistopic in dqm.kafka_topics %}
+{% for thistopic in DUNE_dqm.kafka_topics %}
 ---
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
