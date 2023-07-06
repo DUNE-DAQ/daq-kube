@@ -41,6 +41,13 @@ spec:
               value: "true"
             - name: ME_CONFIG_OPTIONS_READONLY
               value: "true"
+          resources:
+            requests:
+              memory: 64Mi
+              cpu: 20m
+            limits:
+              memory: 2Gi
+              cpu: 500m
           securityContext:
             runAsUser: 10000
             runAsGroup: 10000
