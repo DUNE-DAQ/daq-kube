@@ -19,6 +19,10 @@ Kubernetes API HA via a proxy (see kubespray loadbalancer_api)
 
 PV/PVC system? local-path, openebs, rook.io/ceph?
 
+Move submodules into dedicated `submodules` directory
+* then link things into place
+* makes our bundled k8s manifests easier to track/sync
+
 https://velero.io/
 IPv6 only?
 
