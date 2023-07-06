@@ -1,5 +1,8 @@
 ---
 deployments:
+  - path: .submodules
+    onlyRender: true
+
 {% if args.with_baseline %}
   - include: baseline
     skipDeleteIfTags: true
