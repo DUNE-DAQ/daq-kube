@@ -1,0 +1,5 @@
+---
+ERS_postgresql:
+  database_name: ApplicationDbErrorReporting
+  database_username: ers
+  database_password: "{{ args.ers_postgresql_password }}"

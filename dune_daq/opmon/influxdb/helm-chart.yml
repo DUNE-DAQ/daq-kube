@@ -3,6 +3,6 @@ helmChart:
   chartVersion: 4.12.4
   namespace: '{{ DUNE_opmon.namespace }}'
   output: helm-rendered.yaml
-  releaseName: influxdb
+  releaseName: opmon-influxdb
   repo: https://helm.influxdata.com/
   updateConstraints: ~4.x

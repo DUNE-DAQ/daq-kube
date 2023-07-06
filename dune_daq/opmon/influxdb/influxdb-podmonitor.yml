@@ -9,6 +9,6 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/instance: influxdb
+      app.kubernetes.io/instance: opmon-influxdb
   podMetricsEndpoints:
     - port: api

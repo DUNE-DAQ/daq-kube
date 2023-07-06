@@ -13,7 +13,7 @@ config:
       listen: ":{{ OPMON_telegraf.prometheus_port }}"
   - influxdb: # influxdb_v1, need to switch to v2
       urls: 
-        - http://influxdb.{{ DUNE_opmon.namespace }}.svc:8086
+        - http://opmon-influxdb.{{ DUNE_opmon.namespace }}.svc:8086
       database: {{ OPMON_telegraf.influxdb_database }}
       username: {{ OPMON_telegraf.influxdb_username }}
       password: "{{ OPMON_telegraf.influxdb_password }}"
@@ -40,7 +40,7 @@ affinity:
           - key: "app.kubernetes.io/instance"
             operator: In
             values:
-            - "influxdb"
+            - "opmon-influxdb"
         namespaceSelector:
           matchLabels:
             name: {{ DUNE_opmon.namespace }}

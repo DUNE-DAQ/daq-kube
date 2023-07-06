@@ -1,8 +1,8 @@
 ---
 auth:
-  username: "{{ DUNE_ers.postgresql_database_username }}"
-  password: "{{ DUNE_ers.postgresql_database_password }}"
-  database: "{{ DUNE_ers.postgresql_database_name }}"
+  username: "{{ ERS_postgresql.database_username }}"
+  password: "{{ ERS_postgresql.database_password }}"
+  database: "{{ ERS_postgresql.database_name }}"
 
 architecture: standalone
 
@@ -23,8 +23,8 @@ metrics:
       cpu: 100m
       memory: 128Mi
     limits:
-      cpu: 300m
-      memory: 512Mi
+      cpu: 500m
+      memory: 1Gi
   serviceMonitor:
     enabled: true
     labels:
