@@ -119,9 +119,6 @@ spec:
           value: /mnt/data/Database
         - name: PATH_DATABASE_RESULTS
           value: /mnt/data/Database-results
-        envFrom:
-        - secretRef:
-            name: dqm-secrets
         volumeMounts:
         - name: dqm-db-dir
           mountPath: /mnt/data/Database
