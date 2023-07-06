@@ -36,7 +36,7 @@ args:
     default: false
 
   ### Feature flags for included manifests
-  - name: with_kafka_kraft
+  - name: with_kafka_kraft # strimzi doesn't support topicOperator with KRAFT yet
     default: false
   - name: with_kafka_ui
     default: true
@@ -50,6 +50,8 @@ args:
   ### these should probably lose the default for non-pocket
   ### users and thus force folks to set a specific password
   ### to increase the chances that these are secure in production
+  ###
+  ### see: kluctl --args-from-file=filename
   - name: grafana_admin_password
     default: run4evah
 
@@ -84,11 +86,12 @@ targets:
       with_cilium: false
       with_local_path_as_default_storageclass: true
       with_nfs_storage: false
+
       grafana_admin_password: run4evah
       daqconfig_mongodb_root_password: run4evah
       daqconfig_mongodb_daqconfig_password: run4evah
-      ers_postgresql_password: run4evah
       dqm_backend_admin_password: admin
+      ers_postgresql_password: run4evah
       opmon_influxdb_user_influxdb_password: dunedaq
       opmon_telegraf_user_influxdb_password: run4evah
       opmon_influxdb_admin_password: run4evah
@@ -96,3 +99,6 @@ targets:
 
   - name: np04-services
     context: kubernetes-admin@np04-services
+    args:
+      with_kafka_ui: false
+      with_mongo_express: false
