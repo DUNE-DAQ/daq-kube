@@ -2,7 +2,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: {{ dqm.namespace }}
+namespace: {{ DUNE_dqm.namespace }}
 
 resources:
   - dqm-backend-django-svcinfo.yaml

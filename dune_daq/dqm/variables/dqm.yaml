@@ -1,5 +1,5 @@
 ---
-dqm:
+DUNE_dqm:
   namespace: dqm
   kafka_topics:
     - testdunedqm

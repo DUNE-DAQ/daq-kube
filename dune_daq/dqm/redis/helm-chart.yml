@@ -1,6 +1,6 @@
 helmChart:
   chartVersion: 17.11.7
-  namespace: '{{ dqm.namespace }}'
+  namespace: '{{ DUNE_dqm.namespace }}'
   output: helm-rendered.yaml
   releaseName: dqm-redis
   repo: oci://registry-1.docker.io/bitnamicharts/redis
