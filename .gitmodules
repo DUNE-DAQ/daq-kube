@@ -18,3 +18,12 @@
 	path = .submodules/kepler
 	url = https://github.com/sustainable-computing-io/kepler.git
 	update = checkout
+[submodule "dunedaq-connectivityserver"]
+	path = .submodules/connectivityserver
+	url = https://github.com/DUNE-DAQ/connectivityserver.git
+[submodule "dune-microservices"]
+	path = .submodules/microservices
+	url = https://github.com/DUNE-DAQ/microservices.git
+[submodule "dune-dqmbackend"]
+	path = .submodules/dqm-backend
+	url = https://github.com/DUNE-DAQ/dqm-backend.git
