@@ -15,7 +15,7 @@ stringData:
         type: influxdb
         access: proxy
         database: {{ DUNE_opmon.influxdb_database }}
-        url:  "http://opmon-influxdb.{{ DUNE_opmon.namespace }}:8086"
+        url:  "http://opmon-influxdb.{{ DUNE_opmon.namespace }}.svc:8086" # my heart breaks
         withCredentials: true
         basicAuth: true
         user: {{ DUNE_opmon.influxdb_ro_username }}

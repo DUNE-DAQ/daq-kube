@@ -1,0 +1,54 @@
+---
+config:
+  inputs:
+  - kafka_consumer:
+      brokers: {{ dunedaq.kafka.bootstrap_brokers | tojson }}
+      topics: {{ ERS_telegraf.kafka_topics | tojson }}
+      version: "{{ dunedaq.kafka.version }}"
+      client_id: 'ers-telegraf'
+      data_format: json_v2
+
+  outputs:
+  - prometheus_client: # for prometheus
+      listen: ":{{ ERS_telegraf.prometheus_port }}"
+  - postgresql:
+      connection: "{{ ERS_telegraf.postgresql_connection }}"
+
+affinity:
+  podAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 100
+      podAffinityTerm:
+        labelSelector:
+          matchExpressions: # try to schedule near Kafka
+          - key: "strimzi.io/cluster"
+            operator: In
+            values:
+            - "{{ dunedaq.kafka.name }}"
+        namespaceSelector:
+          matchLabels:
+            name: {{ dunedaq.kafka.namespace }}
+        topologyKey: kubernetes.io/hostname
+    - weight: 90
+      podAffinityTerm:
+        labelSelector:
+          matchExpressions: # try to schedule near postgresql
+          - key: "app.kubernetes.io/instance"
+            operator: In
+            values:
+            - "ers-postgresql"
+        namespaceSelector:
+          matchLabels:
+            name: {{ DUNE_ers.namespace }}
+        topologyKey: kubernetes.io/hostname
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 500Mi
+  requests:
+    cpu: 100m
+    memory: 50Mi
+
+nodeSelector:
+  kubernetes.io/os: linux

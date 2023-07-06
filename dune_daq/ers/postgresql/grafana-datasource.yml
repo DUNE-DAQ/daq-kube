@@ -1,0 +1,25 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  labels:
+    {{ grafana_datasource_label_name }}: {{ grafana_datasource_label_value }}
+  name: grafana-datasource-{{ ERS_postgresql.database_name }}
+  namespace: {{ DUNE_ers.namespace }}
+type: Opaque
+stringData:
+  datasource_ers_postgresql_{{ ERS_postgresql.database_name }}.yaml: |-
+    apiVersion: 1
+    datasources:
+    - name: PostgresERS
+      type: postgres 
+      url: "ers-postgresql.{{DUNE_ers.namespace }}.svc:5432"
+      database: ApplicationDbErrorReporting
+      jsonData:
+        sslmode: "disable" # my heart breaks
+        tlsSkipVerify: true # my heart breaks
+        postgresVersion: 1500
+        maxIdleConns: 2
+      user: {{ ERS_postgresql.database_username }}
+      secureJsonData:
+        password: {{ ERS_postgresql.database_password }}
