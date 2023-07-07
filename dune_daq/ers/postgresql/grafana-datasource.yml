@@ -4,17 +4,16 @@ kind: Secret
 metadata:
   labels:
     {{ grafana_datasource_label_name }}: {{ grafana_datasource_label_value }}
-  name: grafana-datasource-{{ ERS_postgresql.database_name }}
+  name: grafana-datasource-{{ ERS_postgresql.database_name | lower }}
   namespace: {{ DUNE_ers.namespace }}
-type: Opaque
 stringData:
-  datasource_ers_postgresql_{{ ERS_postgresql.database_name }}.yaml: |-
+  datasource_ers_postgresql_{{ ERS_postgresql.database_name | lower }}.yaml: |-
     apiVersion: 1
     datasources:
     - name: PostgresERS
       type: postgres 
-      url: "ers-postgresql.{{DUNE_ers.namespace }}.svc:5432"
-      database: ApplicationDbErrorReporting
+      url: "{{ ERS_postgresql.release_name }}.{{DUNE_ers.namespace }}.svc:5432"
+      database: {{ ERS_postgresql.database_name }}
       jsonData:
         sslmode: "disable" # my heart breaks
         tlsSkipVerify: true # my heart breaks
