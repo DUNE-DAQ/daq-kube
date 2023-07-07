@@ -2,6 +2,6 @@
 ERS_telegraf:
   namespace: ers-telegraf
   prometheus_port: 9126
-  postgresql_connection: "postgres://{{ ERS_postgresql.database_username }}:{{ ERS_postgresql.database_password }}@ers-postgresql/{{ ERS_postgresql.database_name }}?sslmode=disable" # my heart breaks
+  postgresql_connection: "postgres://{{ ERS_postgresql.database_username }}:{{ ERS_postgresql.database_password }}@{{ ERS_postgresql.release_name }}/{{ ERS_postgresql.database_name }}?sslmode=disable" # my heart breaks
   kafka_topics:
     - erskafka-reporting

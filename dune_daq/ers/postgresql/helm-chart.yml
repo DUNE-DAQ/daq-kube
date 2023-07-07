@@ -2,6 +2,6 @@ helmChart:
   chartVersion: 12.6.3
   namespace: '{{ DUNE_ers.namespace }}'
   output: helm-rendered.yaml
-  releaseName: ers-postgresql
+  releaseName: '{{ ERS_postgresql.release_name }}'
   repo: oci://registry-1.docker.io/bitnamicharts/postgresql
   updateConstraints: ~12.x
