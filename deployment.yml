@@ -3,6 +3,14 @@ deployments:
   - path: .submodules
     onlyRender: true
 
+{% if args.with_bootstrap %}
+  - include: bootstrap
+    skipDeleteIfTags: true
+
+  - barrier: true
+    message: Ensure cluster has bootstraps
+{% endif %}
+
 {% if args.with_baseline %}
   - include: baseline
     skipDeleteIfTags: true

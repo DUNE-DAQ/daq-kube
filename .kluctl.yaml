@@ -4,6 +4,8 @@ discriminator: "dune-daq-{{ target.name }}"
 args:
   - name: with_applications
     default: true
+  - name: with_bootstrap
+    default: true
   - name: with_baseline
     default: true
   - name: with_cilium

@@ -1,0 +1,25 @@
+---
+deployments:
+  - path: kube-system
+    alwaysDeploy: true
+    skipDeleteIfTags: true
+
+  - path: prometheus-operator-crds
+    alwaysDeploy: true
+    skipDeleteIfTags: true
+    tags:
+      - metrics
+      - monitoring
+      - alertmanager
+      - prometheus
+      - prometheus-operator
+
+  - barrier: true
+    message: Wait for Prometheus CRDs to settle
+
+{% if args.with_cilium %}
+  - include: cilium
+    tags:
+      - cni
+    skipDeleteIfTags: true
+{% endif %}
