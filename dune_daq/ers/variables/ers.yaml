@@ -3,3 +3,9 @@ DUNE_ers:
   namespace: ers
   kafka_topics:
     - erskafka-reporting
+
+ERS_postgresql:
+  release_name: ers-postgresql
+  database_name: ApplicationDbErrorReporting
+  database_username: ers
+  database_password: "{{ args.ers_postgresql_password }}"

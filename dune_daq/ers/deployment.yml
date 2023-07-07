@@ -14,5 +14,4 @@ deployments:
 
 vars:
   - file: variables/ers.yaml
-  - file: variables/postgresql.yaml
   - file: variables/telegraf.yaml
