@@ -5,10 +5,10 @@ metrics:
 resources:
   limits:
     cpu: 200m
-    memory: 500Mi
+    memory: 512Mi
   requests:
     cpu: 100m
-    memory: 50Mi
+    memory: 16Mi
 
 serviceMonitor:
   enabled: true

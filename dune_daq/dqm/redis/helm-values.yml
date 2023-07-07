@@ -17,20 +17,20 @@ master:
   persistence:
     enabled: false
   disableCommands: [] # dqm-redis expects the FLUSHDB commands to work
-  resource: # this is guess work
+  resources: # this is guess work
     requests:
-      cpu: 100m
+      cpu: 50m
       memory: 128Mi
     limits:
-      cpu: 300m
+      cpu: 500m
       memory: 512Mi
 
 metrics:
   enabled: true
   resources:
     requests:
-      cpu: 100m
-      memory: 128Mi
+      cpu: 20m
+      memory: 16Mi
     limits:
       cpu: 300m
       memory: 512Mi

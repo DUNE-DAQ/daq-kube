@@ -5,10 +5,10 @@ master:
   resources:
     limits:
       cpu: 300m
-      memory: 500Mi
+      memory: 384Mi
     requests:
-      cpu: 100m
-      memory: 50Mi
+      cpu: 20m
+      memory: 16Mi
 
 worker:
   config:
@@ -17,10 +17,10 @@ worker:
   resources:
     limits:
       cpu: 300m
-      memory: 500Mi
+      memory: 384Mi
     requests:
-      cpu: 100m
-      memory: 50Mi
+      cpu: 20m
+      memory: 16Mi
 
 topologyUpdater:
   enable: {{ node_feature_discovery.topologyUpdater.enable }}
@@ -29,10 +29,10 @@ topologyUpdater:
   resources:
     limits:
       cpu: 300m
-      memory: 500Mi
+      memory: 384Mi
     requests:
-      cpu: 100m
-      memory: 50Mi
+      cpu: 20m
+      memory: 16Mi
 
 topologyGC:
   enable: {{ node_feature_discovery.topologyUpdater.enable }}
@@ -40,10 +40,10 @@ topologyGC:
   resources:
     limits:
       cpu: 300m
-      memory: 500Mi
+      memory: 384Mi
     requests:
-      cpu: 100m
-      memory: 50Mi
+      cpu: 20m
+      memory: 16Mi
 
 # TODO: figure out cert-manager
 tls:

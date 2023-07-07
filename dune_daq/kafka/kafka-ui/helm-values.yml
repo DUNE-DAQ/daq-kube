@@ -18,8 +18,8 @@ resources:
     cpu: 400m
     memory: 512Mi
   requests:
-    cpu: 100m
-    memory: 64Mi
+    cpu: 50m
+    memory: 32Mi
 
 podSecurityContext: # https://github.com/provectus/kafka-ui-charts/pull/10
   fsGroup: 101

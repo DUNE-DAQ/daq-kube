@@ -18,10 +18,10 @@ prometheusOperator:
   resources:
     limits:
       cpu: 300m
-      memory: 500Mi
+      memory: 512Mi
     requests:
-      cpu: 100m
-      memory: 50Mi
+      cpu: 50m
+      memory: 32Mi
 
 ## do not deploy a default monitoring setup
 ## we will manage it seperately

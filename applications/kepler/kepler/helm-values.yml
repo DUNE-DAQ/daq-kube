@@ -5,7 +5,7 @@ resources:
     memory: 500Mi
   requests:
     cpu: 10m
-    memory: 5Mi
+    memory: 4Mi
 
 serviceMonitor:
   enabled: true

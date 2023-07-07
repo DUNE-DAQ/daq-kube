@@ -1,11 +1,11 @@
 ---
 resources:
   limits:
-    cpu: 300m
-    memory: 500Mi
+    cpu: 200m
+    memory: 512Mi
   requests:
-    cpu: 100m
-    memory: 50Mi
+    cpu: 10m
+    memory: 32Mi
 
 prometheus:
   monitor:
