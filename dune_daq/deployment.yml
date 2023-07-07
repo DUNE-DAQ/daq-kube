@@ -18,6 +18,7 @@ deployments:
     message: Let services all catch up
 
   - include: dqm
+  - include: ers
   - include: opmon
 
   - path: node-ports
