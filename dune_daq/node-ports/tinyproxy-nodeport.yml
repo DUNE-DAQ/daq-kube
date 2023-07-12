@@ -11,6 +11,7 @@ spec:
   ports:
     - name: socks5
       protocol: TCP
+      port: 8888
       targetPort: socks5
       nodePort: 31000
   selector:
