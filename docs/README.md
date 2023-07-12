@@ -47,6 +47,12 @@ In general each resource should have its own dedicated variables under the `vari
 
 All kluctl target arguments should have default values.
 
+### Bootstrap
+
+This contains the bare minimum for running a kubernetes cluster.
+
+Mostly it is just the CNI.
+
 ### Baseline
 
 Items in baseline should be deployed on all clusters and are the expected minimal feature set of our clusters.
