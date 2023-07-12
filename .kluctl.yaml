@@ -34,6 +34,8 @@ args:
     default: false
   - name: with_strimzi_kafka_operator
     default: true
+  - name: with_tinyproxy
+    default: true
   - name: with_trivy
     default: false
 

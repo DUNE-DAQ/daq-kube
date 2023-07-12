@@ -4,6 +4,10 @@ deployments:
   - include: trivy
 {% endif %}
 
+{% if args.with_tinyproxy %}
+  - path: tinyproxy
+{% endif %}
+
 {% if args.with_kepler %}
   - include: kepler
     tags:
