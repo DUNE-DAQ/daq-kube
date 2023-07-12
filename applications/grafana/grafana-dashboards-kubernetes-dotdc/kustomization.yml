@@ -23,6 +23,13 @@ patches:
         value: "{{ grafana_dashboard_label_value }}"
   - target:
       kind: ConfigMap
+      name: dashboards-k8s-addons-prometheus
+    patch: |-
+      - op: replace
+        path: /metadata/labels/{{ grafana_dashboard_folder_annotation }}
+        value: Prometheus
+  - target:
+      kind: ConfigMap
       name: dashboards-k8s-addons-trivy-operator
     patch: |-
       - op: remove
