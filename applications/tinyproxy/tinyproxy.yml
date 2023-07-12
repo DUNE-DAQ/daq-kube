@@ -31,7 +31,8 @@ spec:
         app.kubernetes.io/component: tinyproxy
     spec:
       containers:
-      - image: docker.io/dunedaq/tinyproxy:latest
+      - image: ghcr.io/dune-daq/tinyproxy:latest
+        imagePullPolicy: Always
         name: tinyproxy
         ports:
         - containerPort: 8888
