@@ -1,4 +1,6 @@
 ---
+tplVersion: 2
+
 config:
   inputs:
   - kafka_consumer:
@@ -11,8 +13,10 @@ config:
       json_v2:
         measurement_name_path: measurement
         timestamp_path: time
-        timestamp_format: '2023-07-13T14:59:51Z'
+        timestamp_format: '2006-01-02T15:04:05Z'
+        timestamp_timezone : UTC
         object:
+          disable_prepend_keys: true
           tags:
             - tags
           fields:
