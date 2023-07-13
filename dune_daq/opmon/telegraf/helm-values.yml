@@ -1,6 +1,4 @@
 ---
-tplVersion: 2
-
 config:
   inputs:
   - kafka_consumer:
