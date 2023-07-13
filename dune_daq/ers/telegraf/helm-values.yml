@@ -7,6 +7,7 @@ config:
       version: "{{ dunedaq.kafka.version }}"
       client_id: 'ers-telegraf'
       data_format: json_v2
+      consumer_group: 'ers-telegraf'
 
   outputs:
   - prometheus_client: # for prometheus
