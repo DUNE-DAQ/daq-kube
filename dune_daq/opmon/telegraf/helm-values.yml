@@ -8,6 +8,15 @@ config:
       client_id: 'opmon-telegraf'
       data_format: json_v2
       consumer_group: 'opmon-telegraf'
+      json_v2:
+        measurement_name_path: measurement
+        timestamp_path: time
+        timestamp_format: '2023-07-13T14:59:51Z'
+        object:
+          tags:
+            - tags
+          fields:
+            key: fields
 
   outputs:
   - prometheus_client: # for prometheus
