@@ -31,7 +31,8 @@ config:
       username: {{ OPMON_telegraf.influxdb_username }}
       password: "{{ OPMON_telegraf.influxdb_password }}"
       tagdrop: 
-        metrics: "telegraf_internal_only"
+        metrics: 
+          - "telegraf_internal_only"
 
 affinity:
   podAffinity:
