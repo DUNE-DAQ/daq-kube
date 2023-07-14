@@ -9,12 +9,12 @@ config:
       topics: {{ ERS_telegraf.kafka_topics | tojson }}
       version: "{{ dunedaq.kafka.version }}"
       client_id: 'ers-telegraf'
-      data_format: json_v2
+      data_format: 'xpath_json'
       consumer_group: 'ers-telegraf'
-      json_v2:
-        - measurement_name: ErrorReports
-          object:
-            - path: '@this'
+      xpath:
+        - metric_name: ErrorReports
+          field_selection: '/*'
+          tag_selection: '/application_name | /chain | function_name | /host_name | /issue_name | /package_name | /partition | /process_id | /severity | /thread_id | /time | /usecs_since_epoch | /user_id | /user_name'
   - internal:
       collect_memstats: false
       tags:  
