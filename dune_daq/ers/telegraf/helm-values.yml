@@ -1,5 +1,8 @@
 ---
 config:
+  agent:
+    omit_hostname: true
+
   inputs:
   - kafka_consumer:
       brokers: {{ dunedaq.kafka.bootstrap_brokers | tojson }}
@@ -8,12 +11,23 @@ config:
       client_id: 'ers-telegraf'
       data_format: json_v2
       consumer_group: 'ers-telegraf'
+      json_v2:
+        - measurement_name: ErrorReports
+          object:
+            - path: '@this'
+  - internal:
+      collect_memstats: false
+      tags:  
+        metrics: "telegraf_internal_only"
 
   outputs:
   - prometheus_client: # for prometheus
       listen: ":{{ ERS_telegraf.prometheus_port }}"
   - postgresql:
       connection: "{{ ERS_telegraf.postgresql_connection }}"
+      tagdrop:
+        metrics:
+          - "telegraf_internal_only"
 
 affinity:
   podAffinity:
@@ -50,3 +64,9 @@ resources:
 
 nodeSelector:
   kubernetes.io/os: linux
+
+metrics: # do this by hand so we can filter
+  health:
+    enabled: false
+  internal:
+    enabled: false
