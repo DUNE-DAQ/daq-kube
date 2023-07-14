@@ -1,5 +1,7 @@
 ---
 config:
+  agent:
+    omit_hostname: true
   inputs:
   - kafka_consumer:
       brokers: {{ dunedaq.kafka.bootstrap_brokers | tojson }}
@@ -16,7 +18,8 @@ config:
         tag_selection: '/tags/*'
   - internal:
       collect_memstats: false
-      tags: '{ metrics: "telegraf_internal_only"}'
+      tags: 
+        metrics: "telegraf_internal_only"
 
   outputs:
   - prometheus_client: # for prometheus
@@ -27,7 +30,8 @@ config:
       database: {{ OPMON_telegraf.influxdb_database }}
       username: {{ OPMON_telegraf.influxdb_username }}
       password: "{{ OPMON_telegraf.influxdb_password }}"
-      tagdrop: '{ metrics: "telegraf_internal_only"}'
+      tagdrop: 
+        metrics: "telegraf_internal_only"
 
 affinity:
   podAffinity:
