@@ -1,6 +1,4 @@
 ---
-tplVersion: 2
-
 config:
   inputs:
   - kafka_consumer:
@@ -8,29 +6,28 @@ config:
       topics: {{ OPMON_telegraf.kafka_topics | tojson }}
       version: "{{ dunedaq.kafka.version }}"
       client_id: 'opmon-telegraf'
-      data_format: json_v2
+      data_format: 'xpath_json'
       consumer_group: 'opmon-telegraf'
-      json_v2:
-        measurement_name_path: measurement
-        timestamp_path: time
-        timestamp_format: '2006-01-02T15:04:05Z'
-        timestamp_timezone : UTC
-        object:
-          disable_prepend_keys: true
-          tags:
-            - tags
-          fields:
-            key: fields
+      xpath:
+        metric_name: '/measurement'
+        timestamp: '/time'
+        timestamp_format: 'rfc3339'
+        field_selection: '/fields/*'
+        tag_selection: '/tags/*'
+  - internal:
+      collect_memstats: false
+      tags: '{ metrics: "telegraf_internal_only"}'
 
   outputs:
   - prometheus_client: # for prometheus
       listen: ":{{ OPMON_telegraf.prometheus_port }}"
-  - influxdb: # influxdb_v1, need to switch to v2
+  - influxdb: # influxdb_v1, need to switch to v2 or v3
       urls: 
         - http://opmon-influxdb.{{ DUNE_opmon.namespace }}.svc:8086
       database: {{ OPMON_telegraf.influxdb_database }}
       username: {{ OPMON_telegraf.influxdb_username }}
       password: "{{ OPMON_telegraf.influxdb_password }}"
+      tagdrop: '{ metrics: "telegraf_internal_only"}'
 
 affinity:
   podAffinity:
@@ -67,3 +64,9 @@ resources:
 
 nodeSelector:
   kubernetes.io/os: linux
+
+metrics: # do this by hand so we can filter
+  health:
+    enabled: false
+  internal:
+    enabled: false
