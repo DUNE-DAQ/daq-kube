@@ -1,14 +1,9 @@
-{% for thistopic in DUNE_dqm.kafka_topics %}
----
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
-  labels:
-    strimzi.io/cluster: {{ dunedaq.kafka.name }}
-  name: {{ thistopic }}
-  namespace: {{ dunedaq.kafka.namespace }}
+  name: dqm
+  namespace: kafka
 spec:
   partitions: 1
   replicas: 1
-...
-{% endfor %}
+  topicName: DQM

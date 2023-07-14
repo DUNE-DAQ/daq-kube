@@ -1,8 +1,6 @@
 ---
 DUNE_dqm:
   namespace: dqm
-  kafka_topics:
-    - DQM
   backend:
     admin_username: admin
     admin_password: {{ args.dqm_backend_admin_password }}
