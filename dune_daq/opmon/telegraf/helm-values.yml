@@ -11,11 +11,11 @@ config:
       data_format: 'xpath_json'
       consumer_group: 'opmon-telegraf'
       xpath:
-        metric_name: '/measurement'
-        timestamp: '/time'
-        timestamp_format: 'rfc3339'
-        field_selection: '/fields/*'
-        tag_selection: '/tags/*'
+        - metric_name: '/measurement'
+          timestamp: '/time'
+          timestamp_format: 'rfc3339'
+          field_selection: '/fields/*'
+          tag_selection: '/tags/*'
   - internal:
       collect_memstats: false
       tags: 
