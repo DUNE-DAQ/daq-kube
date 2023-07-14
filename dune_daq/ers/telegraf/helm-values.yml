@@ -12,7 +12,7 @@ config:
       data_format: 'xpath_json'
       consumer_group: 'ers-telegraf'
       xpath:
-        - metric_name: ErrorReports
+        - metric_name: "'ErrorReports'"
           field_selection: '/*'
           tag_selection: '/application_name | /chain | function_name | /host_name | /issue_name | /package_name | /partition | /process_id | /severity | /thread_id | /time | /usecs_since_epoch | /user_id | /user_name'
   - internal:
