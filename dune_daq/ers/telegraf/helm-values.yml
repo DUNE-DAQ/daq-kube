@@ -25,6 +25,7 @@ config:
             cwd: "/cwd"
             file_name: "/file_name"
             function_name: "/function_name"
+            group_hash: "string(/group_hash)" # technically hex, but...
             host_name: "/host_name"
             issue_name: "/issue_name"
             message: "/message"
