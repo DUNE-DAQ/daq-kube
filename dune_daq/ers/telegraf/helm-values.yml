@@ -15,7 +15,7 @@ config:
         - metric_name: "'ErrorReports'"
           timestamp: '/time'
           timestamp_format: unix_ms
-          field_selection: '/*'
+          field_selection: '/*[not(self::time)]'
   - internal:
       collect_memstats: false
       tags:  
