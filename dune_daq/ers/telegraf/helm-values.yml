@@ -27,10 +27,12 @@ config:
   - postgresql:
       connection: "{{ ERS_telegraf.postgresql_connection }}"
       create_templates: # these indexes should make dashboards more responsive
+{% raw %} 
         - "'''CREATE TABLE {{ .table }} (id BIGINT GENERATED ALWAYS AS IDENTITY, {{ .columns }})'''"
         - "'''CREATE INDEX IF NOT EXISTS ON {{ .table }} USING BTREE (partition)'''"
         - "'''CREATE INDEX IF NOT EXISTS ON {{ .table }} USING HASH (severity)'''"
         - "'''CREATE INDEX IF NOT EXISTS ON {{ .table }} USING BRIN (time)'''"
+{% endraw %} 
       tagdrop:
         metrics:
           - "telegraf_internal_only"
