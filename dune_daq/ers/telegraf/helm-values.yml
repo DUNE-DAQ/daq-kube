@@ -14,33 +14,32 @@ config:
       data_format: 'xpath_json'
       consumer_group: 'ers-telegraf'
       xpath:
-        - metric_name: "string('ErrorReports')"
+        - metric_name: "'ErrorReports')"
+          # These are the fields in the ERS messages
+          # see erskafka/src/KafkaStream.cpp
           timestamp: '/time'
           timestamp_format: unix_ms
           fields:
-            # These are the fields in the ERS messages
-            # see erskafka/src/KafkaStream.cpp
-            # and the timestamp above
-            application_name: "string(/application_name)"
-            chain: "string(/chain)"
-            cwd: "string(/cwd)"
-            file_name: "string(/file_name)"
-            function_name: "string(/function_name)"
-            host_name: "string(/host_name)"
-            issue_name: "string(/issue_name)"
-            line_number: "number(/line_number)"
-            message: "string(/message)"
-            package_name: "string(/package_name)"
-            params: "string(/params)"
-            partition: "string(/partition)"
-            process_id: "number(/process_id)"
-            qualifiers: "string(/qualifiers)"
-            severity: "string(/severity)"
-            thread_id: "number(/thread_id)"
-            usecs_since_epoch: "number(/usecs_since_epoch)"
-            user_id: "number(/user_id)"
-            user_name: "string(/user_name)"
-            
+            application_name: "/application_name"
+            chain: "/chain"
+            cwd: "/cwd"
+            file_name: "/file_name"
+            function_name: "/function_name"
+            host_name: "/host_name"
+            issue_name: "/issue_name"
+            message: "/message"
+            package_name: "/package_name"
+            params: "/params"
+            partition: "/partition"
+            qualifiers: "/qualifiers"
+            severity: "/severity"
+            user_name: "/user_name"
+          fields_int:
+            line_number: "/line_number"
+            process_id: "/process_id"
+            thread_id: "/thread_id"
+            usecs_since_epoch: "/usecs_since_epoch"
+            user_id: "/user_id"
   - internal:
       collect_memstats: false
       tags:  
