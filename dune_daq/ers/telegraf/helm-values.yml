@@ -55,9 +55,9 @@ config:
       create_templates: # these indexes should make dashboards more responsive
 {% raw %}
         - 'CREATE TABLE {{ .table }} (id BIGINT GENERATED ALWAYS AS IDENTITY, {{ .columns }})'
-        - 'CREATE INDEX IF NOT EXISTS ON {{ .table }} USING BTREE (partition)'
-        - 'CREATE INDEX IF NOT EXISTS ON {{ .table }} USING HASH (severity)'
-        - 'CREATE INDEX IF NOT EXISTS ON {{ .table }} USING BRIN (time)'
+        - 'CREATE INDEX IF NOT EXISTS ers_partition_idx ON {{ .table }} USING BTREE (partition)'
+        - 'CREATE INDEX IF NOT EXISTS ers_severity_idx ON {{ .table }} USING HASH (severity)'
+        - 'CREATE INDEX IF NOT EXISTS ers_time_idx ON {{ .table }} USING BRIN (time)'
 {% endraw %}
       tagdrop:
         metrics:
