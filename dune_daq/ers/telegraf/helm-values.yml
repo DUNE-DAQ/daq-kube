@@ -13,11 +13,9 @@ config:
       consumer_group: 'ers-telegraf'
       xpath:
         - metric_name: "string('ErrorReports')"
-          timestamp: '/time'
+          timestamp: '/time' # see erskafka/src/KafkaStream.cpp
           timestamp_format: unix_ms
-          # These are the fields in the ERS messages
-          # see erskafka/src/KafkaStream.cpp
-          fields:
+          fields: # These are the fields in the ERS messages
             application_name: "string(/application_name)"
             chain: "number(/chain)"
             cwd: "string(/cwd)"
