@@ -22,7 +22,7 @@ config:
             # see erskafka/src/KafkaStream.cpp
             # and the timestamp above
             application_name: "string(/application_name)"
-            chain: "number(/chain)"
+            chain: "string(/chain)"
             cwd: "string(/cwd)"
             file_name: "string(/file_name)"
             function_name: "string(/function_name)"
