@@ -10,6 +10,7 @@ env: {{ OPMON_influxdb.env | tojson }}
 persistence:
   enabled: true
   size: 8Gi # this size is guess work
+  storageClass: {{ local_path_provisioner.storage_class_name }}
 
 resources: # this is guess work
   requests:

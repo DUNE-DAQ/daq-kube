@@ -12,7 +12,7 @@ serviceBindings:
 
 persistence:
   enabled: true
-  # storageClass: when unset uses default class
+  storageClass: {{ local_path_provisioner.storage_class_name }}
 
 metrics: # TODO https://github.com/percona/grafana-dashboards/tree/main/dashboards/MongoDB
   enabled: true

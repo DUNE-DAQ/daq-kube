@@ -14,7 +14,9 @@ primary:
     args: '--data-checksums --locale=en_US.UTF-8'
 
   persistence: # this is guess work
+    enabled: true
     size: 4Gi
+    storageClass: {{ local_path_provisioner.storage_class_name }}
 
 resources: # this is guess work
   requests:

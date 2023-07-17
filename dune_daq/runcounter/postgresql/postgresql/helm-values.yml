@@ -15,7 +15,9 @@ primary:
     scriptsConfigMap: runnum-table-sql
 
   persistence:
+    enabled: true
     size: 4Gi # this is guesswork
+    storageClass: {{ local_path_provisioner.storage_class_name }}
 
 resources: # this is guesswork
   requests:
