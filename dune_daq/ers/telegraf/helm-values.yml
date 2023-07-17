@@ -12,10 +12,33 @@ config:
       data_format: 'xpath_json'
       consumer_group: 'ers-telegraf'
       xpath:
-        - metric_name: "'ErrorReports'"
+        - metric_name: "string('ErrorReports')"
           timestamp: '/time'
           timestamp_format: unix_ms
-          field_selection: '/*[not(self::time)]'
+          # These are the fields in the ERS messages
+          # see erskafka/src/KafkaStream.cpp
+          fields:
+            application_name: "string(/application_name)"
+            chain: "number(/chain)"
+            cwd: "string(/cwd)"
+            file_name: "string(/file_name)"
+            function_name: "string(/function_name)"
+            group_hash: "string(/group_hash)" # technically hex, but...
+            host_name: "string(/host_name)"
+            issue_name: "string(/issue_name)"
+            line_number: "number(/line_number)"
+            message: "string(/message)"
+            package_name: "string(/package_name)"
+            params: "string(/params)"
+            partition: "string(/partition)"
+            process_id: "number(/process_id)"
+            qualifiers: "string(/qualifiers)"
+            severity: "string(/severity)"
+            thread_id: "number(/thread_id)"
+            usecs_since_epoch: "number(/usecs_since_epoch)"
+            user_id: "number(/user_id)"
+            user_name: "string(/user_name)"
+            
   - internal:
       collect_memstats: false
       tags:  
