@@ -2,10 +2,10 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaTopic
 metadata:
+  labels:
+    strimzi.io/cluster: {{ dunedaq.kafka.name }}
   name: dqm
   namespace: kafka
-  lables:
-    strimzi.io/cluster: {{ dunedaq.kafka.name }}
 spec:
   partitions: 1
   replicas: 1
