@@ -18,8 +18,8 @@ config:
           timestamp_format: 'rfc3339'
           tag_selection: '/tags/*'
           fields: # where are these fields coming from?
-            busy: "boolean(/fields/busy)"
-            error: "boolean(/fields/error)"
+            busy: "boolean(translate(string(/fields/busy), 'TRUE', 'true') = 'true')"
+            error: "boolean(translate(string(/fields/error, 'TRUE', 'true')) = 'true')"
             host: "string(/fields/host)"
             state: "string(/fields/state)"
   - internal:
