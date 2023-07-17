@@ -1,4 +1,6 @@
 ---
+tplVersion: 2
+
 config:
   agent:
     omit_hostname: true

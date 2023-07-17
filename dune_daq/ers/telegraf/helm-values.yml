@@ -1,4 +1,6 @@
 ---
+tplVersion: 2
+
 config:
   agent:
     omit_hostname: true
@@ -11,7 +13,6 @@ config:
       client_id: 'ers-telegraf'
       data_format: 'xpath_json'
       consumer_group: 'ers-telegraf'
-{% raw %} 
       xpath:
         - metric_name: "string('ErrorReports')"
           timestamp: '/time'
@@ -25,7 +26,7 @@ config:
             cwd: "string(/cwd)"
             file_name: "string(/file_name)"
             function_name: "string(/function_name)"
-            group_hash: "string(/group_hash)" # technically hex, but...
+            group_hash: "string(/group_hash)" # technically hex, but no implict conversion...
             host_name: "string(/host_name)"
             issue_name: "string(/issue_name)"
             line_number: "number(/line_number)"
@@ -40,7 +41,6 @@ config:
             usecs_since_epoch: "number(/usecs_since_epoch)"
             user_id: "number(/user_id)"
             user_name: "string(/user_name)"
-{% endraw %} 
             
   - internal:
       collect_memstats: false
