@@ -1,5 +1,5 @@
 helmChart:
-  chartVersion: 12.6.5
+  chartVersion: 12.6.6
   namespace: '{{ DUNE_runcounter.namespace }}'
   output: helm-rendered.yaml
   releaseName: runcounter-postgresql
