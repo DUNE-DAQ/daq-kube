@@ -16,8 +16,12 @@ config:
         - metric_name: '/measurement'
           timestamp: '/time'
           timestamp_format: 'rfc3339'
-          field_selection: '/fields/*'
           tag_selection: '/tags/*'
+          fields: # where are these fields coming from?
+            busy: "boolean(/fields/busy)"
+            error: "boolean(/fields/error)"
+            host: "string(/fields/host)"
+            state: "string(/fields/state)"
   - internal:
       collect_memstats: false
       tags: 
