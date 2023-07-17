@@ -11,11 +11,15 @@ config:
       client_id: 'ers-telegraf'
       data_format: 'xpath_json'
       consumer_group: 'ers-telegraf'
+{% raw %} 
       xpath:
         - metric_name: "string('ErrorReports')"
-          timestamp: '/time' # see erskafka/src/KafkaStream.cpp
+          timestamp: '/time'
           timestamp_format: unix_ms
-          fields: # These are the fields in the ERS messages
+          fields:
+            # These are the fields in the ERS messages
+            # see erskafka/src/KafkaStream.cpp
+            # and the timestamp above
             application_name: "string(/application_name)"
             chain: "number(/chain)"
             cwd: "string(/cwd)"
@@ -36,6 +40,7 @@ config:
             usecs_since_epoch: "number(/usecs_since_epoch)"
             user_id: "number(/user_id)"
             user_name: "string(/user_name)"
+{% endraw %} 
             
   - internal:
       collect_memstats: false
