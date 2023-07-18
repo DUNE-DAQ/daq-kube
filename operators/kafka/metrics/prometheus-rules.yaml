@@ -10,7 +10,7 @@ metadata:
     app: strimzi
     {{ prometheus_rule_label_name }}: {{ prometheus_rule_labels.kafka }}
   name: prometheus-kafka-rules
-  namespace: {{ kafka.operator_namespace }}
+  namespace: {{ strimzi.namespace }}
 {% raw %}
 spec:
   groups:

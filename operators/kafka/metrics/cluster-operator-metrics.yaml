@@ -4,7 +4,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: PodMonitor
 metadata:
   name: cluster-operator-metrics
-  namespace: {{ kafka.operator_namespace }}
+  namespace: {{ strimzi.namespace }}
   labels:
     app: strimzi
     {{ prometheus_podmonitor_label_name }}: {{ prometheus_podmonitor_labels.kafka }}
@@ -14,7 +14,7 @@ spec:
       strimzi.io/kind: cluster-operator
   namespaceSelector:
     matchNames:
-      - {{ kafka.operator_namespace }}
+      - {{ strimzi.namespace }}
   podMetricsEndpoints:
   - path: /metrics
     port: http

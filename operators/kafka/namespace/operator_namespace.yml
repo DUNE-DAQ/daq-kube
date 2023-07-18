@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: {{ kafka.operator_namespace }}
+  name: {{ strimzi.namespace }}
   labels: # https://github.com/strimzi/strimzi-kafka-operator/issues/8425
     pod-security.kubernetes.io/enforce: baseline
     pod-security.kubernetes.io/enforce-version: latest

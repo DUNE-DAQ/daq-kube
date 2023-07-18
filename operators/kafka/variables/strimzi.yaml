@@ -1,5 +1,4 @@
 ---
 strimzi:
   namespace: strimzi-kafka
-  component_value: strimzi
   with_kafka_kraft: {{ args.with_kafka_kraft }}
