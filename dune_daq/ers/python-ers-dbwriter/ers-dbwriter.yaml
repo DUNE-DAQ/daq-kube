@@ -20,8 +20,8 @@ spec:
         app.kubernetes.io/component: ers-dbwriter
       spec:
         initContainers:
-          - name: wait-for-kafka-startup
-            image: docker.io/library/busybox:latest
+          - image: docker.io/library/busybox:latest
+            name: wait-for-kafka-startup
             command: ['sh','-c', 'until nslookup {{ dunedaq.kafka.bootstrap_brokers[0] }}; do echo waiting for kafka; sleep 1; done']
         containers:
           - image: ghcr.io/dune-daq/pocket-ersdbwriter:latest
@@ -73,5 +73,5 @@ spec:
               capabilities:
                 drop:
                 - ALL
-          securityContext:
-            fsGroup: 10000
+        securityContext:
+          fsGroup: 10000
