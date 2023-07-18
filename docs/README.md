@@ -55,6 +55,10 @@ In general each resource should have its own dedicated variables under the `vari
 
 All kluctl target arguments should have default values.
 
+### .helm-charts
+
+Kluctl caches helm charts it uses locally, this is where the cache lives.
+
 ### .submodules
 
 This contains all the submodule git repos we are including.  Specific elements from them should be linked into place so folks don't need to hunt for what repos we depend upon.
