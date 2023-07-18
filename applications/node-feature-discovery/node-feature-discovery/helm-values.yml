@@ -7,7 +7,7 @@ master:
       cpu: 300m
       memory: 384Mi
     requests:
-      cpu: 20m
+      cpu: 10m
       memory: 16Mi
 
 worker:
@@ -19,7 +19,7 @@ worker:
       cpu: 300m
       memory: 384Mi
     requests:
-      cpu: 20m
+      cpu: 10m
       memory: 16Mi
 
 topologyUpdater:
@@ -31,7 +31,7 @@ topologyUpdater:
       cpu: 300m
       memory: 384Mi
     requests:
-      cpu: 20m
+      cpu: 10m
       memory: 16Mi
 
 topologyGC:
@@ -42,7 +42,7 @@ topologyGC:
       cpu: 300m
       memory: 384Mi
     requests:
-      cpu: 20m
+      cpu: 10m
       memory: 16Mi
 
 # TODO: figure out cert-manager

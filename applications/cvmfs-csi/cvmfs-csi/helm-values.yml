@@ -10,7 +10,7 @@ controllerplugin:
         cpu: 300m
         memory: 512Mi
       requests:
-        cpu: 20m
+        cpu: 10m
         memory: 16Mi
   provisioner:
     resources:
@@ -18,7 +18,7 @@ controllerplugin:
         cpu: 300m
         memory: 512Mi
       requests:
-        cpu: 20m
+        cpu: 10m
         memory: 16Mi
 
 nodeplugin:
@@ -28,7 +28,7 @@ nodeplugin:
         cpu: 300m
         memory: 512Mi
       requests:
-        cpu: 20m
+        cpu: 10m
         memory: 16Mi
   automount:
     resources:
@@ -36,7 +36,7 @@ nodeplugin:
         cpu: 300m
         memory: 512Mi
       requests:
-        cpu: 20m
+        cpu: 10m
         memory: 16Mi
   singlemount:
     resources:
@@ -44,7 +44,7 @@ nodeplugin:
         cpu: 300m
         memory: 512Mi
       requests:
-        cpu: 20m
+        cpu: 10m
         memory: 16Mi
   registrar:
     resources:
@@ -52,5 +52,5 @@ nodeplugin:
         cpu: 300m
         memory: 512Mi
       requests:
-        cpu: 20m
+        cpu: 10m
         memory: 16Mi
