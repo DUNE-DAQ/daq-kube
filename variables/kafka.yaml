@@ -1,0 +1,5 @@
+---
+kafka:
+  with_bridge: false
+  with_connect: false
+  with_mirrormaker: false
