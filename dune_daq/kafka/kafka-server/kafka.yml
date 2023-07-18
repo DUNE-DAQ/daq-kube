@@ -7,18 +7,18 @@ metadata:
 spec:
   entityOperator:
     userOperator:
-      resources:
+      resources: # this is guess work
         requests:
-          cpu: 50m
-          memory: 64Mi
+          cpu: 10m
+          memory: 16Mi
         limits:
           cpu: 400m
           memory: 512Mi
     topicOperator: # topicOperator not supported on KRaft? - https://github.com/strimzi/proposals/pull/76
       resources:
-        requests:
-          cpu: 50m
-          memory: 64Mi
+        requests: # this is guess work
+          cpu: 10m
+          memory: 16Mi
         limits:
           cpu: 400m
           memory: 512Mi
@@ -93,9 +93,9 @@ spec:
     storage:
       type: ephemeral
     resources:
-      requests:
-        cpu: 200m
+      requests: # this is guess work
+        cpu: 100m
         memory: 128Mi
-      limits: # this is guess work
+      limits:
         memory: 8Gi
         cpu: "2"
