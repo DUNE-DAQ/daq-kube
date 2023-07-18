@@ -17,6 +17,8 @@ What about cilium featues:
 
 Kubernetes API HA via a proxy (see kubespray loadbalancer_api)
 
+ers-dbwriter -> switch to telegraf?
+
 PV/PVC system? local-path, openebs, rook.io/ceph?
 
 Move submodules into dedicated `submodules` directory
@@ -202,14 +204,3 @@ https://docs.ansible.com/ansible/latest/collections/ansible/utils/index.html#plu
 https://github.com/FairwindsOps/rbac-manager
 
 https://github.com/FairwindsOps/Polaris
-
-
-kafka:
-set xmx to 4g per best practices?
-
-https://github.com/prometheus/jmx_exporter/tree/main/example_configs # kafka and kafka-connect
-
-config entries:
-log.retention.hours=12 ? non-default, default is 168
-log.retention.bytes=6442450944 ? non-default, default is unset
-
