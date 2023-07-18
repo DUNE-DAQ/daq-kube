@@ -22,7 +22,7 @@ spec:
       initContainers:
         - image: docker.io/library/busybox:latest
           name: wait-for-kafka-startup
-          command: ['sh','-c', 'until nslookup {{ dunedaq.kafka.name }}-kafka-bootstrap.{{ dunedaq.kafka.namespace }}.svc; do echo waiting for kafka - {{ dunedaq.kafka.name }}-kafka-bootstrap.{{ dunedaq.kafka.namespace }}.svc; sleep 1; done']
+          command: ['sh','-c', 'until getent hosts {{ dunedaq.kafka.name }}-kafka-bootstrap.{{ dunedaq.kafka.namespace }}.svc; do echo waiting for kafka - {{ dunedaq.kafka.name }}-kafka-bootstrap.{{ dunedaq.kafka.namespace }}.svc; sleep 1; done']
       containers:
         - image: ghcr.io/dune-daq/pocket-ersdbwriter:latest
           name: ers-dbwriter
