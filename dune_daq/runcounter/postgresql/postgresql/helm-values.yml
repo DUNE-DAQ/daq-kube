@@ -15,9 +15,9 @@ primary:
     scriptsConfigMap: runnum-table-sql
 
   extendedConfiguration: |-
-    log_destination="stderr"
-    log_timezone="UTC"
-    timezone="UTC"
+    log_destination = stderr
+    log_timezone = UTC
+    timezone = UTC
 
   persistence:
     enabled: true
