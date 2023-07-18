@@ -12,6 +12,10 @@ serviceBindings:
 primary:
   initdb:
     args: '--data-checksums --locale=en_US.UTF-8'
+  configuration:
+    log_destination: stderr
+    log_timezone: UTC
+    timezone: UTC
 
   persistence: # this is guess work
     enabled: true

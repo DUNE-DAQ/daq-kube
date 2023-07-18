@@ -14,6 +14,11 @@ primary:
     args: '--data-checksums --locale=en_US.UTF-8'
     scriptsConfigMap: runnum-table-sql
 
+  configuration:
+    log_destination: stderr
+    log_timezone: UTC
+    timezone: UTC
+
   persistence:
     enabled: true
     size: 4Gi # this is guesswork
