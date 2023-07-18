@@ -39,7 +39,13 @@ Or to get just a list of target names `kluctl list-targets | grep 'name:'`.
 
 For example: `kluctl deploy -t pocket`
 
-## Layout
+## Access to your cluster
+
+The list of node-ports in use can be found under `dune_daq/node-ports`.  It contains the exact manifests being run and should thus be the most up to date list of node-ports.
+
+The cluster also launches an instance of the `tinyproxy` SOCKS5 that can be used to tie into the kubernetes network.
+
+## Repo Layout
 
 You are expected to be familiar with https://kluctl.io/docs and its reference sections.
 
@@ -48,6 +54,10 @@ Where possible we are using the kluctl helm integration to rely on upstream pack
 In general each resource should have its own dedicated variables under the `variables` directory.
 
 All kluctl target arguments should have default values.
+
+### .submodules
+
+This contains all the submodule git repos we are including.  Specific elements from them should be linked into place so folks don't need to hunt for what repos we depend upon.
 
 ### Bootstrap
 
