@@ -11,8 +11,8 @@ config:
       topics: {{ ERS_telegraf.kafka_topics | tojson }}
       version: "{{ dunedaq.kafka.version }}"
       client_id: 'ers-telegraf'
-      data_format: 'xpath_json'
       consumer_group: 'ers-telegraf'
+      data_format: 'xpath_json'
       xpath:
         - metric_name: "string('ErrorReports')"
           # These are the fields in the ERS messages
@@ -44,11 +44,14 @@ config:
   - internal:
       collect_memstats: false
       tags:  
-        metrics: "telegraf_internal_only"
+        metrics: "telegraf"
 
   outputs:
   - prometheus_client: # for prometheus
       listen: ":{{ ERS_telegraf.prometheus_port }}"
+      tagpass:
+        metrics:
+          - "telegraf"
   - postgresql:
       connection: "{{ ERS_telegraf.postgresql_connection }}"
       create_templates: # these indexes should make dashboards more responsive
@@ -60,7 +63,7 @@ config:
 {% endraw %}
       tagdrop:
         metrics:
-          - "telegraf_internal_only"
+          - "telegraf"
 
 affinity:
   podAffinity:

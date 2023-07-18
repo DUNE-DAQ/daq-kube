@@ -10,8 +10,8 @@ config:
       topics: {{ OPMON_telegraf.kafka_topics | tojson }}
       version: "{{ dunedaq.kafka.version }}"
       client_id: 'opmon-telegraf'
-      data_format: 'xpath_json'
       consumer_group: 'opmon-telegraf'
+      data_format: 'xpath_json'
       xpath:
         - metric_name: '/measurement'
           timestamp: '/time'
@@ -25,11 +25,14 @@ config:
   - internal:
       collect_memstats: false
       tags: 
-        metrics: "telegraf_internal_only"
+        metrics: "telegraf"
 
   outputs:
   - prometheus_client: # for prometheus
       listen: ":{{ OPMON_telegraf.prometheus_port }}"
+      tagpass: 
+        metrics: 
+          - "telegraf"
   - influxdb: # influxdb_v1, need to switch to v2 or v3
       urls: 
         - http://opmon-influxdb.{{ DUNE_opmon.namespace }}.svc:8086
@@ -38,7 +41,7 @@ config:
       password: "{{ OPMON_telegraf.influxdb_password }}"
       tagdrop: 
         metrics: 
-          - "telegraf_internal_only"
+          - "telegraf"
 
 affinity:
   podAffinity:
