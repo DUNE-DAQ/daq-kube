@@ -70,18 +70,27 @@ args:
   ### on node local ephemeral non-exposed containers, default passwords
   ### are acceptable.
   ###
-  ### For real deployments you must set these to the correct values
+  ### For real deployments you must set these to the correct values.
   ###
   ### see: kluctl --args-from-file=filename
   - name: grafana_admin_password
+    default: run4evah
   - name: daqconfig_mongodb_daqconfig_password
+    default: run4evah
   - name: daqconfig_mongodb_root_password
+    default: run4evah
   - name: dqm_backend_admin_password
+    default: run4evah
   - name: ers_postgresql_password
+    default: run4evah
   - name: opmon_influxdb_user_influxdb_password
+    default: run4evah
   - name: opmon_telegraf_user_influxdb_password
+    default: run4evah
   - name: opmon_influxdb_admin_password
+    default: run4evah
   - name: runcounter_postgresql_password
+    default: run4evah
 
 targets:
   - name: pocket
@@ -90,16 +99,6 @@ targets:
       with_cilium: false
       with_local_path_as_default_storageclass: true
       with_nfs_storage: false
-
-      grafana_admin_password: run4evah
-      daqconfig_mongodb_root_password: run4evah
-      daqconfig_mongodb_daqconfig_password: run4evah
-      dqm_backend_admin_password: admin
-      ers_postgresql_password: run4evah
-      opmon_influxdb_user_influxdb_password: dunedaq
-      opmon_telegraf_user_influxdb_password: run4evah
-      opmon_influxdb_admin_password: run4evah
-      runcounter_postgresql_password: run4evah
 
   - name: pocket-connectionservice
     discriminator: "dune-daq-pocket"
@@ -116,16 +115,6 @@ targets:
       with_dune_opmon: false
       with_dune_runcounter: false
 
-      grafana_admin_password: run4evah
-      daqconfig_mongodb_root_password: run4evah
-      daqconfig_mongodb_daqconfig_password: run4evah
-      dqm_backend_admin_password: admin
-      ers_postgresql_password: run4evah
-      opmon_influxdb_user_influxdb_password: dunedaq
-      opmon_telegraf_user_influxdb_password: run4evah
-      opmon_influxdb_admin_password: run4evah
-      runcounter_postgresql_password: run4evah
-
   - name: pocket-daqconfig
     discriminator: "dune-daq-pocket"
     args:
@@ -140,17 +129,6 @@ targets:
       with_dune_kafka: false
       with_dune_opmon: false
       with_dune_runcounter: false
-
-      grafana_admin_password: run4evah
-      daqconfig_mongodb_root_password: run4evah
-      daqconfig_mongodb_daqconfig_password: run4evah
-      dqm_backend_admin_password: admin
-      ers_postgresql_password: run4evah
-      opmon_influxdb_user_influxdb_password: dunedaq
-      opmon_telegraf_user_influxdb_password: run4evah
-      opmon_influxdb_admin_password: run4evah
-      runcounter_postgresql_password: run4evah
-
 
   - name: pocket-dqm
     discriminator: "dune-daq-pocket"
@@ -167,16 +145,6 @@ targets:
       with_dune_opmon: false
       with_dune_runcounter: false
 
-      grafana_admin_password: run4evah
-      daqconfig_mongodb_root_password: run4evah
-      daqconfig_mongodb_daqconfig_password: run4evah
-      dqm_backend_admin_password: admin
-      ers_postgresql_password: run4evah
-      opmon_influxdb_user_influxdb_password: dunedaq
-      opmon_telegraf_user_influxdb_password: run4evah
-      opmon_influxdb_admin_password: run4evah
-      runcounter_postgresql_password: run4evah
-
   - name: pocket-ers
     discriminator: "dune-daq-pocket"
     args:
@@ -191,16 +159,6 @@ targets:
       with_dune_kafka: true
       with_dune_opmon: false
       with_dune_runcounter: false
-
-      grafana_admin_password: run4evah
-      daqconfig_mongodb_root_password: run4evah
-      daqconfig_mongodb_daqconfig_password: run4evah
-      dqm_backend_admin_password: admin
-      ers_postgresql_password: run4evah
-      opmon_influxdb_user_influxdb_password: dunedaq
-      opmon_telegraf_user_influxdb_password: run4evah
-      opmon_influxdb_admin_password: run4evah
-      runcounter_postgresql_password: run4evah
 
   - name: pocket-opmon
     discriminator: "dune-daq-pocket"
@@ -217,16 +175,6 @@ targets:
       with_dune_opmon: true
       with_dune_runcounter: false
 
-      grafana_admin_password: run4evah
-      daqconfig_mongodb_root_password: run4evah
-      daqconfig_mongodb_daqconfig_password: run4evah
-      dqm_backend_admin_password: admin
-      ers_postgresql_password: run4evah
-      opmon_influxdb_user_influxdb_password: dunedaq
-      opmon_telegraf_user_influxdb_password: run4evah
-      opmon_influxdb_admin_password: run4evah
-      runcounter_postgresql_password: run4evah
-
   - name: pocket-runcounter
     discriminator: "dune-daq-pocket"
     args:
@@ -242,19 +190,20 @@ targets:
       with_dune_opmon: false
       with_dune_runcounter: true
 
-      grafana_admin_password: run4evah
-      daqconfig_mongodb_root_password: run4evah
-      daqconfig_mongodb_daqconfig_password: run4evah
-      dqm_backend_admin_password: admin
-      ers_postgresql_password: run4evah
-      opmon_influxdb_user_influxdb_password: dunedaq
-      opmon_telegraf_user_influxdb_password: run4evah
-      opmon_influxdb_admin_password: run4evah
-      runcounter_postgresql_password: run4evah
-
-
   - name: np04-services
     context: kubernetes-admin@np04-services
     args:
       with_kafka_ui: false
       with_mongo_express: false
+
+      # if you don't set the args to override, you get random values
+      grafana_admin_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      daqconfig_mongodb_root_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      daqconfig_mongodb_daqconfig_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      dqm_backend_admin_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      ers_postgresql_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      opmon_influxdb_user_influxdb_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      opmon_telegraf_user_influxdb_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      opmon_influxdb_admin_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      runcounter_postgresql_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+
