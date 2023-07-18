@@ -43,7 +43,7 @@ For example: `kluctl deploy -t pocket`
 
 The list of node-ports in use can be found under `dune_daq/node-ports`.  It contains the exact manifests being run and should thus be the most up to date list of node-ports.
 
-The cluster also launches an instance of the `tinyproxy` SOCKS5 that can be used to tie into the kubernetes network.
+The cluster also launches an instance of the `tinyproxy` SOCKS5 proxy server that can be used to tie into the kubernetes network.
 
 ## Repo Layout
 
