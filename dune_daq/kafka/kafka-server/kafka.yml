@@ -26,7 +26,7 @@ spec:
     topicRegex: ".*"
     groupRegex: ".*"
   kafka:
-    replicas: {{ DUNE_kafka.replicas }}
+    replicas: {{ dunedaq.kafka.replicas }}
     resources:
       requests: # this is guess work
         cpu: 100m
@@ -64,17 +64,17 @@ spec:
       auto.create.topics.enable: false # make each topic by hand so we know what is out there
       log.cleanup.policy: "delete" # Cannot use 'compact' due to empty key in our data format
       log.retention.bytes: 6442450944 # no default upper size limit, set to 6Gi
-      default.replication.factor: {{ DUNE_kafka.replicas }}
-      offsets.topic.replication.factor: {{ DUNE_kafka.replicas }}
-      transaction.state.log.replication.factor: {{ DUNE_kafka.replicas }}
-{% if DUNE_kafka.replicas < 3 %}
+      default.replication.factor: {{ dunedaq.kafka.replicas }}
+      offsets.topic.replication.factor: {{ dunedaq.kafka.replicas }}
+      transaction.state.log.replication.factor: {{ dunedaq.kafka.replicas }}
+{% if dunedaq.kafka.replicas < 3 %}
       # replication only makes sense if there are 3 or more brokers
       transaction.state.log.min.isr: 1
       min.insync.replicas: 1
 {% else %}
       # replicate to n/2 for stability at small replica counts
-      transaction.state.log.min.isr: {{ (DUNE_kafka.replicas / 2)  | round | int }}
-      min.insync.replicas: {{ (DUNE_kafka.replicas / 2) | round | int }}
+      transaction.state.log.min.isr: {{ (dunedaq.kafka.replicas / 2)  | round | int }}
+      min.insync.replicas: {{ (dunedaq.kafka.replicas / 2) | round | int }}
 {% endif %}
     metricsConfig:
       type: jmxPrometheusExporter
@@ -85,7 +85,7 @@ spec:
     storage: # no persistance requested
       type: ephemeral
   zookeeper: # this stanza is still required even in KRaft mode
-{% if DUNE_kafka.replicas < 3 %}
+{% if dunedaq.kafka.replicas < 3 %}
     replicas: 1
 {% else %}
     replicas: 3

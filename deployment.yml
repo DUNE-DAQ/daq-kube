@@ -42,7 +42,6 @@ vars:
   - file: variables/grafana_default_dashboard.yaml
   - file: variables/local_path_provisioner.yaml # for StorageClass name
 
-  - file: variables/kafka.yaml # figure out how to store these better
   - file: variables/minio.yaml # figure out how to store these better
   - file: variables/postgresql.yaml # figure out how to store these better
 
