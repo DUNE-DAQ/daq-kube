@@ -12,38 +12,35 @@ config:
       version: "{{ dunedaq.kafka.version }}"
       client_id: 'ers-telegraf'
       consumer_group: 'ers-telegraf'
-      data_format: 'json_v2'
-      json_v2:
-        - measurement_name: "ErrorReports"
+      data_format: 'xpath_json'
+      xpath:
+        - metric_name: "string('ErrorReports')"
           # These are the fields in the ERS messages
           # see erskafka/src/KafkaStream.cpp
-          timestamp_path: 'time'
+          timestamp: '/time'
           timestamp_format: unix_ms
-          object:
-            - path: "@this"
-              excluded_keys:
-                - time # time already captured above
-              fields:
-                application_name: "string"
-                chain: "string"
-                cwd: "string"
-                file_name: "string"
-                function_name: "string"
-                group_hash: "string" # technically hex, but we're not using it
-                host_name: "string"
-                issue_name: "string"
-                message: "string"
-                package_name: "string"
-                params: "string"
-                partition: "string"
-                qualifiers: "string"
-                severity: "string"
-                user_name: "string"
-                line_number: "uint"
-                process_id: "uint"
-                thread_id: "uint"
-                usecs_since_epoch: "uint"
-                user_id: "uint"
+          fields:
+            application_name: "/application_name"
+            chain: "/chain"
+            cwd: "/cwd"
+            file_name: "/file_name"
+            function_name: "/function_name"
+            #group_hash: "string(/group_hash)" # technically hex, but we're not using it
+            host_name: "/host_name"
+            issue_name: "/issue_name"
+            message: "/message"
+            package_name: "/package_name"
+            params: "/params"
+            partition: "/partition"
+            qualifiers: "/qualifiers"
+            severity: "/severity"
+            user_name: "/user_name"
+          fields_int:
+            line_number: "number(/line_number)"
+            process_id: "number(/process_id)"
+            thread_id: "number(/thread_id)"
+            usecs_since_epoch: "number(/usecs_since_epoch)"
+            user_id: "number(/user_id)"
   - internal:
       collect_memstats: false
       tags:  
