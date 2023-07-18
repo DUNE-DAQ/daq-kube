@@ -49,39 +49,39 @@ args:
   - name: with_mongo_express
     default: true
 
+  ### Feature flags for application targets
+  - name: with_dune_connectionservice
+    default: true
+  - name: with_dune_daqconfig
+    default: true
+  - name: with_dune_dqm
+    default: true
+  - name: with_dune_ers
+    default: true
+  - name: with_dune_kafka
+    default: true
+  - name: with_dune_opmon
+    default: true
+  - name: with_dune_runcounter
+    default: true
+
   ### This should be customized as an argument for your needs
-  ### FIXME:
-  ### these should probably lose the default for non-pocket
-  ### users and thus force folks to set a specific password
-  ### to increase the chances that these are secure in production
+  ### Since `pocket` mode is for local development of services
+  ### on node local ephemeral non-exposed containers, default passwords
+  ### are acceptable.
+  ###
+  ### For real deployments you must set these to the correct values
   ###
   ### see: kluctl --args-from-file=filename
   - name: grafana_admin_password
-    default: run4evah
-
   - name: daqconfig_mongodb_daqconfig_password
-    default: run4evah
-
   - name: daqconfig_mongodb_root_password
-    default: run4evah
-
   - name: dqm_backend_admin_password
-    default: admin
-
   - name: ers_postgresql_password
-    default: run4evah
-
   - name: opmon_influxdb_user_influxdb_password
-    default: dunedaq
-
   - name: opmon_telegraf_user_influxdb_password
-    default: run4evah
-
   - name: opmon_influxdb_admin_password
-    default: run4evah
-
   - name: runcounter_postgresql_password
-    default: run4evah
 
 targets:
   - name: pocket
@@ -100,6 +100,158 @@ targets:
       opmon_telegraf_user_influxdb_password: run4evah
       opmon_influxdb_admin_password: run4evah
       runcounter_postgresql_password: run4evah
+
+  - name: pocket-connectionservice
+    discriminator: "dune-daq-pocket"
+    args:
+      with_cilium: false
+      with_local_path_as_default_storageclass: true
+      with_nfs_storage: false
+
+      with_dune_connectionservice: true
+      with_dune_daqconfig: false
+      with_dune_dqm: false
+      with_dune_ers: false
+      with_dune_kafka: false
+      with_dune_opmon: false
+      with_dune_runcounter: false
+
+      grafana_admin_password: run4evah
+      daqconfig_mongodb_root_password: run4evah
+      daqconfig_mongodb_daqconfig_password: run4evah
+      dqm_backend_admin_password: admin
+      ers_postgresql_password: run4evah
+      opmon_influxdb_user_influxdb_password: dunedaq
+      opmon_telegraf_user_influxdb_password: run4evah
+      opmon_influxdb_admin_password: run4evah
+      runcounter_postgresql_password: run4evah
+
+  - name: pocket-daqconfig
+    discriminator: "dune-daq-pocket"
+    args:
+      with_cilium: false
+      with_local_path_as_default_storageclass: true
+      with_nfs_storage: false
+
+      with_dune_connectionservice: false
+      with_dune_daqconfig: true
+      with_dune_dqm: false
+      with_dune_ers: false
+      with_dune_kafka: false
+      with_dune_opmon: false
+      with_dune_runcounter: false
+
+      grafana_admin_password: run4evah
+      daqconfig_mongodb_root_password: run4evah
+      daqconfig_mongodb_daqconfig_password: run4evah
+      dqm_backend_admin_password: admin
+      ers_postgresql_password: run4evah
+      opmon_influxdb_user_influxdb_password: dunedaq
+      opmon_telegraf_user_influxdb_password: run4evah
+      opmon_influxdb_admin_password: run4evah
+      runcounter_postgresql_password: run4evah
+
+
+  - name: pocket-dqm
+    discriminator: "dune-daq-pocket"
+    args:
+      with_cilium: false
+      with_local_path_as_default_storageclass: true
+      with_nfs_storage: false
+
+      with_dune_connectionservice: false
+      with_dune_daqconfig: false
+      with_dune_dqm: true
+      with_dune_ers: false
+      with_dune_kafka: true
+      with_dune_opmon: false
+      with_dune_runcounter: false
+
+      grafana_admin_password: run4evah
+      daqconfig_mongodb_root_password: run4evah
+      daqconfig_mongodb_daqconfig_password: run4evah
+      dqm_backend_admin_password: admin
+      ers_postgresql_password: run4evah
+      opmon_influxdb_user_influxdb_password: dunedaq
+      opmon_telegraf_user_influxdb_password: run4evah
+      opmon_influxdb_admin_password: run4evah
+      runcounter_postgresql_password: run4evah
+
+  - name: pocket-ers
+    discriminator: "dune-daq-pocket"
+    args:
+      with_cilium: false
+      with_local_path_as_default_storageclass: true
+      with_nfs_storage: false
+
+      with_dune_connectionservice: false
+      with_dune_daqconfig: false
+      with_dune_dqm: false
+      with_dune_ers: true
+      with_dune_kafka: true
+      with_dune_opmon: false
+      with_dune_runcounter: false
+
+      grafana_admin_password: run4evah
+      daqconfig_mongodb_root_password: run4evah
+      daqconfig_mongodb_daqconfig_password: run4evah
+      dqm_backend_admin_password: admin
+      ers_postgresql_password: run4evah
+      opmon_influxdb_user_influxdb_password: dunedaq
+      opmon_telegraf_user_influxdb_password: run4evah
+      opmon_influxdb_admin_password: run4evah
+      runcounter_postgresql_password: run4evah
+
+  - name: pocket-opmon
+    discriminator: "dune-daq-pocket"
+    args:
+      with_cilium: false
+      with_local_path_as_default_storageclass: true
+      with_nfs_storage: false
+
+      with_dune_connectionservice: false
+      with_dune_daqconfig: false
+      with_dune_dqm: false
+      with_dune_ers: false
+      with_dune_kafka: true
+      with_dune_opmon: true
+      with_dune_runcounter: false
+
+      grafana_admin_password: run4evah
+      daqconfig_mongodb_root_password: run4evah
+      daqconfig_mongodb_daqconfig_password: run4evah
+      dqm_backend_admin_password: admin
+      ers_postgresql_password: run4evah
+      opmon_influxdb_user_influxdb_password: dunedaq
+      opmon_telegraf_user_influxdb_password: run4evah
+      opmon_influxdb_admin_password: run4evah
+      runcounter_postgresql_password: run4evah
+
+  - name: pocket-runcounter
+    discriminator: "dune-daq-pocket"
+    args:
+      with_cilium: false
+      with_local_path_as_default_storageclass: true
+      with_nfs_storage: false
+
+      with_dune_connectionservice: false
+      with_dune_daqconfig: false
+      with_dune_dqm: false
+      with_dune_ers: false
+      with_dune_kafka: false
+      with_dune_opmon: false
+      with_dune_runcounter: true
+
+      grafana_admin_password: run4evah
+      daqconfig_mongodb_root_password: run4evah
+      daqconfig_mongodb_daqconfig_password: run4evah
+      dqm_backend_admin_password: admin
+      ers_postgresql_password: run4evah
+      opmon_influxdb_user_influxdb_password: dunedaq
+      opmon_telegraf_user_influxdb_password: run4evah
+      opmon_influxdb_admin_password: run4evah
+      runcounter_postgresql_password: run4evah
+
 
   - name: np04-services
     context: kubernetes-admin@np04-services
