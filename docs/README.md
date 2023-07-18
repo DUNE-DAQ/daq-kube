@@ -31,9 +31,11 @@ To load the `kluctl` tool please follow https://kluctl.io/docs/kluctl/installati
 
 The `.kluctl.yaml` file lists the deployment targets we've configured.  The `context` keyword ensures that `kluctl` will use the specified [kubectl context](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/) to deploy the manifests.
 
-***NOTE:*** You cannot deploy a target to a context other than the one defined in `.kluctl.yaml`.
+***NOTE:*** You cannot deploy a target to a kubernetes context other than the one defined in `.kluctl.yaml`.
 
 To see what targets are defined you can run `kluctl list-targets` to see the `name` and defaults for each target.
+
+Or to get just a list of target names `kluctl list-targets | grep 'name:'`.
 
 For example: `kluctl deploy -t pocket`
 
