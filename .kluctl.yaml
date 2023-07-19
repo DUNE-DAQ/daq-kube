@@ -206,4 +206,3 @@ targets:
       opmon_telegraf_user_influxdb_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
       opmon_influxdb_admin_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
       runcounter_postgresql_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
-
