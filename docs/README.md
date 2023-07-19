@@ -39,6 +39,8 @@ Or to get just a list of target names `kluctl list-targets | grep 'name:'`.
 
 For example: `kluctl deploy -t pocket`
 
+Or if you wish to provide a set of arguments via a yaml file: `kluctl deploy -t target --args-from-file=filename.yaml`
+
 ## Access to your cluster
 
 The list of node-ports in use can be found under `dune_daq/node-ports`.  It contains the exact manifests being run and should thus be the most up to date list of node-ports.
