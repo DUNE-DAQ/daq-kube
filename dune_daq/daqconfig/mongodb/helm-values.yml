@@ -37,29 +37,3 @@ metrics: # TODO https://github.com/percona/grafana-dashboards/tree/main/dashboar
     rules: []
     additionalLabels:
       "{{ prometheus_rule_label_name }}": "{{ prometheus_rule_labels.mongodb }}"
-
-extraDeploy:
-  - apiVersion: batch/v1
-    kind: CronJob
-    metadata:
-{% raw %}
-      name: {{ .Release.Name }}-backup
-      namespace: {{ .Release.Namespace }}
-{% endraw %}
-    spec:
-      schedule: "@daily"
-      concurrencyPolicy: Replace
-      failedJobsHistoryLimit: 2
-      successfulJobsHistoryLimit: 1
-      startingDeadlineSeconds: 10800 # 3hours
-      jobTemplate:
-        spec:
-          template:
-            containers:
-              - name: mongodump
-{% raw %}
-                image: {{ 
-                securityContext:
-
-            securityContext:
-{% endraw %}
