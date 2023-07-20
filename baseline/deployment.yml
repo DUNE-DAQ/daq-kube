@@ -1,15 +1,20 @@
 ---
 deployments:
+  - include: local-storage
+    skipDeleteIfTags: true
+    tags:
+      - storage
+
   - include: metrics
     skipDeleteIfTags: true
     tags:
       - metrics
       - monitoring
 
+{% if args.with_dns_autoscaler %}
   - barrier: true
     message: metrics need to settle so we can setup HPAs
 
-{% if args.with_dns_autoscaler %}
   - path: dns-autoscaler
     skipDeleteIfTags: true
 {% endif %}
@@ -18,11 +23,6 @@ deployments:
     tags:
       - metrics
       - monitoring
-
-  - include: local-storage
-    skipDeleteIfTags: true
-    tags:
-      - storage
 
   - barrier: true
     message: Make sure baseline is completely loaded
