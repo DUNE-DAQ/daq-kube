@@ -1,6 +1,6 @@
 helmChart:
   chartName: prometheus-node-exporter
-  chartVersion: 4.20.0
+  chartVersion: 4.20.1
   namespace: '{{ metrics.node_exporter_namespace }}'
   output: helm-rendered.yaml
   releaseName: node-exporter
