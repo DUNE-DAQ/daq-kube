@@ -25,11 +25,11 @@ Move submodules into dedicated `submodules` directory
 * then link things into place
 * makes our bundled k8s manifests easier to track/sync
 
+https://github.com/openshift/cluster-node-tuning-operator
+
 https://velero.io/
 IPv6 only?
 
-ARGOCD - do we need DEX? I don't think so
-https://github.com/argoproj-labs/argocd-autopilot
 https://github.com/kostis-codefresh/gitops-environment-promotion
 
 https://github.com/kubevious/kubevious/blob/main/projects/DASHBOARD.md ??
@@ -40,86 +40,9 @@ use projectContour?
 
 http://carl.schelin.org/?p=1916
 
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: grafana-datasource-postgresqlers
-  namespace: monitoring
-  labels:
-     grafana_datasource: import
-type: Opaque
-stringData:
-  postgresqlers.yaml: |-
-    apiVersion: 1
-    datasources:
-    - name: PostgresERS
-      type: postgres
-      url: np04-srv-023.cern.ch:30432
-      access: proxy
-      database: ApplicationDbErrorReporting
-      jsonData:
-        sslmode: "disable"
-        tlsSkipVerify: true
-        postgresVersion: 1200
-        maxIdleConns: 2
-      user: admin
-      secureJsonData:
-        password: puttherealpasswordhere # this note does not contain the real password
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: grafana-datasource-np04daqsysadmin
-  namespace: monitoring
-  labels:
-     grafana_datasource: import
-type: Opaque
-stringData:
-  np04daq_sysadmin.yaml: |-
-    apiVersion: 1
-    datasources:
-    - name: NP04DAQ_sysadmin
-      type: prometheus
-      url: http://np04-srv-009.cern.ch:9090
-      access: proxy
-      jsonData:
-        timeInterval: 30s
-        prometheusType: Prometheus
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: grafana-datasource-influxkafka
-  namespace: monitoring
-  labels:
-     grafana_datasource: import
-type: Opaque
-stringData:
-  influxkafkadatasource.yaml: |-
-    apiVersion: 1
-    datasources:
-      - name: InfluxKafka
-        type: influxdb
-        access: proxy
-        database: influxv3
-        url: http://np04-srv-023.cern.ch:31002
-        withCredentials: true
-        basicAuth: true
-        user: admin
-        basicAuthUser: admin
-        jsonData:
-          httpMode: POST
-        secureJsonData:
-          password: puttherealpasswordhere # this note does not contain the real password
-          basicAuthPassword: puttherealpasswordhere # this note does not contain the real password
-...
-
 etcd quota backend bytes == 8G for prod: https://etcd.io/docs/v3.5/dev-guide/limit/
 
 allocate-node-cidrs=true
-
-cillium disable-kube-proxy?
 
 docker proxy for NP04?
 
