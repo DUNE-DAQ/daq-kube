@@ -23,6 +23,9 @@ primary:
     size: 4Gi
     storageClass: {{ local_path_provisioner.storage_class_name }}
 
+shmVolume:
+  enabled: true
+
 resources: # this is guess work
   requests:
     cpu: 100m

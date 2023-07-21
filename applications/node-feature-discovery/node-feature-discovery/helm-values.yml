@@ -1,6 +1,11 @@
 ---
 enableNodeFeatureApi: {{ node_feature_discovery.enableNodeFeatureApi }}
 
+prometheus:
+  enable: true
+  labels:
+    {{ prometheus_podmonitor_label_name }}: {{ prometheus_podmonitor_labels.system }}
+
 master:
   resources:
     limits:

@@ -24,6 +24,9 @@ primary:
     size: 4Gi # this is guesswork
     storageClass: {{ local_path_provisioner.storage_class_name }}
 
+shmVolume:
+  enabled: true
+
 resources: # this is guesswork
   requests:
     cpu: 10m
