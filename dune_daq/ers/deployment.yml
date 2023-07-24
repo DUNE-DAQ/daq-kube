@@ -10,12 +10,8 @@ deployments:
   - barrier: true
     message: Let services all catch up
 
-  ## I can't seem to get the output to match _exactly_ with ghcr.io/dune-daq/pocket-ersdbwriter:latest
-  ## If I ever do, telegraf is probably the way to go.
   ## How tied are we to the current message spec from https://github.com/DUNE-DAQ/erskafka/blob/develop/src/KafkaStream.cpp?
-  #- path: telegraf
-
-  - path: python-ers-dbwriter
+  - path: telegraf
 
 vars:
   - file: variables/ers.yaml
