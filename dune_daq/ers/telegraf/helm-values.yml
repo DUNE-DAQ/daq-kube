@@ -25,7 +25,7 @@ config:
             cwd: "/cwd"
             file_name: "/file_name"
             function_name: "/function_name"
-            #group_hash: "string(/group_hash)" # technically hex, but we're not using it
+            #group_hash: "string(/group_hash)" # technically hex? but we're not using it
             host_name: "/host_name"
             issue_name: "/issue_name"
             message: "/message"
@@ -56,7 +56,7 @@ config:
       connection: "{{ ERS_telegraf.postgresql_connection }}"
       create_templates: # these indexes should make dashboards more responsive
 {% raw %}
-        - 'CREATE TABLE {{ .table }} (id BIGINT GENERATED ALWAYS AS IDENTITY, {{ .columns }})'
+        - 'CREATE TABLE {{ .table }} (id BIGINT GENERATED ALWAYS AS IDENTITY, time TIMESTAMP, application_name TEXT, chain TEXT, cwd TEXT, file_name TEXT, function_name TEXT, host_name TEXT, issue_name TEXT, message TEXT, package_name TEXT, params JSONB, partition TEXT, qualifiers JSONB, severity TEXT, user_name TEXT, line_number INT, process_id INT, thread_id INT, usecs_since_epoch BIGINT, user_id INT)'
         - 'CREATE INDEX IF NOT EXISTS ers_partition_idx ON {{ .table }} USING BTREE (partition)'
         - 'CREATE INDEX IF NOT EXISTS ers_severity_idx ON {{ .table }} USING HASH (severity)'
         - 'CREATE INDEX IF NOT EXISTS ers_time_idx ON {{ .table }} USING BRIN (time)'
