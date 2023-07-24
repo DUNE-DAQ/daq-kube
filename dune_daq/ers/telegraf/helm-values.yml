@@ -67,16 +67,20 @@ config:
 
   processors:
   - regex:
-      namepass: ErrorReports
+      namepass:
+      - ErrorReports
       fields:
       - key: params
+{% raw %}
         pattern: '(?P<value>\w+:\s*\w+)'
         replacement: '"${value}"'
       - key: qualifiers
         pattern: '(?P<value>\w+)'
         replacement: '"${value}"'
+{% endraw %}
   - regex:
-      namepass: ErrorReports
+      namepass:
+      - ErrorReports
       fields:
       - key: params
         pattern: '" "'
