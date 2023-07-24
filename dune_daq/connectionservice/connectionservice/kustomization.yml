@@ -5,4 +5,4 @@ kind: Kustomization
 namespace: {{ DUNE_connectionservice.namespace }}
 
 resources:
-  - connectivityserver.yaml # https://github.com/DUNE-DAQ/connectivityserver/blob/develop/deploy/connectivityserver.yaml
+  - connectivityserver.yaml
