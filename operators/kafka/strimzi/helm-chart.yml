@@ -1,8 +1,8 @@
 helmChart:
   chartName: strimzi-kafka-operator
-  chartVersion: 0.35.1
+  chartVersion: 0.36.0
   namespace: '{{ strimzi.namespace }}'
   output: helm-rendered.yaml
   releaseName: strimzi-operator
   repo: https://strimzi.io/charts/
-  updateConstraints: ~0.35.x
+  updateConstraints: ~0.36.x
