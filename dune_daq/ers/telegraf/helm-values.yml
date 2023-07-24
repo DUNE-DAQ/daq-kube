@@ -65,6 +65,26 @@ config:
         metrics:
           - "telegraf"
 
+  processors:
+  - regex:
+      namepass: ErrorReports
+      fields:
+      - key: params
+        pattern: '(?P<value>\w+:\s*\w+)'
+        replacement: '"${value}"'
+      - key: qualifiers
+        pattern: '(?P<value>\w+)'
+        replacement: '"${value}"'
+  - regex:
+      namepass: ErrorReports
+      fields:
+      - key: params
+        pattern: '" "'
+        replacement: '", "'
+      - key: qualifiers
+        pattern: '" "'
+        replacement: '", "'
+
 affinity:
   podAffinity:
     preferredDuringSchedulingIgnoredDuringExecution:
