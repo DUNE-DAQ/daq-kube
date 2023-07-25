@@ -5,6 +5,7 @@ config:
   agent:
     flush_interval: "10s"
     flush_jitter: "5s"
+    metric_batch_size: "1000"
     omit_hostname: true
 
   inputs:
