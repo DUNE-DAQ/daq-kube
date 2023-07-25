@@ -7,6 +7,4 @@ metadata:
   name: dqm
   namespace: kafka
 spec:
-  partitions: 1
-  replicas: 1
   topicName: DQM

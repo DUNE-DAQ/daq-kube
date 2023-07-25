@@ -7,8 +7,6 @@ metadata:
     strimzi.io/cluster: {{ dunedaq.kafka.name }}
   name: {{ thistopic }}
   namespace: {{ dunedaq.kafka.namespace }}
-spec:
-  partitions: 1
-  replicas: 1
+spec: {}
 ...
 {% endfor %}
