@@ -36,12 +36,6 @@ patches:
         path: /metadata/labels/{{ grafana_dashboard_label_name }}
   - target:
       kind: ConfigMap
-      name: strimzi-cruise-control
-    patch: |-
-      - op: remove
-        path: /metadata/labels/{{ grafana_dashboard_label_name }}
-  - target:
-      kind: ConfigMap
       name: strimzi-kafka-mirror-maker-2
     patch: |-
       - op: remove
