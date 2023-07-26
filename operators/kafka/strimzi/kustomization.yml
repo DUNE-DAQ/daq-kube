@@ -22,24 +22,39 @@ patches:
       - op: remove
         path: /metadata/labels/{{ grafana_dashboard_label_name }}
 {% endif %}
+{% if not kafka.with_bridge %}
   - target:
       kind: ConfigMap
       name: strimzi-kafka-bridge
     patch: |-
       - op: remove
         path: /metadata/labels/{{ grafana_dashboard_label_name }}
+{% endif %}
+{% if not kafka.with_connect %}
   - target:
       kind: ConfigMap
       name: strimzi-kafka-connect
     patch: |-
       - op: remove
         path: /metadata/labels/{{ grafana_dashboard_label_name }}
+{% endif %}
+{% if not kafka.with_cruisecontrol %}
+  - target:
+      kind: ConfigMap
+      name: strimzi-cruise-control
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+{% endif %}
+{% if not kafka.with_mirrormaker %}
+  - target:
   - target:
       kind: ConfigMap
       name: strimzi-kafka-mirror-maker-2
     patch: |-
       - op: remove
         path: /metadata/labels/{{ grafana_dashboard_label_name }}
+{% endif %}
   - target:
       kind: ConfigMap
       name: strimzi-kafka-oauth

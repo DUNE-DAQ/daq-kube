@@ -1,5 +1,6 @@
 ---
 kafka:
   with_bridge: false
+  with_cruisecontrol: false
   with_connect: false
   with_mirrormaker: false

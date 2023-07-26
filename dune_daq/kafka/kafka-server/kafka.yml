@@ -25,7 +25,9 @@ spec:
   kafkaExporter:
     topicRegex: ".*"
     groupRegex: ".*"
+{% if kafka.with_cruisecontrol %}
   cruiseControl: {}
+{% endif %}
   kafka:
     replicas: {{ dunedaq.kafka.replicas }}
     resources:
