@@ -2,6 +2,8 @@ dunedaq:
   specificCVMFSRepositoryStorageClasses:
     - name: dunedaq.opensciencegrid.org
       repository: dunedaq.opensciencegrid.org
+    - name: dunedaq-development.opensciencegrid.org
+      repository: dunedaq-development.opensciencegrid.org
   kafka:
     namespace: kafka
     name: dune-daq
