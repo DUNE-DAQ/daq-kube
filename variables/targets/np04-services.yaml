@@ -1,3 +1,6 @@
 dqm_backend_allowed_hosts: 'np04-srv-*.cern.ch'
 
+kafka:
+  with_cruisecontrol: true
+
 nfs_storage_classes: {} # TODO, fill me out
