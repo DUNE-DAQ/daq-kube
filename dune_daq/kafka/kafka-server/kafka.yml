@@ -67,22 +67,22 @@ spec:
       auto.create.topics.enable: false # make each topic by hand so we know what is out there
       log.cleanup.policy: "delete" # Cannot use 'compact' due to empty key in our data format
       log.retention.bytes: 6442450944 # no default upper size limit, set to 6Gi
-      default.replication.factor: {{ dunedaq.kafka.replicas }}
-      offsets.topic.replication.factor: {{ dunedaq.kafka.replicas }}
-      transaction.state.log.replication.factor: {{ dunedaq.kafka.replicas }}
-      num.partitions: 1 # number of partitions for each topic by default
 {% if dunedaq.kafka.replicas < 3 %}
       # replication only makes sense if there are 3 or more brokers
       transaction.state.log.min.isr: 1
       min.insync.replicas: 1
       default.replication.factor: 1
       offsets.topic.replication.factor: 1
+      transaction.state.log.replication.factor: 1
+      num.partitions: 1
 {% else %}
       # replicate to n/2 for stability at small replica counts
       transaction.state.log.min.isr: {{ (dunedaq.kafka.replicas / 2)  | round | int }}
       min.insync.replicas: {{ (dunedaq.kafka.replicas / 2) | round | int }}
       default.replication.factor: {{ (dunedaq.kafka.replicas / 2) | round | int }}
       offsets.topic.replication.factor: {{ (dunedaq.kafka.replicas / 2) | round | int }}
+      transaction.state.log.replication.factor: {{ (dunedaq.kafka.replicas / 2) | round | int }}
+      num.partitions: {{ (dunedaq.kafka.replicas / 2) | round | int }}
 {% endif %}
     metricsConfig:
       type: jmxPrometheusExporter
