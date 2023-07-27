@@ -48,7 +48,6 @@ patches:
 {% endif %}
 {% if not kafka.with_mirrormaker %}
   - target:
-  - target:
       kind: ConfigMap
       name: strimzi-kafka-mirror-maker-2
     patch: |-
