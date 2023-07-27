@@ -3,6 +3,7 @@ auth:
   username: "{{ ERS_postgresql.database_username }}"
   password: "{{ ERS_postgresql.database_password }}"
   database: "{{ ERS_postgresql.database_name }}"
+  postgresPassword: "{{ ERS_postgresql.database_password }}"
 
 architecture: standalone
 

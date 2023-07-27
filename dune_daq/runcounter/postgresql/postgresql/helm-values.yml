@@ -3,6 +3,7 @@ auth:
   username: "{{ DUNE_runcounter.postgresql_database_username }}"
   password: "{{ DUNE_runcounter.postgresql_database_password }}"
   database: "{{ DUNE_runcounter.postgresql_database_name }}"
+  postgresPassword: "{{ DUNE_runcounter.postgresql_database_password }}"
 
 architecture: standalone
 
