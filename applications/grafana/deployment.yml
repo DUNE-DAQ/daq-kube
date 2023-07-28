@@ -10,7 +10,7 @@ deployments:
       - grafana-dashboards
       - grafana-dashboards-kubernetes
 
-  - path: grafana-server
+  - path: grafana-server-main
 
 vars:
   - file: variables/grafana.yaml
