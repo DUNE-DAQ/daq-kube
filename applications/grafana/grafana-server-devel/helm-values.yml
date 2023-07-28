@@ -9,9 +9,13 @@ networkPolicy:
   enabled: true
 
 useStatefulSet: true
+revisionHistoryLimit: 1
 
 persistence:
   enabled: true
+
+initChownData:
+  enabled: false
 
 grafana.ini:
   paths:
@@ -23,12 +27,12 @@ grafana.ini:
   server:
     enable_gzip: true
   database:
-    # maybe use postgresql so I can persist?
+    # maybe use postgresql so I can persist without a pvc?
     log_queries: false
     query_retries: 2 # query_retries for sqlite only
   analytics:
-    check_for_updates: true
-    check_for_plugin_updates: true
+    check_for_updates: false
+    check_for_plugin_updates: false
     reporting_enabled: false
   auth:
     login_maximum_inactive_lifetime_duration: 13h
@@ -53,10 +57,10 @@ resources:
    cpu: 500m
    memory: 1Gi
  requests:
-   cpu: 10m
-   memory: 64Mi
+   cpu: 5m
+   memory: 32Mi
 
-# try not to schedule on same node as alertmanager/prometheus
+# try not to schedule on same node as alertmanager/prometheus/grafana-main
 affinity:
   podAntiAffinity:
     preferredDuringSchedulingIgnoredDuringExecution:
@@ -74,6 +78,15 @@ affinity:
             - key: prometheus
               operator: Exists
           topologyKey: kubernetes.io/hostname
+      - weight: 30
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: statefulset.kubernetes.io/pod-name
+              operator: In
+              values:
+              - grafana-0
+          topologyKey: kubernetes.io/hostname
 
 sidecar:
   resources:
@@ -84,20 +97,6 @@ sidecar:
      cpu: 10m
      memory: 5Mi
 
-  alerts:
-    enabled: true
-    label: "{{ grafana_alert_label_name }}"
-    labelValue: "{{ grafana_alert_label_value }}"
-    searchNamespace: ALL
-  dashboards:
-    enabled: true
-    label: "{{ grafana_dashboard_label_name }}"
-    labelValue: "{{ grafana_dashboard_label_value }}"
-    searchNamespace: ALL
-    folderAnnotation: {{ grafana_dashboard_folder_annotation }}
-    provider:
-      allowUiUpdates: false
-      foldersFromFilesStructure: true
   datasources:
     enabled: true
     label: "{{ grafana_datasource_label_name }}"
