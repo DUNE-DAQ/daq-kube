@@ -48,6 +48,14 @@ bpf:
   masquerade: true
   tproxy: true
 
+envory:
+  enabled: true
+  prometheus:
+    serviceMonitor:
+      enabled: true
+      labels:
+        "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.system }}"
+
 prometheus:
   enabled: true
   serviceMonitor:
