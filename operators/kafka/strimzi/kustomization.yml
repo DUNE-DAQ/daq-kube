@@ -41,14 +41,12 @@ patches:
         path: /metadata/labels/{{ grafana_dashboard_label_name }}
 {% endif %}
 {% if not kafka.with_cruisecontrol %}
-{% if dunedaq.kafka.replicas < 2 %}
   - target:
       kind: ConfigMap
       name: strimzi-cruise-control
     patch: |-
       - op: remove
         path: /metadata/labels/{{ grafana_dashboard_label_name }}
-{% endif %}
 {% endif %}
 {% if not kafka.with_mirrormaker %}
   - target:
