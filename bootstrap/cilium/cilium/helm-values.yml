@@ -8,6 +8,7 @@
 #  traffic encryption
 #  service-mesh
 #  multi-cluster mesh
+#  bigTCP
 #  localRedirectPolicy
 #  cilium-NodePort
 #  cilium-wellKnownIdentities
