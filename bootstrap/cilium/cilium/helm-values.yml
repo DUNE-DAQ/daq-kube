@@ -94,7 +94,7 @@ hubble:
         cpu: 1000m
         memory: 1Gi
       requests:
-        cpu: 100m
+        cpu: 50m
         memory: 64Mi
     prometheus:
       enabled: true
@@ -110,7 +110,7 @@ hubble:
           cpu: 1000m
           memory: 1Gi
         requests:
-          cpu: 100m
+          cpu: 10m
           memory: 64Mi
     frontend:
       resources:
@@ -118,7 +118,7 @@ hubble:
           cpu: 1000m
           memory: 1Gi
         requests:
-          cpu: 100m
+          cpu: 10m
           memory: 64Mi
 
 operator:
