@@ -16,16 +16,3 @@ patches:
         path: /metadata/annotations
         value:
           prometheus-operator-validated: "true"
-  - target:
-      kind: serviceMonitor
-    patch: |-
-     - op: replace
-       path: /metadata/namespace
-       value: kube-system
-  - target:
-      kind: serviceMonitor
-      name: kube-prometheus-stack-operator
-    patch: |-
-     - op: replace
-       path: /metadata/namespace
-       value: {{ prometheus_operator_namespace }}
