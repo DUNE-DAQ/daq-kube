@@ -7,34 +7,6 @@ fullnameOverride: "kube-prometheus-stack"
 defaultRules:
   create: true
 
-kubeControllerManager:
-  enabled: true
-  service:
-    enabled: true
-    selector:
-      component: kube-controller-manager
-  serviceMonitor:
-    enabled: true
-
-kubeProxy:
-  enabled: true
-  service:
-    enabled: true
-    selector:
-      k8s-app: kube-proxy
-  serviceMonitor:
-    enabled: true
-
-kubeScheduler:
-  enabled: true
-  service:
-    enabled: true
-    selector:
-      component: kube-scheduler
-  serviceMonitor:
-    enabled: true
-
-
 ## do create the prometheus-operator
 ##
 prometheusOperator:
