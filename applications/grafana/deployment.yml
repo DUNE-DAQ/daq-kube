@@ -10,7 +10,11 @@ deployments:
       - grafana-dashboards
       - grafana-dashboards-kubernetes
 
+  - barrier: true
+    message: Ensure kubernetes dashboards are loaded
+
   - path: grafana-server-main
+  - path: grafana-server-devel
 
 vars:
   - file: variables/grafana.yaml
