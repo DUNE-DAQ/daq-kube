@@ -49,8 +49,11 @@ bpf:
   masquerade: true
   tproxy: true
 
-envory:
+nodePort:
   enabled: true
+  enableHealthCheck: false
+
+envoy:
   resources: # this is guess work
     limits:
       cpu: 4000m
