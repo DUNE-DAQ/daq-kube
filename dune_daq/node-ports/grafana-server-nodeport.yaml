@@ -11,10 +11,10 @@ metadata:
 spec:
   ports:
   - name: service
-    nodePort: 31003
-    port: 80
     protocol: TCP
-    targetPort: 80
+    port: 80
+    targetPort: service
+    nodePort: 31003
   selector:
     app.kubernetes.io/component: grafana
     app.kubernetes.io/instance: grafana-main
