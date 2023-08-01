@@ -8,4 +8,4 @@ resources:
 
 commonLabels:
   app.kubernetes.io/component: {{ grafana.component_value }}
-  app.kubernetes.io/instance: grafana
+  app.kubernetes.io/instance: grafana-main
