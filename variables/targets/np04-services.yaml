@@ -1,5 +1,8 @@
 dqm_backend_allowed_hosts: 'np04-srv-*.cern.ch'
 
+clusterPoolIPv4PodCIDRList:
+  - "10.244.0.0/16"
+
 kafka:
   with_cruisecontrol: true
 

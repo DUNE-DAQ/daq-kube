@@ -1,1 +1,4 @@
 dqm_backend_allowed_hosts: "'*'"
+clusterPoolIPv4PodCIDRList:
+  - "10.244.0.0/16"
+  - "10.96.0.0/12"
