@@ -1,6 +1,6 @@
 helmChart:
   chartName: strimzi-kafka-operator
-  chartVersion: 0.36.0
+  chartVersion: 0.36.1
   namespace: '{{ strimzi.namespace }}'
   output: helm-rendered.yaml
   releaseName: strimzi-operator
