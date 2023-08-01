@@ -45,7 +45,7 @@ pmtuDiscovery:
   enabled: true
 
 bpf:
-  hostLegacyRouting: false
+  hostLegacyRouting: true
   masquerade: true
   tproxy: true
 
