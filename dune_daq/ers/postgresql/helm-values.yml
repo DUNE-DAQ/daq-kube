@@ -32,6 +32,9 @@ resources: # this is guess work
     cpu: 100m
     memory: 64Mi
 
+backup:
+  enabled: true
+
 metrics:
   enabled: true
   resources: # this is guess work
