@@ -9,6 +9,6 @@ dunedaq:
     name: dune-daq
     bootstrap_brokers:
       - dune-daq-kafka-bootstrap.kafka.svc:9092
-    version: "3.5.0"
+    version: "3.5.1"
     protocol_version: "3.5"
     replicas: 1
