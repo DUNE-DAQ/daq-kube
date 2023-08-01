@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/component: grafana
     app.kubernetes.io/instance: grafana-devel
     app.kubernetes.io/name: grafana
-  name: grafana-server-nodeport
+  name: grafana-devel-nodeport
   namespace: monitoring
 spec:
   ports:
