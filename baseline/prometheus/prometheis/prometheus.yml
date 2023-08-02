@@ -32,8 +32,6 @@ spec:
   portName: {{ prometheis[thisone].portName }}
   replicas: {{ prometheis[thisone].replicas }}
   retention: {{ prometheis[thisone].retention }}
-  walCompression: true
-  disableCompaction: false
 
   serviceAccountName: prometheus-{{ prometheis[thisone].name }}
 
