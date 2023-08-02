@@ -32,8 +32,10 @@ resources: # this is guess work
     cpu: 100m
     memory: 64Mi
 
+{% if args.with_backups %}
 backup:
   enabled: true
+{% endif %}
 
 metrics:
   enabled: true

@@ -40,6 +40,8 @@ args:
     default: false
 
   ### Feature flags for included manifests
+  - name: with_backups
+    default: false
   - name: with_kafka_kraft # strimzi doesn't support topicOperator with KRAFT yet
     default: false
   - name: with_kafka_ui
@@ -193,6 +195,7 @@ targets:
   - name: np04-services
     context: kubernetes-admin@np04-services
     args:
+      with_backups: true
       with_kafka_ui: false
       with_mongo_express: false
 
