@@ -58,8 +58,3 @@ metrics:
     rules: []
     labels:
       "{{ prometheus_rule_label_name }}": "{{ prometheus_rule_labels.postgresql }}"
-
-networkPolicy:
-  enabled: true
-  metrics:
-    enabled: true
