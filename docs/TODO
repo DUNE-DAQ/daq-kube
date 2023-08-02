@@ -17,6 +17,8 @@ What about cilium featues:
 
 https://metal3.io/
 
+https://github.com/openshift/sriov-network-operator/tree/master/deployment/sriov-network-operator
+
 Kubernetes API HA via a proxy (see kubespray loadbalancer_api)
 
 ers-dbwriter -> switch to telegraf?
