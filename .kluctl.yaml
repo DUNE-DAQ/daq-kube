@@ -26,6 +26,8 @@ args:
     default: true
   - name: with_minio_operator
     default: false
+  - name: with_multus_cni
+    default: false
   - name: with_nfs_storage
     default: true
   - name: with_node_feature_discovery

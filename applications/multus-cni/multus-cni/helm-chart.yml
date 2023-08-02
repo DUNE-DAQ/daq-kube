@@ -1,0 +1,7 @@
+helmChart:
+  chartVersion: 1.0.4
+  namespace: '{{ multus.namespace }}'
+  output: helm-rendered.yaml
+  releaseName: multus-cni
+  repo: oci://registry-1.docker.io/bitnamicharts/multus-cni
+  updateConstraints: ~1.x

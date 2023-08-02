@@ -19,6 +19,10 @@ deployments:
   - include: node-feature-discovery
 {% endif %}
 
+{% if args.with_multus_cni %}
+  - include: multus-cni
+{% endif %}
+
 {% if args.with_node_problem_detector %}
   - include: node-problem-detector
     tags:

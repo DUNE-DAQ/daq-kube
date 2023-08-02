@@ -1,0 +1,11 @@
+---
+deployments:
+  - path: namespace
+    alwaysDeploy: true
+
+  - barrier: true
+
+  - path: multus-cni
+
+vars:
+  - file: variables/multus.yaml
