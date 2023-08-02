@@ -87,18 +87,3 @@ affinity:
               values:
               - grafana-0
           topologyKey: kubernetes.io/hostname
-
-sidecar:
-  resources:
-   limits:
-     cpu: 200m
-     memory: 200Mi
-   requests:
-     cpu: 10m
-     memory: 5Mi
-
-  datasources:
-    enabled: true
-    label: "{{ grafana_datasource_label_name }}"
-    labelValue: "{{ grafana_datasource_label_value }}"
-    searchNamespace: ALL
