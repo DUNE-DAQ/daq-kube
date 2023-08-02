@@ -24,6 +24,7 @@ resources: # this is guess work
     memory: 512Mi
 
 ipam:
+  mode: cluster-pool
   operator:
     clusterPoolIPv4PodCIDRList: {{ clusterPoolIPv4PodCIDRList | tojson }}
 
