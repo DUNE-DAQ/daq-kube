@@ -7,5 +7,5 @@ metadata:
   name: dqm-kafka-svcbind
   namespace: dqm
 data:
-  host: {{ dunedaq.kafka.name }}.{{ dunedaq.kafka.namespace }}.svc
+  host: {{ dunedaq.kafka.name }}-kafka-bootstrap.{{ dunedaq.kafka.namespace }}.svc
   port: "9092"
