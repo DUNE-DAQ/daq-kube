@@ -51,7 +51,7 @@ grafana.ini:
     org_name: Main Org.
     hide_version: true
   security:
-    admin_email: root@localhost.localdomain
+    admin_email: root@{{ target.name }}
     disable_gravatar: true
   users:
     allow_sign_up: false
