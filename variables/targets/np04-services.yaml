@@ -7,3 +7,6 @@ kafka:
   with_cruisecontrol: true
 
 nfs_storage_classes: {} # TODO, fill me out
+
+smtp_server: smtp.cern.ch
+smtp_port: 587

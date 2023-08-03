@@ -18,6 +18,13 @@ initChownData:
   enabled: false
 
 grafana.ini:
+{% if smtp_server %}
+  smtp:
+    enabled: true
+    host: {{ smtp_server }}:{{ smtp_port }}
+  emails:
+    welcome_email_on_sign_up: true
+{% endif %}
   paths:
     data: /var/lib/grafana/
     logs: /var/log/grafana
