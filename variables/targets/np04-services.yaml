@@ -1,4 +1,4 @@
-dqm_backend_allowed_hosts: 'np04-srv-*.cern.ch localhost dqm-backend.dqm.svc'
+dqm_backend_allowed_hosts: "'*'"
 
 clusterPoolIPv4PodCIDRList:
   - "10.244.0.0/16"
