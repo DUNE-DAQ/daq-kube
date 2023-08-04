@@ -4,7 +4,7 @@ kind: Service
 metadata:
   labels:
     app.kubernetes.io/app: dqm
-    app.kubernetes.io/component: dqm
+    app.kubernetes.io/component: dqm-backend
   name: dqm-nodeport
   namespace: dqm
 spec:
@@ -16,5 +16,5 @@ spec:
       nodePort: 30081
   selector:
     app.kubernetes.io/app: dqm
-    app.kubernetes.io/component: dqm
+    app.kubernetes.io/component: dqm-backend
   type: NodePort
