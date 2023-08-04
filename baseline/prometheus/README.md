@@ -9,3 +9,6 @@ We can then deploy various `Rules` and `Monitors` to let each service describe h
 The `variables` provided should in theory make it easy to add dedicated instances with specific filters.
 
 The lables are kept in the global namespace under `variables/alertmanager_labels.yaml` and `variables/prometheus_labels.yaml`.
+
+The "default" prometheus is available within the cluster under the name `prometheus.monitoring.svc` on port 9090
+The "default" alertmanager is available within the cluster under the name `alertmanager.monitoring.svc` on port 9093

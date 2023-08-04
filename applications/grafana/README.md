@@ -2,6 +2,8 @@
 
 ## grafana-server-main
 
+It is accessible within the cluster under the name `grafana.monitoring.svc` on port 3000.
+
 We have defined top level variables in `variables/grafana_labels.yaml` which can be applied to secrets or configmaps to import dashboards, alerts, and datasources automatically into grafana.
 
 The folder of a dashboard can be further controlled via the `grafana_dashboard_folder_annotation` value.
@@ -17,3 +19,5 @@ This folder includes a number of well regarded kubernetes dashboards that are lo
 ## grafana-server-devel
 
 This is a playground environment for testing the development of new dashboards.
+
+It is accessible within the cluster under the name `grafana-devel.monitoring.svc` on port 3000.
