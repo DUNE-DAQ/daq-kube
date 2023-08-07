@@ -106,6 +106,7 @@ sidecar: # this is guess work
     folderAnnotation: {{ grafana_dashboard_folder_annotation }}
     provider:
       allowUiUpdates: false
+      disableDelete: true
       foldersFromFilesStructure: true
   datasources:
     enabled: true
