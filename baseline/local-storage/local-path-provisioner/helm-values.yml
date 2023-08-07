@@ -1,5 +1,5 @@
 ---
-resources:
+resources: # this is guess work
   limits:
     cpu: 300m
     memory: 384Mi
