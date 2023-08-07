@@ -57,7 +57,7 @@ grafana.ini:
   log:
     mode: console
 
-resources:
+resources: # this is guess work
  limits:
    cpu: 500m
    memory: 1Gi
@@ -84,7 +84,7 @@ affinity:
               operator: Exists
           topologyKey: kubernetes.io/hostname
 
-sidecar:
+sidecar: # this is guess work
   resources:
    limits:
      cpu: 200m
