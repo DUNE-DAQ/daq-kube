@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/component: kafka-ui
+    app.kubernetes.io/instance: kafka-ui
+    app.kubernetes.io/name: kakfa-ui
+  name: kafka-ui-nodeport
+  namespace: kafka
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: http
+    nodePort: 31014
+  selector:
+    app.kubernetes.io/instance: kafka-ui
+    app.kubernetes.io/name: kafka-ui
+  type: NodePort
