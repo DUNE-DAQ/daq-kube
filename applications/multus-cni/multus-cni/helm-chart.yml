@@ -1,5 +1,5 @@
 helmChart:
-  chartVersion: 1.0.4
+  chartVersion: 1.0.5
   namespace: '{{ multus.namespace }}'
   output: helm-rendered.yaml
   releaseName: multus-cni
