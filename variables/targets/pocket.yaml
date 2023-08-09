@@ -4,3 +4,5 @@ clusterPoolIPv4PodCIDRList:
 
 smtp_server: NULL
 smtp_port: NULL
+
+cvmfs_http_proxy: DIRECT

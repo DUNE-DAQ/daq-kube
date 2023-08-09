@@ -1,11 +1,21 @@
 ---
 cache:
   local:
-    cvmfsQuotaLimit: 1000 # TODO: pick a value for this
+    cvmfsQuotaLimit: 1000 # TODO: pick a value for this, currently guess work
+
+extraConfigMaps:
+  cvmfs-csi-default-local:
+    my-default.local: |
+      # Source in the original default.local file.
+{%- raw %}
+      {{ tpl (index .Values.extraConfigMaps "cvmfs-csi-default-local" "default.local") . | nindent 2 }}
+{% endraw %}
+      # Append custom parameters below.
+      CVMFS_HTTP_PROXY="{{ cvmfs_http_proxy }}"
 
 controllerplugin:
   plugin:
-    resources:
+    resources: # this is guess work
       limits:
         cpu: 300m
         memory: 512Mi
@@ -13,7 +23,7 @@ controllerplugin:
         cpu: 10m
         memory: 16Mi
   provisioner:
-    resources:
+    resources: # this is guess work
       limits:
         cpu: 300m
         memory: 512Mi
@@ -22,16 +32,25 @@ controllerplugin:
         memory: 16Mi
 
 nodeplugin:
-  plugin:
-    resources:
+  automount:
+    extraVolumeMounts:
+    # This is a copy-paste from cvmfs-csi's values.yaml file,
+    # only changing the etc-cvmfs-default-conf mount's subPath
+    # into my-default.local.
+    - name: etc-cvmfs-default-conf
+      subPath: my-default.local
+      mountPath: /etc/cvmfs/default.local
+    - name: etc-cvmfs-config-d
+      mountPath: /etc/cvmfs/config.d
+    resources: # this is guess work
       limits:
         cpu: 300m
         memory: 512Mi
       requests:
         cpu: 10m
         memory: 16Mi
-  automount:
-    resources:
+  plugin:
+    resources: # this is guess work
       limits:
         cpu: 300m
         memory: 512Mi
@@ -39,7 +58,7 @@ nodeplugin:
         cpu: 10m
         memory: 16Mi
   singlemount:
-    resources:
+    resources: # this is guess work
       limits:
         cpu: 300m
         memory: 512Mi
@@ -47,7 +66,7 @@ nodeplugin:
         cpu: 10m
         memory: 16Mi
   registrar:
-    resources:
+    resources: # this is guess work
       limits:
         cpu: 300m
         memory: 512Mi
