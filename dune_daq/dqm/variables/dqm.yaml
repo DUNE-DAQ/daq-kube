@@ -4,4 +4,4 @@ DUNE_dqm:
   backend:
     admin_username: admin
     admin_password: {{ args.dqm_backend_admin_password }}
-    django_secret_key: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
+    django_secret_key: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
