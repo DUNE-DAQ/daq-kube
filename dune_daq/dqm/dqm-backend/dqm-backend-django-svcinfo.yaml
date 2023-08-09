@@ -8,4 +8,4 @@ metadata:
 data:
   username: {{ DUNE_dqm.backend.admin_username | b64encode }}
   password: {{ DUNE_dqm.backend.admin_password | b64encode }}
-  allowed_hosts: {{ DUNE_dqm.backend.allowed_hosts | b64encode }}
+  django_secret_key: {{ DUNE_dqm.backend.django_secret_key | b64encode }}
