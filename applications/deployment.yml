@@ -9,10 +9,12 @@ deployments:
 {% endif %}
 
 {% if args.with_kepler %}
+{% if not args.inside_kind %}
   - include: kepler
     tags:
       - monitoring
       - metrics
+{% endif %}
 {% endif %}
 
 {% if args.with_node_feature_discovery %}
