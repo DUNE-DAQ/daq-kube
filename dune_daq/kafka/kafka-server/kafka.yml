@@ -67,7 +67,7 @@ spec:
           brokers:
 {% for broker in range(dunedaq.kafka.replicas) %}
           - broker: {{ broker }}
-            nodePort: 3209{{ broker }}
+            nodePort: 3119{{ broker }}
             advertizedHost: {{ args.hostname }}
 {% endfor %}
 {% endif %}
