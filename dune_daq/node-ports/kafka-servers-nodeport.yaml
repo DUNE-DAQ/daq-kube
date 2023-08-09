@@ -1,0 +1,7 @@
+# strimzi sets this up automatically for KinD.  Bare metal doesn't need this.
+# I'm seeding ports for up to 5 brokers, you're probably using just 1.
+# nodePort: 32090
+# nodePort: 32091
+# nodePort: 32092
+# nodePort: 32093
+# nodePort: 32094

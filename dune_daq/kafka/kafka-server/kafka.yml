@@ -63,6 +63,14 @@ spec:
         configuration:
           bootstrap:
             nodePort: 30092
+{% if args.inside_kind %}
+          brokers:
+{% for broker in range(dunedaq.kafka.replicas) %}
+          - broker: {{ broker }}
+            nodePort: 3209{{ broker }}
+            advertizedHost: {{ args.hostname }}
+{% endfor %}
+{% endif %}
     version: "{{ dunedaq.kafka.version }}"
     config:
       inter.broker.protocol.version: "{{ dunedaq.kafka.protocol_version }}"

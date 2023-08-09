@@ -2,6 +2,8 @@
 discriminator: "dune-daq-{{ target.name }}"
 
 args:
+  - name: inside_kind
+    default: false
   - name: with_applications
     default: true
   - name: with_bootstrap
@@ -100,6 +102,7 @@ targets:
   - name: pocket
     context: kind-pocketdune
     args:
+      inside_kind: true
       with_cilium: false
       with_local_path_as_default_storageclass: true
       with_nfs_storage: false
@@ -107,6 +110,7 @@ targets:
   - name: pocket-connectionservice
     discriminator: "dune-daq-pocket"
     args:
+      inside_kind: true
       with_cilium: false
       with_local_path_as_default_storageclass: true
       with_nfs_storage: false
@@ -122,6 +126,7 @@ targets:
   - name: pocket-daqconfig
     discriminator: "dune-daq-pocket"
     args:
+      inside_kind: true
       with_cilium: false
       with_local_path_as_default_storageclass: true
       with_nfs_storage: false
@@ -137,6 +142,7 @@ targets:
   - name: pocket-dqm
     discriminator: "dune-daq-pocket"
     args:
+      inside_kind: true
       with_cilium: false
       with_local_path_as_default_storageclass: true
       with_nfs_storage: false
@@ -152,6 +158,7 @@ targets:
   - name: pocket-ers
     discriminator: "dune-daq-pocket"
     args:
+      inside_kind: true
       with_cilium: false
       with_local_path_as_default_storageclass: true
       with_nfs_storage: false
@@ -167,6 +174,7 @@ targets:
   - name: pocket-opmon
     discriminator: "dune-daq-pocket"
     args:
+      inside_kind: true
       with_cilium: false
       with_local_path_as_default_storageclass: true
       with_nfs_storage: false
@@ -182,6 +190,7 @@ targets:
   - name: pocket-runcounter
     discriminator: "dune-daq-pocket"
     args:
+      inside_kind: true
       with_cilium: false
       with_local_path_as_default_storageclass: true
       with_nfs_storage: false

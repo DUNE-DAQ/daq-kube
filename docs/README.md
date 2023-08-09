@@ -33,13 +33,17 @@ The `.kluctl.yaml` file lists the deployment targets we've configured.  The `con
 
 ***NOTE:*** You cannot deploy a target to a kubernetes context other than the one defined in `.kluctl.yaml`.
 
+For example: `kluctl deploy -t pocket`
+
 To see what targets are defined you can run `kluctl list-targets` to see the `name` and defaults for each target.
 
 Or to get just a list of target names `kluctl list-targets | grep 'name:'`.
 
-For example: `kluctl deploy -t pocket`
+***NOTE:*** if deploying into Pocket you should also set the hostname of your system via `--arg hostname=$HOSTNAME`
 
-Or if you wish to provide a set of arguments via a yaml file: `kluctl deploy -t target --args-from-file=filename.yaml`
+For example: `kluctl deploy -t pocket --arg hostname=$HOSTNAME`
+
+***NOTE:*** when setting the passwords to non-default values you should use an args-file. You can provide a set of arguments via a yaml file: `kluctl deploy -t target --args-from-file=filename.yaml`
 
 ## Access to your cluster
 
