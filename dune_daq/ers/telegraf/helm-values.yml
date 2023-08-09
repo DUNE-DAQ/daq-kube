@@ -20,8 +20,6 @@ config:
         - metric_name: "string('ErrorReports')"
           # These are the fields in the ERS messages
           # see erskafka/src/KafkaStream.cpp
-          timestamp: '/time'
-          timestamp_format: unix_ms
           fields:
             application_name: "/application_name"
             chain: "/chain"
@@ -42,6 +40,7 @@ config:
             line_number: "number(/line_number)"
             process_id: "number(/process_id)"
             thread_id: "number(/thread_id)"
+            time: "number(/time)" # this column is kinda redundant
             usecs_since_epoch: "number(/usecs_since_epoch)" # this column is kinda redundant
             user_id: "number(/user_id)"
   - internal:
