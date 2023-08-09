@@ -35,6 +35,7 @@ resources: # this is guess work
 {% if args.with_backups %}
 backup:
   enabled: true
+  successfulJobsHistoryLimit: 1
 {% endif %}
 
 metrics:

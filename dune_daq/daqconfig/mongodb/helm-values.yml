@@ -17,6 +17,9 @@ persistence:
 {% if args.with_backups %}
 backup:
   enabled: true
+  successfulJobsHistoryLimit: 1
+{% endif %}
+
 {% endif %}
 
 metrics: # TODO https://github.com/percona/grafana-dashboards/tree/main/dashboards/MongoDB
