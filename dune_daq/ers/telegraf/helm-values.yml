@@ -40,7 +40,6 @@ config:
             line_number: "number(/line_number)"
             process_id: "number(/process_id)"
             thread_id: "number(/thread_id)"
-            time: "number(/time)" # this column is kinda redundant
             usecs_since_epoch: "number(/usecs_since_epoch)" # this column is kinda redundant
             user_id: "number(/user_id)"
   - internal:
