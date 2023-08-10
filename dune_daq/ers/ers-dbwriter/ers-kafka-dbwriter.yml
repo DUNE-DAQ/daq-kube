@@ -58,3 +58,20 @@ spec:
             secretKeyRef:
               key: database
               name: ers-postgresql-svcbind-custom-user
+        resources:
+          limits: # this is guess work
+            memory: 1Gi
+          requests:
+            memory: 8Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          runAsGroup: 11000
+          runAsNonRoot: true
+          runAsUser: 11000
+          seccompProfile:
+            type: RuntimeDefault
+      securityContext:
+        fsGroup: 11000
