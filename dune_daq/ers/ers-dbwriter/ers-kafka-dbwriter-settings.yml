@@ -1,0 +1,13 @@
+---
+apiVersion: v1
+kind: Secret
+type: Opaque
+metadata:
+  labels:
+    app.kubernetes.io/app: ers
+    app.kubernetes.io/component: ers-kafka-dbwriter
+  name: ers-kafka-dbwriter-settings
+  namespace: {{ DUNE_ers.namespace }}
+data:
+  kafka_host: {{ dunedaq.kafka.bootstrap_brokers | split(':') | first | b64encode }}
+  kafka_port: {{ dunedaq.kafka.bootstrap_brokers | split(':') | last | b64encode }}

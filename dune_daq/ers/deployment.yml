@@ -10,5 +10,7 @@ deployments:
   - barrier: true
     message: Let services all catch up
 
+  - path: ers-dbwriter
+
 vars:
   - file: variables/ers.yaml

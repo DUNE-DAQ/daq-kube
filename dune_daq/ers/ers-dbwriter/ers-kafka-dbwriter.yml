@@ -1,0 +1,60 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/app: ers
+    app.kubernetes.io/component: ers-kafka-dbwriter
+  name: ers-kafka-dbwriter
+  namespace: {{ DUNE_ers.namespace }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/app: ers
+      app.kubernetes.io/component: ers-kafka-dbwriter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/app: ers
+        app.kubernetes.io/component: ers-kafka-dbwriter
+    spec:
+      containers:
+      - image: ghcr.io/dune-daq/pocket-ersdbwriter:latest
+        name: ers-kafka-dbwriter
+        env:
+        - name: ERS_DBWRITER_KAFKA_HOST
+          valueFrom:
+            secretKeyRef:
+              key: kafka_host
+              name: ers-kafka-dbwriter-settings
+        - name: ERS_DBWRITER_KAFKA_PORT
+          valueFrom:
+            secretKeyRef:
+              key: kafka_port
+              name: ers-kafka-dbwriter-settings
+        - name: ERS_DBWRITER_HOST
+          valueFrom:
+            secretKeyRef:
+              key: host
+              name: ers-postgresql-svcbind-custom-user
+        - name: ERS_DBWRITER_PORT
+          valueFrom:
+            secretKeyRef:
+              key: port
+              name: ers-postgresql-svcbind-custom-user
+        - name: ERS_DBWRITER_USER
+          valueFrom:
+            secretKeyRef:
+              key: username
+              name: ers-postgresql-svcbind-custom-user
+        - name: ERS_DBWRITER_PASS
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: ers-postgresql-svcbind-custom-user
+        - name: ERS_DBWRITER_NAME
+          valueFrom:
+            secretKeyRef:
+              key: database
+              name: ers-postgresql-svcbind-custom-user
