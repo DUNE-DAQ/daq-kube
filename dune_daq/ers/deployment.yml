@@ -10,9 +10,5 @@ deployments:
   - barrier: true
     message: Let services all catch up
 
-  ## How tied are we to the current message spec from https://github.com/DUNE-DAQ/erskafka/blob/develop/src/KafkaStream.cpp?
-  - path: telegraf
-
 vars:
   - file: variables/ers.yaml
-  - file: variables/telegraf.yaml
