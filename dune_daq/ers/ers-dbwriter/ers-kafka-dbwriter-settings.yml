@@ -9,5 +9,5 @@ metadata:
   name: ers-kafka-dbwriter-settings
   namespace: {{ DUNE_ers.namespace }}
 data:
-  kafka_host: {{ dunedaq.kafka.bootstrap_brokers | split(':') | first | b64encode }}
-  kafka_port: {{ dunedaq.kafka.bootstrap_brokers | split(':') | last | b64encode }}
+  kafka_host: {{ dunedaq.kafka.bootstrap_brokers[0].split(':') | first | b64encode }}
+  kafka_port: {{ dunedaq.kafka.bootstrap_brokers[0].split(':') | last | b64encode }}
