@@ -11,3 +11,7 @@ deployments:
 {% if args.with_kafka_ui %}
   - path: kafka-ui
 {% endif %}
+
+vars:
+- systemEnvVars:
+    kafka_hostname: HOSTNAME

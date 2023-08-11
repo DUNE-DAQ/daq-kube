@@ -39,10 +39,6 @@ To see what targets are defined you can run `kluctl list-targets` to see the `na
 
 Or to get just a list of target names `kluctl list-targets | grep 'name:'`.
 
-***NOTE:*** if deploying into Pocket you should also set the hostname of your system via `--arg hostname=$HOSTNAME`
-
-For example: `kluctl deploy -t pocket --arg hostname=$HOSTNAME`
-
 ***NOTE:*** when setting the passwords to non-default values you should use an args-file. You can provide a set of arguments via a yaml file: `kluctl deploy -t target --args-from-file=filename.yaml`
 
 ## Access to your cluster
