@@ -94,23 +94,3 @@ affinity:
               values:
               - grafana-0
           topologyKey: kubernetes.io/hostname
-
-sidecar: # this is guess work
-  resources:
-   limits:
-     cpu: 200m
-     memory: 200Mi
-   requests:
-     cpu: 10m
-     memory: 5Mi
-
-  dashboards:
-    enabled: true
-    label: "{{ grafana_dashboard_label_name }}"
-    labelValue: "{{ grafana_dashboard_label_value }}"
-    searchNamespace: ALL
-    folderAnnotation: {{ grafana_dashboard_folder_annotation }}
-    provider:
-      allowUiUpdates: false
-      disableDelete: false
-      foldersFromFilesStructure: true
