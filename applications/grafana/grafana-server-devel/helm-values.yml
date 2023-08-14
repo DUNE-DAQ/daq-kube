@@ -9,7 +9,7 @@ networkPolicy:
   enabled: true
 
 useStatefulSet: true
-revisionHistoryLimit: 1
+revisionHistoryLimit: 3
 
 persistence:
   enabled: true
@@ -38,8 +38,8 @@ grafana.ini:
     log_queries: false
     query_retries: 2 # query_retries for sqlite only
   analytics:
-    check_for_updates: false
-    check_for_plugin_updates: false
+    check_for_updates: true
+    check_for_plugin_updates: true
     reporting_enabled: false
   auth:
     login_maximum_inactive_lifetime_duration: 13h
@@ -64,10 +64,10 @@ resources: # this is guess work
    cpu: 500m
    memory: 1Gi
  requests:
-   cpu: 5m
-   memory: 32Mi
+   cpu: 10m
+   memory: 64Mi
 
-# try not to schedule on same node as alertmanager/prometheus/grafana-main
+# try not to schedule on same node as alertmanager/prometheus
 affinity:
   podAntiAffinity:
     preferredDuringSchedulingIgnoredDuringExecution:
@@ -85,7 +85,7 @@ affinity:
             - key: prometheus
               operator: Exists
           topologyKey: kubernetes.io/hostname
-      - weight: 30
+      - weight: 30 # also avoid scheduling alongside grafana-main
         podAffinityTerm:
           labelSelector:
             matchExpressions:

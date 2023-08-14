@@ -13,6 +13,9 @@ useStatefulSet: true
 persistence:
   enabled: false
 
+initChownData:
+  enabled: false
+
 grafana.ini:
   dashboards:
     default_home_dashboard_path: {{ grafana_default_dashboard }}
@@ -32,7 +35,7 @@ grafana.ini:
   server:
     enable_gzip: true
   database:
-    # maybe use postgresql so I can persist?
+    # maybe use postgresql so I can persist without a pvc?
     log_queries: false
     query_retries: 2 # query_retries for sqlite only
   analytics:
