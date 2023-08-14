@@ -16,7 +16,7 @@ networkPolicy:
   enabled: true
   ingressDenyAll: {{ kubernetes_dashboard.deny_all_ingress }}
 
-{% if kubernetes_dashboard.disable_ro_user %}
+{% if kubernetes_dashboard.enable_ro_user %}
 rbac:
   # It is NOT RECOMMENDED to use this version in production.
   # Instead you should review the role and remove all potentially sensitive parts such as
