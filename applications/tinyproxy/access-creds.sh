@@ -1,3 +1,5 @@
+#!/bin/bash
+
 NAMESPACE="tinyproxy"
 HELM_RELEASE="tinyproxy"
 

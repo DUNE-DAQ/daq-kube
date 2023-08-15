@@ -1,3 +1,5 @@
+#!/bin/bash
+
 NAMESPACE="kubernetes-dashboard"
 HELM_RELEASE="kubernetes-dashboard"
 

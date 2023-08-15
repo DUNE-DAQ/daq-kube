@@ -1,3 +1,5 @@
+#!/bin/bash
+
 NAMESPACE="monitoring"
 HELM_RELEASE="grafana"
 
