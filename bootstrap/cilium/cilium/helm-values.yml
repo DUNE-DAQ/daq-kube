@@ -94,7 +94,10 @@ hubble:
       - tcp
       - flow
       - icmp
-      - http
+      - httpV2
+      - flows-to-world
+      - kafka_requests_total
+      - kafka_request_duration_seconds
     serviceMonitor:
       enabled: true
       labels:
