@@ -6,7 +6,7 @@ kafka:
 
 nfs_storage_classes: {} # TODO, fill me out
 
-smtp_server: smtp.cern.ch
+smtp_server: cernmx.cern.ch
 smtp_port: 587
 
 cvmfs_http_proxy: http://ca-proxy.cern.ch:3128
