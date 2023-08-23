@@ -18,7 +18,7 @@ args:
     default: false
   - name: with_dns_autoscaler
     default: true
-  - name: with_dune_daq
+  - name: with_dune_daq_services
     default: true
   - name: with_grafana
     default: true
