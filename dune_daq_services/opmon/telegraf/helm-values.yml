@@ -1,6 +1,9 @@
 ---
 tplVersion: 2
 
+image:
+  pullPolicy: Always # they overwrite tags for bugfixes
+
 config:
   agent:
     flush_interval: "2s"
