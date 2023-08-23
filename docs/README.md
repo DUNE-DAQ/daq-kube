@@ -47,6 +47,8 @@ The list of node-ports in use can be found under `dune_daq/node-ports`.  It cont
 
 The cluster also launches an instance of the `tinyproxy` SOCKS5 proxy server that can be used to tie into the kubernetes network.
 
+You can review the default credentials for your cluster by running `print-creds.sh` when `kubectl` is in your `$PATH` and has this cluster as the default context.
+
 ## Repo Layout
 
 You are expected to be familiar with https://kluctl.io/docs and its reference sections.
