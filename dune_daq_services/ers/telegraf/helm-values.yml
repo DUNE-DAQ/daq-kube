@@ -40,7 +40,7 @@ config:
 
   outputs:
   - prometheus_client: # for prometheus
-      listen: ":{{ OPMON_telegraf.prometheus_port }}"
+      listen: ":{{ ERS_telegraf.prometheus_port }}"
       tagpass: 
         metrics: 
           - "telegraf"
