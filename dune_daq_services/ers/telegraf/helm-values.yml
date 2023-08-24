@@ -32,6 +32,7 @@ config:
             session: "/session"
             parameters: "string(/final/parameters)"
             issue_name: "/final/name"
+            causes: "string(/causes)"
   - internal:
       collect_memstats: false
       tags: 
