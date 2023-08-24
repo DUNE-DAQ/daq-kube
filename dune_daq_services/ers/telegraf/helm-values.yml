@@ -1,0 +1,93 @@
+---
+tplVersion: 2
+
+image:
+  pullPolicy: Always # they overwrite tags for bugfixes
+
+config:
+  agent:
+    flush_interval: "2s"
+    flush_jitter: "1s"
+    metric_batch_size: 1000
+    omit_hostname: true
+
+  inputs:
+  - kafka_consumer:
+      brokers: {{ dunedaq.kafka.bootstrap_brokers | tojson }}
+      topics: {{ ERS_telegraf.kafka_topics | tojson }}
+      version: "{{ dunedaq.kafka.version }}"
+      client_id: 'ers-telegraf'
+      consumer_group: 'ers-telegraf'
+      data_format: 'xpath_protobuf'
+      xpath_native_types: 'true'
+      xpath_protobuf_type: "dunedaq.ersschema.IssueChain"
+      xpath_protobuf_file: "/path/to/issue.proto"
+      xpath:
+        - metric_name: 'string("ProtobufErrorReports")'
+          field_selection: "/final/descendant::*[not(*) and name() != 'time' and name() != 'parameters' and name() != 'context' and name() != 'name' and name() != 'inheritance']"
+          tag_selection: "/final/context"
+          timestamp: '/final/time'
+          timestamp_format: 'unix_ms'
+          fields:
+            session: "/session"
+            parameters: "string(/final/parameters)"
+            issue_name: "/final/name"
+  - internal:
+      collect_memstats: false
+      tags: 
+        metrics: "telegraf"
+
+  outputs:
+  - prometheus_client: # for prometheus
+      listen: ":{{ OPMON_telegraf.prometheus_port }}"
+      tagpass: 
+        metrics: 
+          - "telegraf"
+  - postgresql:
+      connection: "{{ ERS_telegraf.postgresql_connection }}"
+      timestamp_column_type: "timestamp with time zone"
+      tagdrop:
+        metrics:
+          - "telegraf"
+
+affinity:
+  podAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 100
+      podAffinityTerm:
+        labelSelector:
+          matchExpressions: # try to schedule near Kafka
+          - key: "strimzi.io/cluster"
+            operator: In
+            values:
+            - "{{ dunedaq.kafka.name }}"
+        namespaceSelector:
+          matchLabels:
+            name: {{ dunedaq.kafka.namespace }}
+        topologyKey: kubernetes.io/hostname
+    - weight: 90
+      podAffinityTerm:
+        labelSelector:
+          matchExpressions: # try to schedule near postgresql
+          - key: "app.kubernetes.io/instance"
+            operator: In
+            values:
+            - "ers-postgresql"
+        namespaceSelector:
+          matchLabels:
+            name: {{ DUNE_ers.namespace }}
+        topologyKey: kubernetes.io/hostname
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 16Mi
+
+nodeSelector:
+  kubernetes.io/os: linux
+
+metrics: # do this by hand so we can filter
+  health:
+    enabled: false
+  internal:
+    enabled: false
