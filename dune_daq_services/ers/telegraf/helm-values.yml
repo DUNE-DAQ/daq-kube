@@ -25,7 +25,6 @@ config:
       xpath:
         - metric_name: 'string("ProtobufErrorReports")'
           field_selection: "/final/descendant::*[not(*) and name() != 'time' and name() != 'parameters' and name() != 'context' and name() != 'name' and name() != 'inheritance']"
-          tag_selection: "/final/context"
           timestamp: '/final/time'
           timestamp_format: 'unix_ms'
           fields:
