@@ -24,14 +24,16 @@ config:
       xpath_protobuf_file: "/path/to/issue.proto"
       xpath:
         - metric_name: 'string("ProtobufErrorReports")'
-          field_selection: "/final/descendant::*[not(*) and name() != 'time' and name() != 'parameters' and name() != 'context' and name() != 'name' and name() != 'inheritance']"
+          field_selection: "/final/child::*[not(*) and name() != 'time' and name() != 'name' and name() != 'context' and name() != 'parameters' and name() != 'inheritance'] | /final/context/child::*[not(*)]"
           timestamp: '/final/time'
           timestamp_format: 'unix_ms'
           fields:
             session: "/session"
             parameters: "string(/final/parameters)"
-            issue_name: "/final/name"
+            issueName: "/final/name"
             causes: "string(/causes)"
+            inheritance: "string(/final/inheritance)"
+
   - internal:
       collect_memstats: false
       tags: 
