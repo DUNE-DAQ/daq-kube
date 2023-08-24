@@ -19,7 +19,7 @@ config:
       client_id: 'ers-telegraf'
       consumer_group: 'ers-telegraf'
       data_format: 'xpath_protobuf'
-      xpath_native_types: 'true'
+      xpath_native_types: true
       xpath_protobuf_type: "dunedaq.ersschema.IssueChain"
       xpath_protobuf_file: "/path/to/issue.proto"
       xpath:
