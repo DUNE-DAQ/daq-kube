@@ -30,7 +30,7 @@ config:
           fields:
             session: "/session"
             parameters: "string(/final/parameters)"
-            issueName: "/final/name"
+            issue_name: "/final/name"
             causes: "string(/causes)"
             inheritance: "string(/final/inheritance)"
 
