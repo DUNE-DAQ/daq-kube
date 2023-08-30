@@ -1,6 +1,6 @@
 ---
 # You must still deploy your database with its manifests from upstream
-# and create a secret called runcounter-postgresql-svcbind-custom-user
+# and create a secret called runservices-postgresql-svcbind-custom-user
 #   containing keys: host, port, dbname,  username, password
 apiVersion: apps/v1
 kind: Deployment
@@ -9,7 +9,7 @@ metadata:
     app.kubernetes.io/app: runregistry-rest
     app.kubernetes.io/component: runregistry-rest
   name: runregistry-rest
-  namespace: runcounter
+  namespace: runservices
 spec:
   selector:
     matchLabels:
@@ -30,27 +30,27 @@ spec:
           valueFrom:
             secretKeyRef:
               key: username
-              name: runcounter-postgresql-svcbind-custom-user
+              name: runservices-postgresql-svcbind-custom-user
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
               key: password
-              name: runcounter-postgresql-svcbind-custom-user
+              name: runservices-postgresql-svcbind-custom-user
         - name: DB_HOSTNAME
           valueFrom:
             secretKeyRef:
               key: host
-              name: runcounter-postgresql-svcbind-custom-user
+              name: runservices-postgresql-svcbind-custom-user
         - name: DB_PORT
           valueFrom:
             secretKeyRef:
               key: port
-              name: runcounter-postgresql-svcbind-custom-user
+              name: runservices-postgresql-svcbind-custom-user
         - name: DB_NAME
           valueFrom:
             secretKeyRef:
               key: database
-              name: runcounter-postgresql-svcbind-custom-user
+              name: runservices-postgresql-svcbind-custom-user
         image: ghcr.io/dune-daq/pocket-runregistry-rest:v0.0.8
         name: runregistry-rest
         ports:
@@ -91,7 +91,7 @@ metadata:
     app.kubernetes.io/app: runregistry-rest
     app.kubernetes.io/component: runregistry-rest
   name: runregistry-rest
-  namespace: runcounter
+  namespace: runservices
 spec:
   ports:
   - name: http

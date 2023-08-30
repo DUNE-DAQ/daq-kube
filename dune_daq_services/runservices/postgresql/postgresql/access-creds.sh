@@ -1,7 +1,7 @@
 #!/bin/bash
 
-NAMESPACE="runcounter"
-HELM_RELEASE="runcounter-postgresql"
+NAMESPACE="runservices"
+HELM_RELEASE="runservices-postgresql"
 
 DATABASE=$(kubectl -n ${NAMESPACE} get secret ${HELM_RELEASE}-svcbind-custom-user -ojsonpath="{.data.database}" | base64 --decode; echo)
 HOST=$(kubectl -n ${NAMESPACE} get secret ${HELM_RELEASE}-svcbind-custom-user -ojsonpath="{.data.host}" | base64 --decode; echo)

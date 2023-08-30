@@ -1,7 +1,7 @@
 helmChart:
   chartVersion: 12.10.0
-  namespace: '{{ DUNE_runcounter.namespace }}'
+  namespace: '{{ DUNE_runservices.namespace }}'
   output: helm-rendered.yaml
-  releaseName: '{{ DUNE_runcounter.postgresql_release_name }}'
+  releaseName: '{{ DUNE_runservices.postgresql_release_name }}'
   repo: oci://registry-1.docker.io/bitnamicharts/postgresql
   updateConstraints: ~12.x

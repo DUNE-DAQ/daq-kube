@@ -1,9 +1,9 @@
 ---
 auth:
-  username: "{{ DUNE_runcounter.postgresql_database_username }}"
-  password: "{{ DUNE_runcounter.postgresql_database_password }}"
-  database: "{{ DUNE_runcounter.postgresql_database_name }}"
-  postgresPassword: "{{ DUNE_runcounter.postgresql_database_password }}"
+  username: "{{ DUNE_runservices.postgresql_database_username }}"
+  password: "{{ DUNE_runservices.postgresql_database_password }}"
+  database: "{{ DUNE_runservices.postgresql_database_name }}"
+  postgresPassword: "{{ DUNE_runservices.postgresql_database_password }}"
 
 architecture: standalone
 
@@ -51,7 +51,7 @@ metrics:
   serviceMonitor:
     enabled: true
     labels:
-      jobLabel: postgresql-runcounter
+      jobLabel: postgresql-runservices
       "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.postgresql }}"
     jobLabel: jobLabel
   prometheusRule: # setup alerting rules here and then enable it

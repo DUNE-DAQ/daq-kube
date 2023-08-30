@@ -68,7 +68,7 @@ args:
     default: true
   - name: with_dune_opmon
     default: true
-  - name: with_dune_runcounter
+  - name: with_dune_runservices
     default: true
 
   ### This should be customized as an argument for your needs
@@ -95,7 +95,7 @@ args:
     default: run4evah
   - name: opmon_influxdb_admin_password
     default: run4evah
-  - name: runcounter_postgresql_password
+  - name: runservices_postgresql_password
     default: run4evah
 
 targets:
@@ -121,7 +121,7 @@ targets:
       with_dune_ers: false
       with_dune_kafka: false
       with_dune_opmon: false
-      with_dune_runcounter: false
+      with_dune_runservices: false
 
   - name: pocket-daqconfig
     discriminator: "dune-daq-pocket"
@@ -137,7 +137,7 @@ targets:
       with_dune_ers: false
       with_dune_kafka: false
       with_dune_opmon: false
-      with_dune_runcounter: false
+      with_dune_runservices: false
 
   - name: pocket-dqm
     discriminator: "dune-daq-pocket"
@@ -153,7 +153,7 @@ targets:
       with_dune_ers: false
       with_dune_kafka: true
       with_dune_opmon: false
-      with_dune_runcounter: false
+      with_dune_runservices: false
 
   - name: pocket-ers
     discriminator: "dune-daq-pocket"
@@ -169,7 +169,7 @@ targets:
       with_dune_ers: true
       with_dune_kafka: true
       with_dune_opmon: false
-      with_dune_runcounter: false
+      with_dune_runservices: false
 
   - name: pocket-opmon
     discriminator: "dune-daq-pocket"
@@ -185,9 +185,9 @@ targets:
       with_dune_ers: false
       with_dune_kafka: true
       with_dune_opmon: true
-      with_dune_runcounter: false
+      with_dune_runservices: false
 
-  - name: pocket-runcounter
+  - name: pocket-runservices
     discriminator: "dune-daq-pocket"
     args:
       inside_kind: true
@@ -201,7 +201,7 @@ targets:
       with_dune_ers: false
       with_dune_kafka: false
       with_dune_opmon: false
-      with_dune_runcounter: true
+      with_dune_runservices: true
 
   - name: np04-services
     context: kubernetes-admin@np04-services
@@ -219,4 +219,4 @@ targets:
       opmon_influxdb_user_influxdb_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
       opmon_telegraf_user_influxdb_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
       opmon_influxdb_admin_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
-      runcounter_postgresql_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
+      runservices_postgresql_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"

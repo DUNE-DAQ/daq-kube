@@ -8,8 +8,8 @@ deployments:
 {% if args.with_dune_daqconfig %}
   - include: daqconfig
 {% endif %}
-{% if args.with_dune_runcounter %}
-  - include: runcounter
+{% if args.with_dune_runservices %}
+  - include: runservices
 {% endif %}
 {% if args.with_dune_kafka %}
   - include: kafka

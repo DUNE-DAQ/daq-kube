@@ -2,7 +2,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: {{ DUNE_runcounter.namespace }}
+namespace: {{ DUNE_runservices.namespace }}
 
 resources:
   - runregistry.yml # https://raw.githubusercontent.com/DUNE-DAQ/microservices/develop/runregistry-rest/runregistry.yml
