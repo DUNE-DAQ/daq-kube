@@ -1,5 +1,5 @@
 helmChart:
-  chartVersion: 17.16.0
+  chartVersion: 17.17.1
   namespace: '{{ DUNE_dqm.namespace }}'
   output: helm-rendered.yaml
   releaseName: dqm-redis
