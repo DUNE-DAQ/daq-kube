@@ -52,6 +52,15 @@ config:
         metrics:
           - "telegraf"
 
+volumeMounts:
+- name: dunedaq.opensciencegrid.org
+  mountPath: /cvmfs
+
+volumes:
+- name: dunedaq.opensciencegrid.org
+  persistentVolumeClaim:
+    claimName: dunedaq.opensciencegrid.org
+
 affinity:
   podAffinity:
     preferredDuringSchedulingIgnoredDuringExecution:
@@ -80,7 +89,7 @@ affinity:
             name: {{ DUNE_ers.namespace }}
         topologyKey: kubernetes.io/hostname
 
-resources:
+resources: # this is guess work
   requests:
     cpu: 10m
     memory: 16Mi

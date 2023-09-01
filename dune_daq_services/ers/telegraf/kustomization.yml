@@ -6,5 +6,6 @@ namespace: {{ ERS_telegraf.namespace }}
 
 resources:
   - namespace.yml
+  - cvmfs-dunedaq.opensciencegrid.org.yaml
   - helm-rendered.yaml
   - telegraf-servicemonitor.yml
