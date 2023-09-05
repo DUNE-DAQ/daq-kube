@@ -1,6 +1,6 @@
 helmChart:
   chartName: node-problem-detector
-  chartVersion: 2.3.6
+  chartVersion: 2.3.7
   namespace: '{{ node_problem_detector.namespace }}'
   output: helm-rendered.yaml
   releaseName: node-problem-detector

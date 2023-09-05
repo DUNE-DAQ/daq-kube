@@ -1,6 +1,6 @@
 helmChart:
   chartName: trivy-operator
-  chartVersion: 0.15.1
+  chartVersion: 0.18.0
   namespace: '{{ trivy.namespace }}'
   output: helm-rendered.yaml
   releaseName: trivy-operator
