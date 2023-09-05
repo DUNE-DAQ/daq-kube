@@ -36,6 +36,10 @@ logSystemLoad: true
 
 cluster:
   name: "{{ target.name }}"
+  id: {{ kubernetesClusterID }}
+
+# ipv4NativeRoutingCIDR is required for cluster mesh
+# but I don't know what to set it to...
 
 monitor:
   enabled: true

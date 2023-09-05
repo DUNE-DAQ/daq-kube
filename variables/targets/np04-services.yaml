@@ -1,6 +1,9 @@
 clusterPoolIPv4PodCIDRList:
   - "10.244.0.0/16"
 
+# cluster ID must be unique across mesh
+kubernetesClusterID: 1
+
 kafka:
   with_cruisecontrol: true
 
