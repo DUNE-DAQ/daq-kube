@@ -88,16 +88,18 @@ dashboards:
 hubble:
   enabled: true
   metrics:
+    enableOpenMetrics: true
     enabled:
       - dns:query
       - drop
       - tcp
       - flow
       - icmp
-      - httpV2
+      - httpV2:exemplars=true
       - flows-to-world
       - kafka_requests_total
       - kafka_request_duration_seconds
+      - labelsContext=source_ip,source_namespace,source_workload,destination_ip,destination_namespace,destination_workload,traffic_direction
     serviceMonitor:
       enabled: true
       labels:
