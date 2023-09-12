@@ -19,7 +19,7 @@ config:
       client_id: 'opmon-telegraf'
       consumer_group: 'opmon-telegraf'
       data_format: 'xpath_json'
-      xpath_native_types: 'true'
+      xpath_native_types: true
       xpath:
         - metric_name: '/measurement'
           timestamp: '/time'
