@@ -1,0 +1,15 @@
+clusterPoolIPv4PodCIDRList:
+  - "10.244.0.0/16"
+
+# cluster ID must be unique across mesh
+kubernetesClusterID: 2
+
+kafka:
+  with_cruisecontrol: true
+
+nfs_storage_classes: {} # TODO, fill me out
+
+smtp_server: cernmx.cern.ch
+smtp_port: 587
+
+cvmfs_http_proxy: http://ca-proxy.cern.ch:3128
