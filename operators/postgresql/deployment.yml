@@ -1,6 +1,0 @@
----
-deployments:
-  - include: postgresql-operator
-
-  - barrier: true
-    message: wait for operator to settle

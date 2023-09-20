@@ -2,10 +2,6 @@
 	path = .submodules/dotdc-grafana-dashboards-kubernetes
 	url = https://github.com/dotdc/grafana-dashboards-kubernetes.git
 	update = checkout
-[submodule "cloudnative-pg"]
-	path = .submodules/cloudnative-pg
-	url = https://github.com/cloudnative-pg/cloudnative-pg.git
-	update = checkout
 [submodule "kube-prometheus"]
 	path = .submodules/kube-prometheus
 	url = https://github.com/prometheus-operator/kube-prometheus.git
