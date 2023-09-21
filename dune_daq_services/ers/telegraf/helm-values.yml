@@ -53,16 +53,16 @@ config:
           - "telegraf"
 
 volumeMounts:
-- name: dunedaq.opensciencegrid.org
+- name: dunedaq-opensciencegrid-org
   mountPath: /cvmfs/dunedaq.opensciencegrid.org
-- name: dunedaq-development.opensciencegrid.org
+- name: dunedaq-development-opensciencegrid-org
   mountPath: /cvmfs/dunedaq-development.opensciencegrid.org
 
 volumes:
-- name: dunedaq.opensciencegrid.org
+- name: dunedaq-opensciencegrid-org
   persistentVolumeClaim:
     claimName: dunedaq.opensciencegrid.org
-- name: dunedaq-development.opensciencegrid.org
+- name: dunedaq-development-opensciencegrid-org
   persistentVolumeClaim:
     claimName: dunedaq-development.opensciencegrid.org
 
