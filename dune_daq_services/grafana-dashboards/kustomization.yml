@@ -5,7 +5,7 @@ kind: Kustomization
 namespace: {{ monitoring.namespace }}
 
 resources:
-  - grafana-dashboards-dune-daq/
+  - dune-daq-grafana-dashboards/
 
 patches:
   - target:

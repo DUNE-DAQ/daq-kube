@@ -14,10 +14,6 @@
 	path = .submodules/dune-daq-grafana-dashboards
 	url = https://github.com/DUNE-DAQ/grafana-dashboards.git
 	update = checkout
-[submodule "dune-daq-connectivityserver"]
-	path = .submodules/dune-daq-connectivityserver
-	url = https://github.com/DUNE-DAQ/connectivityserver.git
-	update = checkout
 [submodule "dune-daq-microservices"]
 	path = .submodules/dune-daq-microservices
 	url = https://github.com/DUNE-DAQ/microservices.git
@@ -25,4 +21,8 @@
 [submodule "dune-daq-dqmbackend"]
 	path = .submodules/dune-daq-dqm-backend
 	url = https://github.com/DUNE-DAQ/dqm-backend.git
+	update = checkout
+[submodule "dune-daq-connectivityserver"]
+	path = .submodules/dune-daq-connectivityserver
+	url = https://github.com/DUNE-DAQ/connectivityserver.git
 	update = checkout
