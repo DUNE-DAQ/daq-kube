@@ -22,6 +22,14 @@ prometheusOperator:
     requests:
       cpu: 10m
       memory: 16Mi
+  prometheusConfigReloader:
+    resources:
+      limits:
+        cpu: 300m
+        memory: 512Mi
+      requests:
+        cpu: 10m
+        memory: 16Mi
 
 ## do not deploy a default monitoring setup
 ## we will manage it seperately
