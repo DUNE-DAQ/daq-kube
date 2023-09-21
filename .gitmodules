@@ -2,24 +2,27 @@
 	path = .submodules/dotdc-grafana-dashboards-kubernetes
 	url = https://github.com/dotdc/grafana-dashboards-kubernetes.git
 	update = checkout
+[submodule "kepler"]
+	path = .submodules/kepler
+	url = https://github.com/sustainable-computing-io/kepler.git
+	update = checkout
 [submodule "kube-prometheus"]
 	path = .submodules/kube-prometheus
 	url = https://github.com/prometheus-operator/kube-prometheus.git
 	update = checkout
 [submodule "dune-daq-grafana-dashboards"]
-	path = .submodules/grafana-dashboards-dune-daq
+	path = .submodules/dune-daq-grafana-dashboards
 	url = https://github.com/DUNE-DAQ/grafana-dashboards.git
 	update = checkout
-[submodule "kepler"]
-	path = .submodules/kepler
-	url = https://github.com/sustainable-computing-io/kepler.git
-	update = checkout
-[submodule "dunedaq-connectivityserver"]
-	path = .submodules/connectivityserver
+[submodule "dune-daq-connectivityserver"]
+	path = .submodules/dune-daq-connectivityserver
 	url = https://github.com/DUNE-DAQ/connectivityserver.git
-[submodule "dune-microservices"]
-	path = .submodules/microservices
+	update = checkout
+[submodule "dune-daq-microservices"]
+	path = .submodules/dune-daq-microservices
 	url = https://github.com/DUNE-DAQ/microservices.git
-[submodule "dune-dqmbackend"]
-	path = .submodules/dqm-backend
+	update = checkout
+[submodule "dune-daq-dqmbackend"]
+	path = .submodules/dune-daq-dqm-backend
 	url = https://github.com/DUNE-DAQ/dqm-backend.git
+	update = checkout
