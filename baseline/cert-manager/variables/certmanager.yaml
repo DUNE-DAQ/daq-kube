@@ -1,0 +1,3 @@
+---
+certmanager:
+  namespace: cert-manager

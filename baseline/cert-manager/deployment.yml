@@ -1,0 +1,18 @@
+---
+deployments:
+  - path: namespace
+    alwaysDeploy: true
+    skipDeleteIfTags: true
+
+  - barrier: true
+
+  - path: cert-manager
+    skipDeleteIfTags: true
+    waitReadiness: true
+
+  - path: prometheus-rules
+    skipDeleteIfTags: true
+    waitReadiness: true
+
+vars:
+  - file: variables/certmanager

@@ -24,5 +24,12 @@ deployments:
       - metrics
       - monitoring
 
+{% if args.with_certmanager %}
+  - include: cert-manager
+    tags:
+      - pki
+      - tls
+{% endif %}
+
   - barrier: true
     message: Make sure baseline is completely loaded
