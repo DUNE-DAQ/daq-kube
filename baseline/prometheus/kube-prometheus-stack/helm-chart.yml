@@ -1,6 +1,6 @@
 helmChart:
   chartName: kube-prometheus-stack
-  chartVersion: 51.1.0
+  chartVersion: 51.2.0
   namespace: '{{ prometheus_operator_namespace }}'
   output: helm-rendered.yaml
   releaseName: kube-prometheus-stack
