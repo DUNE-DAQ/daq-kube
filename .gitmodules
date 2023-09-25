@@ -26,6 +26,3 @@
 	path = .submodules/dune-daq-connectivityserver
 	url = https://github.com/DUNE-DAQ/connectivityserver.git
 	update = checkout
-[submodule "monitoring-mixins"]
-	path = .submodules/monitoring-mixins-samples
-	url = https://github.com/monitoring-mixins/website.git

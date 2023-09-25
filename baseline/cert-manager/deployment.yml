@@ -10,9 +10,5 @@ deployments:
     skipDeleteIfTags: true
     waitReadiness: true
 
-  - path: prometheus-rules
-    skipDeleteIfTags: true
-    waitReadiness: true
-
 vars:
   - file: variables/certmanager.yaml
