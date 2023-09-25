@@ -31,7 +31,7 @@ config:
             session: "/session"
             parameters: "string(/final/parameters)"
             issue_name: "/final/name"
-            causes: "string(/causes)"
+            causes: "string-join(/causes, ' ')"
             inheritance: "string(/final/inheritance)"
 
   - internal:
