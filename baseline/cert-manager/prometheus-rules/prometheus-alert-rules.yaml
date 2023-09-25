@@ -7,4 +7,6 @@ metadata:
   namespace: {{ certmanager.namespace }}
   labels:
     {{ prometheus_rule_label_name }}: {{ prometheus_rule_labels.system }}
+{{ "{% raw %}" }}
 spec: {{ raw|tojson }}
+{{ "{% endraw %}" }}
