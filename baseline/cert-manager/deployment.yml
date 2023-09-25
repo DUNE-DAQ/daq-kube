@@ -15,4 +15,4 @@ deployments:
     waitReadiness: true
 
 vars:
-  - file: variables/certmanager
+  - file: variables/certmanager.yaml
