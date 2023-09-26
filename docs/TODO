@@ -63,6 +63,8 @@ docker proxy for kind?
   - https://maelvls.dev/docker-proxy-registry-kind/
 
 https://cert-manager.io/docs/configuration/
+* https://github.com/cert-manager/csi-driver/tree/main/deploy/charts/csi-driver
+* https://github.com/cert-manager/trust-manager/tree/main/deploy/charts/trust-manager
 
 https://github.com/cilium/tetragon
 
