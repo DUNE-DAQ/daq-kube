@@ -10,5 +10,9 @@ deployments:
     skipDeleteIfTags: true
     waitReadiness: true
 
+  - barrier: true
+
+  - path: ca
+
 vars:
   - file: variables/certmanager.yaml
