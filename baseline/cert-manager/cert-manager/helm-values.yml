@@ -7,6 +7,14 @@ prometheus:
     enabled: true
     prometheusInstance: {{ prometheus_servicemonitor_labels.system }}
 
+resources:
+  limits:
+    cpu: 200m
+    memory: 512Mi
+  requests:
+    cpu: 10m
+    memory: 16Mi
+
 # below this line from upstream docs:
 # https://cert-manager.io/docs/installation/best-practice/values.best-practice.yaml
 # Helm chart values which make cert-manager comply with CIS, BSI and NSA

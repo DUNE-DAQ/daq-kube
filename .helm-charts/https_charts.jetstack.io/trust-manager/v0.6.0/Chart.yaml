@@ -1,0 +1,17 @@
+annotations:
+  artifacthub.io/prerelease: "false"
+apiVersion: v2
+appVersion: v0.6.0
+description: trust-manager is the easiest way to manage TLS trust bundles in Kubernetes
+  and OpenShift clusters
+home: https://github.com/cert-manager/trust-manager
+kubeVersion: '>= 1.22.0-0'
+maintainers:
+- email: cert-manager-maintainers@googlegroups.com
+  name: cert-manager-maintainers
+  url: https://cert-manager.io
+name: trust-manager
+sources:
+- https://github.com/cert-manager/trust-manager
+type: application
+version: v0.6.0

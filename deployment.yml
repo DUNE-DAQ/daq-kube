@@ -36,6 +36,7 @@ deployments:
 
 vars:
   - file: variables/monitoring.yaml
+  - file: variables/certmanager_bundle.yaml
 
   - file: variables/alertmanager_labels.yaml
   - file: variables/prometheus_labels.yaml

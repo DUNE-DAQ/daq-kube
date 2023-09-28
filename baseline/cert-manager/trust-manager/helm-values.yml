@@ -1,0 +1,18 @@
+crds:
+  enabled: true
+
+app:
+  metrics:
+    service:
+      enabled: true
+      servicemonitor:
+        enabled: true
+        prometheusInstance: {{ prometheus_servicemonitor_labels.system }}
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 512Mi
+  requests:
+    cpu: 10m
+    memory: 16Mi

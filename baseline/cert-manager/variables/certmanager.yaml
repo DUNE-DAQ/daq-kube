@@ -1,3 +1,4 @@
 ---
 certmanager:
   namespace: cert-manager
+  ca_name: fake-ca
