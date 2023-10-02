@@ -14,4 +14,3 @@ deployments:
 
 vars:
   - file: variables/ers.yaml
-  - file: variables/telegraf.yaml
