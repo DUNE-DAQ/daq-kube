@@ -9,12 +9,14 @@ deployments:
   - path: cert-manager
     waitReadiness: true
 
-  - path: trust-manager
-    waitReadiness: true
-
   - barrier: true
 
   - path: ca
+
+  - barrier: true
+
+  - path: trust-manager
+    waitReadiness: true
 
 vars:
   - file: variables/certmanager.yaml
