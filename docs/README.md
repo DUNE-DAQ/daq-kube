@@ -49,6 +49,12 @@ The cluster also launches an instance of the `tinyproxy` SOCKS5 proxy server tha
 
 You can review the default credentials for your cluster by running `print-creds.sh` when `kubectl` is in your `$PATH` and has this cluster as the default context.
 
+### Proxy
+
+Inside the cluster, port `1080` is available for use as a SOCKS5 proxy.
+
+If the node-ports were deployed, there is a node-port set for `tinyproxy` that should grant access to the cluster.  If you delegate DNS to the SOCKS5 proxy, you can use this proxy server to test and recieve any in cluster resources.
+
 ## Repo Layout
 
 You are expected to be familiar with https://kluctl.io/docs and its reference sections.
