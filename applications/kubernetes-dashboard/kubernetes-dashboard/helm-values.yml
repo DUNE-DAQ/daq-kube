@@ -6,6 +6,12 @@
 
 fullnameOverride: 'kubernetes-dashboard'
 
+cert-manager:
+  enabled: false
+
+nginx:
+  enabled: false
+
 metricsScraper:
   enabled: true
 
