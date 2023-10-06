@@ -15,8 +15,8 @@ deployments:
 
   - barrier: true
 
-  - path: trust-manager
-    waitReadiness: true
+#  - path: trust-manager
+#    waitReadiness: true
 
 vars:
   - file: variables/certmanager.yaml

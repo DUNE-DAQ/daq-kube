@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - helm-rendered.yaml
+  - ca-bundle.yaml
 
 commonLabels:
   app.kubernetes.io/instance: trust-manager
