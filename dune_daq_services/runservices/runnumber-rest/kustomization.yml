@@ -6,6 +6,7 @@ namespace: {{ DUNE_runservices.namespace }}
 
 resources:
   - runnumber-rest.yaml # https://github.com/DUNE-DAQ/microservices/tree/develop/runnumber-rest
+  - run-db-secret.yaml # this is a hack, a terrible hack for oracle
 
 patches:
   - target:

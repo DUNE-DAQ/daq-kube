@@ -3,28 +3,28 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app.kubernetes.io/app: runnumber-rest
-    app.kubernetes.io/component: runnumber-rest
-  name: runnumber-rest
+    app.kubernetes.io/app: runregistry-rest
+    app.kubernetes.io/component: runregistry-rest
+  name: runregistry-rest
   namespace: {{ DUNE_runservices.namespace }}
 spec:
   minReadySeconds: 5
   selector:
     matchLabels:
-      app.kubernetes.io/app: runnumber-rest
-      app.kubernetes.io/component: runnumber-rest
+      app.kubernetes.io/app: runregistry-rest
+      app.kubernetes.io/component: runregistry-rest
   template:
     metadata:
       labels:
-        app.kubernetes.io/app: runnumber-rest
-        app.kubernetes.io/component: runnumber-rest
+        app.kubernetes.io/app: runregistry-rest
+        app.kubernetes.io/component: runregistry-rest
     spec:
       containers:
-      - image: ghcr.io/dune-daq/pocket-runnumber-rest:0.8 # this tag is different than standard
-        name: runnumber-rest
+      - image: ghcr.io/dune-daq/pocket-runregistry-rest:0.8 # this tag is different than standard
+        name: runregistry-rest
         env:
         - name: MICROSERVICE
-          value: runnumber-rest
+          value: runregistry-rest
         envFrom:
         - secretRef:
             name: run-db-secret
