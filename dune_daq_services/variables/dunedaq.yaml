@@ -12,6 +12,6 @@ dunedaq:
     version: "3.5.1"
     protocol_version: "3.5"
     replicas: 1
-  unified-microservices:
+  unified_microservices:
     image: ghcr.io/dune-daq/microservices
     tag: cc4f
