@@ -5,8 +5,7 @@ kind: Kustomization
 namespace: {{ DUNE_ers.namespace }}
 
 resources:
-  - ers-kafka-dbwriter-settings.yml
-  - ers-kafka-dbwriter.yml
+  - ersdbwriter.yaml
 
 patches:
   - target:
@@ -17,3 +16,6 @@ patches:
       - op: replace
         path: /spec/template/spec/containers/0/image
         value: {{ dunedaq.unified_microservices.image }}:{{ dunedaq.unified_microservices.tag }}
+      - op: replace
+        path: /spec/template/spec/containers/0/env/1/value
+        value: {{ dunedaq.kafka.bootstrap_brokers[0] }}
