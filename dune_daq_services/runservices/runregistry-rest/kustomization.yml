@@ -6,3 +6,13 @@ namespace: {{ DUNE_runservices.namespace }}
 
 resources:
   - runregistry.yml # https://raw.githubusercontent.com/DUNE-DAQ/microservices/develop/runregistry-rest/runregistry.yml
+
+patchesJSON6902:
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: {{ dunedaq.unified-microservices.image }}:{{ dunedaq.unified-microservices.tag }}

@@ -6,3 +6,13 @@ namespace: {{ DUNE_runservices.namespace }}
 
 resources:
   - runnumber-rest.yaml # https://github.com/DUNE-DAQ/microservices/tree/develop/runnumber-rest
+
+patchesJSON6902:
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: {{ dunedaq.unified-microservices.image }}:{{ dunedaq.unified-microservices.tag }}
