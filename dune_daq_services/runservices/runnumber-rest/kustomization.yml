@@ -16,6 +16,3 @@ patchesJSON6902:
       - op: replace
         path: /spec/template/spec/containers/0/image
         value: {{ dunedaq.unified_microservices.image }}:{{ dunedaq.unified_microservices.tag }}
-
-patches:
-  - path: no-ns.yaml

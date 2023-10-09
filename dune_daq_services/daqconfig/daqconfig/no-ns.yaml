@@ -1,3 +1,0 @@
-$patch: delete
-apiVersion: v1
-kind: Namespace
