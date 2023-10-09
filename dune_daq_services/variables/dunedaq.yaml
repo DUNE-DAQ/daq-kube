@@ -12,3 +12,5 @@ dunedaq:
     version: "3.5.1"
     protocol_version: "3.5"
     replicas: 1
+
+dune-daq-microservices-tag: cc4f
