@@ -7,7 +7,7 @@ namespace: {{ DUNE_runservices.namespace }}
 resources:
   - runregistry.yml # https://raw.githubusercontent.com/DUNE-DAQ/microservices/develop/runregistry-rest/runregistry.yml
 
-patchesJSON6902:
+patches:
   - target:
       group: apps
       version: v1

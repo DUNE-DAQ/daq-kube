@@ -8,7 +8,7 @@ resources:
   - ers-kafka-dbwriter-settings.yml
   - ers-kafka-dbwriter.yml
 
-patchesJSON6902:
+patches:
   - target:
       group: apps
       version: v1
