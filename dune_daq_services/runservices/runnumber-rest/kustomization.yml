@@ -2,11 +2,19 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+generatorOptions:
+  disableNameSuffixHash: true # this is a hack for oracle
+
+
 namespace: {{ DUNE_runservices.namespace }}
 
 resources:
   - runnumber-rest.yaml # https://github.com/DUNE-DAQ/microservices/tree/develop/runnumber-rest
   - run-db-secret.yaml # this is a hack, a terrible hack for oracle
+
+configMapGenerator:
+  - name: tnsnames-ora
+    files: [ tnsnames.ora ] # this is a hack, a terrible hack for oracle
 
 patches:
   - target:

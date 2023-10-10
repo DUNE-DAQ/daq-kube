@@ -28,6 +28,10 @@ spec:
         envFrom:
         - secretRef:
             name: run-db-secret
+        volumesMounts:
+          - name: tnsnames-ora
+            mountPath: /etc
+            subPath: tnsnames.ora
         ports:
         - containerPort: 5000
           protocol: TCP
@@ -46,5 +50,12 @@ spec:
           runAsGroup: 11000
           seccompProfile:
             type: RuntimeDefault
+      volumes:
+        - name: tnsnames-ora
+          configMap:
+            name: tnsnames-ora
+            items:
+             - key: tnsnames.ora
+               path: tnsnames.ora
       securityContext:
         fsGroup: 11000
