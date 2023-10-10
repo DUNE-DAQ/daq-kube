@@ -30,7 +30,7 @@ spec:
             name: run-db-secret
         volumeMounts:
           - name: tnsnames-ora
-            mountPath: /etc
+            mountPath: /etc/tnsnames.ora
             subPath: tnsnames.ora
         ports:
         - containerPort: 5000
