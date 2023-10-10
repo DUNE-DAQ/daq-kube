@@ -28,7 +28,7 @@ spec:
         envFrom:
         - secretRef:
             name: run-db-secret
-        volumesMounts:
+        volumeMounts:
           - name: tnsnames-ora
             mountPath: /etc
             subPath: tnsnames.ora
