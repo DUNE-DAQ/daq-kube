@@ -4,7 +4,8 @@ deployments:
 
   - barrier: true
 
-  - include: postgresql
+# skip while we are using the oracle hacks
+#  - include: postgresql
 
   - barrier: true
     message: make sure database is up
