@@ -15,7 +15,7 @@ args:
   - name: with_cilium
     default: true
   - name: with_cvmfs_csi
-    default: true
+    default: false
   - name: with_cnpg_operator
     default: false
   - name: with_dns_autoscaler
