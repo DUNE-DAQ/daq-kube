@@ -5,7 +5,7 @@ kind: Kustomization
 namespace: {{ DUNE_ers.namespace }}
 
 resources:
-  - ersdbwriter.yaml
+  - ers-dbwriter-deployment.yaml
 
 patches:
   - target:

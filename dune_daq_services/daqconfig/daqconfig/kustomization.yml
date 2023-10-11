@@ -5,7 +5,7 @@ kind: Kustomization
 namespace: {{ DUNE_daqconfig.namespace }}
 
 resources:
-  - configservice.yml
+  - config-service-deployment.yaml
 
 patches:
   - target:
