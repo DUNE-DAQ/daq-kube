@@ -74,7 +74,7 @@ spec:
     version: "{{ dunedaq.kafka.version }}"
     config:
       inter.broker.protocol.version: "{{ dunedaq.kafka.protocol_version }}"
-      auto.create.topics.enable: false # make each topic by hand so we know what is out there
+      auto.create.topics.enable: true
       log.cleanup.policy: "delete" # Cannot use 'compact' due to empty key in our data format
       log.retention.bytes: 6442450944 # no default upper size limit, set to 6Gi
       max.message.bytes: 1048576 # if you change this you need to review the kafka docs
