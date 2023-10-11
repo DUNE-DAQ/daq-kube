@@ -22,13 +22,6 @@ spec:
   - name: prometheus
     startupProbe:
       failureThreshold: 300
-  resources: # this is guess work for replaying the WAL
-    limits:
-      cpu: 2
-      memory: 4G
-    requests:
-      cpu: 200m
-      memory: 64Mi
 
   # https://github.com/prometheus-operator/prometheus-operator/issues/5519
   securityContext:

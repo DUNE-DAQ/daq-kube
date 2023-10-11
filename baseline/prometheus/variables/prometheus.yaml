@@ -29,10 +29,11 @@ prometheis: # this is the plural of prometheus
               topologyKey: kubernetes.io/hostname
 
     # these limits should probably be tuned a bit
+    # but the wal log is memory hungry
     resources:
       limits:
-        cpu: 400m
-        memory: 1Gi
+        cpu: 1
+        memory: 8Gi
       requests:
         cpu: 200m
         memory: 64Mi
