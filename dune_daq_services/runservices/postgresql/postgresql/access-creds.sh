@@ -10,6 +10,6 @@ PORT=$(kubectl -n ${NAMESPACE} get secret ${HELM_RELEASE}-svcbind-custom-user -o
 USER=$(kubectl -n ${NAMESPACE} get secret ${HELM_RELEASE}-svcbind-custom-user -ojsonpath="{.data.username}" | base64 --decode; echo)
 
 echo "--------------------------------------------------"
-echo "DUNE DAQ RunCounter Service PostgreSQL:"
+echo "DUNE DAQ RunServices Service PostgreSQL:"
 echo "  URI in cluster: postgresql://${USER}:${PASS}@${HOST}.${NAMESPACE}.svc:${PORT}/${DATABASE}"
 echo "--------------------------------------------------"
