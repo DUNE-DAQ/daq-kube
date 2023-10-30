@@ -226,7 +226,9 @@ targets:
   - name: np04-daq
     context: kubernetes-admin@np04-daq
     args:
+      with_cvmfs_csi: false
       with_dune_daq_services: false
+      with_grafana: false
 
       # if you don't set the args to override, you get random values
       grafana_admin_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
