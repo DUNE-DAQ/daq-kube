@@ -229,6 +229,7 @@ targets:
       with_cvmfs_csi: false
       with_dune_daq_services: false
       with_grafana: false
+      with_nfs_storage: false
 
       # if you don't set the args to override, you get random values
       grafana_admin_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
