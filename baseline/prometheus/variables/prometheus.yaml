@@ -32,8 +32,8 @@ prometheis: # this is the plural of prometheus
     # but the wal log is memory hungry
     resources:
       limits:
-        cpu: 1
-        memory: 8Gi
+        cpu: 2
+        memory: 32Gi
       requests:
         cpu: 200m
         memory: 64Mi
