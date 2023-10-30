@@ -1,3 +1,5 @@
+{% if args.with_dune_daq_services %}
+{% if args.with_dune_daqconfig %}
 ---
 apiVersion: v1
 kind: Service
@@ -20,3 +22,5 @@ spec:
     app.kubernetes.io/instance: mongodb
     app.kubernetes.io/name: mongodb
   type: NodePort
+{% endif %}
+{% endif %}

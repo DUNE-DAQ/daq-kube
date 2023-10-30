@@ -73,6 +73,9 @@ args:
   - name: with_dune_runservices
     default: true
 
+  - name: with_dune_node_ports
+    default: true
+
   ### This should be customized as an argument for your needs
   ### Since `pocket` mode is for local development of services
   ### on node local ephemeral non-exposed containers, default passwords
@@ -229,6 +232,7 @@ targets:
       with_cvmfs_csi: false
       with_dune_daq_services: false
       with_grafana: false
+      with_kepler: false
       with_nfs_storage: false
       with_strimzi_kafka_operator: false
 

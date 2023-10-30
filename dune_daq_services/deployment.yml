@@ -35,7 +35,5 @@ deployments:
   - include: opmon
 {% endif %}
 
-  - path: node-ports
-
 vars:
   - file: variables/dunedaq.yaml

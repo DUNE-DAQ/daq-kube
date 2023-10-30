@@ -34,6 +34,10 @@ deployments:
       - services
 {% endif %}
 
+{% if args.with_dune_node_ports %}
+ - path: node-ports
+{% endif %}
+
 vars:
   - file: variables/monitoring.yaml
   - file: variables/certmanager_bundle.yaml

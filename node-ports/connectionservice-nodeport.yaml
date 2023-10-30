@@ -1,3 +1,5 @@
+{% if args.with_dune_daq_services %}
+{% if args.with_dune_connectionservice %}
 ---
 apiVersion: v1
 kind: Service
@@ -18,3 +20,5 @@ spec:
     app.kubernetes.io/app: connectionservice
     app.kubernetes.io/component: connectionservice
   type: NodePort
+{% endif %}
+{% endif %}

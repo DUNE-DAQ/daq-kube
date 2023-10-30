@@ -1,3 +1,4 @@
+{% if args.with_tinyproxy %}
 ---
 apiVersion: v1
 kind: Service
@@ -18,3 +19,4 @@ spec:
     app.kubernetes.io/app: tinyproxy
     app.kubernetes.io/component: tinyproxy
   type: NodePort
+{% endif %}

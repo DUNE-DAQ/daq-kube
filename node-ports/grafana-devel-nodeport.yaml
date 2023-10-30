@@ -1,3 +1,4 @@
+{% if args.with_grafana %}
 ---
 apiVersion: v1
 kind: Service
@@ -20,3 +21,4 @@ spec:
     app.kubernetes.io/instance: grafana-devel
     app.kubernetes.io/name: grafana
   type: NodePort
+{% endif %}

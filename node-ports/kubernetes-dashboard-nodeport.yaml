@@ -1,3 +1,4 @@
+{% if args.with_kubernetes_dashboard %}
 ---
 apiVersion: v1
 kind: Service
@@ -20,3 +21,4 @@ spec:
     app.kubernetes.io/instance: kubernetes-dashboard
     app.kubernetes.io/name: kubernetes-dashboard
   type: NodePort
+{% endif %}

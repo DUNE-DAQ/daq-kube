@@ -43,7 +43,7 @@ Or to get just a list of target names `kluctl list-targets | grep 'name:'`.
 
 ## Access to your cluster
 
-The list of node-ports in use can be found under `dune_daq/node-ports`.  It contains the exact manifests being run and should thus be the most up to date list of node-ports.
+The list of node-ports in use can be found under `node-ports`.  It contains the exact manifests being run and should thus be the most up to date list of node-ports. These are controled with `kluctl` variables.
 
 The cluster also launches an instance of the `tinyproxy` SOCKS5 proxy server that can be used to tie into the kubernetes network.
 
