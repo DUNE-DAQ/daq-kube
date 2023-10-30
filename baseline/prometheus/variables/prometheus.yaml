@@ -33,6 +33,7 @@ prometheis: # this is the plural of prometheus
     resources:
       limits:
         cpu: 2
+        memory: 32Gi
       requests:
         cpu: 200m
         memory: 64Mi
