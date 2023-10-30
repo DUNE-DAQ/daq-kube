@@ -1,9 +1,5 @@
 ---
 deployments:
-{% if args.with_trivy %}
-  - include: trivy
-{% endif %}
-
 {% if args.with_tinyproxy %}
   - path: tinyproxy
 {% endif %}
@@ -19,17 +15,6 @@ deployments:
 
 {% if args.with_node_feature_discovery %}
   - include: node-feature-discovery
-{% endif %}
-
-{% if args.with_multus_cni %}
-  - include: multus-cni
-{% endif %}
-
-{% if args.with_node_problem_detector %}
-  - include: node-problem-detector
-    tags:
-      - monitoring
-      - metrics
 {% endif %}
 
 {% if args.with_kubernetes_dashboard %}

@@ -17,6 +17,7 @@ What about cilium featues:
 
 https://metal3.io/
 
+multus-cni?
 https://github.com/openshift/sriov-network-operator/tree/master/deployment/sriov-network-operator
 https://github.com/k8snetworkplumbingwg/sriov-network-device-plugin
 
@@ -44,6 +45,8 @@ https://github.com/kubevious/kubevious/blob/main/projects/DASHBOARD.md ??
 tool_k9s
 
 use projectContour?
+
+trivy?
 
 http://carl.schelin.org/?p=1916
 

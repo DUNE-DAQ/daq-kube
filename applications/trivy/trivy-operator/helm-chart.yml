@@ -1,8 +1,0 @@
-helmChart:
-  chartName: trivy-operator
-  chartVersion: 0.18.4
-  namespace: '{{ trivy.namespace }}'
-  output: helm-rendered.yaml
-  releaseName: trivy-operator
-  repo: https://aquasecurity.github.io/helm-charts/
-  updateConstraints: ~0.x

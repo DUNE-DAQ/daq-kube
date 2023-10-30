@@ -9,7 +9,6 @@ prometheus_servicemonitor_labels:
   mongodb: mongodb-metrics
   postgresql: postgresql-metrics
   redis: redis-metrics
-  trivy: trivy-metrics
   dune: dune-metrics
 
 prometheus_podmonitor_label_name: prometheus.io/podmonitor
@@ -19,7 +18,6 @@ prometheus_podmonitor_labels:
   mongodb: mongodb-metrics
   postgresql: postgresql-metrics
   redis: redis-metrics
-  trivy: trivy-metrics
   dune: dune-metrics
 
 prometheus_probe_label_name: prometheus.io/probe
@@ -29,7 +27,6 @@ prometheus_probe_labels:
   mongodb: mongodb-metrics
   postgresql: postgresql-metrics
   redis: redis-metrics
-  trivy: trivy-metrics
   dune: dune-metrics
 
 prometheus_rule_label_name: prometheus.io/rule
@@ -39,5 +36,4 @@ prometheus_rule_labels:
   mongodb: mongodb-metrics
   postgresql: postgresql-rules
   redis: redis-metrics
-  trivy: trivy-rules
   dune: dune-metrics

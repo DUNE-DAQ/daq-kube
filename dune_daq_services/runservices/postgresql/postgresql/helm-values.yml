@@ -12,13 +12,14 @@ serviceBindings:
 
 primary:
   initdb:
-    args: '--data-checksums --locale=en_US.UTF-8'
+    args: '--data-checksums --locale=en_US.UTF-8 --set huge_pages=off'
     scriptsConfigMap: runnum-table-sql
 
   extendedConfiguration: |-
     log_destination = stderr
     log_timezone = UTC
     timezone = UTC
+    huge_pages = off
 
   persistence:
     enabled: true

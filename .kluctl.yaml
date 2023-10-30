@@ -30,20 +30,14 @@ args:
     default: true
   - name: with_minio_operator
     default: false
-  - name: with_multus_cni
-    default: false
   - name: with_nfs_storage
     default: true
   - name: with_node_feature_discovery
     default: true
-  - name: with_node_problem_detector
-    default: false
   - name: with_strimzi_kafka_operator
     default: true
   - name: with_tinyproxy
     default: true
-  - name: with_trivy
-    default: false
 
   ### Feature flags for included manifests
   - name: with_backups
