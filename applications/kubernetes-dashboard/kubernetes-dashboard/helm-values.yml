@@ -4,7 +4,13 @@
 # loses its labels and annotations after initial startup
 # https://github.com/kubernetes/dashboard/issues/7731
 
+# Dashboard 3.0 changes/moves most of these parameters
+
 fullnameOverride: 'kubernetes-dashboard'
+
+settings:
+  global:
+    clusterName: {{ target.name }}
 
 cert-manager:
   enabled: false
@@ -15,19 +21,30 @@ nginx:
 metricsScraper:
   enabled: true
 
-serviceMonitor:
-  enabled: true
-
 networkPolicy:
   enabled: true
   ingressDenyAll: {{ kubernetes_dashboard.deny_all_ingress }}
 
+serviceMonitor:
+  enabled: true
+
 {% if kubernetes_dashboard.enable_ro_user %}
 rbac:
   # It is NOT RECOMMENDED to use this version in production.
-  # Instead you should review the role and remove all potentially sensitive parts such as
-  # access to persistentvolumes, pods/log etc.
   clusterReadOnlyRole: true
 extraArgs:
   - --enable-skip-login
+{% endif %}
+
+{% if kubernetes_dashboard.on_control_plane %}
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: node-role.kubernetes.io/control-plane
+          operator: Exists
+tolerations:
+- key: node-role.kubernetes.io/control-plane
+  effect: NoSchedule
 {% endif %}
