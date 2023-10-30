@@ -35,7 +35,7 @@ deployments:
 {% endif %}
 
 {% if args.with_dune_node_ports %}
- - path: node-ports
+  - path: node-ports
 {% endif %}
 
 vars:
