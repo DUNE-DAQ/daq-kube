@@ -118,6 +118,7 @@ hubble:
     auto:
       enabled: true
       method: helm ###FIXME### should be cert-manager eventually
+      certValidityDuration: 3660
   relay:
     enabled: true
     resources: # this is guess work

@@ -9,7 +9,7 @@ deployments:
 vars:
   - file: variables/cilium.yaml
 
-ignoreForDiff:
+ignoreForDiff: ###FIXME### switch to cert manager
   - kind: Job
     name: hubble-generate-certs
     namespace: kube-system
@@ -18,3 +18,15 @@ ignoreForDiff:
     name: hubble-generate-certs
     namespace: kube-system
     fieldPath: .spec.template.metadata.labels["batch.kubernetes.io/controller-uid"]
+  - kind: Secret
+    name: hubble-relay-client-certs
+    namespace: kube-system
+    fieldPath: .data
+  - kind: Secret
+    name: cilium-ca
+    namespace: kube-system
+    fieldPath: .data
+  - kind: Secret
+    name: hubble-server-certs
+    namespace: kube-system
+    fieldPath: .data
