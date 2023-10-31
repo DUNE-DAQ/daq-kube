@@ -115,10 +115,9 @@ hubble:
     annotations:
       "{{ grafana_dashboard_folder_annotation }}": Cilium
   tls:
-    enabled: false ###FIXME### when certmanager works
     auto:
       enabled: true
-      method: certmanager
+      method: helm ###FIXME### should be cert-manager eventually
   relay:
     enabled: true
     resources: # this is guess work
