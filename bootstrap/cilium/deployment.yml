@@ -14,3 +14,7 @@ ignoreForDiff:
     name: hubble-generate-certs
     namespace: kube-system
     fieldPath: .spec.selector.matchLabels["batch.kubernetes.io/controller-uid"]
+  - kind: Job
+    name: hubble-generate-certs
+    namespace: kube-system
+    fieldPath: .spec.template.metadata.labels["batch.kubernetes.io/controller-uid"]
