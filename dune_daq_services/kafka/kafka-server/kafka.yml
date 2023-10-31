@@ -22,12 +22,39 @@ spec:
         limits:
           cpu: 400m
           memory: 512Mi
+    template:    
+      pod:       
+        affinity:
+         nodeAffinity:
+           requiredDuringSchedulingIgnoredDuringExecution:
+             nodeSelectorTerms:
+             - matchExpressions:
+               - key: {{ kubernetes_worker_label }}
+                 operator: Exists
   kafkaExporter:
     topicRegex: ".*"
     groupRegex: ".*"
+    template:    
+      pod:       
+        affinity:
+         nodeAffinity:
+           requiredDuringSchedulingIgnoredDuringExecution:
+             nodeSelectorTerms:
+             - matchExpressions:
+               - key: {{ kubernetes_worker_label }}
+                 operator: Exists
 {% if kafka.with_cruisecontrol %}
 {% if dunedaq.kafka.replicas > 1 %}
-  cruiseControl: {}
+  cruiseControl:
+    template:    
+      pod:       
+        affinity:
+         nodeAffinity:
+           requiredDuringSchedulingIgnoredDuringExecution:
+             nodeSelectorTerms:
+             - matchExpressions:
+               - key: {{ kubernetes_worker_label }}
+                 operator: Exists
 {% endif %}
 {% endif %}
   kafka:
@@ -36,6 +63,15 @@ spec:
       requests: # this is guess work
         cpu: 100m
         memory: 1Gi
+    template:
+      pod:
+        affinity:
+         nodeAffinity:
+           requiredDuringSchedulingIgnoredDuringExecution:
+             nodeSelectorTerms:
+             - matchExpressions:
+               - key: {{ kubernetes_worker_label }}
+                 operator: Exists
     logging:
       type: inline
       loggers:

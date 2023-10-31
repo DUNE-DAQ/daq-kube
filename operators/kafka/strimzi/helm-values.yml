@@ -9,6 +9,14 @@ featureGates: '+StableConnectIdentities'
 
 watchAnyNamespace: true
 
+affinity:
+ nodeAffinity:
+   requiredDuringSchedulingIgnoredDuringExecution:
+     nodeSelectorTerms:
+     - matchExpressions:
+       - key: {{ kubernetes_worker_label }}
+         operator: Exists
+
 extraEnvs:
   - name: STRIMZI_POD_SECURITY_PROVIDER_CLASS
     value: restricted

@@ -14,3 +14,11 @@ serviceMonitor:
   enabled: true
   additionalLabels:
     {{ prometheus_servicemonitor_label_name }}: {{ prometheus_servicemonitor_labels.system }}
+
+affinity:
+ nodeAffinity:
+   requiredDuringSchedulingIgnoredDuringExecution:
+     nodeSelectorTerms:
+     - matchExpressions:
+       - key: {{ kubernetes_worker_label }}
+         operator: Exists

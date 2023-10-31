@@ -13,3 +13,11 @@ storageClass:
   name: {{ local_path_provisioner.storage_class_name }}
   defaultClass: {{ local_path_provisioner.is_default_class }}
   reclaimPolicy: Retain
+
+affinity:
+ nodeAffinity:
+   requiredDuringSchedulingIgnoredDuringExecution:
+     nodeSelectorTerms:
+     - matchExpressions:
+       - key: {{ kubernetes_worker_label }}
+         operator: Exists

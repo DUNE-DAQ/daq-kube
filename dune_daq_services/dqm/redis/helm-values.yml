@@ -22,6 +22,14 @@ master:
       cpu: 50m
       memory: 128Mi
 
+affinity:
+ nodeAffinity:
+   requiredDuringSchedulingIgnoredDuringExecution:
+     nodeSelectorTerms:
+     - matchExpressions:
+       - key: {{ kubernetes_worker_label }}
+         operator: Exists
+
 metrics:
   enabled: true
   resources:

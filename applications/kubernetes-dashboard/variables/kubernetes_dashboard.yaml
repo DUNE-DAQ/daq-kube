@@ -1,7 +1,6 @@
 ---
 kubernetes_dashboard:
   namespace: kubernetes-dashboard
-  on_control_plane: true
 
   enable_ro_user: true  # setting this to `true` is a bad idea
   deny_all_ingress: false # setting this to `false` is a bad idea

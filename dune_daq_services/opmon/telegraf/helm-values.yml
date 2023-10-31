@@ -48,6 +48,12 @@ config:
           - "telegraf"
 
 affinity:
+ nodeAffinity:
+   requiredDuringSchedulingIgnoredDuringExecution:
+     nodeSelectorTerms:
+     - matchExpressions:
+       - key: {{ kubernetes_worker_label }}
+         operator: Exists
   podAffinity:
     preferredDuringSchedulingIgnoredDuringExecution:
     - weight: 100

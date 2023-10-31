@@ -20,6 +20,14 @@ backup:
   successfulJobsHistoryLimit: 1
 {% endif %}
 
+affinity:
+ nodeAffinity:
+   requiredDuringSchedulingIgnoredDuringExecution:
+     nodeSelectorTerms:
+     - matchExpressions:
+       - key: {{ kubernetes_worker_label }}
+         operator: Exists
+
 metrics: # TODO https://github.com/percona/grafana-dashboards/tree/main/dashboards/MongoDB
   enabled: true
   compatibleMode: false # skip old metrics

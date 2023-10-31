@@ -22,6 +22,13 @@ spec:
         app.kubernetes.io/component: mongodb-express
         app.kubernetes.io/instance: mongodb-express
     spec:
+      affinity:
+       nodeAffinity:
+         requiredDuringSchedulingIgnoredDuringExecution:
+           nodeSelectorTerms:
+           - matchExpressions:
+             - key: {{ kubernetes_worker_label }}
+               operator: Exists
       containers:
         - name: mongodb-express
           # https://github.com/mongo-express/mongo-express/issues/1170

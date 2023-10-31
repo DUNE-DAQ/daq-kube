@@ -30,6 +30,13 @@ spec:
         app.kubernetes.io/app: tinyproxy
         app.kubernetes.io/component: tinyproxy
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: {{ kubernetes_worker_label }}
+                operator: Exists
       containers:
       - image: ghcr.io/dune-daq/tinyproxy:latest
         imagePullPolicy: Always

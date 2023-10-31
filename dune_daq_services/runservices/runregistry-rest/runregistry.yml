@@ -19,6 +19,13 @@ spec:
         app.kubernetes.io/app: runregistry-rest
         app.kubernetes.io/component: runregistry-rest
     spec:
+      affinity:
+       nodeAffinity:
+         requiredDuringSchedulingIgnoredDuringExecution:
+           nodeSelectorTerms:
+           - matchExpressions:
+             - key: {{ kubernetes_worker_label }}
+               operator: Exists
       containers:
       - image: ghcr.io/dune-daq/pocket-runregistry-rest:0.8 # this tag is different than standard
         name: runregistry-rest

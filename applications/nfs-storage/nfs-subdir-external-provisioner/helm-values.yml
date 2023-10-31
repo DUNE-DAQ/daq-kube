@@ -9,3 +9,11 @@ resources:
   requests:
     cpu: 10m
     memory: 16Mi
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: {{ kubernetes_worker_label }}
+          operator: Exists

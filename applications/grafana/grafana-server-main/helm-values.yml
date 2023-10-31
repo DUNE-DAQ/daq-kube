@@ -70,6 +70,12 @@ resources: # this is guess work
 
 # try not to schedule on same node as alertmanager/prometheus
 affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: {{ kubernetes_worker_label }}
+          operator: Exists
   podAntiAffinity:
     preferredDuringSchedulingIgnoredDuringExecution:
       - weight: 10

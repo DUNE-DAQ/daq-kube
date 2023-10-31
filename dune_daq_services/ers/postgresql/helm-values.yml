@@ -33,6 +33,14 @@ resources: # this is guess work
     cpu: 100m
     memory: 64Mi
 
+affinity:
+ nodeAffinity:
+   requiredDuringSchedulingIgnoredDuringExecution:
+     nodeSelectorTerms:
+     - matchExpressions:
+       - key: {{ kubernetes_worker_label }}
+         operator: Exists
+
 {% if args.with_backups %}
 backup:
   enabled: true

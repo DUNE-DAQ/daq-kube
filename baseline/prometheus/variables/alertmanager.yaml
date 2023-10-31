@@ -21,4 +21,11 @@ alertmanagers:
         memory: 1Gi
       requests:
         cpu: 50m
-        memory: 64Mi
+        memory: 64M
+    affinity:
+     nodeAffinity:
+       requiredDuringSchedulingIgnoredDuringExecution:
+         nodeSelectorTerms:
+         - matchExpressions:
+           - key: {{ kubernetes_worker_label }}
+             operator: Exists
