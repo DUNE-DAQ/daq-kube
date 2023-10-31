@@ -21,6 +21,22 @@ master:
        - matchExpressions:
          - key: {{ kubernetes_worker_label }}
            operator: Exists
+gc:
+  interval: {{ node_feature_discovery.worker.updateInterval }}
+  resources:
+    limits:
+      cpu: 300m
+      memory: 384Mi
+    requests:
+      cpu: 10m
+      memory: 16Mi
+  affinity:
+   nodeAffinity:
+     requiredDuringSchedulingIgnoredDuringExecution:
+       nodeSelectorTerms:
+       - matchExpressions:
+         - key: {{ kubernetes_worker_label }}
+           operator: Exists
 
 worker:
   config:
