@@ -127,6 +127,19 @@ hubble:
       requests:
         cpu: 50m
         memory: 64Mi
+    affinity:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: {{ kubernetes_label.worker }}
+              operator: Exists
+      podAffinity: # copied from helm chart
+        requiredDuringSchedulingIgnoredDuringExecution:
+        - topologyKey: kubernetes.io/hostname
+          labelSelector:
+            matchLabels:
+              k8s-app: cilium
     prometheus:
       enabled: true
       serviceMonitor:
@@ -152,12 +165,12 @@ hubble:
           cpu: 10m
           memory: 64Mi
     affinity:
-     nodeAffinity:
-       requiredDuringSchedulingIgnoredDuringExecution:
-         nodeSelectorTerms:
-         - matchExpressions:
-           - key: {{ kubernetes_label.worker }}
-             operator: Exists
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: {{ kubernetes_label.worker }}
+              operator: Exists
 
 operator:
   enabled: true
