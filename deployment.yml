@@ -46,7 +46,7 @@ vars:
   - file: variables/prometheus_labels.yaml
   - file: variables/grafana_labels.yaml
   - file: variables/grafana_default_dashboard.yaml
-  - file: variables/kubernetes_worker_label.yaml
+  - file: variables/kubernetes_role_labels.yaml
   - file: variables/local_path_provisioner.yaml # for StorageClass name
 
   - file: variables/kafka.yaml # figure out how to store these better

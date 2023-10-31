@@ -29,7 +29,7 @@ spec:
            requiredDuringSchedulingIgnoredDuringExecution:
              nodeSelectorTerms:
              - matchExpressions:
-               - key: {{ kubernetes_worker_label }}
+               - key: {{ kubernetes_label.worker }}
                  operator: Exists
   kafkaExporter:
     topicRegex: ".*"
@@ -41,7 +41,7 @@ spec:
            requiredDuringSchedulingIgnoredDuringExecution:
              nodeSelectorTerms:
              - matchExpressions:
-               - key: {{ kubernetes_worker_label }}
+               - key: {{ kubernetes_label.worker }}
                  operator: Exists
 {% if kafka.with_cruisecontrol %}
 {% if dunedaq.kafka.replicas > 1 %}
@@ -53,7 +53,7 @@ spec:
            requiredDuringSchedulingIgnoredDuringExecution:
              nodeSelectorTerms:
              - matchExpressions:
-               - key: {{ kubernetes_worker_label }}
+               - key: {{ kubernetes_label.worker }}
                  operator: Exists
 {% endif %}
 {% endif %}
@@ -70,7 +70,7 @@ spec:
            requiredDuringSchedulingIgnoredDuringExecution:
              nodeSelectorTerms:
              - matchExpressions:
-               - key: {{ kubernetes_worker_label }}
+               - key: {{ kubernetes_label.worker }}
                  operator: Exists
     logging:
       type: inline

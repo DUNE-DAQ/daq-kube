@@ -20,7 +20,7 @@ affinity:
    requiredDuringSchedulingIgnoredDuringExecution:
      nodeSelectorTerms:
      - matchExpressions:
-       - key: {{ kubernetes_worker_label }}
+       - key: {{ kubernetes_label.worker }}
          operator: Exists
 
 # below this line from upstream docs:
@@ -61,7 +61,7 @@ webhook:
      requiredDuringSchedulingIgnoredDuringExecution:
        nodeSelectorTerms:
        - matchExpressions:
-         - key: {{ kubernetes_worker_label }}
+         - key: {{ kubernetes_label.worker }}
            operator: Exists
   ### END Added locally ###
   automountServiceAccountToken: false
@@ -98,7 +98,7 @@ cainjector:
      requiredDuringSchedulingIgnoredDuringExecution:
        nodeSelectorTerms:
        - matchExpressions:
-         - key: {{ kubernetes_worker_label }}
+         - key: {{ kubernetes_label.worker }}
            operator: Exists
   ### END Added locally ###
   automountServiceAccountToken: false
@@ -135,7 +135,7 @@ startupapicheck:
      requiredDuringSchedulingIgnoredDuringExecution:
        nodeSelectorTerms:
        - matchExpressions:
-         - key: {{ kubernetes_worker_label }}
+         - key: {{ kubernetes_label.worker }}
            operator: Exists
   ### END Added locally ###
   automountServiceAccountToken: false

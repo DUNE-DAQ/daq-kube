@@ -24,7 +24,7 @@ spec:
          requiredDuringSchedulingIgnoredDuringExecution:
            nodeSelectorTerms:
            - matchExpressions:
-             - key: {{ kubernetes_worker_label }}
+             - key: {{ kubernetes_label.worker }}
                operator: Exists
       containers:
       - image: ghcr.io/dune-daq/pocket-runregistry-rest:0.8 # this tag is different than standard

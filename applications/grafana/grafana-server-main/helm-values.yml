@@ -74,7 +74,7 @@ affinity:
     requiredDuringSchedulingIgnoredDuringExecution:
       nodeSelectorTerms:
       - matchExpressions:
-        - key: {{ kubernetes_worker_label }}
+        - key: {{ kubernetes_label.worker }}
           operator: Exists
   podAntiAffinity:
     preferredDuringSchedulingIgnoredDuringExecution:
