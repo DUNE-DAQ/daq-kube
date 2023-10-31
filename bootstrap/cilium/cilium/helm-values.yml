@@ -94,16 +94,16 @@ hubble:
   metrics:
     enableOpenMetrics: true
     enabled:
+      - labelsContext=source_ip,source_namespace,source_workload,destination_ip,destination_namespace,destination_workload,traffic_direction
       - dns:query
       - drop
       - tcp
       - flow
       - icmp
-      - httpV2:exemplars=true
       - flows-to-world
-      - kafka_requests_total
-      - kafka_request_duration_seconds
-      - labelsContext=source_ip,source_namespace,source_workload,destination_ip,destination_namespace,destination_workload,traffic_direction
+      - httpV2:exemplars=true
+#      - kafka_requests_total
+#      - kafka_request_duration_seconds
     serviceMonitor:
       enabled: true
       labels:
