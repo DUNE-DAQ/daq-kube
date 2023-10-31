@@ -14,5 +14,5 @@ smtp_port: 587
 
 cvmfs_http_proxy: http://ca-proxy.cern.ch:3128
 
-kubernetes_labels:
+kubernetes_label:
   worker: node-role.kubernetes.io/control-plane # my heart breaks!
