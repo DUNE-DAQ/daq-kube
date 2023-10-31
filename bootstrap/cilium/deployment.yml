@@ -8,3 +8,9 @@ deployments:
 
 vars:
   - file: variables/cilium.yaml
+
+ignoreForDiff:
+  - kind: Job
+    name: hubble-generate-certs
+    namespace: kube-system
+    fieldPath: .spec.selector.matchLabels["batch.kubernetes.io/controller-uid"]
