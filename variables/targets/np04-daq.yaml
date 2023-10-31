@@ -7,7 +7,7 @@ kubernetesClusterID: 2
 kafka:
   with_cruisecontrol: true
 
-nfs_storage_classes: {} # TODO, fill me out
+nfs_storage_classes: {} # TODO, fill me out and enable chart
 
 smtp_server: cernmx.cern.ch
 smtp_port: 587
