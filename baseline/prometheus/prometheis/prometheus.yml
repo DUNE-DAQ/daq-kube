@@ -13,9 +13,6 @@ spec:
   alerting:
     alertmanagers: {{ prometheis[thisone].alertmanagers | tojson }}
 
-  # try not to schedule on same node as alertmanager
-  affinity: {{ prometheis[thisone].affinity | tojson }}
-
   enableAdminAPI: false
   hostNetwork: false
   containers:
@@ -40,6 +37,7 @@ spec:
   serviceAccountName: prometheus-{{ prometheis[thisone].name }}
 
   resources: {{ prometheis[thisone].resources | tojson }}
+  # try not to schedule on same node as alertmanager
   affinity: {{ prometheis[thisone].affinity | tojson }}
   {% if prometheis[thisone].storage is defined %}
   storage: {{ prometheis[thisone].storage | tojson }}
