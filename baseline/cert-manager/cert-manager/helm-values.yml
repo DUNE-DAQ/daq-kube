@@ -55,6 +55,15 @@ volumeMounts:
   readOnly: true
 
 webhook:
+  ### BEGIN Added locally ###
+  affinity:
+   nodeAffinity:
+     requiredDuringSchedulingIgnoredDuringExecution:
+       nodeSelectorTerms:
+       - matchExpressions:
+         - key: {{ kubernetes_worker_label }}
+           operator: Exists
+  ### END Added locally ###
   automountServiceAccountToken: false
   serviceAccount:
     automountServiceAccountToken: false
@@ -83,6 +92,15 @@ webhook:
     readOnly: true
 
 cainjector:
+  ### BEGIN Added locally ###
+  affinity:
+   nodeAffinity:
+     requiredDuringSchedulingIgnoredDuringExecution:
+       nodeSelectorTerms:
+       - matchExpressions:
+         - key: {{ kubernetes_worker_label }}
+           operator: Exists
+  ### END Added locally ###
   automountServiceAccountToken: false
   serviceAccount:
     automountServiceAccountToken: false
@@ -111,6 +129,15 @@ cainjector:
     readOnly: true
 
 startupapicheck:
+  ### BEGIN Added locally ###
+  affinity:
+   nodeAffinity:
+     requiredDuringSchedulingIgnoredDuringExecution:
+       nodeSelectorTerms:
+       - matchExpressions:
+         - key: {{ kubernetes_worker_label }}
+           operator: Exists
+  ### END Added locally ###
   automountServiceAccountToken: false
   serviceAccount:
     automountServiceAccountToken: false

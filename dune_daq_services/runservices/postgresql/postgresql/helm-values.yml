@@ -26,6 +26,15 @@ primary:
     size: 4Gi # this is guesswork
     storageClass: {{ local_path_provisioner.storage_class_name }}
 
+  affinity:
+   nodeAffinity:
+     requiredDuringSchedulingIgnoredDuringExecution:
+       nodeSelectorTerms:
+       - matchExpressions:
+         - key: {{ kubernetes_worker_label }}
+           operator: Exists
+
+
 shmVolume:
   enabled: true
 

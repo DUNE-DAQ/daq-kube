@@ -14,6 +14,13 @@ master:
     requests:
       cpu: 10m
       memory: 16Mi
+  affinity:
+   nodeAffinity:
+     requiredDuringSchedulingIgnoredDuringExecution:
+       nodeSelectorTerms:
+       - matchExpressions:
+         - key: {{ kubernetes_worker_label }}
+           operator: Exists
 
 worker:
   config:
@@ -38,6 +45,13 @@ topologyUpdater:
     requests:
       cpu: 10m
       memory: 16Mi
+  affinity:
+   nodeAffinity:
+     requiredDuringSchedulingIgnoredDuringExecution:
+       nodeSelectorTerms:
+       - matchExpressions:
+         - key: {{ kubernetes_worker_label }}
+           operator: Exists
 
 topologyGC:
   enable: {{ node_feature_discovery.topologyUpdater.enable }}
@@ -49,6 +63,13 @@ topologyGC:
     requests:
       cpu: 10m
       memory: 16Mi
+  affinity:
+   nodeAffinity:
+     requiredDuringSchedulingIgnoredDuringExecution:
+       nodeSelectorTerms:
+       - matchExpressions:
+         - key: {{ kubernetes_worker_label }}
+           operator: Exists
 
 # TODO: figure out cert-manager
 tls:
