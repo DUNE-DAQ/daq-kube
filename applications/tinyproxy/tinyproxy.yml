@@ -11,6 +11,23 @@ metadata:
     pod-security.kubernetes.io/warn-version: latest
   name: tinyproxy
 ---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:              
+    app.kubernetes.io/app: tinyproxy
+    app.kubernetes.io/component: tinyproxy
+  name: tinyproxy-config
+  namespace: tinyproxy 
+data:
+  tinyproxy.conf: |
+    User nobody
+    Group nobody
+    Port 8888
+    MaxClients 100
+    Timeout 600
+    LogLevel Info
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -54,6 +71,9 @@ spec:
             cpu: 5m
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File
+        volumeMounts:
+        - name: tinyproxy-config-volume
+          mountPath: /etc/tinyproxy
         securityContext:
           runAsUser: 10000
           runAsGroup: 10000
@@ -67,6 +87,10 @@ spec:
             - ALL
       securityContext:
         fsGroup: 10000
+      volumes:
+      - name: tinyproxy-config-volume
+        configMap:
+          name: tinyproxy-config
 ---
 apiVersion: v1
 kind: Service
