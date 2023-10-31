@@ -6,6 +6,11 @@ This repository contains kubernetes deployment objects for our DAQ environments.
 
 Setting up your system to use this repo has a few steps:
 
+### Set your kubernetes roles on your worker nodes
+This repo expects you to use the `node-role.kubernetes.io/rolename` labels to control where pods are run.
+
+By default most things use `node-role.kubernetes.io/worker` which you can set with `kubectl label node mynode node-role.kubernetes.io/worker=worker`.  The actual value of the label isn't checked, just if it exists.
+
 ### Clone the repo
 This repository uses submodules to track external repos.  To clone this repository you should use:
 
