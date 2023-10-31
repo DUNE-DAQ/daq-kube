@@ -16,7 +16,7 @@ prometheis: # this is the plural of prometheus
         name: {{ alertmanagers.main.serviceName }}
         port: {{ alertmanagers.main.portName }}
 
-    # try not to schedule on same node as alertmanager
+    # try to schedule on same node as alertmanager
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -24,9 +24,9 @@ prometheis: # this is the plural of prometheus
           - matchExpressions:
             - key: {{ kubernetes_label.worker }}
               operator: Exists
-      podAntiAffinity:
+      podAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 1
+          - weight: 30
             podAffinityTerm:
               labelSelector:
                 matchExpressions:
