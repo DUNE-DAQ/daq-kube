@@ -230,6 +230,8 @@ targets:
       with_nfs_storage: false
       with_strimzi_kafka_operator: false
 
+      with_local_path_as_default_storageclass: true
+
       # if you don't set the args to override, you get random values
       grafana_admin_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
       daqconfig_mongodb_root_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
