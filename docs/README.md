@@ -85,4 +85,4 @@ If the node-ports were deployed, there is a node-port set for `python-tiny-proxy
 
 ## HOW TO
 
-See the `docs` directory for individual instructions.
+See the [docs](https://github.com/DUNE-DAQ/daq-kube/blob/develop/docs) directory for instructions on individual components.
