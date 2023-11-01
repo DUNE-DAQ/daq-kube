@@ -8,10 +8,6 @@
 
 fullnameOverride: 'kubernetes-dashboard'
 
-settings:
-  global:
-    clusterName: {{ target.name }}
-
 cert-manager:
   enabled: false
 
