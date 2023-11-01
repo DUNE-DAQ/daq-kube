@@ -66,9 +66,12 @@ kluctl deploy -t pocket-opmon
 
 ## Access to your cluster
 
-You can review the default credentials for your cluster by running `print-creds.sh` when `kubectl` is in your `$PATH` and has this cluster as the default context.
+You can review the default credentials for your cluster by running when `kubectl` is in your `$PATH` and has this cluster as the default context with:
+```shell
+print-creds.sh
+```
 
-The cluster also launches an instance of a `python-tiny-proxy` SOCKS5 proxy server that can be used to tie into the kubernetes network.
+The deployment also sets up an instance of a `python-tiny-proxy` SOCKS5 proxy server that you can use to tie into the kubernetes network.
 
 ### Node Ports
 
