@@ -7,9 +7,18 @@ This repository contains kubernetes deployment objects for our DAQ environments.
 Setting up your system to use this repo has a few steps:
 
 ### Set your kubernetes roles on your worker nodes
+
 This repo expects you to use the `node-role.kubernetes.io/rolename` labels to control where pods are run.
 
-By default most things use `node-role.kubernetes.io/worker` which you can set with `kubectl label node mynode node-role.kubernetes.io/worker=worker`.  The actual value of the label isn't checked, just if it exists.
+By default most things use `node-role.kubernetes.io/worker` which you can set with:
+
+```
+kubectl label node mynode node-role.kubernetes.io/worker=worker
+```
+
+Users of [pocket](https://github.com/DUNE-DAQ/pocket) will have the worker label set automatically.
+
+The actual value of the label isn't checked, just if it exists. Some DAQ targets will use a different label.
 
 ### Clone the repo
 This repository uses submodules to track external repos.  To clone this repository you should use:
@@ -32,13 +41,16 @@ This repository makes use of [kluctl](https://kluctl.io) to provide flexible env
 
 To load the `kluctl` tool please follow https://kluctl.io/docs/kluctl/installation/ to get the binary.
 
-### Select your target
+## Select your target and deploy
 
 The `.kluctl.yaml` file lists the deployment targets we've configured.  The `context` keyword ensures that `kluctl` will use the specified [kubectl context](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/) to deploy the manifests.
 
-***NOTE:*** You cannot deploy a target to a kubernetes context other than the one defined in `.kluctl.yaml`.  You may need to rename or set you kubernetes context.
+***NOTE:*** You cannot deploy a target to a kubernetes context other than the one defined in `.kluctl.yaml`.  You may need to rename or set you kubernetes context in `~/.kube/config`.
 
-For example: `kluctl deploy -t pocket`
+For example:
+```shell
+kluctl deploy -t pocket
+```
 
 To see what targets are defined you can run `kluctl list-targets` to see the `name` and defaults for each target.
 
@@ -50,7 +62,7 @@ Or to get just a list of target names `kluctl list-targets | grep 'name:'`.
 
 The list of node-ports in use can be found under `node-ports`.  It contains the exact manifests being run and should thus be the most up to date list of node-ports. These are controled with `kluctl` variables.
 
-The cluster also launches an instance of the `tinyproxy` SOCKS5 proxy server that can be used to tie into the kubernetes network.
+The cluster also launches an instance of a `python-tiny-proxy` SOCKS5 proxy server that can be used to tie into the kubernetes network.
 
 You can review the default credentials for your cluster by running `print-creds.sh` when `kubectl` is in your `$PATH` and has this cluster as the default context.
 
@@ -58,120 +70,8 @@ You can review the default credentials for your cluster by running `print-creds.
 
 Inside the cluster, port `1080` is available for use as a SOCKS5 proxy.
 
-If the node-ports were deployed, there is a node-port set for `tinyproxy` that should grant access to the cluster.  If you delegate DNS to the SOCKS5 proxy, you can use this proxy server to test and recieve any in cluster resources.
-
-## Repo Layout
-
-You are expected to be familiar with https://kluctl.io/docs and its reference sections.
-
-Where possible we are using the kluctl helm integration to rely on upstream packaging of resources.
-
-In general each resource should have its own dedicated variables under the `variables` directory.
-
-All kluctl target arguments should have default values.
-
-### .helm-charts
-
-Kluctl caches helm charts it uses locally, this is where the cache lives.
-
-### .submodules
-
-This contains all the submodule git repos we are including.  Specific elements from them should be linked into place so folks don't need to hunt for what repos we depend upon.
-
-### Bootstrap
-
-This contains the bare minimum for running a kubernetes cluster.
-
-Mostly it is just the CNI.
-
-### Baseline
-
-Items in baseline should be deployed on all clusters and are the expected minimal feature set of our clusters.
-
-This is a somewhat opinionated feature list.
-
-#### Example
-
-The `baseline/metrics` folder contains:
-
-* kubernetes `metrics-server` for providing kubernetes metrics to kubernetes
-* kubernetes prometheus exporter (`kube-state-metrics`) for providing kubernetes metrics to prometheus
-* `prometheus-node-exporter` for providing host metrics to prometheus
-
-### Operators
-
-The [kubernetes operator pattern](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) is a useful way to deploy highly complex applications with clear integration points.
-
-When an operator is maintained by a healthy community it should be strongly considered before using a helm manifest for the application.  The end of the influxdb operator is a point of worry.
-
-It should be safe to deploy operators on all clusters even if you do not intend to use its feature set.  Each operator has a resource cost.
-
-### Applications
-
-These are items that external communities are maintaining.
-
-Applications are optional components of the cluster.  Odds are you'll want them, but they should be controlled via arguments.  They should be treated similarly to feature flags from `autoconf` so there is an obvious method for enabling or disabling a specific application.
-
-#### Example
-
-the `applications/grafana` folder contains:
-
-* the grafana-server
-* dashboards for kubernetes components from two different upstream projects
-
-### DUNE\_DAQ
-
-This is where DUNE specific applications, utilities, dashboards, etc should be placed.
-
-Ideally each subsystem will have a subdirectory that contains its own items.
+If the node-ports were deployed, there is a node-port set for `python-tiny-proxy` that should grant access to the cluster.  If you delegate DNS to the SOCKS5 proxy, you can use this proxy server to test and recieve any in-cluster resources.
 
 ## HOW TO
 
-### Grafana
-
-You can set the grafana password with `kluctl deploy -a grafana_admin_password=mypassword`.
-
-The grafana container we are using has the ability to dynamically import items.
-
-To add a new datasource build a config map like:
-
-```
----
-apiVersion: v1
-kind: Secret
-metadata:
-  name: grafana-datasource-postgresqlers
-  namespace: monitoring
-  labels:
-     {{ grafana_datasource_label_name }}: {{ grafana_datasource_label_value }}
-type: Opaque
-stringData:
-  postgresqlers.yaml: |-
-    apiVersion: 1
-    datasources:
-    - name: PostgresERS
-      type: postgres
-      url: np04-srv-000.cern.ch:65432
-      access: proxy
-      database: ApplicationDbErrorReporting
-      jsonData:
-        sslmode: "disable" # this breaks my heart
-        tlsSkipVerify: true # this breaks my heart
-        postgresVersion: 1200
-        maxIdleConns: 2
-      user: admin
-      secureJsonData:
-        password: puttherealpasswordhere # this note example doesn't have the password, but your secret should
-```
-
-The `{{ grafana_datasource_label_name }}: {{ grafana_datasource_label_value }}` elements are expanded by kluctl to their values from the `variables`.
-
-The process is similar for datasources as well.  To control what folder a dashboard goes into use `{{ grafana_dashboard_folder_annotation }}: MYFOLDER`.
-
-### Prometheus
-
-You'll need to read up on https://prometheus-operator.dev/
-
-The important variables are provided in the variables file.
-
-The "main" prometheus deployed in this repository will track all `serviceMonitor`, `podMonitor`, `probe`, and `prometheusRule` resources.
+See the `docs` directory for individual instructions.
