@@ -1,4 +1,4 @@
-{% if args.with_python-tiny-proxy %}
+{% if args.with_tinyproxy %}
 ---
 apiVersion: v1
 kind: Service
