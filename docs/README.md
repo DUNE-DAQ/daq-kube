@@ -1,10 +1,10 @@
 # daq-kube
 
-This repository contains kubernetes deployment objects for our DAQ environments.
+This repository contains kubernetes deployment objects for our DAQ style environments.
 
 ## Setup
 
-Setting up your system to use this repo has a few steps:
+Setting up your system and cluster to use this repo has a few steps:
 
 ### Set your kubernetes roles on your worker nodes
 
@@ -43,6 +43,8 @@ To load the `kluctl` tool please follow https://kluctl.io/docs/kluctl/installati
 
 ## Select your target and deploy
 
+***NOTE:*** when setting the passwords to non-default values you should use an args-file. You can provide a set of arguments via a yaml file: `kluctl deploy -t target --args-from-file=filename.yaml`
+
 The `.kluctl.yaml` file lists the deployment targets we've configured.  The `context` keyword ensures that `kluctl` will use the specified [kubectl context](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/) to deploy the manifests.
 
 ***NOTE:*** You cannot deploy a target to a kubernetes context other than the one defined in `.kluctl.yaml`.  You may need to rename or set you kubernetes context in `~/.kube/config`.
@@ -56,15 +58,21 @@ To see what targets are defined you can run `kluctl list-targets` to see the `na
 
 Or to get just a list of target names `kluctl list-targets | grep 'name:'`.
 
-***NOTE:*** when setting the passwords to non-default values you should use an args-file. You can provide a set of arguments via a yaml file: `kluctl deploy -t target --args-from-file=filename.yaml`
+For example, to just deploy the `opmon` services to `pocket`:
+
+```shell
+kluctl deploy -t pocket-opmon
+```
 
 ## Access to your cluster
 
-The list of node-ports in use can be found under `node-ports`.  It contains the exact manifests being run and should thus be the most up to date list of node-ports. These are controled with `kluctl` variables.
+You can review the default credentials for your cluster by running `print-creds.sh` when `kubectl` is in your `$PATH` and has this cluster as the default context.
 
 The cluster also launches an instance of a `python-tiny-proxy` SOCKS5 proxy server that can be used to tie into the kubernetes network.
 
-You can review the default credentials for your cluster by running `print-creds.sh` when `kubectl` is in your `$PATH` and has this cluster as the default context.
+### Node Ports
+
+The list of node-ports in use can be found under `node-ports`.  It contains the exact manifests being run and should thus be the most up to date list of node-ports. These are controled with `kluctl` variables.
 
 ### Proxy
 
