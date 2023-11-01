@@ -1,7 +1,7 @@
 ---
 deployments:
 {% if args.with_tinyproxy %}
-  - path: tinyproxy
+  - path: python-tiny-proxy
 {% endif %}
 
 {% if args.with_kepler %}
