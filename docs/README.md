@@ -41,6 +41,8 @@ This repository makes use of [kluctl](https://kluctl.io) to provide flexible env
 
 To load the `kluctl` tool please follow https://kluctl.io/docs/kluctl/installation/ to get the binary.
 
+Users of [pocket](https://github.com/DUNE-DAQ/pocket) will have this downloaded automatically.
+
 ## Select your target and deploy
 
 ***NOTE:*** when setting the passwords to non-default values you should use an args-file. You can provide a set of arguments via a yaml file: `kluctl deploy -t target --args-from-file=filename.yaml`
