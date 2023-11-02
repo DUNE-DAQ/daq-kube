@@ -1,0 +1,96 @@
+---
+adminUser: admin
+adminPassword: "{{ args.grafana_admin_password }}"
+
+serviceMonitor:
+  enabled: true
+
+networkPolicy:
+  enabled: true
+
+useStatefulSet: true
+revisionHistoryLimit: 3
+
+persistence:
+  enabled: true
+
+initChownData:
+  enabled: false
+
+grafana.ini:
+{% if smtp_server %}
+  smtp:
+    enabled: true
+    host: {{ smtp_server }}:{{ smtp_port }}
+  emails:
+    welcome_email_on_sign_up: true
+{% endif %}
+  paths:
+    data: /var/lib/grafana/
+    logs: /var/log/grafana
+    plugins: /var/lib/grafana/plugins
+    provisioning: /etc/grafana/provisioning
+    temp_data_lifetime: 12h
+  server:
+    enable_gzip: true
+  database:
+    # maybe use postgresql so I can persist without a pvc?
+    log_queries: false
+    query_retries: 2 # query_retries for sqlite only
+  analytics:
+    check_for_updates: true
+    check_for_plugin_updates: true
+    reporting_enabled: false
+  auth:
+    login_maximum_inactive_lifetime_duration: 13h
+    login_maximum_lifetime_duration: 10d
+    login_cookie_name: "grafana_session_devel_{{ target.name }}"
+  auth.anonymous:
+    enabled: true # make sure to clean your cookies or else!
+    org_role: Viewer
+    org_name: Main Org.
+    hide_version: true
+  security:
+    admin_email: root@{{ target.name }}
+    disable_gravatar: true
+  users:
+    allow_sign_up: false
+    allow_org_create: false
+  log:
+    mode: console
+
+resources: # this is guess work
+ limits:
+   cpu: 500m
+   memory: 1Gi
+ requests:
+   cpu: 10m
+   memory: 64Mi
+
+# try not to schedule on same node as alertmanager/prometheus
+affinity:
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 10
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: alertmanager
+              operator: Exists
+          topologyKey: kubernetes.io/hostname
+      - weight: 20
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: prometheus
+              operator: Exists
+          topologyKey: kubernetes.io/hostname
+      - weight: 30 # also avoid scheduling alongside grafana-main
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: statefulset.kubernetes.io/pod-name
+              operator: In
+              values:
+              - grafana-0
+          topologyKey: kubernetes.io/hostname
