@@ -1,6 +1,9 @@
 installCRDs: true
 enableCertificateOwnerRef: true
 
+deploymentAnnotations:
+  "kluctl.io/is-ready": "true"
+
 prometheus:
   enabled: true
   servicemonitor:
