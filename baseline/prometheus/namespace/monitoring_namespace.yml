@@ -3,6 +3,8 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: {{ monitoring.namespace }}
+  annotations:
+    kluctl.io/skip-delete-if-tags: "true"
   labels:
     # grafana needs run-as-root to chown
     #   https://github.com/grafana/helm-charts/issues/2355
