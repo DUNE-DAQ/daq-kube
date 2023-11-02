@@ -15,6 +15,7 @@ deployments:
 
   - path: grafana-server-main
   - path: grafana-server-devel
+  - path: grafana-server-devel-other
 
 vars:
   - file: variables/grafana.yaml

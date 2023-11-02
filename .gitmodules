@@ -18,6 +18,7 @@
 	path = .submodules/dune-daq-microservices
 	url = https://github.com/DUNE-DAQ/microservices.git
 	update = checkout
+	branch = develop
 [submodule "dune-daq-dqmbackend"]
 	path = .submodules/dune-daq-dqm-backend
 	url = https://github.com/DUNE-DAQ/dqm-backend.git
