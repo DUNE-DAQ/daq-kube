@@ -66,6 +66,8 @@ webhook:
        - matchExpressions:
          - key: {{ kubernetes_label.worker }}
            operator: Exists
+  deploymentAnnotations:
+    "kluctl.io/is-ready": "true"
   ### END Added locally ###
   automountServiceAccountToken: false
   serviceAccount:
@@ -103,6 +105,8 @@ cainjector:
        - matchExpressions:
          - key: {{ kubernetes_label.worker }}
            operator: Exists
+  deploymentAnnotations:
+    "kluctl.io/is-ready": "true"
   ### END Added locally ###
   automountServiceAccountToken: false
   serviceAccount:
@@ -140,6 +144,8 @@ startupapicheck:
        - matchExpressions:
          - key: {{ kubernetes_label.worker }}
            operator: Exists
+  deploymentAnnotations:
+    "kluctl.io/is-ready": "true"
   ### END Added locally ###
   automountServiceAccountToken: false
   serviceAccount:
