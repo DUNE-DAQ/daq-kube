@@ -1,0 +1,10 @@
+clusterPoolIPv4PodCIDRList:
+  - "10.244.0.0/16"
+  - "10.96.0.0/12"
+
+kubernetesClusterID: 0
+
+smtp_server: NULL
+smtp_port: NULL
+
+cvmfs_http_proxy: DIRECT
