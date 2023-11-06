@@ -14,5 +14,5 @@ dunedaq:
     replicas: 1
   unified_microservices:
     image: ghcr.io/dune-daq/microservices
-    tag: "9e36"
+    tag: "mroda-test"
  
