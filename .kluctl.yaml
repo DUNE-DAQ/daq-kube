@@ -173,6 +173,22 @@ targets:
       with_dune_opmon: false
       with_dune_runservices: false
 
+  - name: pocket-ers-protobuf
+    discriminator: "dune-daq-pocket"
+    args:
+      inside_kind: true
+      with_cilium: false
+      with_local_path_as_default_storageclass: true
+      with_nfs_storage: false
+
+      with_dune_connectionservice: false
+      with_dune_daqconfig: false
+      with_dune_dqm: false
+      with_dune_ers: true
+      with_dune_kafka: true
+      with_dune_opmon: false
+      with_dune_runservices: false
+
   - name: pocket-opmon
     discriminator: "dune-daq-pocket"
     args:
