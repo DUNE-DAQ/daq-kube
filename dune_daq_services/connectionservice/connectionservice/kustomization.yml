@@ -6,3 +6,13 @@ namespace: {{ DUNE_connectionservice.namespace }}
 
 resources:
   - connectivityserver.yaml
+
+patches:
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/affinity/nodeAffinity/requiredDuringSchedulingIgnoredDuringExecution/nodeSelectorTerms[0]/matchExpressions[0]/key
+        value: {{ kubernetes_label.worker }}
