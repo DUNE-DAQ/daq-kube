@@ -106,6 +106,16 @@ targets:
       with_local_path_as_default_storageclass: true
       with_nfs_storage: false
 
+  - name: pocket-baseline
+    context: kind-pocketdune
+    args:
+      inside_kind: true
+      with_cilium: false
+      with_local_path_as_default_storageclass: true
+      with_nfs_storage: false
+
+      with_dune_daq_services: false
+
   - name: pocket-connectionservice
     discriminator: "dune-daq-pocket"
     args:
