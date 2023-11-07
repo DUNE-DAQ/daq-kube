@@ -42,8 +42,8 @@ args:
   ### Feature flags for included manifests
   - name: with_backups
     default: false
-  - name: with_kafka_kraft # strimzi doesn't support topicOperator with KRAFT yet
-    default: false
+  - name: with_kafka_kraft # strimzi doesn't support topicOperator with KRAFT yet, but we auto create topics on use
+    default: true
   - name: with_kafka_ui
     default: true
   - name: with_local_path_as_default_storageclass
