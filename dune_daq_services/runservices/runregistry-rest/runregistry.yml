@@ -27,18 +27,18 @@ spec:
              - key: {{ kubernetes_label.worker }}
                operator: Exists
       containers:
-      - image: ghcr.io/dune-daq/pocket-runregistry-rest:0.8 # this tag is different than standard
+      - image: ghcr.io/dune-daq/pocket-runserv-rest:0.1 # this tag is different than standard
         name: runregistry-rest
         env:
         - name: MICROSERVICE
           value: runregistry-rest
-        envFrom:
-        - secretRef:
-            name: run-db-secret
-        volumeMounts:
-          - name: tnsnames-ora
-            mountPath: /etc/tnsnames.ora
-            subPath: tnsnames.ora
+        # envFrom:
+        # - secretRef:
+        #     name: run-db-secret
+        # volumeMounts:
+        #   - name: tnsnames-ora
+        #     mountPath: /etc/tnsnames.ora
+        #     subPath: tnsnames.ora
         ports:
         - containerPort: 5000
           protocol: TCP
@@ -57,12 +57,12 @@ spec:
           runAsGroup: 11000
           seccompProfile:
             type: RuntimeDefault
-      volumes:
-        - name: tnsnames-ora
-          configMap:
-            name: tnsnames-ora
-            items:
-             - key: tnsnames.ora
-               path: tnsnames.ora
+      # volumes:
+      #   - name: tnsnames-ora
+      #     configMap:
+      #       name: tnsnames-ora
+      #       items:
+      #        - key: tnsnames.ora
+      #          path: tnsnames.ora
       securityContext:
         fsGroup: 11000

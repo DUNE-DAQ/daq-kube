@@ -10,11 +10,11 @@ namespace: {{ DUNE_runservices.namespace }}
 
 resources:
   - runnumber-rest.yaml # https://github.com/DUNE-DAQ/microservices/tree/develop/runnumber-rest
-  - run-db-secret.yaml # this is a hack, a terrible hack for oracle
+  # - run-db-secret.yaml # this is a hack, a terrible hack for oracle
 
-configMapGenerator:
-  - name: tnsnames-ora
-    files: [ tnsnames.ora ] # this is a hack, a terrible hack for oracle
+# configMapGenerator:
+#   - name: tnsnames-ora
+#     files: [ tnsnames.ora ] # this is a hack, a terrible hack for oracle
 
 patches:
   - target:
