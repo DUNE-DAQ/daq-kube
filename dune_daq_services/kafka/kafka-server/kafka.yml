@@ -133,7 +133,6 @@ spec:
 {% endif %}
     version: "{{ dunedaq.kafka.version }}"
     config:
-      inter.broker.protocol.version: "{{ dunedaq.kafka.protocol_version }}"
       auto.create.topics.enable: true
       log.cleanup.policy: "delete" # Cannot use 'compact' due to empty key in our data format
       log.retention.bytes: 6442450944 # no default upper size limit, set to 6Gi
