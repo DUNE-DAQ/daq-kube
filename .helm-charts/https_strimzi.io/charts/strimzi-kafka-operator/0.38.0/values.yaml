@@ -10,7 +10,7 @@ watchAnyNamespace: false
 
 defaultImageRegistry: quay.io
 defaultImageRepository: strimzi
-defaultImageTag: 0.36.1
+defaultImageTag: 0.38.0
 
 image:
   registry: ""
@@ -49,6 +49,9 @@ rbac:
   create: yes
 serviceAccountCreate: yes
 serviceAccount: strimzi-cluster-operator
+
+leaderElection:
+  enable: true
 
 # If you are using the grafana dashboard sidecar,
 # you can import some default dashboards here
@@ -110,7 +113,7 @@ kafkaBridge:
     registry: ""
     repository:
     name: kafka-bridge
-    tag: 0.26.1
+    tag: 0.27.0
 kafkaExporter:
   image:
     registry: ""
