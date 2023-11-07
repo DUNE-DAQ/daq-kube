@@ -4,3 +4,7 @@ kafka:
   with_cruisecontrol: false
   with_connect: false
   with_mirrormaker: false
+
+strimzi:
+  namespace: strimzi-kafka
+  with_kafka_kraft: {{ args.with_kafka_kraft }}
