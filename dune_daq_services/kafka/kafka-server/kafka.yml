@@ -1,3 +1,20 @@
+{% if strimzi.with_kafka_kraft %}
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaNodePool
+metadata:
+  name: {{ dunedaq.kafka.name }}
+  namespace: {{ dunedaq.kafka.namespace }}
+  labels:
+    strimzi.io/cluster: {{ dunedaq.kafka.name }}
+spec:
+  replicas: {{ dunedaq.kafka.replicas }}
+  roles:
+    - controller
+    - broker
+  storage:
+    type: ephemeral
+{% endif %}
 ---
 apiVersion: kafka.strimzi.io/v1beta2
 kind: Kafka
@@ -7,6 +24,7 @@ metadata:
 {% if strimzi.with_kafka_kraft %}
   annotations:
     strimzi.io/kraft: enabled
+    strimzi.io/node-pools: enabled
 {% endif %}
 spec:
   entityOperator:
@@ -19,7 +37,7 @@ spec:
           cpu: 400m
           memory: 512Mi
 {% if not strimzi.with_kafka_kraft %}
-    topicOperator: # topicOperator not supported on KRaft? - https://github.com/strimzi/proposals/pull/76
+    topicOperator: # bidirectional topicOperator not supported on KRaft
       resources:
         requests: # this is guess work
           cpu: 10m
@@ -145,11 +163,8 @@ spec:
           key: kafka-metrics-config.yml
     storage: # no persistance requested
       type: ephemeral
-{% if strimzi.with_kafka_kraft %}
-  zookeeper: {} # this stanza is still required even in KRaft mode
-{% else %}
+  zookeeper: # this stanza is still required even in KRaft mode
 {% if dunedaq.kafka.replicas < 3 %}
-  zookeeper:
     replicas: 1
 {% else %}
     replicas: 3
@@ -163,4 +178,3 @@ spec:
       limits:
         memory: 8Gi
         cpu: "2"
-{% endif %}
