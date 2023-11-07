@@ -14,5 +14,5 @@ patches:
       kind: Deployment
     patch: |-
       - op: replace
-        path: /spec/template/spec/affinity/nodeAffinity/requiredDuringSchedulingIgnoredDuringExecution/nodeSelectorTerms[0]/matchExpressions[0]/key
+        path: /spec/template/spec/affinity/nodeAffinity/requiredDuringSchedulingIgnoredDuringExecution/nodeSelectorTerms/0/matchExpressions/0/key
         value: {{ kubernetes_label.worker }}
