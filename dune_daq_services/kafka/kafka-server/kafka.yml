@@ -4,6 +4,10 @@ kind: Kafka
 metadata:
   name: {{ dunedaq.kafka.name }}
   namespace: {{ dunedaq.kafka.namespace }}
+{% if strimzi.with_kafka_kraft %}
+  annotations:
+    strimzi.io/kraft: enabled
+{% endif %}
 spec:
   entityOperator:
     userOperator:
@@ -14,6 +18,7 @@ spec:
         limits:
           cpu: 400m
           memory: 512Mi
+{% if not strimzi.with_kafka_kraft %}
     topicOperator: # topicOperator not supported on KRaft? - https://github.com/strimzi/proposals/pull/76
       resources:
         requests: # this is guess work
@@ -22,6 +27,7 @@ spec:
         limits:
           cpu: 400m
           memory: 512Mi
+{% endif %}
     template:    
       pod:       
         affinity:
@@ -139,8 +145,11 @@ spec:
           key: kafka-metrics-config.yml
     storage: # no persistance requested
       type: ephemeral
-  zookeeper: # this stanza is still required even in KRaft mode
+{% if strimzi.with_kafka_kraft %}
+  zookeeper: {} # this stanza is still required even in KRaft mode
+{% else %}
 {% if dunedaq.kafka.replicas < 3 %}
+  zookeeper:
     replicas: 1
 {% else %}
     replicas: 3
@@ -154,3 +163,4 @@ spec:
       limits:
         memory: 8Gi
         cpu: "2"
+{% endif %}
