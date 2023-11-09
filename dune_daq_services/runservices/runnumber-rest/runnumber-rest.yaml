@@ -32,9 +32,9 @@ spec:
         env:
         - name: MICROSERVICE
           value: runnumber-rest
-        # envFrom:
-        # - secretRef:
-        #     name: run-db-secret
+        envFrom:
+        - secretRef:
+            name: run-db-secret
         # volumeMounts:
         #   - name: tnsnames-ora
         #     mountPath: /etc/tnsnames.ora
