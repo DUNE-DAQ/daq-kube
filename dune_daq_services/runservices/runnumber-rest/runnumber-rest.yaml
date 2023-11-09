@@ -32,9 +32,31 @@ spec:
         env:
         - name: MICROSERVICE
           value: runnumber-rest
-        envFrom:
-        - secretRef:
-            name: run-db-secret
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: username
+              name: runservices-postgresql-svcbind-custom-user
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: runservices-postgresql-svcbind-custom-user
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              key: database
+              name: runservices-postgresql-svcbind-custom-user
+        - name: DB_PORT
+          valueFrom:
+            secretKeyRef:
+              key: port
+              name: runservices-postgresql-svcbind-custom-user
+        - name: DB_HOSTNAME
+          valueFrom:
+            secretKeyRef:
+              key: host
+              name: runservices-postgresql-svcbind-custom-user
         # volumeMounts:
         #   - name: tnsnames-ora
         #     mountPath: /etc/tnsnames.ora

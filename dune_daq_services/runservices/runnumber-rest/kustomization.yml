@@ -2,20 +2,19 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-generatorOptions:
-  disableNameSuffixHash: true # this is a hack for oracle
-
-
 namespace: {{ DUNE_runservices.namespace }}
 
 resources:
   - runnumber-rest.yaml # https://github.com/DUNE-DAQ/microservices/tree/develop/runnumber-rest
-  - run-db-secret.yaml # this is a hack, a terrible hack for oracle
+#  - run-db-secret.yaml # this is a hack, a terrible hack for oracle
 
+#generatorOptions:
+#  disableNameSuffixHash: true # this is a hack for oracle
 # configMapGenerator:
 #   - name: tnsnames-ora
 #     files: [ tnsnames.ora ] # this is a hack, a terrible hack for oracle
 
+<<<<<<< HEAD
 patches:
   - target:
       group: apps
@@ -33,3 +32,15 @@ patches:
       - op: replace
         path: /spec/template/spec/affinity/nodeAffinity/requiredDuringSchedulingIgnoredDuringExecution/nodeSelectorTerms/0/matchExpressions/0/key
         value: {{ kubernetes_label.worker }}
+=======
+## commented out until unified image has these changes
+#patches:
+#  - target:
+#      group: apps
+#      version: v1
+#      kind: Deployment
+#    patch: |-
+#      - op: replace
+#        path: /spec/template/spec/containers/0/image
+#        value: {{ dunedaq.unified_microservices.image }}:{{ dunedaq.unified_microservices.tag }}
+>>>>>>> d28074e (Try to use postgresql provided secret for database)
