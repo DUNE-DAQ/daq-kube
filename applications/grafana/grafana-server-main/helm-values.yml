@@ -93,6 +93,10 @@ affinity:
               operator: Exists
           topologyKey: kubernetes.io/hostname
 
+service:
+  labels:
+    grafana: grafana
+
 sidecar: # this is guess work
   resources:
    limits:
