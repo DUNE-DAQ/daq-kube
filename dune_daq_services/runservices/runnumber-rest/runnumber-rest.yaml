@@ -27,7 +27,7 @@ spec:
              - key: {{ kubernetes_label.worker }}
                operator: Exists
       containers:
-      - image: ghcr.io/dune-daq/pocket-runserv-rest:0.1 # this tag is different than standard
+      - image: ghcr.io/dune-daq/pocket-runserv-rest:0.2 # this tag is different than standard
         name: runnumber-rest
         env:
         - name: MICROSERVICE
