@@ -71,6 +71,7 @@ envoy:
   prometheus:
     serviceMonitor:
       enabled: true
+      interval: "30s"
       labels:
         "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.system }}"
 
@@ -78,6 +79,7 @@ prometheus:
   enabled: true
   serviceMonitor:
     enabled: true
+    interval: "30s"
     trustCRDsExist: true
     labels:
       "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.system }}"
@@ -106,6 +108,7 @@ hubble:
 #      - kafka_request_duration_seconds
     serviceMonitor:
       enabled: true
+      interval: "30s"
       labels:
         "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.system }}"
   dashboards:
@@ -145,6 +148,7 @@ hubble:
       enabled: true
       serviceMonitor:
         enabled: true
+        interval: "30s"
         labels:
           "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.system }}"
   ui:
@@ -188,6 +192,7 @@ operator:
     enabled: true
     serviceMonitor:
       enabled: true
+      interval: "30s"
       labels:
         "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.system }}"
   dashboards:
