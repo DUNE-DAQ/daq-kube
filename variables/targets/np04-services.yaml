@@ -13,3 +13,24 @@ smtp_server: cernmx.cern.ch
 smtp_port: 587
 
 cvmfs_http_proxy: http://ca-proxy.cern.ch:3128
+
+prometheus_scrape_configs:
+  np04-daq:
+    namespace: {{ monitoring.namespace }}
+    labels:
+      {{ prometheus_scrapeconfig_label_name }}: {{ prometheus_scrapeconfig_labels.extra }}
+      {{ prometheus_config_label_name }}: {{ prometheus_scrapeconfig_labels.extra }}
+  spec:
+    metricsPath: /federate
+    scrapeInterval: 1m
+    scrapeTimeout: 1m
+    honorTimestaps: true
+    honorLabels: true
+    params:
+      'match[]':
+      - '[1m]'
+    staticConfigs:
+    - targets:
+      - np04-srv-016.cern.ch:31093
+      labels:
+      - np04-daq   

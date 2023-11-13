@@ -42,6 +42,8 @@ spec:
   storage: {{ prometheis[thisone].storage | tojson }}
   {% endif %}
 
+  additionalScrapeConfigs: {{ prometheis[thisone].additionalScrapeConfigs | tojson }}
+
   serviceMonitorNamespaceSelector: {{ prometheis[thisone].serviceMonitorNamespaceSelector | tojson }}
   serviceMonitorSelector: {{ prometheis[thisone].serviceMonitorSelector | tojson }}
   podMonitorNamespaceSelector: {{ prometheis[thisone].podMonitorNamespaceSelector | tojson }}
@@ -50,5 +52,7 @@ spec:
   probeSelector: {{ prometheis[thisone].probeSelector | tojson }}
   ruleNamespaceSelector: {{ prometheis[thisone].ruleNamespaceSelector | tojson }}
   ruleSelector: {{ prometheis[thisone].ruleSelector | tojson }}
+  scrapeConfigNamespaceSelector: {{ prometheis[thisone].scrapeConfigNamespaceSelector | tojson }}
+  scrapeConfigSelector: {{ prometheis[thisone].scrapeConfigSelector | tojson }}
 ...
 {% endfor %}

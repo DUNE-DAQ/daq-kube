@@ -1,0 +1,11 @@
+{% for thisone in prometheus_scrape_configs %}
+---
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: prometheus-config-{{ thisone }}
+  namespace: {{ prometheus_scrape_configs[thisone].namespace }}
+  labels: {{ prometheus_scrape_configs[thisone].labels | tojson }}
+spec: {{ prometheus_scrape_configs[thisone].spec | tojson }}
+...
+{% endfor %}
