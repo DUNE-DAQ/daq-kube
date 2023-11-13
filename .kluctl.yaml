@@ -233,7 +233,6 @@ targets:
   - name: np04-daq
     context: kubernetes-admin@np04-daq
     args:
-      with_cvmfs_csi: false
       with_dune_daq_services: false
       with_grafana: false
       with_kepler: false
