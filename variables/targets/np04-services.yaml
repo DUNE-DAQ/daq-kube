@@ -28,7 +28,7 @@ prometheus_scrape_configs:
     honorLabels: true
     params:
       'match[]':
-      - '[1m]'
+      - '{__name__!=""}[1m]'
     staticConfigs:
     - targets:
       - np04-srv-016.cern.ch:31093
