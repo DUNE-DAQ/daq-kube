@@ -13,9 +13,9 @@ spec:
   type: NodePort
   ports:
   - name: http
-    port: 5005
+    port: 5000
     protocol: TCP
-    targetPort: 5005
+    targetPort: 5000
     nodePort: 30016
   selector:
     app.kubernetes.io/app: runnumber-rest
