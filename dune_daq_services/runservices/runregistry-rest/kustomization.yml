@@ -7,20 +7,20 @@ namespace: {{ DUNE_runservices.namespace }}
 resources:
   - runregistry.yml # https://raw.githubusercontent.com/DUNE-DAQ/microservices/develop/runregistry-rest/runregistry.yml
 
-# patches:
-#   - target:
-#       group: apps
-#       version: v1
-#       kind: Deployment
-#     patch: |-
-#       - op: replace
-#         path: /spec/template/spec/containers/0/image
-#         value: {{ dunedaq.unified_microservices.image }}:{{ dunedaq.unified_microservices.tag }}
-#   - target:
-#       group: apps
-#       version: v1
-#       kind: Deployment
-#     patch: |-
-#       - op: replace
-#         path: /spec/template/spec/affinity/nodeAffinity/requiredDuringSchedulingIgnoredDuringExecution/nodeSelectorTerms/0/matchExpressions/0/key
-#         value: {{ kubernetes_label.worker }}
+patches:
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: {{ dunedaq.unified_microservices.image }}:{{ dunedaq.unified_microservices.tag }}
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/affinity/nodeAffinity/requiredDuringSchedulingIgnoredDuringExecution/nodeSelectorTerms/0/matchExpressions/0/key
+        value: {{ kubernetes_label.worker }}

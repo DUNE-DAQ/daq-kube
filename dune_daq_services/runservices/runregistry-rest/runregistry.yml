@@ -27,12 +27,27 @@ spec:
              - key: {{ kubernetes_label.worker }}
                operator: Exists
       containers:
-      - image: ghcr.io/dune-daq/pocket-runserv-rest:0.2 # this tag is different than standard
+      - image: ghcr.io/dune-daq/pocket-runserv-rest:0.4 # this tag is different than standard
         name: runregistry-rest
         env:
         - name: MICROSERVICE
           value: runregistry-rest
         envFrom:
+        - name: RNURI
+          valueFrom:
+            secretKeyRef:
+              key: uri
+              name: runservices-postgresql-svcbind-custom-user
+        - name: RNUSER
+          valueFrom:
+            secretKeyRef:
+              key: username
+              name: runservices-postgresql-svcbind-custom-user
+        - name: RNPASS
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: runservices-postgresql-svcbind-custom-user
         # - secretRef:
         #     name: run-db-secret
         # volumeMounts:

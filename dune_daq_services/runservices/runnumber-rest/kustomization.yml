@@ -15,20 +15,20 @@ resources:
 #     files: [ tnsnames.ora ] # this is a hack, a terrible hack for oracle
 
 # commented out until unified image has these changes
-# patches:
-#   - target:
-#       group: apps
-#       version: v1
-#       kind: Deployment
-#     patch: |-
-#       - op: replace
-#         path: /spec/template/spec/containers/0/image
-#         value: {{ dunedaq.unified_microservices.image }}:{{ dunedaq.unified_microservices.tag }}
-#   - target:
-#       group: apps
-#       version: v1
-#       kind: Deployment
-#     patch: |-
-#       - op: replace
-#         path: /spec/template/spec/affinity/nodeAffinity/requiredDuringSchedulingIgnoredDuringExecution/nodeSelectorTerms/0/matchExpressions/0/key
-#         value: {{ kubernetes_label.worker }}
+patches:
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: {{ dunedaq.unified_microservices.image }}:{{ dunedaq.unified_microservices.tag }}
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/affinity/nodeAffinity/requiredDuringSchedulingIgnoredDuringExecution/nodeSelectorTerms/0/matchExpressions/0/key
+        value: {{ kubernetes_label.worker }}

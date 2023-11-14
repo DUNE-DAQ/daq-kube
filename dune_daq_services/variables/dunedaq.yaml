@@ -13,5 +13,5 @@ dunedaq:
     protocol_version: "3.6"
     replicas: 1
   unified_microservices:
-    image: ghcr.io/dune-daq/microservices
-    tag: fa6c
+    image: ghcr.io/dune-daq/pocket-runserv-rest
+    tag: "0.4"
