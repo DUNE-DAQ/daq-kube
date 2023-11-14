@@ -1,0 +1,24 @@
+{% if args.with_dune_daq_services %}
+{% if args.with_dune_runservices %}
+--- 
+apiVersion: v1
+kind: Service
+metadata:    
+  name: runnumber-rest-nodeport
+  labels:
+    app.kubernetes.io/app: runnumber-rest
+    app.kubernetes.io/component: runnumber-rest
+  namespace: runservices
+spec:
+  type: NodePort
+  ports:
+  - name: http
+    port: 5005
+    protocol: TCP
+    targetPort: 5005
+    nodePort: 30016
+  selector:
+    app.kubernetes.io/app: runnumber-rest
+    app.kubernetes.io/component: runnumber-rest
+{% endif %}
+{% endif %}
