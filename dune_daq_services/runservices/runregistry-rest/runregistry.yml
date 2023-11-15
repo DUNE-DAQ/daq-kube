@@ -32,22 +32,32 @@ spec:
         env:
         - name: MICROSERVICE
           value: runregistry-rest
-        envFrom:
-        - name: RNURI
-          valueFrom:
-            secretKeyRef:
-              key: uri
-              name: runservices-postgresql-svcbind-custom-user
-        - name: RNUSER
+        - name: DB_USERNAME
           valueFrom:
             secretKeyRef:
               key: username
               name: runservices-postgresql-svcbind-custom-user
-        - name: RNPASS
+        - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
               key: password
               name: runservices-postgresql-svcbind-custom-user
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              key: database
+              name: runservices-postgresql-svcbind-custom-user
+        - name: DB_PORT
+          valueFrom:
+            secretKeyRef:
+              key: port
+              name: runservices-postgresql-svcbind-custom-user
+        - name: DB_HOSTNAME
+          valueFrom:
+            secretKeyRef:
+              key: host
+              name: runservices-postgresql-svcbind-custom-user
+        envFrom:
         # - secretRef:
         #     name: run-db-secret
         # volumeMounts:
