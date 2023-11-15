@@ -32,6 +32,8 @@ spec:
         env:
         - name: MICROSERVICE
           value: runregistry-rest
+        - name: RGDB
+          value: postgres
         - name: DB_USERNAME
           valueFrom:
             secretKeyRef:
