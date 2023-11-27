@@ -48,8 +48,6 @@ prometheis: # this is the plural of prometheus
             requests:
               storage: 20Gi # this is guess work
 
-    additionalScrapeConfigs: {}
-
     # these selectors should probably be set to rational filters
     serviceMonitorNamespaceSelector: {}
     serviceMonitorSelector: {}
