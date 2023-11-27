@@ -57,21 +57,6 @@ spec:
             secretKeyRef:
               key: host
               name: runservices-postgresql-svcbind-custom-user
-        - name: RNURI
-          valueFrom:
-            secretKeyRef:
-              key: uri
-              name: runservices-postgresql-svcbind-custom-user
-        - name: RNUSER
-          valueFrom:
-            secretKeyRef:
-              key: username
-              name: runservices-postgresql-svcbind-custom-user
-        - name: RNPASS
-          valueFrom:
-            secretKeyRef:
-              key: password
-              name: runservices-postgresql-svcbind-custom-user
         ports:
         - containerPort: 5000
           protocol: TCP
