@@ -32,13 +32,46 @@ spec:
         env:
         - name: MICROSERVICE
           value: runnumber-rest
-        envFrom:
-        - secretRef:
-            name: run-db-secret
-        volumeMounts:
-          - name: tnsnames-ora
-            mountPath: /etc/tnsnames.ora
-            subPath: tnsnames.ora
+        - name: DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              key: username
+              name: runservices-postgresql-svcbind-custom-user
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: runservices-postgresql-svcbind-custom-user
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              key: database
+              name: runservices-postgresql-svcbind-custom-user
+        - name: DB_PORT
+          valueFrom:
+            secretKeyRef:
+              key: port
+              name: runservices-postgresql-svcbind-custom-user
+        - name: DB_HOSTNAME
+          valueFrom:
+            secretKeyRef:
+              key: host
+              name: runservices-postgresql-svcbind-custom-user
+        - name: RNURI
+          valueFrom:
+            secretKeyRef:
+              key: uri
+              name: runservices-postgresql-svcbind-custom-user
+        - name: RNUSER
+          valueFrom:
+            secretKeyRef:
+              key: username
+              name: runservices-postgresql-svcbind-custom-user
+        - name: RNPASS
+          valueFrom:
+            secretKeyRef:
+              key: password
+              name: runservices-postgresql-svcbind-custom-user
         ports:
         - containerPort: 5000
           protocol: TCP
@@ -57,12 +90,5 @@ spec:
           runAsGroup: 11000
           seccompProfile:
             type: RuntimeDefault
-      volumes:
-        - name: tnsnames-ora
-          configMap:
-            name: tnsnames-ora
-            items:
-             - key: tnsnames.ora
-               path: tnsnames.ora
       securityContext:
         fsGroup: 11000

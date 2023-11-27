@@ -4,11 +4,10 @@ deployments:
 
   - barrier: true
 
-# maybe skip while we are using the oracle hacks
   - include: postgresql
 
   - barrier: true
-    message: make sure database is up
+    message: make sure database is setup
 
   - path: runnumber-rest
   - path: runregistry-rest

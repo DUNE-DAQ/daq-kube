@@ -5,7 +5,7 @@ kind: Kustomization
 namespace: {{ DUNE_runservices.namespace }}
 
 resources:
-  - runregistry.yml # https://raw.githubusercontent.com/DUNE-DAQ/microservices/develop/runregistry-rest/runregistry.yml
+  - runregistry.yml # temporary local copy, should be updated when unified image is ready
 
 patches:
   - target:
@@ -15,7 +15,7 @@ patches:
     patch: |-
       - op: replace
         path: /spec/template/spec/containers/0/image
-        value: {{ dunedaq.unified_microservices.image }}:{{ dunedaq.unified_microservices.tag }}
+        value: ghcr.io/dune-daq/pocket-runserv-rest:0.20 # temporary hack, switch to unified image
   - target:
       group: apps
       version: v1
