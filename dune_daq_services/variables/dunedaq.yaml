@@ -7,6 +7,7 @@ dunedaq:
   kafka:
     namespace: kafka
     name: dune-daq
+    pool: kafka-full
     bootstrap_brokers:
       - dune-daq-kafka-bootstrap.kafka.svc:9092
     version: "3.6.0"
