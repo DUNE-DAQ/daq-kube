@@ -42,8 +42,6 @@ spec:
   storage: {{ prometheis[thisone].storage | tojson }}
   {% endif %}
 
-  additionalScrapeConfigs: {{ prometheis[thisone].additionalScrapeConfigs | tojson }}
-
   serviceMonitorNamespaceSelector: {{ prometheis[thisone].serviceMonitorNamespaceSelector | tojson }}
   serviceMonitorSelector: {{ prometheis[thisone].serviceMonitorSelector | tojson }}
   podMonitorNamespaceSelector: {{ prometheis[thisone].podMonitorNamespaceSelector | tojson }}
