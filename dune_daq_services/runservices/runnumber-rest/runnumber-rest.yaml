@@ -57,7 +57,7 @@ spec:
             secretKeyRef:
               key: host
               name: runservices-postgresql-svcbind-custom-user
-        - name: RNURI
+        - name: DATABASE_URI
           valueFrom:
             secretKeyRef:
               key: uri

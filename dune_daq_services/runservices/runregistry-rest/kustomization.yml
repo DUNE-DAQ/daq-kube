@@ -15,6 +15,7 @@ patches:
     patch: |-
       - op: replace
         path: /spec/template/spec/containers/0/image
+        value: {{ dunedaq.unified_microservices.image }}:{{ dunedaq.unified_microservices.tag }}
   - target:
       group: apps
       version: v1

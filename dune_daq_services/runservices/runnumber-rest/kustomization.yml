@@ -7,7 +7,6 @@ namespace: {{ DUNE_runservices.namespace }}
 resources:
   - runnumber-rest.yaml # temporary local copy, should be updated when unified image is ready
 
-# commented out until unified image has these changes
 patches:
   - target:
       group: apps
@@ -16,6 +15,7 @@ patches:
     patch: |-
       - op: replace
         path: /spec/template/spec/containers/0/image
+        value: {{ dunedaq.unified_microservices.image }}:{{ dunedaq.unified_microservices.tag }}
   - target:
       group: apps
       version: v1
