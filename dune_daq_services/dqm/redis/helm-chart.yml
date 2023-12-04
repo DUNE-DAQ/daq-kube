@@ -1,7 +1,7 @@
 helmChart:
-  chartVersion: 17.17.1
+  chartVersion: 18.4.0
   namespace: '{{ DUNE_dqm.namespace }}'
   output: helm-rendered.yaml
   releaseName: dqm-redis
   repo: oci://registry-1.docker.io/bitnamicharts/redis
-  updateConstraints: ~17.x
+  updateConstraints: ~18.x
