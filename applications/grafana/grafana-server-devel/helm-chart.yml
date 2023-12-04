@@ -1,8 +1,8 @@
 helmChart:
   chartName: grafana
-  chartVersion: 6.61.2
+  chartVersion: 7.0.11
   namespace: '{{ monitoring.namespace }}'
   output: helm-rendered.yaml
   releaseName: grafana-devel
   repo: https://grafana.github.io/helm-charts
-  updateConstraints: ~6.x
+  updateConstraints: ~7.x
