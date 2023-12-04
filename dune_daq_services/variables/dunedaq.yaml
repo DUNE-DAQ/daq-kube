@@ -7,6 +7,7 @@ dunedaq:
   kafka:
     namespace: kafka
     name: dune-daq
+    pool: kafka-full
     bootstrap_brokers:
       - dune-daq-kafka-bootstrap.kafka.svc:9092
     version: "3.6.0"
@@ -14,4 +15,4 @@ dunedaq:
     replicas: 1
   unified_microservices:
     image: ghcr.io/dune-daq/pocket-runserv-rest
-    tag: "0.20"
+    tag: "0.22"

@@ -3,7 +3,7 @@
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaNodePool
 metadata:
-  name: {{ dunedaq.kafka.name }}
+  name: {{ dunedaq.kafka.pool }}
   namespace: {{ dunedaq.kafka.namespace }}
   labels:
     strimzi.io/cluster: {{ dunedaq.kafka.name }}

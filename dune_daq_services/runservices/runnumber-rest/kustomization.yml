@@ -5,14 +5,7 @@ kind: Kustomization
 namespace: {{ DUNE_runservices.namespace }}
 
 resources:
-  - runnumber-rest.yaml # https://github.com/DUNE-DAQ/microservices/tree/develop/runnumber-rest
-#  - run-db-secret.yaml # this is a hack, a terrible hack for oracle
-
-#generatorOptions:
-#  disableNameSuffixHash: true # this is a hack for oracle
-# configMapGenerator:
-#   - name: tnsnames-ora
-#     files: [ tnsnames.ora ] # this is a hack, a terrible hack for oracle
+  - runnumber-rest.yaml # temporary local copy, should be updated when unified image is ready
 
 # commented out until unified image has these changes
 patches:
@@ -23,7 +16,6 @@ patches:
     patch: |-
       - op: replace
         path: /spec/template/spec/containers/0/image
-        value: {{ dunedaq.unified_microservices.image }}:{{ dunedaq.unified_microservices.tag }}
   - target:
       group: apps
       version: v1
