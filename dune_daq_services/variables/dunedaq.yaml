@@ -15,4 +15,4 @@ dunedaq:
     replicas: 1
   unified_microservices:
     image: ghcr.io/dune-daq/pocket-runserv-rest
-    tag: "0.25"
+    tag: "0.27"
