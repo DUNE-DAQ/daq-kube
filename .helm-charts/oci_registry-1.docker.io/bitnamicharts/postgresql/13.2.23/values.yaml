@@ -98,11 +98,7 @@ diagnosticMode:
 image:
   registry: docker.io
   repository: bitnami/postgresql
-<<<<<<<< HEAD:.helm-charts/oci_registry-1.docker.io/bitnamicharts/postgresql/13.2.20/values.yaml
-  tag: 16.1.0-debian-11-r12
-========
   tag: 16.1.0-debian-11-r15
->>>>>>>> develop:.helm-charts/oci_registry-1.docker.io/bitnamicharts/postgresql/13.2.23/values.yaml
   digest: ""
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
