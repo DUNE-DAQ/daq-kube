@@ -33,32 +33,10 @@ spec:
       - env:
         - name: MICROSERVICE
           value: runregistry-rest
-        - name: RGDB
-          value: postgres
-        - name: DB_USERNAME
+        - name: DATABASE_URI
           valueFrom:
             secretKeyRef:
-              key: username
-              name: runservices-postgresql-svcbind-custom-user
-        - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              key: password
-              name: runservices-postgresql-svcbind-custom-user
-        - name: DB_HOSTNAME
-          valueFrom:
-            secretKeyRef:
-              key: host
-              name: runservices-postgresql-svcbind-custom-user
-        - name: DB_PORT
-          valueFrom:
-            secretKeyRef:
-              key: port
-              name: runservices-postgresql-svcbind-custom-user
-        - name: DB_NAME
-          valueFrom:
-            secretKeyRef:
-              key: database
+              key: uri
               name: runservices-postgresql-svcbind-custom-user
         image: ghcr.io/dune-daq/pocket-runregistry-rest:v0.0.8
         name: runregistry-rest
