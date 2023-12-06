@@ -11,9 +11,6 @@ serviceBindings:
   enabled: true
 
 primary:
-  initdb:
-    args: '--data-checksums --locale=en_US.UTF-8 --set huge_pages=off'
-    scriptsConfigMap: runnum-table-sql
 
   extendedConfiguration: |-
     log_destination = stderr
