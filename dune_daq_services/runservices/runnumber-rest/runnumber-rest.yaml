@@ -8,7 +8,6 @@ metadata:
   name: runnumber-rest
   namespace: {{ DUNE_runservices.namespace }}
 spec:
-  minReadySeconds: 5
   selector:
     matchLabels:
       app.kubernetes.io/app: runnumber-rest
@@ -26,19 +25,20 @@ spec:
            - matchExpressions:
              - key: {{ kubernetes_label.worker }}
                operator: Exists
+      initContainers:
+      - name: wait-for-run-postgres
+        image: busybox:1.28
+        command: ['sh','-c', 'until nc -z runservices-postgresql.runservices.svc.cluster.local 5432; do echo "Waiting for PostgreSQL"; sleep 2; done']
       containers:
-      - image: ghcr.io/dune-daq/pocket-runnumber-rest:0.8 # this tag is different than standard
-        name: runnumber-rest
+      - name: runnumber-rest
         env:
         - name: MICROSERVICE
           value: runnumber-rest
-        envFrom:
-        - secretRef:
-            name: run-db-secret
-        volumeMounts:
-          - name: tnsnames-ora
-            mountPath: /etc/tnsnames.ora
-            subPath: tnsnames.ora
+        - name: DATABASE_URI
+          valueFrom:
+            secretKeyRef:
+              key: uri
+              name: runservices-postgresql-svcbind-custom-user
         ports:
         - containerPort: 5000
           protocol: TCP
@@ -57,12 +57,24 @@ spec:
           runAsGroup: 11000
           seccompProfile:
             type: RuntimeDefault
-      volumes:
-        - name: tnsnames-ora
-          configMap:
-            name: tnsnames-ora
-            items:
-             - key: tnsnames.ora
-               path: tnsnames.ora
       securityContext:
         fsGroup: 11000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/app: runnumber-rest
+    app.kubernetes.io/component: runnumber-rest
+  name: runnumber-rest
+  namespace: runservices
+spec:
+  ports:
+  - name: http
+    port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app.kubernetes.io/app: runnumber-rest
+    app.kubernetes.io/component: runnumber-rest
+  type: ClusterIP

@@ -35,3 +35,4 @@ name: postgresql
 sources:
 - https://github.com/bitnami/charts/tree/main/bitnami/postgresql
 version: 13.2.23
+

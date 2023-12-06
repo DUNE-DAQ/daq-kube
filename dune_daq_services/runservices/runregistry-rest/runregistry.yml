@@ -1,4 +1,7 @@
 ---
+# You must still deploy your database with its manifests from upstream
+# and create a secret called runservices-postgresql-svcbind-custom-user
+#   containing keys: host, port, dbname,  username, password
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -8,7 +11,6 @@ metadata:
   name: runregistry-rest
   namespace: {{ DUNE_runservices.namespace }}
 spec:
-  minReadySeconds: 5
   selector:
     matchLabels:
       app.kubernetes.io/app: runregistry-rest
@@ -26,43 +28,66 @@ spec:
            - matchExpressions:
              - key: {{ kubernetes_label.worker }}
                operator: Exists
+      initContainers:
+      - name: wait-for-run-postgres
+        image: busybox:1.28
+        command: ['sh','-c', 'until nc -z runservices-postgresql.runservices.svc.cluster.local 5432; do echo "Waiting for PostgreSQL"; sleep 2; done']
       containers:
-      - image: ghcr.io/dune-daq/pocket-runregistry-rest:0.8 # this tag is different than standard
-        name: runregistry-rest
-        env:
+      - env:
         - name: MICROSERVICE
           value: runregistry-rest
-        envFrom:
-        - secretRef:
-            name: run-db-secret
-        volumeMounts:
-          - name: tnsnames-ora
-            mountPath: /etc/tnsnames.ora
-            subPath: tnsnames.ora
+        - name: DATABASE_URI
+          valueFrom:
+            secretKeyRef:
+              key: uri
+              name: runservices-postgresql-svcbind-custom-user
+        name: runregistry-rest
         ports:
-        - containerPort: 5000
+        - containerPort: 5005
+          name: http
           protocol: TCP
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
         resources:
           limits:
             memory: 1Gi
           requests:
             memory: 8Mi
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
         securityContext:
           allowPrivilegeEscalation: false
           capabilities:
             drop:
             - ALL
           runAsGroup: 11000
+          runAsNonRoot: true
+          runAsUser: 11000
           seccompProfile:
             type: RuntimeDefault
-      volumes:
-        - name: tnsnames-ora
-          configMap:
-            name: tnsnames-ora
-            items:
-             - key: tnsnames.ora
-               path: tnsnames.ora
+        volumeMounts:
+        - mountPath: /uploads
+          name: uploads-volume
+      volumes: # persistance is not required at this time
+      - name: uploads-volume
+        emptyDir:
+          sizeLimit: 20Gi
       securityContext:
         fsGroup: 11000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/app: runregistry-rest
+    app.kubernetes.io/component: runregistry-rest
+  name: runregistry-rest
+  namespace: runservices
+spec:
+  ports:
+  - name: http
+    port: 5005
+    protocol: TCP
+    targetPort: 5005
+  selector:
+    app.kubernetes.io/app: runregistry-rest
+    app.kubernetes.io/component: runregistry-rest
+  type: ClusterIP
