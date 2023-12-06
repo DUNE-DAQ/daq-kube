@@ -9,13 +9,12 @@ metadata:
     app.kubernetes.io/app: runregistry-rest
     app.kubernetes.io/component: runregistry-rest
   name: runregistry-rest
-  namespace: runservices
+  namespace: {{ DUNE_runservices.namespace }}
 spec:
   selector:
     matchLabels:
       app.kubernetes.io/app: runregistry-rest
       app.kubernetes.io/component: runregistry-rest
-  minReadySeconds: 5
   template:
     metadata:
       labels:
@@ -38,7 +37,6 @@ spec:
             secretKeyRef:
               key: uri
               name: runservices-postgresql-svcbind-custom-user
-        image: ghcr.io/dune-daq/pocket-runregistry-rest:v0.0.8
         name: runregistry-rest
         ports:
         - containerPort: 5005

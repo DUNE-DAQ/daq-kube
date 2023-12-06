@@ -8,7 +8,6 @@ metadata:
   name: runnumber-rest
   namespace: {{ DUNE_runservices.namespace }}
 spec:
-  minReadySeconds: 5
   selector:
     matchLabels:
       app.kubernetes.io/app: runnumber-rest
@@ -27,8 +26,7 @@ spec:
              - key: {{ kubernetes_label.worker }}
                operator: Exists
       containers:
-      - image: ghcr.io/dune-daq/pocket-runserv-rest:0.4 # this tag is different than standard
-        name: runnumber-rest
+      - name: runnumber-rest
         env:
         - name: MICROSERVICE
           value: runnumber-rest
@@ -55,5 +53,25 @@ spec:
           runAsGroup: 11000
           seccompProfile:
             type: RuntimeDefault
+
       securityContext:
         fsGroup: 11000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/app: runnumber-rest
+    app.kubernetes.io/component: runnumber-rest
+  name: runnumber-rest
+  namespace: runservices
+spec:
+  ports:
+  - name: http
+    port: 5000
+    protocol: TCP
+    targetPort: 5000
+  selector:
+    app.kubernetes.io/app: runnumber-rest
+    app.kubernetes.io/component: runnumber-rest
+  type: ClusterIP
