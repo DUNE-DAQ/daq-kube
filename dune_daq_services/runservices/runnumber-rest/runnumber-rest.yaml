@@ -25,6 +25,10 @@ spec:
            - matchExpressions:
              - key: {{ kubernetes_label.worker }}
                operator: Exists
+      initContainers:
+      - name: wait-for-run-postgres
+        image: busybox:1.28
+        command: ['sh','-c', 'until nc -z runservices-postgresql.runservices.svc.cluster.local 5432; do echo "Waiting for PostgreSQL"; sleep 2; done']
       containers:
       - name: runnumber-rest
         env:
@@ -53,7 +57,6 @@ spec:
           runAsGroup: 11000
           seccompProfile:
             type: RuntimeDefault
-
       securityContext:
         fsGroup: 11000
 ---
