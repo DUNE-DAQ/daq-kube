@@ -10,7 +10,7 @@ prometheis: # this is the plural of prometheus
     port: 9090
     portName: web
     replicas: 1
-    retention: 45d
+    retention: 25d
     alertmanagers:
       - namespace: {{ alertmanagers.main.namespace }}
         name: {{ alertmanagers.main.serviceName }}
