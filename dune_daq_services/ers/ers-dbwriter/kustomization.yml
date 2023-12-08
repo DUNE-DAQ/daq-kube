@@ -19,3 +19,10 @@ patches:
       - op: replace
         path: /spec/template/spec/containers/0/env/1/value
         value: {{ dunedaq.kafka.bootstrap_brokers[0] }}
+  - target:
+      kind: Namespace
+    patch: |-
+      $patch: delete
+      kind: Kustomization
+      metadata:
+        name: DOES NOT MATTER
