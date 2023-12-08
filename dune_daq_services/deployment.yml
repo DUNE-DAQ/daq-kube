@@ -25,9 +25,6 @@ deployments:
   - barrier: true
     message: Let services all catch up
 
-{% if args.with_dune_dqm %}
-  - include: dqm
-{% endif %}
 {% if args.with_dune_ers %}
   - include: ers
 {% endif %}
