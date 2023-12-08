@@ -56,8 +56,6 @@ args:
     default: true
   - name: with_dune_daqconfig
     default: true
-  - name: with_dune_dqm
-    default: true
   - name: with_dune_ers
     default: true
   - name: with_dune_kafka
@@ -83,8 +81,6 @@ args:
   - name: daqconfig_mongodb_daqconfig_password
     default: run4evah
   - name: daqconfig_mongodb_root_password
-    default: run4evah
-  - name: dqm_backend_admin_password
     default: run4evah
   - name: ers_postgresql_password
     default: run4evah
@@ -126,7 +122,6 @@ targets:
 
       with_dune_connectionservice: true
       with_dune_daqconfig: false
-      with_dune_dqm: false
       with_dune_ers: false
       with_dune_kafka: false
       with_dune_opmon: false
@@ -142,25 +137,8 @@ targets:
 
       with_dune_connectionservice: false
       with_dune_daqconfig: true
-      with_dune_dqm: false
       with_dune_ers: false
       with_dune_kafka: false
-      with_dune_opmon: false
-      with_dune_runservices: false
-
-  - name: pocket-dqm
-    discriminator: "dune-daq-pocket"
-    args:
-      inside_kind: true
-      with_cilium: false
-      with_local_path_as_default_storageclass: true
-      with_nfs_storage: false
-
-      with_dune_connectionservice: false
-      with_dune_daqconfig: false
-      with_dune_dqm: true
-      with_dune_ers: false
-      with_dune_kafka: true
       with_dune_opmon: false
       with_dune_runservices: false
 
@@ -174,7 +152,6 @@ targets:
 
       with_dune_connectionservice: false
       with_dune_daqconfig: false
-      with_dune_dqm: false
       with_dune_ers: true
       with_dune_kafka: true
       with_dune_opmon: false
@@ -190,7 +167,6 @@ targets:
 
       with_dune_connectionservice: false
       with_dune_daqconfig: false
-      with_dune_dqm: false
       with_dune_ers: false
       with_dune_kafka: true
       with_dune_opmon: true
@@ -206,7 +182,6 @@ targets:
 
       with_dune_connectionservice: false
       with_dune_daqconfig: false
-      with_dune_dqm: false
       with_dune_ers: false
       with_dune_kafka: false
       with_dune_opmon: false
@@ -223,7 +198,6 @@ targets:
       grafana_admin_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
       daqconfig_mongodb_root_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
       daqconfig_mongodb_daqconfig_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
-      dqm_backend_admin_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
       ers_postgresql_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
       opmon_influxdb_user_influxdb_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
       opmon_telegraf_user_influxdb_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
@@ -245,7 +219,6 @@ targets:
       grafana_admin_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
       daqconfig_mongodb_root_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
       daqconfig_mongodb_daqconfig_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
-      dqm_backend_admin_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
       ers_postgresql_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
       opmon_influxdb_user_influxdb_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
       opmon_telegraf_user_influxdb_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
