@@ -11,6 +11,7 @@ deployments:
     message: Let services all catch up
 
   - path: ers-dbwriter
+  - path: ers-protobuf-dbwriter
 
 vars:
   - file: variables/ers.yaml
