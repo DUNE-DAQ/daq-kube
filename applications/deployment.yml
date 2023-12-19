@@ -42,6 +42,10 @@ deployments:
       - dpdk
 {% endif %}
 
+{% if args.with_dune_felix_plugin %}
+  - include: felix-plugin
+{% endif %}
+
 {% if args.with_grafana %}
   - barrier: true
     message: "Let grafana dashboard config maps finish loading"
