@@ -16,8 +16,6 @@ args:
     default: true
   - name: with_cvmfs_csi
     default: false
-  - name: with_cnpg_operator
-    default: false
   - name: with_dns_autoscaler
     default: true
   - name: with_dune_daq_services
@@ -34,6 +32,8 @@ args:
     default: true
   - name: with_node_feature_discovery
     default: true
+  - name: with_sriov
+    default: false
   - name: with_strimzi_kafka_operator
     default: true
   - name: with_tinyproxy
@@ -58,6 +58,8 @@ args:
     default: true
   - name: with_dune_ers
     default: true
+  - name: with_dune_felix_plugin
+    default: false
   - name: with_dune_kafka
     default: true
   - name: with_dune_opmon
@@ -212,6 +214,9 @@ targets:
       with_kepler: false
       with_nfs_storage: false
       with_strimzi_kafka_operator: false
+
+      with_dune_felix_plugin: true
+      with_sriov: true
 
       with_local_path_as_default_storageclass: true
 

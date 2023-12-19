@@ -1,0 +1,29 @@
+---
+# https://github.com/k8snetworkplumbingwg/sriov-network-device-plugin/blob/master/deployments/configMap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sriovdp-config
+  namespace: kube-system
+data:
+  config.json: |
+    {
+        "resourceList": [
+            {
+                "resourceName": "intel_sriov_dpdk",
+                "selectors": {
+                    "vendors": ["8086"],
+                    "devices": ["1592"],
+                    "drivers": ["vfio-pci"]
+                }
+            },
+            {
+                "resourceName": "mlx_sriov_dpdk",
+                "selectors": {
+                    "vendors": ["15b3"],
+                    "devices": ["101d"],
+                    "drivers": ["mlx5_core"]
+                }
+            }
+        ]
+    }

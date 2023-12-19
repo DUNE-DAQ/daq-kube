@@ -35,6 +35,17 @@ deployments:
       - storage
 {% endif %}
 
+{% if args.with_sriov %}
+  - path: sriov-network-device-plugin
+    tags:
+      - sriov
+      - dpdk
+{% endif %}
+
+{% if args.with_dune_felix_plugin %}
+  - include: felix-plugin
+{% endif %}
+
 {% if args.with_grafana %}
   - barrier: true
     message: "Let grafana dashboard config maps finish loading"

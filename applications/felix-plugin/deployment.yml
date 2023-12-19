@@ -1,0 +1,10 @@
+---
+deployments:
+  - path: namespace
+
+  - barrier: true
+
+  - path: flx-plugin
+
+vars:
+  - file: variables/flx-plugin.yaml
