@@ -26,3 +26,9 @@
 	path = .submodules/dune-daq-connectivityserver
 	url = https://github.com/DUNE-DAQ/connectivityserver.git
 	update = checkout
+[submodule "dune-daq-flx-k8s-device-plugin"]
+	path = .submodules/dune-daq-flx-k8s-device-plugin
+	url = https://github.com/DUNE-DAQ/flx-k8s-device-plugin.git
+[submodule "sriov-network-device-plugin"]
+	path = .submodules/sriov-network-device-plugin
+	url = https://github.com/k8snetworkplumbingwg/sriov-network-device-plugin.git
