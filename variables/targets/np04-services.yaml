@@ -24,7 +24,7 @@ prometheus_scrape_configs:
       metricsPath: /federate
       scrapeInterval: 1m
       scrapeTimeout: 1m
-      honorTimestaps: true
+      honorTimestamps: true
       honorLabels: true
       params:
         'match[]':
@@ -33,4 +33,4 @@ prometheus_scrape_configs:
       - targets:
         - np04-srv-016.cern.ch:31093
         labels:
-        - np04-daq   
+          cluster: np04-daq
