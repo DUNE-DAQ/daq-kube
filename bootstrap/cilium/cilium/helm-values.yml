@@ -120,7 +120,7 @@ hubble:
   tls:
     auto:
       enabled: true
-      method: cronjob ###FIXME### should be cert-manager eventually
+      method: cronJob ###FIXME### should be cert-manager eventually
       certValidityDuration: 3660
   relay:
     enabled: true
