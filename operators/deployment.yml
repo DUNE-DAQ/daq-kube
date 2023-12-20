@@ -6,12 +6,6 @@ deployments:
       - strimzi
 {% endif %}
 
-#{% if args.with_minio_operator %}
-#  - include: minio
-#    tags:
-#      - storage
-#{% endif %}
-
 # operators should always end in a barrier
   - barrier: true
     message: make sure operators have time to settle
