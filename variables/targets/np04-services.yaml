@@ -20,17 +20,17 @@ prometheus_scrape_configs:
     labels:
       {{ prometheus_scrapeconfig_label_name }}: {{ prometheus_scrapeconfig_labels.extra }}
       {{ prometheus_config_label_name }}: {{ prometheus_scrapeconfig_labels.extra }}
-  spec:
-    metricsPath: /federate
-    scrapeInterval: 1m
-    scrapeTimeout: 1m
-    honorTimestaps: true
-    honorLabels: true
-    params:
-      'match[]':
-      - '{__name__!=""}[1m]'
-    staticConfigs:
-    - targets:
-      - np04-srv-016.cern.ch:31093
-      labels:
-      - np04-daq   
+    spec:
+      metricsPath: /federate
+      scrapeInterval: 1m
+      scrapeTimeout: 1m
+      honorTimestaps: true
+      honorLabels: true
+      params:
+        'match[]':
+        - '{__name__!=""}[1m]'
+      staticConfigs:
+      - targets:
+        - np04-srv-016.cern.ch:31093
+        labels:
+        - np04-daq   
