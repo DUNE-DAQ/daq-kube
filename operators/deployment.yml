@@ -6,18 +6,11 @@ deployments:
       - strimzi
 {% endif %}
 
-{% if args.with_cnpg_operator %}
-  - include: postgresql
-    tags:
-      - postgres
-      - cnpg
-{% endif %}
-
-{% if args.with_minio_operator %}
-  - include: minio
-    tags:
-      - storage
-{% endif %}
+#{% if args.with_minio_operator %}
+#  - include: minio
+#    tags:
+#      - storage
+#{% endif %}
 
 # operators should always end in a barrier
   - barrier: true
