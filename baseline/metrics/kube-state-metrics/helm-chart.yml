@@ -1,6 +1,6 @@
 helmChart:
   chartName: kube-state-metrics
-  chartVersion: 5.15.2
+  chartVersion: 5.15.3
   namespace: '{{ metrics.kubernetes_metrics_namespace }}'
   output: helm-rendered.yaml
   releaseName: kube-state-metrics
