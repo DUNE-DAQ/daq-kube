@@ -1,13 +1,16 @@
 ---
 inside_kind: false
-with_applications: true
-with_bootstrap: true
-with_baseline: true
+
+with_applications: {{ args.with_applications }}
+with_bootstrap: {{ args.with_bootstrap }}
+with_baseline: {{ args.with_baseline }}
+with_dune_daq_services: {{ args.with_dune_daq_services }}
+with_dune_node_ports: {{ args.with_dune_node_ports }}
+
 with_certmanager: true
 with_cilium: true
 with_cvmfs_csi: false
 with_dns_autoscaler: true
-with_dune_daq_services: true
 with_grafana: true
 with_kepler: true
 with_kubernetes_dashboard: true
@@ -31,4 +34,3 @@ with_dune_felix_plugin: false
 with_dune_kafka: true
 with_dune_opmon: true
 with_dune_runservices: true
-with_dune_node_ports: true
