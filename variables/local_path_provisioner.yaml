@@ -2,7 +2,7 @@
 local_path_provisioner:
   namespace: local-path-storage
   storage_class_name: local-path
-  is_default_class: {{ args.with_local_path_as_default_storageclass }}
+  is_default_class: {{ with_local_path_as_default_storageclass }}
   nodePathMap:
     - node: DEFAULT_PATH_FOR_NON_LISTED_NODES
       paths:

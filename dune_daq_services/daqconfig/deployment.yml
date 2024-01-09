@@ -9,7 +9,7 @@ deployments:
   - barrier: true
     message: make sure mongodb is setup for daqconfig container
 
-{% if args.with_mongo_express %}
+{% if with_mongo_express %}
   - path: mongo-express
 {% endif %}
 

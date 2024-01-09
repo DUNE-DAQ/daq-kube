@@ -1,9 +1,9 @@
 ---
 auth:
-  username: "{{ ERS_postgresql.database_username }}"
-  password: "{{ ERS_postgresql.database_password }}"
-  database: "{{ ERS_postgresql.database_name }}"
-  postgresPassword: "{{ ERS_postgresql.database_password }}"
+  username: {{ ERS_postgresql.database_username }}
+  password: {{ ERS_postgresql.database_password }}
+  database: {{ ERS_postgresql.database_name }}
+  postgresPassword: {{ ERS_postgresql.database_password }}
 
 architecture: standalone
 
@@ -49,7 +49,7 @@ affinity:
        - key: {{ kubernetes_label.worker }}
          operator: Exists
 
-{% if args.with_backups %}
+{% if with_backups %}
 backup:
   enabled: true
   successfulJobsHistoryLimit: 1

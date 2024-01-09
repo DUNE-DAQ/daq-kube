@@ -1,9 +1,9 @@
 ---
 auth:
-  username: "{{ DUNE_runservices.postgresql_database_username }}"
-  password: "{{ DUNE_runservices.postgresql_database_password }}"
-  database: "{{ DUNE_runservices.postgresql_database_name }}"
-  postgresPassword: "{{ DUNE_runservices.postgresql_database_password }}"
+  username: {{ DUNE_runservices.postgresql_database_username }}
+  password: {{ DUNE_runservices.postgresql_database_password }}
+  database: {{ DUNE_runservices.postgresql_database_name }}
+  postgresPassword: {{ DUNE_runservices.postgresql_database_password }}
 
 architecture: standalone
 
@@ -51,7 +51,7 @@ affinity:
        - key: {{ kubernetes_label.worker }}
          operator: Exists
 
-{% if args.with_backups %}
+{% if with_backups %}
 backup:
   enabled: true
   successfulJobsHistoryLimit: 1

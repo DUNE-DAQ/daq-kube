@@ -1,0 +1,34 @@
+---
+inside_kind: false
+with_applications: true
+with_bootstrap: true
+with_baseline: true
+with_certmanager: true
+with_cilium: true
+with_cvmfs_csi: false
+with_dns_autoscaler: true
+with_dune_daq_services: true
+with_grafana: true
+with_kepler: true
+with_kubernetes_dashboard: true
+with_nfs_storage: true
+with_node_feature_discovery: true
+with_sriov: false
+with_strimzi_kafka_operator: true
+with_tinyproxy: true
+
+### Feature flags for included manifests
+with_backups: false
+with_kafka_ui: true
+with_local_path_as_default_storageclass: false
+with_mongo_express: true
+
+### Feature flags for application targets
+with_dune_connectionservice: true
+with_dune_daqconfig: true
+with_dune_ers: true
+with_dune_felix_plugin: false
+with_dune_kafka: true
+with_dune_opmon: true
+with_dune_runservices: true
+with_dune_node_ports: true

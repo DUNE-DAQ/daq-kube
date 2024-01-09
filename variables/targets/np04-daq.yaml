@@ -1,3 +1,4 @@
+---
 clusterPoolIPv4PodCIDRList:
   - "10.244.0.0/16"
 
@@ -13,6 +14,17 @@ smtp_server: cernmx.cern.ch
 smtp_port: 587
 
 cvmfs_http_proxy: http://ca-proxy.cern.ch:3128
+
+with_dune_daq_services: false
+with_grafana: false
+with_kepler: false
+with_nfs_storage: false
+with_strimzi_kafka_operator: false
+
+with_dune_felix_plugin: true
+with_sriov: true
+
+with_local_path_as_default_storageclass: true
 
 kubernetes_label:
   worker: node-role.kubernetes.io/control-plane # my heart breaks!

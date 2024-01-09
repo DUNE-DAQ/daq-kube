@@ -17,7 +17,7 @@ deployments:
   - barrier: true
     message: Wait for Prometheus CRDs to settle
 
-{% if args.with_cilium %}
+{% if with_cilium %}
   - include: cilium
     tags:
       - cni

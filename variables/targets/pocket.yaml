@@ -1,3 +1,4 @@
+---
 clusterPoolIPv4PodCIDRList:
   - "10.244.0.0/16"
   - "10.96.0.0/12"
@@ -8,3 +9,8 @@ smtp_server: NULL
 smtp_port: NULL
 
 cvmfs_http_proxy: DIRECT
+
+inside_kind: true
+with_cilium: false
+with_local_path_as_default_storageclass: true
+with_nfs_storage: false

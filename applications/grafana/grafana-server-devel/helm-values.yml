@@ -1,6 +1,6 @@
 ---
 adminUser: admin
-adminPassword: "{{ args.grafana_admin_password }}"
+adminPassword: {{ args.grafana_admin_password }}
 
 serviceMonitor:
   enabled: true

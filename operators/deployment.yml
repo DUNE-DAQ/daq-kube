@@ -1,6 +1,6 @@
 ---
 deployments:
-{% if args.with_strimzi_kafka_operator %}
+{% if with_strimzi_kafka_operator %}
   - include: kafka
     tags:
       - strimzi

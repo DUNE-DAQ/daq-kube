@@ -3,5 +3,5 @@ DUNE_runservices:
   namespace: runservices
   postgresql_database_name: runservices
   postgresql_database_username: runservices
-  postgresql_database_password: "{{ args.runservices_postgresql_password }}"
+  postgresql_database_password: {{ args.runservices_postgresql_password }}
   postgresql_release_name: runservices-postgresql
