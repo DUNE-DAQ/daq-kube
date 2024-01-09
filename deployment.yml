@@ -43,7 +43,7 @@ vars:
   - file: variables/targets/pocket-defaults.yaml
 {% endif %}
   - file: variables/targets/{{ target.name }}.yaml
-  - file: variables/default.yaml
+  - file: variables/defaults.yaml
     noOverride: true
 
   - file: variables/monitoring.yaml
