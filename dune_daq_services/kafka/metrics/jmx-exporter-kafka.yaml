@@ -131,7 +131,7 @@ data:
       type: GAUGE
       labels:
         quantile: "0.$4"
-{% if args.with_kafka_kraft %}
+{% if strimzi.with_kafka_kraft %}
     # KRaft mode: uncomment the following lines to export KRaft related metrics
     # KRaft overall related metrics
     # distinguish between always increasing COUNTER (total and max) and variable GAUGE (all others) metrics

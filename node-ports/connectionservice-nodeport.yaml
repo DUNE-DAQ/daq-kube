@@ -1,5 +1,5 @@
-{% if args.with_dune_daq_services %}
-{% if args.with_dune_connectionservice %}
+{% if with_dune_daq_services %}
+{% if with_dune_connectionservice %}
 ---
 apiVersion: v1
 kind: Service

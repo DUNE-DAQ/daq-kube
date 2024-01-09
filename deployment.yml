@@ -3,7 +3,7 @@ deployments:
   - path: .submodules
     onlyRender: true
 
-{% if args.with_bootstrap %}
+{% if with_bootstrap %}
   - include: bootstrap
     skipDeleteIfTags: true
 
@@ -11,7 +11,7 @@ deployments:
     message: Ensure cluster has bootstraps
 {% endif %}
 
-{% if args.with_baseline %}
+{% if with_baseline %}
   - include: baseline
     skipDeleteIfTags: true
 
@@ -19,14 +19,14 @@ deployments:
     message: Ensure baseline is loaded
 {% endif %}
 
-{% if args.with_applications %}
+{% if with_applications %}
   - include: operators
   - barrier: true
 
   - include: applications
 {% endif %}
 
-{% if args.with_dune_daq_services %}
+{% if with_dune_daq_services %}
   - include: dune_daq_services
     tags:
       - dune
@@ -34,11 +34,18 @@ deployments:
       - services
 {% endif %}
 
-{% if args.with_dune_node_ports %}
+{% if with_dune_node_ports %}
   - path: node-ports
 {% endif %}
 
 vars:
+{% if args.in_pocket %}
+  - file: variables/targets/pocket-defaults.yaml
+{% endif %}
+  - file: variables/targets/{{ target.name }}.yaml
+  - file: variables/default.yaml
+    noOverride: true
+
   - file: variables/monitoring.yaml
   - file: variables/certmanager_bundle.yaml
 
@@ -52,8 +59,6 @@ vars:
   - file: variables/kafka.yaml # figure out how to store these better
   - file: variables/minio.yaml # figure out how to store these better
   - file: variables/postgresql.yaml # figure out how to store these better
-
-  - file: variables/targets/{{ target.name }}.yaml
 
 ignoreForDiff:
   - kind: PrometheusRule

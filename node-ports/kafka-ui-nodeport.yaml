@@ -1,5 +1,5 @@
-{% if args.with_dune_daq_services %}
-{% if args.with_kafka_ui %}
+{% if with_dune_daq_services %}
+{% if with_kafka_ui %}
 ---
 apiVersion: v1
 kind: Service

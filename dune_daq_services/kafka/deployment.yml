@@ -8,7 +8,7 @@ deployments:
 
   - path: kafka-server
 
-{% if args.with_kafka_ui %}
+{% if with_kafka_ui %}
   - path: kafka-ui
 {% endif %}
 

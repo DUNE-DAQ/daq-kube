@@ -14,7 +14,7 @@ persistence:
   enabled: true
   storageClass: {{ local_path_provisioner.storage_class_name }}
 
-{% if args.with_backups %}
+{% if with_backups %}
 backup:
   enabled: true
   successfulJobsHistoryLimit: 1

@@ -11,7 +11,7 @@ deployments:
       - metrics
       - monitoring
 
-{% if args.with_dns_autoscaler %}
+{% if with_dns_autoscaler %}
   - barrier: true
     message: metrics need to settle so we can setup HPAs
 
@@ -24,7 +24,7 @@ deployments:
       - metrics
       - monitoring
 
-{% if args.with_certmanager %}
+{% if with_certmanager %}
   - include: cert-manager
     tags:
       - pki

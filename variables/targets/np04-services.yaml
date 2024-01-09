@@ -1,3 +1,4 @@
+---
 clusterPoolIPv4PodCIDRList:
   - "10.244.0.0/16"
 
@@ -13,6 +14,10 @@ smtp_server: cernmx.cern.ch
 smtp_port: 587
 
 cvmfs_http_proxy: http://ca-proxy.cern.ch:3128
+
+with_backups: true
+with_kafka_ui: false
+with_mongo_express: false
 
 prometheus_scrape_configs:
   np04-daq:

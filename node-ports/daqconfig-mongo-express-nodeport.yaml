@@ -1,6 +1,6 @@
-{% if args.with_dune_daq_services %}
-{% if args.with_dune_daqconfig %}
-{% if args.with_mongo_express %}
+{% if with_dune_daq_services %}
+{% if with_dune_daqconfig %}
+{% if with_mongo_express %}
 ---
 # do we really need this?
 apiVersion: v1

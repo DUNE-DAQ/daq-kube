@@ -2,20 +2,20 @@
 deployments:
   - path: grafana-dashboards
 
-{% if args.with_dune_connectionservice %}
+{% if with_dune_connectionservice %}
   - include: connectionservice
 {% endif %}
-{% if args.with_dune_daqconfig %}
+{% if with_dune_daqconfig %}
   - include: daqconfig
 {% endif %}
-{% if args.with_dune_runservices %}
+{% if with_dune_runservices %}
   - include: runservices
 {% endif %}
-{% if args.with_dune_kafka %}
+{% if with_dune_kafka %}
   - include: kafka
 {% endif %}
 
-{% if args.with_cvmfs_csi %}
+{% if with_cvmfs_csi %}
   - path: cvmfs_storageclass
     tags:
       - cvmfs
@@ -25,10 +25,10 @@ deployments:
   - barrier: true
     message: Let services all catch up
 
-{% if args.with_dune_ers %}
+{% if with_dune_ers %}
   - include: ers
 {% endif %}
-{% if args.with_dune_opmon %}
+{% if with_dune_opmon %}
   - include: opmon
 {% endif %}
 

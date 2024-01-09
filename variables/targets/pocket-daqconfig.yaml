@@ -1,1 +1,7 @@
-pocket.yaml
+---
+with_dune_connectionservice: false
+with_dune_daqconfig: true
+with_dune_ers: false
+with_dune_kafka: false
+with_dune_opmon: false
+with_dune_runservices: false

@@ -1,4 +1,4 @@
-{% if args.with_grafana %}
+{% if with_grafana %}
 ---
 apiVersion: v1
 kind: Service

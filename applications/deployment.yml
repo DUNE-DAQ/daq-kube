@@ -1,11 +1,11 @@
 ---
 deployments:
-{% if args.with_tinyproxy %}
+{% if with_tinyproxy %}
   - path: python-tiny-proxy
 {% endif %}
 
-{% if args.with_kepler %}
-{% if not args.inside_kind %}
+{% if with_kepler %}
+{% if not inside_kind %}
   - include: kepler
     tags:
       - monitoring
@@ -13,40 +13,40 @@ deployments:
 {% endif %}
 {% endif %}
 
-{% if args.with_node_feature_discovery %}
+{% if with_node_feature_discovery %}
   - include: node-feature-discovery
 {% endif %}
 
-{% if args.with_kubernetes_dashboard %}
+{% if with_kubernetes_dashboard %}
   - include: kubernetes-dashboard
 {% endif %}
 
-{% if args.with_nfs_storage %}
+{% if with_nfs_storage %}
   - include: nfs-storage
     tags:
       - nfs
       - storage
 {% endif %}
 
-{% if args.with_cvmfs_csi %}
+{% if with_cvmfs_csi %}
   - include: cvmfs-csi
     tags:
       - cvmfs
       - storage
 {% endif %}
 
-{% if args.with_sriov %}
+{% if with_sriov %}
   - path: sriov-network-device-plugin
     tags:
       - sriov
       - dpdk
 {% endif %}
 
-{% if args.with_dune_felix_plugin %}
+{% if with_dune_felix_plugin %}
   - include: felix-plugin
 {% endif %}
 
-{% if args.with_grafana %}
+{% if with_grafana %}
   - barrier: true
     message: "Let grafana dashboard config maps finish loading"
 

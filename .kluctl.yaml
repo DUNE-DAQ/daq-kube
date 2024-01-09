@@ -2,71 +2,8 @@
 discriminator: "dune-daq-{{ target.name }}"
 
 args:
-  - name: inside_kind
+  - name: in_pocket
     default: false
-  - name: with_applications
-    default: true
-  - name: with_bootstrap
-    default: true
-  - name: with_baseline
-    default: true
-  - name: with_certmanager
-    default: true
-  - name: with_cilium
-    default: true
-  - name: with_cvmfs_csi
-    default: false
-  - name: with_dns_autoscaler
-    default: true
-  - name: with_dune_daq_services
-    default: true
-  - name: with_grafana
-    default: true
-  - name: with_kepler
-    default: true
-  - name: with_kubernetes_dashboard
-    default: true
-  - name: with_nfs_storage
-    default: true
-  - name: with_node_feature_discovery
-    default: true
-  - name: with_sriov
-    default: false
-  - name: with_strimzi_kafka_operator
-    default: true
-  - name: with_tinyproxy
-    default: true
-
-  ### Feature flags for included manifests
-  - name: with_backups
-    default: false
-  - name: with_kafka_kraft # strimzi doesn't support topicOperator with KRAFT yet, but we auto create topics on use
-    default: true
-  - name: with_kafka_ui
-    default: true
-  - name: with_local_path_as_default_storageclass
-    default: false
-  - name: with_mongo_express
-    default: true
-
-  ### Feature flags for application targets
-  - name: with_dune_connectionservice
-    default: true
-  - name: with_dune_daqconfig
-    default: true
-  - name: with_dune_ers
-    default: true
-  - name: with_dune_felix_plugin
-    default: false
-  - name: with_dune_kafka
-    default: true
-  - name: with_dune_opmon
-    default: true
-  - name: with_dune_runservices
-    default: true
-
-  - name: with_dune_node_ports
-    default: true
 
   ### This should be customized as an argument for your needs
   ### Since `pocket` mode is for local development of services
@@ -74,6 +11,7 @@ args:
   ### are acceptable.
   ###
   ### For real deployments you must set these to the correct values.
+  ### If you don't this should hopefully error out with random values.
   ###
   ### see: kluctl deploy -t target --args-from-file=filename.yaml
   - name: grafana_admin_password
@@ -97,133 +35,60 @@ targets:
   - name: pocket
     context: kind-pocketdune
     args:
-      inside_kind: true
-      with_cilium: false
-      with_local_path_as_default_storageclass: true
-      with_nfs_storage: false
+      in_pocket: true
 
   - name: pocket-baseline
     context: kind-pocketdune
     args:
-      inside_kind: true
-      with_cilium: false
-      with_local_path_as_default_storageclass: true
-      with_nfs_storage: false
-
-      with_dune_daq_services: false
+      in_pocket: true
 
   - name: pocket-connectionservice
     discriminator: "dune-daq-pocket"
     args:
-      inside_kind: true
-      with_cilium: false
-      with_local_path_as_default_storageclass: true
-      with_nfs_storage: false
-
-      with_dune_connectionservice: true
-      with_dune_daqconfig: false
-      with_dune_ers: false
-      with_dune_kafka: false
-      with_dune_opmon: false
-      with_dune_runservices: false
+      in_pocket: true
 
   - name: pocket-daqconfig
     discriminator: "dune-daq-pocket"
     args:
-      inside_kind: true
-      with_cilium: false
-      with_local_path_as_default_storageclass: true
-      with_nfs_storage: false
-
-      with_dune_connectionservice: false
-      with_dune_daqconfig: true
-      with_dune_ers: false
-      with_dune_kafka: false
-      with_dune_opmon: false
-      with_dune_runservices: false
+      in_pocket: true
 
   - name: pocket-ers
     discriminator: "dune-daq-pocket"
     args:
-      inside_kind: true
-      with_cilium: false
-      with_local_path_as_default_storageclass: true
-      with_nfs_storage: false
-
-      with_dune_connectionservice: false
-      with_dune_daqconfig: false
-      with_dune_ers: true
-      with_dune_kafka: true
-      with_dune_opmon: false
-      with_dune_runservices: false
+      in_pocket: true
 
   - name: pocket-opmon
     discriminator: "dune-daq-pocket"
     args:
-      inside_kind: true
-      with_cilium: false
-      with_local_path_as_default_storageclass: true
-      with_nfs_storage: false
-
-      with_dune_connectionservice: false
-      with_dune_daqconfig: false
-      with_dune_ers: false
-      with_dune_kafka: true
-      with_dune_opmon: true
-      with_dune_runservices: false
+      in_pocket: true
 
   - name: pocket-runservices
     discriminator: "dune-daq-pocket"
     args:
-      inside_kind: true
-      with_cilium: false
-      with_local_path_as_default_storageclass: true
-      with_nfs_storage: false
-
-      with_dune_connectionservice: false
-      with_dune_daqconfig: false
-      with_dune_ers: false
-      with_dune_kafka: false
-      with_dune_opmon: false
-      with_dune_runservices: true
+      in_pocket: true
 
   - name: np04-services
     context: kubernetes-admin@np04-services
     args:
-      with_backups: true
-      with_kafka_ui: false
-      with_mongo_express: false
-
       # if you don't set the args to override, you get random values
-      grafana_admin_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
-      daqconfig_mongodb_root_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
-      daqconfig_mongodb_daqconfig_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
-      ers_postgresql_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
-      opmon_influxdb_user_influxdb_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
-      opmon_telegraf_user_influxdb_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
-      opmon_influxdb_admin_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
-      runservices_postgresql_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
+      grafana_admin_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
+      daqconfig_mongodb_root_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
+      daqconfig_mongodb_daqconfig_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
+      ers_postgresql_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
+      opmon_influxdb_user_influxdb_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
+      opmon_telegraf_user_influxdb_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
+      opmon_influxdb_admin_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
+      runservices_postgresql_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
 
   - name: np04-daq
     context: kubernetes-admin@np04-daq
     args:
-      with_dune_daq_services: false
-      with_grafana: false
-      with_kepler: false
-      with_nfs_storage: false
-      with_strimzi_kafka_operator: false
-
-      with_dune_felix_plugin: true
-      with_sriov: true
-
-      with_local_path_as_default_storageclass: true
-
       # if you don't set the args to override, you get random values
-      grafana_admin_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
-      daqconfig_mongodb_root_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
-      daqconfig_mongodb_daqconfig_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
-      ers_postgresql_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
-      opmon_influxdb_user_influxdb_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
-      opmon_telegraf_user_influxdb_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
-      opmon_influxdb_admin_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
-      runservices_postgresql_password: "a{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
+      grafana_admin_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
+      daqconfig_mongodb_root_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
+      daqconfig_mongodb_daqconfig_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
+      ers_postgresql_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
+      opmon_influxdb_user_influxdb_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
+      opmon_telegraf_user_influxdb_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
+      opmon_influxdb_admin_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
+      runservices_postgresql_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
