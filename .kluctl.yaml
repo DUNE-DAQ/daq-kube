@@ -4,6 +4,16 @@ discriminator: "dune-daq-{{ target.name }}"
 args:
   - name: in_pocket
     default: false
+  - name: with_applications
+    default: true
+  - name: with_bootstrap
+    default: true
+  - name: with_baseline
+    default: true
+  - name: with_dune_daq_services
+    default: true
+  - name: with_dune_node_ports
+    default: true
 
   ### This should be customized as an argument for your needs
   ### Since `pocket` mode is for local development of services
@@ -41,6 +51,7 @@ targets:
     context: kind-pocketdune
     args:
       in_pocket: true
+      with_dune_daq_services: false
 
   - name: pocket-connectionservice
     discriminator: "dune-daq-pocket"
@@ -83,6 +94,8 @@ targets:
   - name: np04-daq
     context: kubernetes-admin@np04-daq
     args:
+      with_dune_daq_services: false
+
       # if you don't set the args to override, you get random values
       grafana_admin_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
       daqconfig_mongodb_root_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
