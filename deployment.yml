@@ -3,40 +3,35 @@ deployments:
   - path: .submodules
     onlyRender: true
 
-{% if args.with_bootstrap %}
   - include: bootstrap
     skipDeleteIfTags: true
 
   - barrier: true
     message: Ensure cluster has bootstraps
-{% endif %}
 
-{% if args.with_baseline %}
   - include: baseline
     skipDeleteIfTags: true
 
   - barrier: true
     message: Ensure baseline is loaded
-{% endif %}
 
-{% if args.with_applications %}
   - include: operators
   - barrier: true
 
   - include: applications
-{% endif %}
 
-{% if args.with_dune_daq_services %}
   - include: dune_daq_services
     tags:
       - dune
       - daq
       - services
-{% endif %}
 
-{% if args.with_dune_node_ports %}
-  - path: node-ports
-{% endif %}
+  - include: node-ports
+    tags:
+      - dune
+      - daq
+      - services
+      - ports
 
 vars:
 {% if args.in_pocket %}

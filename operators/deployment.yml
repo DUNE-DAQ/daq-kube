@@ -1,9 +1,11 @@
 ---
 deployments:
+{% if with_applications %}
 {% if with_strimzi_kafka_operator %}
   - include: kafka
     tags:
       - strimzi
+{% endif %}
 {% endif %}
 
 # operators should always end in a barrier

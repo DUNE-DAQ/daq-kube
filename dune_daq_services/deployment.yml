@@ -1,5 +1,6 @@
 ---
 deployments:
+{% if with_dune_daq_services %}
   - path: grafana-dashboards
 
 {% if with_dune_connectionservice %}
@@ -22,15 +23,16 @@ deployments:
       - storage
 {% endif %}
 
-  - barrier: true
-    message: Let services all catch up
-
 {% if with_dune_ers %}
   - include: ers
 {% endif %}
 {% if with_dune_opmon %}
   - include: opmon
 {% endif %}
+{% endif %}
+
+  - barrier: true
+    message: Let services all catch up
 
 vars:
   - file: variables/dunedaq.yaml
