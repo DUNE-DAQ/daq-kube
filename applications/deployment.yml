@@ -1,5 +1,6 @@
 ---
 deployments:
+{% if with_applications %}
 {% if with_tinyproxy %}
   - path: python-tiny-proxy
 {% endif %}
@@ -48,10 +49,14 @@ deployments:
 
 {% if with_grafana %}
   - barrier: true
-    message: "Let grafana dashboard config maps finish loading"
+    message: Let grafana dashboard config maps finish loading
 
   - include: grafana
     tags:
       - monitoring
       - metrics
 {% endif %}
+{% endif %}
+
+  - barrier: true
+    message: Finish loading applications

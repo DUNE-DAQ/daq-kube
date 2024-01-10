@@ -4,6 +4,7 @@ deployments:
     alwaysDeploy: true
     skipDeleteIfTags: true
 
+{% if with_bootstrap %}
   - path: prometheus-operator-crds
     alwaysDeploy: true
     skipDeleteIfTags: true
@@ -22,4 +23,5 @@ deployments:
     tags:
       - cni
     skipDeleteIfTags: true
+{% endif %}
 {% endif %}

@@ -1,5 +1,6 @@
 ---
 deployments:
+{% if with_baseline %}
   - include: local-storage
     skipDeleteIfTags: true
     tags:
@@ -29,6 +30,7 @@ deployments:
     tags:
       - pki
       - tls
+{% endif %}
 {% endif %}
 
   - barrier: true
