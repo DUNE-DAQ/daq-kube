@@ -16,7 +16,9 @@ deployments:
     message: Ensure baseline is loaded
 
   - include: operators
+
   - barrier: true
+    message: Make sure operators have settled
 
   - include: applications
 
