@@ -32,7 +32,7 @@ metrics: # TODO https://github.com/percona/grafana-dashboards/tree/main/dashboar
   enabled: true
   compatibleMode: false # skip old metrics
   username: metrics
-  # password:
+  password: {{ args.daqconfig_mongodb_daqconfig_password }}
   collector:
     all: true
   resources:
