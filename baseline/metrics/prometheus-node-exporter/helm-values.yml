@@ -13,7 +13,7 @@ nodeSelector:
 fullnameOverride: node-exporter
 
 podLabels:
-  jobLabel: node-exporter # changing this impacts dashboards
+  jobLabel: app.kubernetes.io/instance # changing this impacts dashboards
 
 prometheus:
   podMonitor:
