@@ -1,6 +1,9 @@
 ---
 tplVersion: 2
 
+podLabels:
+  jobLabel: telegraf
+
 image:
   pullPolicy: Always # they overwrite tags for bugfixes
 

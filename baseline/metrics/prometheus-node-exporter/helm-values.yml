@@ -13,8 +13,7 @@ nodeSelector:
 fullnameOverride: node-exporter
 
 podLabels:
-  jobLabel: job # changing this impacts dashboards
-  job: node-exporter
+  jobLabel: node-exporter # changing this impacts dashboards
 
 prometheus:
   podMonitor:
@@ -24,8 +23,7 @@ prometheus:
     jobLabel: jobLabel # changing this impacts dashboards
     additionalLabels:
       {{ prometheus_podmonitor_label_name }}: {{ prometheus_podmonitor_labels.system }}
-      jobLabel: job
-      job: node-exporter
+      jobLabel: node-exporter
     relabelings:
       - sourceLabels: [__meta_kubernetes_pod_node_name] # ensure consistent node name
         targetLabel: nodename
