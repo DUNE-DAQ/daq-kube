@@ -20,7 +20,7 @@ spec:
           targetLabel: instance
       scheme: http
       scrapeTimeout: 5s
-  jobLabel: app.kubernetes.io/name
+  jobLabel: jobLabel
   namespaceSelector:
     matchNames:
       - {{ OPMON_telegraf.namespace }}
