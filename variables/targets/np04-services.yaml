@@ -20,10 +20,10 @@ with_kafka_ui: false
 with_mongo_express: false
 
 grafana_extra_datasources:
-  np04-daq:
+  prometheus-extra-np04-daq:
     apiVersion: 1
     datasources:
-    - name: np04-daq
+    - name: prometheus-np04-daq
       type: prometheus
       uid: prometheus-np04-daq
       url: http://np04-srv-016.cern.ch:31093
