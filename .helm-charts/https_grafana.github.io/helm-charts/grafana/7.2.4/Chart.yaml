@@ -1,5 +1,5 @@
 annotations:
-  artifacthub.io/license: AGPL-3.0-only
+  artifacthub.io/license: Apache-2.0
   artifacthub.io/links: |
     - name: Chart Source
       url: https://github.com/grafana/helm-charts
@@ -30,4 +30,4 @@ sources:
 - https://github.com/grafana/grafana
 - https://github.com/grafana/helm-charts
 type: application
-version: 7.2.3
+version: 7.2.4
