@@ -1,0 +1,13 @@
+{% for thisone in grafana_extra_datasources %}
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: grafana-extra-datasource-{{ thisone }}
+  namespace: monitoring
+  labels:
+    {{ grafana_datasource_label_name }}: "{{ grafana_datasource_label_value }}"
+stringData:
+   grafana-extra-datasource-{{ thisone }}.yaml: |-
+     {{ grafana_extra_datasources[thisone] }}
+{% endfor %}

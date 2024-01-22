@@ -28,3 +28,5 @@ with_local_path_as_default_storageclass: true
 
 kubernetes_label:
   worker: node-role.kubernetes.io/control-plane # my heart breaks!
+
+grafana_extra_datasources: {}

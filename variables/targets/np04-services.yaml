@@ -19,23 +19,15 @@ with_backups: true
 with_kafka_ui: false
 with_mongo_express: false
 
-prometheus_scrape_configs:
+grafana_extra_datasources:
   np04-daq:
-    namespace: {{ monitoring.namespace }}
-    labels:
-      {{ prometheus_scrapeconfig_label_name }}: {{ prometheus_scrapeconfig_labels.extra }}
-      {{ prometheus_config_label_name }}: {{ prometheus_scrapeconfig_labels.extra }}
-    spec:
-      metricsPath: /federate
-      scrapeInterval: 1m
-      scrapeTimeout: 1m
-      honorTimestamps: true
-      honorLabels: true
-      params:
-        'match[]':
-        - '{__name__!=""}[1m]'
-      staticConfigs:
-      - targets:
-        - np04-srv-016.cern.ch:31093
-        labels:
-          cluster: np04-daq
+    apiVersion: 1
+    datasources:
+    - name: np04-daq
+      type: prometheus
+      uid: prometheus-np04-daq
+      url: http://np04-srv-016.cern.ch:31093
+      access: proxy
+      jsonData:
+        timeInterval: 30s
+        prometheusType: Prometheus

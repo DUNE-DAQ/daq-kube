@@ -14,3 +14,5 @@ inside_kind: true
 with_cilium: false
 with_local_path_as_default_storageclass: true
 with_nfs_storage: false
+
+grafana_extra_datasources: {}
