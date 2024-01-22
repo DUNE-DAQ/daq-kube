@@ -5,6 +5,7 @@ namespace: {{ monitoring.namespace }}
 
 resources:
   - helm-rendered.yaml
+  - grafana_extra_datasources.yaml
 
 commonLabels:
   app.kubernetes.io/component: {{ grafana.component_value }}
