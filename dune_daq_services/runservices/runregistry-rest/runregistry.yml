@@ -39,6 +39,8 @@ spec:
           - name: tnsnames-ora
             mountPath: /etc/tnsnames.ora
             subPath: tnsnames.ora
+          - mountPath: /microservices/runregistry-rest/uploads
+            name: uploads-volume
         ports:
         - containerPort: 5000
           protocol: TCP
@@ -64,5 +66,8 @@ spec:
             items:
              - key: tnsnames.ora
                path: tnsnames.ora
+        - name: uploads-volume # persistance is not required at this time
+          emptyDir:
+            sizeLimit: 20Gi
       securityContext:
         fsGroup: 11000
