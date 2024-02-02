@@ -27,7 +27,7 @@ spec:
              - key: {{ kubernetes_label.worker }}
                operator: Exists
       containers:
-      - image: ghcr.io/dune-daq/pocket-runregistry-rest:v0.0.10
+      - image: ghcr.io/dune-daq/pocket-runregistry-rest:v0.0.11 # TODO: unified image
         name: runregistry-rest
         env:
         - name: MICROSERVICE
