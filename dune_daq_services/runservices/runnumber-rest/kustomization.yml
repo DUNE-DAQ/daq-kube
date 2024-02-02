@@ -14,7 +14,7 @@ resources:
 
 configMapGenerator:
   - name: tnsnames-ora
-    files: [ tnsnames.ora ] # this is a hack, a terrible hack for oracle
+    files: [ tnsnames.ora ] # from https://service-oracle-tnsnames.web.cern.ch/service-oracle-tnsnames/tnsnames.ora
 
 patches:
   - target:
