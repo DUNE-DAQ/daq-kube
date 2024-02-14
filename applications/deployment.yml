@@ -16,6 +16,9 @@ deployments:
 
 {% if with_node_feature_discovery %}
   - include: node-feature-discovery
+{% if with_pcm %}
+  - path: pcm
+{% endif %}
 {% endif %}
 
 {% if with_kubernetes_dashboard %}

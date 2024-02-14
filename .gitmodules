@@ -32,3 +32,6 @@
 [submodule "sriov-network-device-plugin"]
 	path = .submodules/sriov-network-device-plugin
 	url = https://github.com/k8snetworkplumbingwg/sriov-network-device-plugin.git
+[submodule "intel-pcm"]
+	path = .submodules/intel-pcm
+	url = https://github.com/intel/pcm.git
