@@ -4,8 +4,11 @@ deployments:
 
   - barrier: true
 
-# maybe skip while we are using the oracle hacks
-#  - include: postgresql
+{% if with_dune_runservices_db_as == 'postgresql' %}
+  - include: postgresql # FIXME for sqlalchemy
+{% elif  with_dune_runservices_db_as == 'oracle' %}
+  - path: oracle
+{% endif %}
 
   - barrier: true
     message: make sure database is up

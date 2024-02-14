@@ -1,0 +1,14 @@
+
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+resources:
+  - run-db-secret.yaml # this is a terrible hack for oracle
+
+configMapGenerator:
+  - name: tnsnames-ora
+    files: [ tnsnames.ora ] # from https://service-oracle-tnsnames.web.cern.ch/service-oracle-tnsnames/tnsnames.ora
