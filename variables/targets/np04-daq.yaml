@@ -19,6 +19,7 @@ with_dune_daq_services: false
 with_grafana: false
 with_kepler: false
 with_nfs_storage: false
+with_pcm: true
 with_strimzi_kafka_operator: false
 
 with_dune_felix_plugin: true

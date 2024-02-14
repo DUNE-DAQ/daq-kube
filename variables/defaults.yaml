@@ -16,6 +16,7 @@ with_kepler: true
 with_kubernetes_dashboard: true
 with_nfs_storage: true
 with_node_feature_discovery: true
+with_pcm: false
 with_sriov: false
 with_strimzi_kafka_operator: true
 with_tinyproxy: true
