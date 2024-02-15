@@ -7,4 +7,4 @@ deployments:
   - path: flx-plugin
 
 vars:
-  - file: variables/flx-plugin.yaml
+  - file: variables/flx-plugin.yml
