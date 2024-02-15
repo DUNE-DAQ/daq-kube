@@ -8,8 +8,12 @@ patches:
   - target:
       kind: PodMonitor
     patch: |-
-      - op: remove
-        path: /metadata/labels/{{ prometheus_podmonitor_label_name }}
       - op: add
         path: /metadata/labels/{{ prometheus_podmonitor_label_name }}
         value: {{ prometheus_podmonitor_labels.system }}
+  - target: # eventually drop this
+      kind: DaemonSet
+    patch: |-
+      - op: add
+        path: /spec/template/spec/hostNetwork
+        value: true
