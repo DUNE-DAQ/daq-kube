@@ -1,4 +1,7 @@
 ---
+kubernetes_label:
+  worker: node-role.kubernetes.io/worker
+
 inside_kind: false
 
 with_applications: true
