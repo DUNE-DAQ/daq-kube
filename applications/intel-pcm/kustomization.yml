@@ -11,12 +11,6 @@ patches:
       - op: add
         path: /metadata/labels/{{ prometheus_podmonitor_label_name | replace("/", "~1") }}
         value: {{ prometheus_podmonitor_labels.system }}
-  - target:
-      kind: DaemonSet
-    patch: |-
-      - op: replace
-        path: /spec/template/spec/containers/0/securityContext/readOnlyRootFilesystem
-        value: false
   - target: # eventually drop this
       kind: DaemonSet
     patch: |-
