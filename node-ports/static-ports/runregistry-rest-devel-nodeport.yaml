@@ -1,0 +1,24 @@
+{% if with_dune_daq_services %}
+{% if with_dune_runservices_devel %}
+--- 
+apiVersion: v1
+kind: Service
+metadata:    
+  name: runregistry-rest-devel-nodeport
+  labels:
+    app.kubernetes.io/app: runregistry-rest-devel
+    app.kubernetes.io/component: runregistry-rest-devel
+  namespace: runservices
+spec:
+  type: NodePort
+  ports:
+  - name: http
+    port: 5005
+    protocol: TCP
+    targetPort: 5005
+    nodePort: 31015
+  selector:
+    app.kubernetes.io/app: runregistry-rest
+    app.kubernetes.io/component: runregistry-rest
+{% endif %}
+{% endif %}

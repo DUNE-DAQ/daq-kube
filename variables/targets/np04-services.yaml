@@ -20,6 +20,7 @@ with_kafka_ui: false
 with_mongo_express: false
 
 with_dune_runservices_db_as: oracle
+with_dune_runservices_devel: true
 
 grafana_extra_datasources:
   prometheus-extra-np04-daq:
