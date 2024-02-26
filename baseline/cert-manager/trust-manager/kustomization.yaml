@@ -5,5 +5,7 @@ resources:
   - helm-rendered.yaml
   - ca-bundle.yaml
 
-commonLabels:
-  app.kubernetes.io/instance: trust-manager
+labels:
+  - pairs:
+      app.kubernetes.io/instance: trust-manager
+    includeSelectors: true

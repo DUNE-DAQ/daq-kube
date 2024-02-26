@@ -6,6 +6,8 @@ resources:
 
 namespace: '{{ kubernetes_dashboard.namespace }}'
 
-commonLabels:
-  app.kubernetes.io/component: kubernetes-dashboard
-  app.kubernetes.io/instance: kubernetes-dashboard
+labels:
+  - pairs:
+      app.kubernetes.io/component: kubernetes-dashboard
+      app.kubernetes.io/instance: kubernetes-dashboard
+    includeSelectors: true

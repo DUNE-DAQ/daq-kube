@@ -4,6 +4,8 @@ kind: Kustomization
 resources:
   - helm-rendered.yaml
 
-commonLabels:
-  app.kubernetes.io/component: node-feature-discovery
-  app.kubernetes.io/instance: node-feature-discovery
+labels:
+  - pairs:
+      app.kubernetes.io/component: node-feature-discovery
+      app.kubernetes.io/instance: node-feature-discovery
+    includeSelectors: true

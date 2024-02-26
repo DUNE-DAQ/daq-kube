@@ -4,5 +4,7 @@ kind: Kustomization
 resources:
   - helm-rendered.yaml
 
-commonLabels:
-  app.kubernetes.io/instance: kepler
+labels:
+  - pairs:
+      app.kubernetes.io/instance: kepler
+    includeSelectors: true
