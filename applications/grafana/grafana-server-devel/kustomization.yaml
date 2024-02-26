@@ -6,6 +6,8 @@ namespace: {{ monitoring.namespace }}
 resources:
   - helm-rendered.yaml
 
-commonLabels:
-  app.kubernetes.io/component: {{ grafana.component_value }}
-  app.kubernetes.io/instance: grafana-devel
+labels:
+  - pairs:
+      app.kubernetes.io/component: {{ grafana.component_value }}
+      app.kubernetes.io/instance: grafana-devel
+    includeSelectors: true

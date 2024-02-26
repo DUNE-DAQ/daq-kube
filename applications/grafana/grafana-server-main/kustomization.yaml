@@ -7,6 +7,8 @@ resources:
   - helm-rendered.yaml
   - grafana_extra_datasources.yaml
 
-commonLabels:
-  app.kubernetes.io/component: {{ grafana.component_value }}
-  app.kubernetes.io/instance: grafana-main
+labels:
+  - pairs:
+      app.kubernetes.io/component: {{ grafana.component_value }}
+      app.kubernetes.io/instance: grafana-main
+    includeSelectors: true

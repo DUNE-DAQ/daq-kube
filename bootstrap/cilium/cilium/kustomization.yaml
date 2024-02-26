@@ -4,5 +4,7 @@ kind: Kustomization
 resources:
   - helm-rendered.yaml
 
-commonLabels:
-  app.kubernetes.io/instance: cilium
+labels:
+  - pairs:
+      app.kubernetes.io/instance: cilium
+    includeSelectors: true
