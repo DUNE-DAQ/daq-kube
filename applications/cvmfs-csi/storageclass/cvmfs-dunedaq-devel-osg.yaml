@@ -1,0 +1,8 @@
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: cvmfs-dunedaq-devel-osg
+provisioner: cvmfs.csi.cern.ch
+parameters:
+  repository: dunedaq-development.opensciencegrid.org

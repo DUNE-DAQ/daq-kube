@@ -12,5 +12,7 @@ deployments:
   - barrier: true
     message: wait for cvmfs-csi to settle
 
+  - path: storageclass
+
 vars:
   - file: variables/cvmfs_csi.yaml
