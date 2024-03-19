@@ -1,6 +1,6 @@
 helmChart:
   chartName: trust-manager
-  chartVersion: v0.8.0
+  chartVersion: v0.9.1
   namespace: '{{ certmanager.namespace }}'
   output: helm-rendered.yaml
   releaseName: trust-manager
