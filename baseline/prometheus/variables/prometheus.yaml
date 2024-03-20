@@ -46,7 +46,11 @@ prometheis: # this is the plural of prometheus
           accessModes: ["ReadWriteOnce"]
           resources:
             requests:
-              storage: 20Gi # this is guess work
+              storage: 55Gi # this is guess work
+    prometheusSpec:
+      storage:
+        tsdb:
+          retentionSize: 50GB
 
     # these selectors should probably be set to rational filters
     serviceMonitorNamespaceSelector: {}
