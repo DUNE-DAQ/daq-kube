@@ -47,10 +47,7 @@ prometheis: # this is the plural of prometheus
           resources:
             requests:
               storage: 55Gi # this is guess work
-    prometheusSpec:
-      storage:
-        tsdb:
-          retentionSize: 50GB
+    retentionSize: 50GB
 
     # these selectors should probably be set to rational filters
     serviceMonitorNamespaceSelector: {}
