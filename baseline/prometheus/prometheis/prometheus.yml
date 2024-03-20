@@ -40,9 +40,11 @@ spec:
   affinity: {{ prometheis[thisone].affinity | tojson }}
   {% if prometheis[thisone].storage is defined %}
   storage: {{ prometheis[thisone].storage | tojson }}
+  {% if prometheis[thisone].retentionSize is defined %}
+  retentionSize: {{ prometheis[thisone].retentionSize | tojson }}
+  {% endif %}
   {% endif %}
 
-  prometheusSpec: {{ prometheis[thisone].prometheusSpec | tojson }}
 
   serviceMonitorNamespaceSelector: {{ prometheis[thisone].serviceMonitorNamespaceSelector | tojson }}
   serviceMonitorSelector: {{ prometheis[thisone].serviceMonitorSelector | tojson }}
