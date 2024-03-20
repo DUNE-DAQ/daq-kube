@@ -12,3 +12,27 @@ The lables are kept in the global namespace under `variables/alertmanager_labels
 
 The "default" prometheus is available within the cluster under the name `prometheus.monitoring.svc` on port 9090
 The "default" alertmanager is available within the cluster under the name `alertmanager.monitoring.svc` on port 9093
+
+## Scrape Config note:
+
+```yaml
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: prometheus-config-np04-daq
+  namespace: monitoring
+spec:
+  honorLabels: true
+  honorTimestamps: true
+  metricsPath: /federate
+  params:
+    match[]:
+    - '{__name__=~".+"}[1m]'
+  scrapeInterval: 1m
+  scrapeTimeout: 1m
+  staticConfigs:
+  - labels:
+      cluster: np04-daq
+    targets:
+    - np04-srv-016.cern.ch:31093
+```
