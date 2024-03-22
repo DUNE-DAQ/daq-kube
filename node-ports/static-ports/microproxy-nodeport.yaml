@@ -1,0 +1,22 @@
+{% if with_tinyproxy %}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/app: microsocks
+    app.kubernetes.io/component: microsocks
+  name: microsocks-nodeport
+  namespace: microsocks
+spec:
+  ports:
+    - name: socks5
+      protocol: TCP
+      port: 1080
+      targetPort: socks5
+      nodePort: 31000
+  selector:
+    app.kubernetes.io/app: microsocks
+    app.kubernetes.io/component: microsocks
+  type: NodePort
+{% endif %}
