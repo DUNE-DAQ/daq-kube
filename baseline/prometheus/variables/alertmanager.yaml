@@ -21,7 +21,7 @@ alertmanagers:
         memory: 1Gi
       requests:
         cpu: 50m
-        memory: 64M
+        memory: 128M
     affinity:
      nodeAffinity:
        requiredDuringSchedulingIgnoredDuringExecution:

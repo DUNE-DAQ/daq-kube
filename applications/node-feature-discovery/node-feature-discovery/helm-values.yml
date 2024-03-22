@@ -13,7 +13,7 @@ master:
       memory: 384Mi
     requests:
       cpu: 10m
-      memory: 16Mi
+      memory: 128Mi
   affinity:
    nodeAffinity:
      requiredDuringSchedulingIgnoredDuringExecution:
@@ -29,7 +29,7 @@ gc:
       memory: 384Mi
     requests:
       cpu: 10m
-      memory: 16Mi
+      memory: 64Mi
   affinity:
    nodeAffinity:
      requiredDuringSchedulingIgnoredDuringExecution:
@@ -48,7 +48,7 @@ worker:
       memory: 384Mi
     requests:
       cpu: 10m
-      memory: 16Mi
+      memory: 32Mi
 
 topologyUpdater:
   enable: {{ node_feature_discovery.topologyUpdater.enable }}
@@ -60,7 +60,7 @@ topologyUpdater:
       memory: 384Mi
     requests:
       cpu: 10m
-      memory: 16Mi
+      memory: 32Mi
   affinity:
    nodeAffinity:
      requiredDuringSchedulingIgnoredDuringExecution:
@@ -78,7 +78,7 @@ topologyGC:
       memory: 384Mi
     requests:
       cpu: 10m
-      memory: 16Mi
+      memory: 32Mi
   affinity:
    nodeAffinity:
      requiredDuringSchedulingIgnoredDuringExecution:

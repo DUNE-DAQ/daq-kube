@@ -54,7 +54,7 @@ spec:
             cpu: 500m
           requests:
             memory: 8Mi
-            cpu: 5m
+            cpu: 100m
         securityContext:
           runAsUser: 10000
           runAsGroup: 10000
