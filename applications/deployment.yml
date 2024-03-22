@@ -2,7 +2,7 @@
 deployments:
 {% if with_applications %}
 {% if with_tinyproxy %}
-  - path: python-tiny-proxy
+  - path: microsocks
 {% endif %}
 
 {% if with_kepler %}
