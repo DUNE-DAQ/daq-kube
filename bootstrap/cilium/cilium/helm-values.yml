@@ -55,13 +55,9 @@ pmtuDiscovery:
 
 bpf:
   hostLegacyRouting: true
-  masquerade: true
   preallocateMaps: true
   tproxy: true
 bpfClockProbe: true
-
-nodePort:
-  enabled: true
 
 envoy:
   resources: # this is guess work
