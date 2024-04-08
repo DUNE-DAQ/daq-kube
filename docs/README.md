@@ -83,7 +83,7 @@ The list of node-ports in use can be found under `node-ports`.  It contains the 
 
 Inside the cluster, port `1080` is available for use as a SOCKS5 proxy.
 
-If the node-ports were deployed, there is a node-port set for `python-tiny-proxy` that should grant access to the cluster.  If you delegate DNS to the SOCKS5 proxy, you can use this proxy server to test and recieve any in-cluster resources.
+If the node-ports were deployed, there is a node-port set for `microsocks` that should grant access to the cluster.  If you delegate DNS to the SOCKS5 proxy, you can use this proxy server to test and recieve any in-cluster resources.
 
 ## HOW TO
 
