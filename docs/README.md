@@ -73,7 +73,7 @@ You can review the default credentials for your cluster by running when `kubectl
 print-creds.sh
 ```
 
-The deployment also sets up an instance of a `python-tiny-proxy` SOCKS5 proxy server that you can use to tie into the kubernetes network.
+The deployment also sets up an instance of a `microsocks` SOCKS5 proxy server that you can use to tie into the kubernetes network.
 
 ### Node Ports
 
