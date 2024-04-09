@@ -5,6 +5,7 @@ deployments:
   - barrier: true
 
   - path: kubernetes-dashboard
+  - path: ro-user
 
 vars:
   - file: variables/kubernetes_dashboard.yaml
