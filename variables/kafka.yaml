@@ -7,4 +7,3 @@ kafka:
 
 strimzi:
   namespace: strimzi-kafka
-  with_kafka_kraft: true
