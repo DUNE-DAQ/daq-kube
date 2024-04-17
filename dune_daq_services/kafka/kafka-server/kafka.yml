@@ -1,4 +1,3 @@
-{% if strimzi.with_kafka_kraft %}
 ---
 apiVersion: kafka.strimzi.io/v1beta2
 kind: KafkaNodePool
@@ -14,18 +13,22 @@ spec:
     - broker
   storage:
     type: ephemeral
-{% endif %}
+  resources:
+    requests:
+      memory: 1Gi
+      cpu: "1"
+    limits:
+      memory: 64Gi
+      cpu: "12"
 ---
 apiVersion: kafka.strimzi.io/v1beta2
 kind: Kafka
 metadata:
   name: {{ dunedaq.kafka.name }}
   namespace: {{ dunedaq.kafka.namespace }}
-{% if strimzi.with_kafka_kraft %}
   annotations:
     strimzi.io/kraft: enabled
     strimzi.io/node-pools: enabled
-{% endif %}
 spec:
   entityOperator:
     userOperator:
@@ -36,16 +39,6 @@ spec:
         limits:
           cpu: 400m
           memory: 512Mi
-{% if not strimzi.with_kafka_kraft %}
-    topicOperator: # bidirectional topicOperator not supported on KRaft
-      resources:
-        requests: # this is guess work
-          cpu: 10m
-          memory: 16Mi
-        limits:
-          cpu: 400m
-          memory: 512Mi
-{% endif %}
     template:    
       pod:       
         affinity:

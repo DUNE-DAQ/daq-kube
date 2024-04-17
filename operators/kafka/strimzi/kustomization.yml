@@ -9,21 +9,12 @@ resources:
 
 # disable dashboards for components we are not using
 patches:
-{% if strimzi.with_kafka_kraft %}
   - target:
       kind: ConfigMap
       name: strimzi-zookeeper
     patch: |-
       - op: remove
         path: /metadata/labels/{{ grafana_dashboard_label_name }}
-{% else %}
-  - target:
-      kind: ConfigMap
-      name: strimzi-kraft
-    patch: |-
-      - op: remove
-        path: /metadata/labels/{{ grafana_dashboard_label_name }}
-{% endif %}
 {% if not kafka.with_bridge %}
   - target:
       kind: ConfigMap

@@ -10,8 +10,7 @@ dunedaq:
     pool: kafka-full
     bootstrap_brokers:
       - dune-daq-kafka-bootstrap.kafka.svc:9092
-    version: "3.6.1"
-    protocol_version: "3.6"
+    version: "3.7.0"
     replicas: 1
   unified_microservices:
     image: ghcr.io/dune-daq/microservices

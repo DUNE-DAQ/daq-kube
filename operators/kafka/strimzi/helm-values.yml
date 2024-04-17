@@ -1,11 +1,5 @@
 ---
-# Apache Kafka is "stable" with KRaft but
-# you cannot upgrade from one version of kafka to the next with Kraft
-{% if strimzi.with_kafka_kraft %}
-featureGates: '+UseKRaft,+KafkaNodePools'
-{% else %}
 featureGates: ''
-{% endif %}
 
 watchAnyNamespace: true
 
