@@ -43,7 +43,7 @@ The command deploys Local Path Provisioner on the Kubernetes cluster in the defa
 To uninstall/delete the `local-path-storage` deployment:
 
 ```console
-$ helm delete --purge local-path-storage
+$ helm uninstall local-path-storage
 ```
 
 The command removes all the Kubernetes components associated with the chart and deletes the release.
@@ -55,12 +55,14 @@ default values.
 
 | Parameter                           | Description                                                                     | Default                                                                             |
 | ----------------------------------- | ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| `commonLabels`                      | Custom labels to apply to all resources                                         | `{}`                                                                                |
 | `image.repository`                  | Local Path Provisioner image name                                               | `rancher/local-path-provisioner`                                                    |
-| `image.tag`                         | Local Path Provisioner image tag                                                | `v0.0.24`                                                                       |
+| `image.tag`                         | Local Path Provisioner image tag                                                | `master-head`                                                                       |
 | `image.pullPolicy`                  | Image pull policy                                                               | `IfNotPresent`                                                                      |
 | `storageClass.create`               | If true, create a `StorageClass`                                                | `true`                                                                              |
 | `storageClass.provisionerName`      | The provisioner name for the storage class                                      | `nil`                                                                               |
 | `storageClass.defaultClass`         | If true, set the created `StorageClass` as the cluster's default `StorageClass` | `false`                                                                             |
+| `storageClass.defaultVolumeType`    | The default volume type this storage class creates                              | `hostPath`                                                                          |
 | `storageClass.name`                 | The name to assign the created StorageClass                                     | local-path                                                                          |
 | `storageClass.reclaimPolicy`        | ReclaimPolicy field of the class                                                | Delete                                                                              |
 | `nodePathMap`                       | Configuration of where to store the data on each node                           | `[{node: DEFAULT_PATH_FOR_NON_LISTED_NODES, paths: [/opt/local-path-provisioner]}]` |
