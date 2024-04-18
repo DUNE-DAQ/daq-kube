@@ -1,5 +1,7 @@
 node-taints node.Cilium.io/agent-not-ready=true:NoExecute   ??
 
+What about https://github.com/democratic-csi/democratic-csi instead of local-path-provisioner?
+
 What about cilium featues:
   kube-proxy replacement
   ingress
