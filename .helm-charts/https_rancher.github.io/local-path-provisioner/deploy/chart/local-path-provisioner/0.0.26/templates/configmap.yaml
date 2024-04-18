@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ .Values.configmap.name }}
+  namespace: {{ .Release.Namespace }}
   labels:
 {{ include "local-path-provisioner.labels" . | indent 4 }}
 data:
@@ -15,20 +16,25 @@ data:
     {{- end }}
     {{- $config | toPrettyJson | nindent 4 }}
   setup: |-
-    {{ .Values.configmap.setup | nindent 4 }}
+    {{- .Values.configmap.setup | nindent 4 }}
   teardown: |-
-    {{ .Values.configmap.teardown | nindent 4 }}
+    {{- .Values.configmap.teardown | nindent 4 }}
   helperPod.yaml: |-
     apiVersion: v1
     kind: Pod
     metadata:
       name: helper-pod
     spec:
+      priorityClassName: system-node-critical
+      tolerations:
+        - key: node.kubernetes.io/disk-pressure
+          operator: Exists
+          effect: NoSchedule
       containers:
         - name: helper-pod
           {{- if .Values.privateRegistry.registryUrl }}
           image: {{ .Values.privateRegistry.registryUrl }}/{{ .Values.helperImage.repository }}:{{ .Values.helperImage.tag }}
           {{- else }}
-          image: docker.io/{{ .Values.helperImage.repository }}:{{ .Values.helperImage.tag }}
+          image: {{ .Values.helperImage.repository }}:{{ .Values.helperImage.tag }}
           {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}

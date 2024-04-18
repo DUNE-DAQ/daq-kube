@@ -2,31 +2,38 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "local-path-provisioner.fullname" . }}
+  namespace: {{ .Release.Namespace }}
   labels:
 {{ include "local-path-provisioner.labels" . | indent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "local-path-provisioner.name" . }}
-      app.kubernetes.io/instance: {{ .Release.Name }}
+{{ include "local-path-provisioner.labels" . | indent 6 }}
   template:
     metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       labels:
-        app.kubernetes.io/name: {{ include "local-path-provisioner.name" . }}
-        app.kubernetes.io/instance: {{ .Release.Name }}
+{{ include "local-path-provisioner.labels" . | indent 8 }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
     {{- end }}
       serviceAccountName: {{ template "local-path-provisioner.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
         {{- if .Values.privateRegistry.registryUrl }}
           image: "{{ .Values.privateRegistry.registryUrl }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         {{- else }}
-          image: "docker.io/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           command:
@@ -43,21 +50,21 @@ spec:
           {{- if .Values.privateRegistry.registryUrl }}
             - "{{ .Values.privateRegistry.registryUrl }}/{{ .Values.helperImage.repository }}:{{ .Values.helperImage.tag }}"
           {{- else }}
-            - "docker.io/{{ .Values.helperImage.repository }}:{{ .Values.helperImage.tag }}"
+            - "{{ .Values.helperImage.repository }}:{{ .Values.helperImage.tag }}"
           {{- end }}
             - --configmap-name
             - {{ .Values.configmap.name }}
           {{- if .Values.workerThreads }}
             - --worker-threads
-            - {{ .Values.workerThreads }}
+            - {{ .Values.workerThreads | quote }}
           {{- end }}
           {{- if .Values.provisioningRetryCount }}
             - --provisioning-retry-count
-            - {{ .Values.provisioningRetryCount }}
+            - {{ .Values.provisioningRetryCount | quote }}
           {{- end }}
           {{- if .Values.deletionRetryCount }}
             - --deletion-retry-count
-            - {{ .Values.deletionRetryCount }}
+            - {{ .Values.deletionRetryCount | quote }}
           {{- end }}
           volumeMounts:
             - name: config-volume
