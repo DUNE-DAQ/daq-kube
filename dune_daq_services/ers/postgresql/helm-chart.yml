@@ -1,7 +1,7 @@
 helmChart:
-  chartVersion: 14.3.3
+  chartVersion: 15.2.5
   namespace: '{{ DUNE_ers.namespace }}'
   output: helm-rendered.yaml
   releaseName: '{{ ERS_postgresql.release_name }}'
   repo: oci://registry-1.docker.io/bitnamicharts/postgresql
-  updateConstraints: ~14.x
+  updateConstraints: ~15.x

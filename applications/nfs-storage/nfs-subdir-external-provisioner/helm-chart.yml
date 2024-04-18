@@ -2,7 +2,7 @@ helmChart:
   repo: https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/
   chartName: nfs-subdir-external-provisioner
   chartVersion: 4.0.18
-  updateConstraints: ~4.x
   releaseName: nfs-subdir-external-provisioner
   namespace: "{{ nfs_subdir_external_provisioner.namespace }}"
   output: helm-rendered.yaml
+  updateConstraints: ~4.x
