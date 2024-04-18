@@ -1,7 +1,7 @@
 helmChart:
-  chartVersion: 14.13.0
+  chartVersion: 15.1.4
   namespace: '{{ DUNE_daqconfig.namespace }}'
   output: helm-rendered.yaml
   releaseName: daqconfig-mongodb
   repo: oci://registry-1.docker.io/bitnamicharts/mongodb
-  updateConstraints: ~14.x
+  updateConstraints: ~15.x
