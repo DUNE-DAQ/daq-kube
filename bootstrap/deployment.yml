@@ -4,6 +4,10 @@ deployments:
     alwaysDeploy: true
     skipDeleteIfTags: true
 
+  - path: debug
+    alwaysDeploy: true
+    skipDeleteIfTags: true
+
 {% if with_bootstrap %}
   - path: prometheus-operator-crds
     alwaysDeploy: true
