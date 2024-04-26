@@ -4,7 +4,7 @@ kind: Secret
 metadata:
   labels:
     {{ grafana_datasource_label_name }}: {{ grafana_datasource_label_value }}
-  name: grafana-datasource-opmon-influxdb-InfluxKafka
+  name: grafana-datasource-opmon-influxdb-influxkafka
   namespace: {{ DUNE_opmon.namespace }}
 type: Opaque
 stringData:
