@@ -4,18 +4,18 @@ kind: Secret
 metadata:
   labels:
     {{ grafana_datasource_label_name }}: {{ grafana_datasource_label_value }}
-  name: grafana-datasource-opmon-influxdb
+  name: grafana-datasource-opmon-influxdb-InfluxKafka
   namespace: {{ DUNE_opmon.namespace }}
 type: Opaque
 stringData:
-  datasource_opmon_influxdb_{{ DUNE_opmon.influxdb_database }}.yaml: |-
+  datasource_opmon_influxdb_InfluxKafka.yaml: |-
     apiVersion: 1
     datasources:
       - name: InfluxKafka
         type: influxdb
         access: proxy
         database: {{ DUNE_opmon.influxdb_database }}
-        url:  "http://opmon-influxdb.{{ DUNE_opmon.namespace }}.svc:8086" # my heart breaks
+        url:  "http://opmon-influxdb.{{ DUNE_opmon.namespace }}.svc:8086" # my heart breaks without ssl
         withCredentials: true
         basicAuth: true
         user: {{ DUNE_opmon.influxdb_ro_username }}
