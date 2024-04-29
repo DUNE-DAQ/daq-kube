@@ -1,43 +1,62 @@
 ---
-setDefaultUser:
+auth:
   enabled: true
-  user:
+  admin:
     username: {{ OPMON_influxdb.admin_username }}
     password: {{ OPMON_influxdb.admin_password }}
+  user:
+    username: {{ OPMON_influxdb.username }}
+    password: {{ OPMON_influxdb.password }}
+    org: {{ OPMON_influxdb.influxdb_org }}
+    bucket: {{ OPMON_influxdb.influxdb_database }}
+  readUser:
+    username: {{ OPMON_influxdb.influxdb_ro_username }}
+    password: {{ OPMON_influxdb.influxdb_ro_password }}
+  writeUser:
+    username: {{ OPMON_influxdb.influxdb_rw_username }}
+    password: {{ OPMON_influxdb.influxdb_rw_password }}
 
-env: {{ OPMON_influxdb.env | tojson }}
+influxdb:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: {{ kubernetes_label.worker }}
+            operator: Exists
+    podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions: # try to schedule away from Kafka
+            - key: "strimzi.io/cluster"
+              operator: In
+              values:
+              - "{{ dunedaq.kafka.name }}"
+          topologyKey: kubernetes.io/hostname
 
 persistence:
   enabled: true
   size: 8Gi # this size is guess work
   storageClass: {{ local_path_provisioner.storage_class_name }}
 
+{% if with_backups %}
+backup:
+  enabled: true
+  successfulJobsHistoryLimit: 1
+{% endif %}
+
+metrics:
+  enabled: true
+  serviceMonitor:
+    enabled: true
+    labels:
+      jobLabel: influxdb-opmon
+      "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.influxdb }}"
+    jobLabel: jobLabel
+
 resources: # this is guess work
   requests:
-    cpu: 10m
-    memory: 16Mi
-
-securityContext:
-  runAsUser: 1999
-  runAsNonRoot: true
-  seccompProfile:
-    type: RuntimeDefault
-
-affinity:
-  nodeAffinity:
-    requiredDuringSchedulingIgnoredDuringExecution:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: {{ kubernetes_label.worker }}
-          operator: Exists
-  podAntiAffinity:
-    preferredDuringSchedulingIgnoredDuringExecution:
-    - weight: 100
-      podAffinityTerm:
-        labelSelector:
-          matchExpressions: # try to schedule away from Kafka
-          - key: "strimzi.io/cluster"
-            operator: In
-            values:
-            - "{{ dunedaq.kafka.name }}"
-        topologyKey: kubernetes.io/hostname
+    cpu: 50m
+    memory: 64Mi

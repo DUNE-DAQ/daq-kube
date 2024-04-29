@@ -6,5 +6,4 @@ namespace: {{ DUNE_opmon.namespace }}
 
 resources:
   - helm-rendered.yaml
-  - influxdb-podmonitor.yml
   - grafana-datasource.yml

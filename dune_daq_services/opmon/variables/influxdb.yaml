@@ -2,18 +2,11 @@
 OPMON_influxdb:
   admin_username: dune
   admin_password: {{ args.opmon_influxdb_admin_password }}
-  env:
-    - name: INFLUXDB_DB
-      value: {{ DUNE_opmon.influxdb_database }}
-    - name: INFLUXDB_USER # is this user used?
-      value: user
-    - name: INFLUXDB_USER_PASSWORD
-      value: {{ args.opmon_influxdb_user_influxdb_password }}
-    - name: INFLUXDB_READ_USER
-      value: {{ DUNE_opmon.influxdb_ro_username }}
-    - name: INFLUXDB_READ_USER_PASSWORD
-      value: {{ DUNE_opmon.influxdb_ro_password }}
-    - name: INFLUXDB_WRITE_USER
-      value: {{ OPMON_telegraf.influxdb_username }}
-    - name: INFLUXDB_WRITE_USER_PASSWORD
-      value: {{ OPMON_telegraf.influxdb_password }}
+  username: username # just set so our buckets create
+  password: {{ args.opmon_influxdb_user_influxdb_password }}
+  influxdb_org: dune
+  influxdb_database: {{ DUNE_opmon.influxdb_database }}
+  influxdb_rw_username: {{ OPMON_telegraf.influxdb_username }}
+  influxdb_rw_password: {{ OPMON_telegraf.influxdb_password }}
+  influxdb_ro_username: {{ DUNE_opmon.influxdb_ro_username }}
+  influxdb_ro_password: {{ DUNE_opmon.influxdb_ro_password }}
