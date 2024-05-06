@@ -29,6 +29,14 @@ patches:
         path: /metadata/labels/{{ grafana_dashboard_label_name }}
   - target:
       kind: ConfigMap
+      name: grafana-dashboard-nodes-darwin # not necessary
+    patch: |-
+      - op: remove
+        path: /metadata/annotations/{{ grafana_dashboard_folder_annotation }}
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+  - target:
+      kind: ConfigMap
       name: grafana-dashboard-prometheus
     patch: |-
       - op: replace
