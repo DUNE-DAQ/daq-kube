@@ -3,7 +3,7 @@
 NAMESPACE="opmon"
 HELM_RELEASE="opmon-influxdb"
 
-DATABASE="influxv3"
+DATABASE="influxv4"
 HOST=${HELM_RELEASE}
 PASS=$(kubectl -n ${NAMESPACE} get secret ${HELM_RELEASE}-auth -ojsonpath="{.data.influxdb-password}" | base64 --decode; echo)
 PORT="8086"
