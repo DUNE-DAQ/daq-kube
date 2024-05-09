@@ -16,8 +16,8 @@ smtp_port: 587
 cvmfs_http_proxy: http://ca-proxy.cern.ch:3128
 
 with_backups: true
-with_kafka_ui: false
-with_mongo_express: false
+with_kafka_ui: true
+with_mongo_express: true
 
 with_dune_runservices_db_as: oracle
 with_dune_runservices_devel: true
