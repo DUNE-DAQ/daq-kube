@@ -29,10 +29,21 @@ spec:
            - matchExpressions:
              - key: {{ kubernetes_label.worker }}
                operator: Exists
+       podAffinity:
+         preferredDuringSchedulingIgnoredDuringExecution:
+         - weight: 100
+           podAffinityTerm:
+             labelSelector:
+               matchExpressions: # try to schedule near Mongodb
+               - key: "app.kubernetes.io/component"
+                 operator: In
+                 values:
+                 - mongodb
+             topologyKey: kubernetes.io/hostname
+
       containers:
         - name: mongodb-express
-          # https://github.com/mongo-express/mongo-express/issues/1170
-          image: docker.io/library/mongo-express
+          image: docker.io/library/mongo-express:latest
           ports:
             - containerPort: 8081
               name: mongo-express
