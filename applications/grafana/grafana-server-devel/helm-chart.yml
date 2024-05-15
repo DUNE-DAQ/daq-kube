@@ -1,6 +1,6 @@
 helmChart:
   chartName: grafana
-  chartVersion: 7.3.9
+  chartVersion: 7.3.11
   namespace: '{{ monitoring.namespace }}'
   output: helm-rendered.yaml
   releaseName: grafana-devel
