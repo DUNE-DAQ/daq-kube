@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+data:
+  database: cGRicg==
+  host: cGRici1zLmNlcm4uY2g=
+  password: FIXME
+  port: MTAxMjE=
+  provider: c2VsZg==
+  type: b3JhY2xl
+  uri: FIXME # oracle+oracledb://pdsp_rc:FIXME@pdbr-s.cern.ch:10121?service_name=protodune_prod.cern.ch
+  username: cGRzcF9yYw==
+kind: Secret
+metadata:
+  labels:
+    app.kubernetes.io/instance: runservices-oracle
+  name: runservices-oracle-svcbind-custom-user
+  namespace: runservices
+type: Opaque
+

@@ -5,7 +5,7 @@ deployments:
   - barrier: true
 
 {% if with_dune_runservices_db_as == 'postgresql' %}
-  - include: postgresql # FIXME for sqlalchemy
+  - path: postgresql
 {% elif  with_dune_runservices_db_as == 'oracle' %}
   - path: oracle
 {% endif %}
@@ -18,3 +18,14 @@ deployments:
 
 vars:
   - file: variables/runservices.yml
+
+ignoreForDiff: # don't keep changing the postgresql password
+  - kind: Secret
+    name: runservices-postgresql-svcbind-postgres
+    fieldPath: .data.password
+  - kind: Secret
+    name: runservices-postgresql-svcbind-postgres
+    fieldPath: .data.uri
+  - kind: Secret
+    name: runservices-postgresql
+    fieldPath: .data["postgres-password"]
