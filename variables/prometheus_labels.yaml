@@ -6,6 +6,7 @@ prometheus_servicemonitor_label_name: prometheus.io/servicemonitor
 prometheus_servicemonitor_labels:
   system: system-metrics
   extra: extra-metrics
+  influxdb: influxdb-metrics
   kafka: kafka-metrics
   mongodb: mongodb-metrics
   postgresql: postgresql-metrics

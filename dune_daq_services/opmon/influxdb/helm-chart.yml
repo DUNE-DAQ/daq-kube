@@ -1,8 +1,7 @@
 helmChart:
-  chartName: influxdb
-  chartVersion: 4.12.5
+  chartVersion: 6.0.8
   namespace: '{{ DUNE_opmon.namespace }}'
   output: helm-rendered.yaml
   releaseName: opmon-influxdb
-  repo: https://helm.influxdata.com/
-  updateConstraints: ~4.x
+  repo: oci://registry-1.docker.io/bitnamicharts/influxdb
+  updateConstraints: ~6.x
