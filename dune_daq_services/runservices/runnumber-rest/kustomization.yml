@@ -5,9 +5,16 @@ kind: Kustomization
 namespace: {{ DUNE_runservices.namespace }}
 
 resources:
-  - runnumber-rest.yaml # https://github.com/DUNE-DAQ/microservices/tree/develop/runnumber-rest
+  - runnumber-rest-deployment.yaml
 
 patches:
+  - target:
+      kind: Namespace
+    patch: |-
+      $patch: delete
+      kind: Kustomization
+      metadata:
+        name: DOES NOT MATTER
   - target:
       group: apps
       version: v1
@@ -24,3 +31,13 @@ patches:
       - op: replace
         path: /spec/template/spec/affinity/nodeAffinity/requiredDuringSchedulingIgnoredDuringExecution/nodeSelectorTerms/0/matchExpressions/0/key
         value: {{ kubernetes_label.worker }}
+{% if  with_dune_runservices_db_as == 'oracle' %}
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/env/1/valueFrom/secretKeyRef/name
+        value: runservices-oracle-svcbind-custom-user
+{% endif %}
