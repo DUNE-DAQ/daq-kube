@@ -1,11 +1,4 @@
 ---
-# There is a known issue where
-# Secret/kubernetes-dashboard-key-holder
-# loses its labels and annotations after initial startup
-# https://github.com/kubernetes/dashboard/issues/7731
-
-# Dashboard 3.0 changes/moves most of these parameters
-
 fullnameOverride: 'kubernetes-dashboard'
 
 cert-manager:
@@ -17,20 +10,23 @@ nginx:
 metricsScraper:
   enabled: true
 
-networkPolicy:
-  enabled: true
-  ingressDenyAll: {{ kubernetes_dashboard.deny_all_ingress }}
+app:
+  security:
+    networkPolicy:
+      enabled: true
+      ingressDenyAll: {{ kubernetes_dashboard.deny_all_ingress }}
 
-serviceMonitor:
-  enabled: true
+extras:
+  serviceMonitor:
+    enabled: true
+    labels:
+      {{ prometheus_servicemonitor_label_name }}: {{ prometheus_servicemonitor_labels.system }}
 
-{% if kubernetes_dashboard.enable_ro_user %}
-rbac:
-  # It is NOT RECOMMENDED to use this version in production.
-  clusterReadOnlyRole: true
-extraArgs:
-  - --enable-skip-login
-{% endif %}
+# kong:
+#  serviceMonitor:
+#    enabled: true
+#    labels:
+#      {{ prometheus_servicemonitor_label_name }}: {{ prometheus_servicemonitor_labels.system }}
 
 affinity:
   nodeAffinity:

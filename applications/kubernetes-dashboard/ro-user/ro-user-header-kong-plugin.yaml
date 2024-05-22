@@ -1,0 +1,10 @@
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: ro-user-header-kong-plugin
+plugin: headers
+config:
+  add:
+    header_name: Authorization
+    value: "Bearer {{secret:kubernetes-dashboard-read-only-token:token}}"

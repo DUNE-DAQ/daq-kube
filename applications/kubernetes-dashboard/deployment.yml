@@ -5,6 +5,9 @@ deployments:
   - barrier: true
 
   - path: kubernetes-dashboard
+
+  - barrier: true
+
   - path: ro-user
 
 vars:
