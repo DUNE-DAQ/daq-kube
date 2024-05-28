@@ -15,6 +15,8 @@ with_cilium: true
 with_cvmfs_csi: false
 with_dns_autoscaler: true
 with_grafana: true
+with_grafana_server_main: true
+with_grafana_server_devel: true
 with_kepler: true
 with_kubernetes_dashboard: true
 with_nfs_storage: true
