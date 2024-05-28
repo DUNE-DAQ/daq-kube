@@ -13,8 +13,13 @@ deployments:
   - barrier: true
     message: Ensure kubernetes dashboards are loaded
 
+{% if with_grafana_server_main %}
   - path: grafana-server-main
+{% endif %}
+
+{% if with_grafana_server_devel %}
   - path: grafana-server-devel
+{% endif %}
 
 vars:
   - file: variables/grafana.yaml
