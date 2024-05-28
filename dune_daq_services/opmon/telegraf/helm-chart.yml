@@ -1,6 +1,6 @@
 helmChart:
   chartName: telegraf
-  chartVersion: 1.8.45
+  chartVersion: 1.8.48
   namespace: '{{ OPMON_telegraf.namespace }}'
   output: helm-rendered.yaml
   releaseName: telegraf
