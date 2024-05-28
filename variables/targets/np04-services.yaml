@@ -22,8 +22,6 @@ with_mongo_express: true
 with_dune_runservices_db_as: oracle
 with_dune_runservices_devel: true
 
-with_grafana_server_main: false
-
 grafana_extra_datasources:
   prometheus-extra-np04-daq:
     apiVersion: 1
