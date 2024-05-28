@@ -1,7 +1,9 @@
 ---
 deployments:
 {% if with_dune_daq_services %}
+{% if with_grafana_dune_dashboards %}
   - path: grafana-dashboards
+{% endif %}
 
 {% if with_dune_connectionservice %}
   - include: connectionservice
