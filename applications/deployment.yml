@@ -1,7 +1,7 @@
 ---
 deployments:
 {% if with_applications %}
-{% if with_tinyproxy %}
+{% if with_microsocks %}
   - path: microsocks
 {% endif %}
 
