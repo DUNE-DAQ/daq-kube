@@ -25,7 +25,7 @@ with_node_feature_discovery: true
 with_pcm: false
 with_sriov: false
 with_strimzi_kafka_operator: true
-with_tinyproxy: true
+with_microsocks: true
 
 ### Feature flags for included manifests
 with_backups: false

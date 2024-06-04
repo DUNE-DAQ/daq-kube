@@ -1,4 +1,4 @@
-{% if with_tinyproxy %}
+{% if with_microsocks %}
 ---
 apiVersion: v1
 kind: Service
