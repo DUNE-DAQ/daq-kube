@@ -67,6 +67,11 @@ targets:
     args:
       in_pocket: true
 
+  - name: iceberg-services
+    discriminator: "dune-daq-pocket"
+    args:
+      in_pocket: true
+
   - name: np04-services
     context: kubernetes-admin@np04-services
     args:
