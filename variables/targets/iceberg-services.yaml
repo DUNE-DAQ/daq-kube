@@ -1,0 +1,32 @@
+---
+clusterPoolIPv4PodCIDRList:
+  - "10.244.0.0/16"
+  - "10.96.0.0/12"
+
+kubernetesClusterID: 0
+
+smtp_server: NULL
+smtp_port: NULL
+
+cvmfs_http_proxy: DIRECT
+
+inside_kind: true
+with_cilium: false
+with_local_path_as_default_storageclass: true
+with_nfs_storage: false
+
+grafana_extra_datasources: {}
+
+kafka:
+  with_cruisecontrol: true
+
+with_backups: true
+with_kafka_ui: false
+with_mongo_express: false
+
+with_dune_daqconfig: false
+
+with_dune_runservices_db_as: postgres
+with_dune_runservices_devel: false
+
+with_grafana_dune_dashboards: false
