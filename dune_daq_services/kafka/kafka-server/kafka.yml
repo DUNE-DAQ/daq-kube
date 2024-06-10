@@ -129,7 +129,11 @@ spec:
       auto.create.topics.enable: true
       log.cleanup.policy: "delete" # Cannot use 'compact' due to empty key in our data format
       log.retention.bytes: 6442450944 # no default upper size limit, set to 6Gi
-      max.message.bytes: 1048576 # if you change this you need to review the kafka docs
+
+      message.max.bytes: 402653184 # if you change this you need to review the kafka docs
+      replica.fetch.max.bytes: 402653184 # if you change this you need to review the kafka docs
+      replica.fetch.response.max.bytes: 402653184 # if you change this you need to review the kafka docs
+      max.partition.fetch.bytes: 402653184 # if you change this you need to review the kafka docs
 {% if dunedaq.kafka.replicas < 3 %}
       # replication only makes sense if there are 3 or more brokers
       transaction.state.log.min.isr: 1
