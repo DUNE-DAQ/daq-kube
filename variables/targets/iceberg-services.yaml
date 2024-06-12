@@ -29,4 +29,4 @@ with_dune_daqconfig: false
 with_dune_runservices_db_as: postgresql
 with_dune_runservices_devel: false
 
-with_grafana_dune_dashboards: false
+with_grafana_dune_dashboards: true
