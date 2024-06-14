@@ -33,6 +33,10 @@ deployments:
 {% endif %}
 {% endif %}
 
+{% if with_elisa_logbook %}
+  - include: elisa_logbook
+{% endif %}
+
   - barrier: true
     message: Let services all catch up
 

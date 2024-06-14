@@ -1,0 +1,48 @@
+---
+deployments:
+  - path: namespace
+
+  - barrier: true
+
+  - path: elisa_logbook_secrets
+
+  - barrier: true
+
+{% for thishardware in dunedaq.elisa_logbook_hardware_types %}
+  - path: elisa_logbook
+    vars:
+      - values:
+          deploymentname: elisa-logbook-{{ thishardware }}
+          thishardware: {{ thishardware }}
+          logbooktype: production
+  - path: elisa_logbook_nodeports
+    vars:
+      - values:
+          deploymentname: elisa-logbook-{{ thishardware }}
+          thishardware: {{ thishardware }}
+          logbooktype: production
+          baseport: 3190
+          service_count: {{ loop.index0 }}
+{% endfor %}
+
+{% if with_elisa_logbook_devel %}
+{% for thishardware in dunedaq.elisa_logbook_hardware_types %}
+  - path: elisa_logbook
+    vars:
+      - values:
+          deploymentname: elisa-logbook-devel-{{ thishardware }}
+          thishardware: {{ thishardware }}
+          logbooktype: development
+  - path: elisa_logbook_nodeports
+    vars:
+      - values:
+          deploymentname: elisa-logbook-devel-{{ thishardware }}
+          thishardware: {{ thishardware }}
+          logbooktype: production
+          baseport: 3191
+          service_count: {{ loop.index0 }}
+{% endfor %}
+{% endif %}
+
+vars:
+  - file: variables/elisa_logbook.yaml

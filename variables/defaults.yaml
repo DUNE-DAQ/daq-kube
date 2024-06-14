@@ -42,5 +42,7 @@ with_dune_kafka: true
 with_dune_opmon: true
 with_dune_runservices: true
 with_dune_runservices_devel: false
+with_elisa_logbook: false
+with_elisa_logbook_devel: false
 
 with_dune_runservices_db_as: postgresql

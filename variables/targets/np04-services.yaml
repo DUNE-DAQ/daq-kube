@@ -24,6 +24,9 @@ with_dune_daqconfig: false
 with_dune_runservices_db_as: oracle
 with_dune_runservices_devel: true
 
+with_elisa_logbook: true
+with_elisa_logbook_devel: true
+
 with_grafana_dune_dashboards: false
 
 grafana_extra_datasources:

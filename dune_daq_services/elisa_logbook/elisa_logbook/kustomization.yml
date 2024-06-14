@@ -1,0 +1,168 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: {{ elisa_logbook_namespace }}
+
+resources:
+  - elisa-logbook-deployment.yaml
+
+patches:
+  - target:
+      kind: Namespace
+    patch: |-
+      $patch: delete
+      kind: Kustomization
+      metadata:
+        name: DOES NOT MATTER
+
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: {{ dunedaq.unified_microservices.image }}:{{ dunedaq.unified_microservices.tag }}
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/affinity/nodeAffinity/requiredDuringSchedulingIgnoredDuringExecution/nodeSelectorTerms/0/matchExpressions/0/key
+        value: {{ kubernetes_label.worker }}
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: {{ deploymentname }}
+
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /metadata/labels/elisa-logbook-type
+        value: {{ logbooktype }}
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/selector/matchLabels/elisa-logbook-type
+        value: {{ logbooktype }}
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/metadata/labels/elisa-logbook-type
+        value: {{ logbooktype }}
+
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /metadata/labels/elisa-logbook-hardware
+        value: {{ thishardware }}
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/selector/matchLabels/elisa-logbook-hardware
+        value: {{ thishardware }}
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/metadata/labels/elisa-logbook-hardware
+        value: {{ thishardware }}
+
+
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/env/1/name
+        value: HARDWARE
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/env/1/valueFrom/secretKeyRef/key
+        value: hardware
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/env/1/valueFrom/secretKeyRef/name
+        value: elisa-logbook-secret-{{ thishardware }}
+
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/env/2/name
+        value: USERNAME
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/env/2/valueFrom/secretKeyRef/key
+        value: username
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/env/2/valueFrom/secretKeyRef/name
+        value: elisa-logbook-secret-{{ thishardware }}
+
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/env/3/name
+        value: PASSWORD
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/env/3/valueFrom/secretKeyRef/key
+        value: password
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/env/3/valueFrom/secretKeyRef/name
+        value: elisa-logbook-secret-{{ thishardware }}

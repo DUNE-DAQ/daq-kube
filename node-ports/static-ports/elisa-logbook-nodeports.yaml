@@ -1,0 +1,9 @@
+# The services provided depend on the number of hardware targets
+# and if you need devel instances.
+# I'm seeding ports for up to 6 instances
+# nodePort: 31900
+# nodePort: 31901
+# nodePort: 31902
+# nodePort: 31910
+# nodePort: 31911
+# nodePort: 31912
