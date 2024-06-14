@@ -11,7 +11,7 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - name: elisa_logbook
+    - name: elisa-logbook
       protocol: TCP
       port: 5005
       targetPort: 5005
