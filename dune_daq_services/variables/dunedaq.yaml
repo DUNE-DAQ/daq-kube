@@ -1,4 +1,7 @@
 dunedaq:
+  elisa_logbook_hardware_types:
+    - npvd
+    - pdsp
   specificCVMFSRepositoryStorageClasses:
     - name: dunedaq.opensciencegrid.org
       repository: dunedaq.opensciencegrid.org
@@ -15,3 +18,4 @@ dunedaq:
   unified_microservices:
     image: ghcr.io/dune-daq/microservices
     tag: "a326"  # note this must be a string!
+

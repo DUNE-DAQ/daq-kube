@@ -30,6 +30,10 @@ args:
     default: run4evah
   - name: runservices_postgresql_password
     default: run4evah
+  - name: elisa_logbook_username
+    default: username
+  - name: elisa_logbook_password
+    default: password
 
 targets:
   - name: pocket
@@ -84,6 +88,8 @@ targets:
       opmon_telegraf_user_influxdb_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
       opmon_influxdb_admin_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
       runservices_postgresql_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
+      elisa_logbook_username: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
+      elisa_logbook_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
 
   - name: np04-daq
     context: kubernetes-admin@np04-daq
@@ -97,3 +103,5 @@ targets:
       opmon_telegraf_user_influxdb_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
       opmon_influxdb_admin_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
       runservices_postgresql_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
+      elisa_logbook_username: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
+      elisa_logbook_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) | string }}"
