@@ -61,7 +61,7 @@ grafana.ini:
 
 resources: # this is guess work
  limits:
-   cpu: 1
+   cpu: 3
    memory: 4Gi
  requests:
    cpu: 10m
