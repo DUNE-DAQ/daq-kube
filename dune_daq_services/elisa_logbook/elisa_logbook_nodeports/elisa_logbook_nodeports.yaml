@@ -8,6 +8,7 @@ metadata:
     elisa-logbook-hardware: {{ thishardware }}
     elisa-logbook-type: {{ logbooktype }}
   name: {{ deploymentname }}
+  namespace: {{ elisa_logbook_namespace }}
 spec:
   type: NodePort
   ports:
