@@ -1,5 +1,5 @@
 helmChart:
-  chartVersion: 15.6.1
+  chartVersion: 15.6.12
   namespace: '{{ DUNE_daqconfig.namespace }}'
   output: helm-rendered.yaml
   releaseName: daqconfig-mongodb
