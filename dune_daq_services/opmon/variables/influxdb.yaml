@@ -6,7 +6,7 @@ OPMON_influxdb:
     - name: INFLUXDB_DB
       value: {{ DUNE_opmon.influxdb_database }}
     - name: INFLUXDB_USER # is this user used?
-      value: user
+      value: defaultuser
     - name: INFLUXDB_USER_PASSWORD
       value: {{ args.opmon_influxdb_user_influxdb_password }}
     - name: INFLUXDB_READ_USER
@@ -14,6 +14,6 @@ OPMON_influxdb:
     - name: INFLUXDB_READ_USER_PASSWORD
       value: {{ DUNE_opmon.influxdb_ro_password }}
     - name: INFLUXDB_WRITE_USER
-      value: {{ OPMON_telegraf.influxdb_username }}
+      value: {{ DUNE_opmon.influxdb_rw_username }}
     - name: INFLUXDB_WRITE_USER_PASSWORD
-      value: {{ OPMON_telegraf.influxdb_password }}
+      value: {{ DUNE_opmon.influxdb_rw_password }}
