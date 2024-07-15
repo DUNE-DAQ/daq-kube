@@ -1,6 +1,6 @@
 helmChart:
   chartName: cilium
-  chartVersion: 1.15.6
+  chartVersion: 1.15.7
   namespace: kube-system
   output: helm-rendered.yaml
   releaseName: cilium
