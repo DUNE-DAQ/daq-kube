@@ -6,3 +6,5 @@ DUNE_opmon:
   influxdb_database: influxv4 # the database should have a better name
   influxdb_ro_username: readonly
   influxdb_ro_password: readonly
+  influxdb_rw_username: readwrite
+  influxdb_rw_password: {{ args.opmon_influxdb_readwrite_password }}
