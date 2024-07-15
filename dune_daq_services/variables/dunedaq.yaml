@@ -17,5 +17,5 @@ dunedaq:
     replicas: 1
   unified_microservices:
     image: ghcr.io/dune-daq/microservices
-    tag: "a326"  # note this must be a string!
+    tag: "mroda-opmon_protobuf"  # note this must be a string!
 
