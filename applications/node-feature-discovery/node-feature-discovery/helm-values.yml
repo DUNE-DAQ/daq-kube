@@ -7,6 +7,7 @@ prometheus:
     {{ prometheus_podmonitor_label_name }}: {{ prometheus_podmonitor_labels.system }}
 
 master:
+  revisionHistoryLimit: 3
   resources:
     limits:
       cpu: 300m
@@ -22,6 +23,7 @@ master:
          - key: {{ kubernetes_label.worker }}
            operator: Exists
 gc:
+  revisionHistoryLimit: 3
   interval: {{ node_feature_discovery.worker.updateInterval }}
   resources:
     limits:
