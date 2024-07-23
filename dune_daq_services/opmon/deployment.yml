@@ -11,6 +11,7 @@ deployments:
     message: Let services all catch up
 
   - path: telegraf
+  - path: opmon-protobuf-dbwriter
 
 vars:
   - file: variables/opmon.yaml
