@@ -19,6 +19,12 @@ patches:
       - op: replace
         path: /spec/template/spec/containers/0/env/1/value
         value: {{ dunedaq.kafka.bootstrap_brokers[0] }}
+      - op: replace
+        path: /spec/template/spec/containers/0/env/2/value
+        value: {{ OPMON_telegraf.influxdb_username }}
+      - op: replace
+        path: /spec/template/spec/containers/0/env/3/value
+        value: {{ OPMON_telegraf.influxdb_password }}
   - target:
       kind: Namespace
     patch: |-
