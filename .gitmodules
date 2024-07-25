@@ -17,7 +17,7 @@
 [submodule "dune-daq-microservices"]
 	path = .submodules/dune-daq-microservices
 	url = https://github.com/DUNE-DAQ/microservices.git
-	branch = mroda/opmon_protobuf
+	branch = develop
 	update = checkout
 [submodule "dune-daq-dqmbackend"]
 	path = .submodules/dune-daq-dqm-backend
