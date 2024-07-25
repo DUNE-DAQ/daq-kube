@@ -24,7 +24,7 @@ patches:
         value: {{ DUNE_opmon.influxdb_rw_username }}
       - op: replace
         path: /spec/template/spec/containers/0/env/3/value
-        value: {{ OPMON_opmon.influxdb_rw_password }}
+        value: {{ DUNE_opmon.influxdb_rw_password }}
   - target:
       kind: Namespace
     patch: |-
