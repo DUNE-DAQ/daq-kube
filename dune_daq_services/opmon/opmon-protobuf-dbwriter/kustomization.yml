@@ -1,0 +1,37 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: {{ DUNE_opmon.namespace }}
+
+resources:
+  - opmon-dbwriter-deployment.yaml
+
+patches:
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: {{ dunedaq.unified_microservices.image }}:{{ dunedaq.unified_microservices.tag }}
+      - op: replace
+        path: /spec/template/spec/containers/0/env/1/value
+        value: {{ dunedaq.kafka.bootstrap_brokers[0] }}
+      - op: replace
+        path: /spec/template/spec/containers/0/env/2/value
+        value: {{ DUNE_opmon.influxdb_rw_username }}
+      - op: replace
+        path: /spec/template/spec/containers/0/env/3/value
+        value: {{ DUNE_opmon.influxdb_rw_password }}
+      - op: replace
+        path: /spec/template/spec/containers/0/env/4/value
+        value: opmon-influxdb.{{ DUNE_opmon.namespace }}.svc
+  - target:
+      kind: Namespace
+    patch: |-
+      $patch: delete
+      kind: Kustomization
+      metadata:
+        name: DOES NOT MATTER
