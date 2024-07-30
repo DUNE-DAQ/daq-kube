@@ -59,6 +59,11 @@ bpf:
   tproxy: true
 bpfClockProbe: true
 
+gatewayAPI:
+  enabled: true
+  hostNetwork:
+    enabled: true
+
 envoy:
   resources: # this is guess work
     limits:
@@ -119,7 +124,7 @@ hubble:
   tls:
     auto:
       enabled: true
-      method: cronJob ###FIXME### should be cert-manager eventually
+      method: certmanager
       certValidityDuration: 3660
   relay:
     enabled: true
