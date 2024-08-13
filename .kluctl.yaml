@@ -80,28 +80,28 @@ targets:
     context: kubernetes-admin@np04-services
     args:
       # if you don't set the args to override, you get random values
-      grafana_admin_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
-      daqconfig_mongodb_root_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
-      daqconfig_mongodb_daqconfig_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
-      ers_postgresql_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
-      opmon_influxdb_user_influxdb_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
-      opmon_influxdb_readwrite_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
-      opmon_influxdb_admin_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
-      runservices_postgresql_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
-      elisa_logbook_username: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
-      elisa_logbook_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
+      grafana_admin_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      daqconfig_mongodb_root_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      daqconfig_mongodb_daqconfig_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      ers_postgresql_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      opmon_influxdb_user_influxdb_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      opmon_influxdb_readwrite_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      opmon_influxdb_admin_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      runservices_postgresql_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      elisa_logbook_username: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      elisa_logbook_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
 
   - name: np04-daq
     context: kubernetes-admin@np04-daq
     args:
       # if you don't set the args to override, you get random values
-      grafana_admin_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
-      daqconfig_mongodb_root_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
-      daqconfig_mongodb_daqconfig_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
-      ers_postgresql_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
-      opmon_influxdb_user_influxdb_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
-      opmon_influxdb_readwrite_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
-      opmon_influxdb_admin_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
-      runservices_postgresql_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
-      elisa_logbook_username: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
-      elisa_logbook_password: {{ '{:0=13}'.format(range(0, 9999999999999) | random) }}
+      grafana_admin_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      daqconfig_mongodb_root_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      daqconfig_mongodb_daqconfig_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      ers_postgresql_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      opmon_influxdb_user_influxdb_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      opmon_influxdb_readwrite_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      opmon_influxdb_admin_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      runservices_postgresql_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      elisa_logbook_username: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      elisa_logbook_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
