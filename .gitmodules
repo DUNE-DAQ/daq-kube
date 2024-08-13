@@ -35,3 +35,6 @@
 [submodule "intel-pcm"]
 	path = .submodules/intel-pcm
 	url = https://github.com/intel/pcm.git
+[submodule ".submodules/rfmoz-grafana-dashboards"]
+	path = .submodules/rfmoz-grafana-dashboards
+	url = https://github.com/rfmoz/grafana-dashboards.git

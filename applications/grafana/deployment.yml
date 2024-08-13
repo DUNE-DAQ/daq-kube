@@ -10,6 +10,11 @@ deployments:
       - grafana-dashboards
       - grafana-dashboards-kubernetes
 
+  - path: grafana-dashboards-rfmoz
+    tags:
+      - grafana-dashboards
+      - grafana-dashboards-kubernetes
+
   - barrier: true
     message: Ensure kubernetes dashboards are loaded
 
