@@ -126,6 +126,10 @@ hubble:
       enabled: true
       method: certmanager
       certValidityDuration: 3660
+      certManagerIssuerRef:
+        group: cert-manager.io
+        kind: ClusterIssuer
+        name: {{ certmanager_ca_name }}
   relay:
     enabled: true
     resources: # this is guess work
