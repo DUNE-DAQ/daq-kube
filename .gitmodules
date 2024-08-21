@@ -38,3 +38,6 @@
 [submodule ".submodules/rfmoz-grafana-dashboards"]
 	path = .submodules/rfmoz-grafana-dashboards
 	url = https://github.com/rfmoz/grafana-dashboards.git
+[submodule ".submodules/local-path-provisioner"]
+	path = .submodules/local-path-provisioner
+	url = https://github.com/rancher/local-path-provisioner.git
