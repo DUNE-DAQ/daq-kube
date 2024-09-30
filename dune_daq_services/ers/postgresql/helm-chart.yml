@@ -1,5 +1,5 @@
 helmChart:
-  chartVersion: 15.5.32
+  chartVersion: 15.5.37
   namespace: '{{ DUNE_ers.namespace }}'
   output: helm-rendered.yaml
   releaseName: '{{ ERS_postgresql.release_name }}'
