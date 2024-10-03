@@ -1,9 +1,9 @@
 helmChart:
   chartName: kube-prometheus-stack
-  chartVersion: 63.1.0
+  chartVersion: 65.0.0
   namespace: '{{ prometheus_operator_namespace }}'
   output: helm-rendered.yaml
   releaseName: kube-prometheus-stack
   repo: https://prometheus-community.github.io/helm-charts
   skipCRDs: true
-  updateConstraints: ~63.x
+  updateConstraints: ~65.x
