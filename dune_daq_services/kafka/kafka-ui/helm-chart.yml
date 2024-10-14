@@ -1,6 +1,6 @@
 helmChart:
   chartName: kafka-ui
-  chartVersion: 1.4.6
+  chartVersion: 1.4.8
   namespace: '{{ dunedaq.kafka.namespace }}'
   output: helm-rendered.yaml
   releaseName: kafka-ui
