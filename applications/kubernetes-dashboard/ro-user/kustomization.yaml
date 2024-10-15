@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - ro-cluster-role.yaml
+  - ro-service-autologin.yaml
 
 namespace: '{{ kubernetes_dashboard.namespace }}'
 

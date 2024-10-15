@@ -1,0 +1,22 @@
+apiVersion: configuration.konghq.com/v1
+kind: KongService
+metadata:
+  name: kubernetes-dashboard-ro
+spec:
+  proxy:
+    path: /
+    route:
+    protocols:
+    - https
+  upstream:
+    scheme: https
+    service: kubernetes-dashboard
+    port: 443
+    tls:
+      client_cert_ref: "kubernetes-dashboard-key-holder.pub"
+  plugins:
+  - name: request-transformer
+    config:
+      add:
+        headers:
+        - "Authorization: Bearer $(kubernetes-dashboard-read-only-token.token)"
