@@ -18,4 +18,4 @@ dunedaq:
     replicas: 1
   unified_microservices:
     image: ghcr.io/dune-daq/microservices
-    tag: "33cf"  # note this must be a string!
+    tag: "pddp"  # note this must be a string!
