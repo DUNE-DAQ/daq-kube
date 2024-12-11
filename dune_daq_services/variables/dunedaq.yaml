@@ -2,6 +2,7 @@ dunedaq:
   elisa_logbook_hardware_types:
     - npvd
     - pdsp
+    - pddp
   specificCVMFSRepositoryStorageClasses:
     - name: dunedaq.opensciencegrid.org
       repository: dunedaq.opensciencegrid.org
