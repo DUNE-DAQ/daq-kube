@@ -13,6 +13,7 @@ storageClass:
   name: {{ local_path_provisioner.storage_class_name }}
   defaultClass: {{ local_path_provisioner.is_default_class }}
   reclaimPolicy: Retain
+  pathPattern: "{{ .PVC.Namespace }}-{{ .PVC.Name }}"
 
 affinity:
  nodeAffinity:
