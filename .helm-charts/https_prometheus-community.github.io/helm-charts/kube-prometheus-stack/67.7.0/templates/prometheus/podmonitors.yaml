@@ -1,10 +1,10 @@
-{{- if and .Values.prometheus.enabled .Values.prometheus.additionalServiceMonitors }}
+{{- if and .Values.prometheus.enabled .Values.prometheus.additionalPodMonitors }}
 apiVersion: v1
 kind: List
 items:
-{{- range .Values.prometheus.additionalServiceMonitors }}
+{{- range .Values.prometheus.additionalPodMonitors }}
   - apiVersion: monitoring.coreos.com/v1
-    kind: ServiceMonitor
+    kind: PodMonitor
     metadata:
       name: {{ .name }}
       namespace: {{ template "kube-prometheus-stack.namespace" $ }}
@@ -16,8 +16,8 @@ items:
         {{- end }}
     spec:
       {{- include "servicemonitor.scrapeLimits" . | nindent 6 }}
-      endpoints:
-{{ toYaml .endpoints | indent 8 }}
+      podMetricsEndpoints:
+{{ toYaml .podMetricsEndpoints | indent 8 }}
     {{- if .jobLabel }}
       jobLabel: {{ .jobLabel }}
     {{- end }}
@@ -27,21 +27,15 @@ items:
     {{- end }}
       selector:
 {{ toYaml .selector | indent 8 }}
-    {{- if .targetLabels }}
-      targetLabels:
-{{ toYaml .targetLabels | indent 8 }}
-    {{- end }}
     {{- if .podTargetLabels }}
       podTargetLabels:
 {{ toYaml .podTargetLabels | indent 8 }}
     {{- end }}
-    {{- if .metricRelabelings }}
-      metricRelabelings:
-{{ toYaml .metricRelabelings | indent 8 }}
+    {{- if .sampleLimit }}
+      sampleLimit: {{ .sampleLimit }}
     {{- end }}
-    {{- if .relabelings }}
-      relabelings:
-{{ toYaml .relabelings | indent 8 }}
+    {{- if .fallbackScrapeProtocol }}
+      fallbackScrapeProtocol: {{ .fallbackScrapeProtocol }}
     {{- end }}
 {{- end }}
 {{- end }}
