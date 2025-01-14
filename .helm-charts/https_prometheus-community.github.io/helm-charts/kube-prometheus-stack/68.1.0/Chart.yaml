@@ -62,4 +62,4 @@ sources:
 - https://github.com/prometheus-community/helm-charts
 - https://github.com/prometheus-operator/kube-prometheus
 type: application
-version: 67.11.0
+version: 68.1.0
