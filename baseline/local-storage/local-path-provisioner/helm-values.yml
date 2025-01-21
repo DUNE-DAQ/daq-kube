@@ -13,7 +13,9 @@ storageClass:
   name: {{ local_path_provisioner.storage_class_name }}
   defaultClass: {{ local_path_provisioner.is_default_class }}
   reclaimPolicy: Retain
+{%- raw %}
   pathPattern: "{{ .PVC.Namespace }}-{{ .PVC.Name }}"
+{% endraw %}
 
 affinity:
  nodeAffinity:
