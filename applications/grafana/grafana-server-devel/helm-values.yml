@@ -54,6 +54,7 @@ grafana.ini:
   users:
     allow_sign_up: false
     allow_org_create: false
+    default_theme: dark
   log:
     mode: console
 
