@@ -9,12 +9,13 @@ networkPolicy:
   enabled: true
 
 useStatefulSet: true
+revisionHistoryLimit: 3
 
 persistence:
   enabled: false
-
-initChownData:
-  enabled: false
+  inMemory:
+    enabled: true    # use EmptyDir
+    sizeLimit: 300Mi # this is guess work
 
 grafana.ini:
   dashboards:
@@ -37,7 +38,7 @@ grafana.ini:
   database:
     # maybe use postgresql so I can persist without a pvc?
     log_queries: false
-    query_retries: 2 # query_retries for sqlite only
+    query_retries: 5 # query_retries for sqlite only
   analytics:
     check_for_updates: true
     check_for_plugin_updates: true
