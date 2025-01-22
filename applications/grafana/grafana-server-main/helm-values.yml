@@ -38,6 +38,7 @@ grafana.ini:
   database:
     # maybe use postgresql so I can persist without a pvc?
     log_queries: false
+    wal: true # wal for sqlite only
     query_retries: 5 # query_retries for sqlite only
   analytics:
     check_for_updates: true
