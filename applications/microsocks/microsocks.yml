@@ -110,4 +110,5 @@ spec:
       ports:
         - protocol: TCP
           port: 1080
-  egress: {}
+  egress:
+    - {}
