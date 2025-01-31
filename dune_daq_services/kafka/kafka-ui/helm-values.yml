@@ -21,6 +21,22 @@ resources:
     cpu: 1m
     memory: 16Mi
 
+networkPolicy:
+  enabled: true
+  egressRules:
+    customRules: # host port could be anything
+      - {}
+  ingressRules:
+    customRules: # need to lock this down better
+      - from:
+        - ipBlock:
+            cidr: 0.0.0.0/0
+        - ipBlock:
+            cidr: ::/0
+        ports:
+          - protocol: TCP
+            port: 80
+
 podSecurityContext: # https://github.com/provectus/kafka-ui-charts/pull/10
   fsGroup: 101
 securityContext: # https://github.com/provectus/kafka-ui-charts/pull/10
