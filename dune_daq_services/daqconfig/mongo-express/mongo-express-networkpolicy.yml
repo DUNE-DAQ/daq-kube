@@ -1,0 +1,29 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: mongo-express-to-mongodb
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/app: mongodb-express
+  policyTypes:
+  - Egress
+  - Ingress
+  ingress:  # Need better restrictions for ingress
+  - from:
+    - ipBlock:
+        cidr: 0.0.0.0/0
+    - ipBlock:
+        cidr: ::/0
+    ports:
+      - protocol: TCP
+        port: 8081
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app.kubernetes.io/component: mongodb
+    ports:
+    - protocol: TCP
+      port: 27017 
