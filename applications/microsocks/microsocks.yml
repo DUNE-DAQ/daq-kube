@@ -87,3 +87,27 @@ spec:
     app.kubernetes.io/app: microsocks
     app.kubernetes.io/component: microsocks
   type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: microsocks-network-policy
+  namespace: microsocks
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/app: microsocks
+      app.kubernetes.io/component: microsocks
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress: # this policy is intentionally pretty wide open
+    - from:
+      - ipBlock:
+          cidr: 0.0.0.0/0
+      - ipBlock:
+          cidr: ::/0
+      ports:
+        - protocol: TCP
+          port: 1080
+  egress: {}
