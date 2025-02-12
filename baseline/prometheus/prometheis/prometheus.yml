@@ -34,6 +34,7 @@ spec:
   replicas: {{ prometheis[thisone].replicas }}
   retention: {{ prometheis[thisone].retention }}
 
+  scrapeFailureLogFile: /dev/stderr
   serviceAccountName: prometheus-{{ prometheis[thisone].name }}
 
   resources: {{ prometheis[thisone].resources | tojson }}
@@ -45,7 +46,7 @@ spec:
   {% endif %}
   {% endif %}
 
-
+  ################################
   serviceMonitorNamespaceSelector: {{ prometheis[thisone].serviceMonitorNamespaceSelector | tojson }}
   serviceMonitorSelector: {{ prometheis[thisone].serviceMonitorSelector | tojson }}
   podMonitorNamespaceSelector: {{ prometheis[thisone].podMonitorNamespaceSelector | tojson }}
