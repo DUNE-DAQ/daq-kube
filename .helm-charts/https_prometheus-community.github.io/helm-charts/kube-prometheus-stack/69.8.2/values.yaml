@@ -910,7 +910,7 @@ alertmanager:
     image:
       registry: quay.io
       repository: prometheus/alertmanager
-      tag: v0.28.0
+      tag: v0.28.1
       sha: ""
 
     ## If true then the user will be responsible to provide a secret with alertmanager configuration
@@ -1450,6 +1450,7 @@ kubeApiServer:
     serverName: kubernetes
     insecureSkipVerify: false
   serviceMonitor:
+    enabled: true
     ## Scrape interval. If not set, the Prometheus default scrape interval is used.
     ##
     interval: ""
@@ -1527,6 +1528,7 @@ kubelet:
   namespace: kube-system
 
   serviceMonitor:
+    enabled: true
     ## Enable scraping /metrics from kubelet's service
     kubelet: true
 
