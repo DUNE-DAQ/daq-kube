@@ -2,6 +2,8 @@
 # What about:
 #  kube-proxy replacement
 #  bpf: flags in helm chart
+#  netkit
+#  masquerade
 #  ingress
 #  gateway-api
 #  socketLB
@@ -10,6 +12,9 @@
 #  multi-cluster mesh
 #  bigTCP
 #  localRedirectPolicy
+#  autoDirectNodeRoute
+#  BGP
+#  routingMode
 #  cilium-NodePort
 #  cilium-wellKnownIdentities
 #  cilium-etcd
@@ -54,7 +59,9 @@ pmtuDiscovery:
   enabled: true
 
 bpf:
-  hostLegacyRouting: true
+  datapathMode: netkit
+  distributedLRU:
+    enabled: true
   preallocateMaps: true
   tproxy: true
 bpfClockProbe: true
@@ -65,6 +72,10 @@ gatewayAPI:
     enabled: true
 
 envoy:
+  serviceMonitor:
+    enabled: true
+    labels:
+      "{{ prometheus_servicemonitor_label.name }}": "{{ prometheus_servicemonitor_labels.system }}"
   resources: # this is guess work
     limits:
       cpu: 4000m
@@ -81,6 +92,7 @@ envoy:
 
 prometheus:
   enabled: true
+  controllerGroupMetrics: all
   serviceMonitor:
     enabled: true
     interval: "30s"
@@ -97,8 +109,8 @@ dashboards:
 
 hubble:
   enabled: true
+  preferIpv6: false
   metrics:
-    enableOpenMetrics: true
     enabled:
       - dns:query
       - drop
