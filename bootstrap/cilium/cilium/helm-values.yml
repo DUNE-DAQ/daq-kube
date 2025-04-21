@@ -75,7 +75,7 @@ envoy:
   serviceMonitor:
     enabled: true
     labels:
-      "{{ prometheus_servicemonitor_label.name }}": "{{ prometheus_servicemonitor_labels.system }}"
+      "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.system }}"
   resources: # this is guess work
     limits:
       cpu: 4000m
@@ -92,7 +92,8 @@ envoy:
 
 prometheus:
   enabled: true
-  controllerGroupMetrics: all
+  controllerGroupMetrics: 
+  - all
   serviceMonitor:
     enabled: true
     interval: "30s"
