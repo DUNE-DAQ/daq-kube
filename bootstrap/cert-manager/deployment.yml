@@ -1,0 +1,10 @@
+---
+deployments:
+  - path: namespace
+    alwaysDeploy: true
+    skipDeleteIfTags: true
+
+  - barrier: true
+
+  - path: cert-manager
+    waitReadiness: false

@@ -1,0 +1,8 @@
+---
+deployments:
+  - path: ca
+
+  - barrier: true
+
+#  - path: trust-manager
+#    waitReadiness: true

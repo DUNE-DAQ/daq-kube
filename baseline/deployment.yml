@@ -25,12 +25,10 @@ deployments:
       - metrics
       - monitoring
 
-{% if with_certmanager %}
-  - include: cert-manager
+  - include: cert-manager-ca
     tags:
       - pki
       - tls
-{% endif %}
 {% endif %}
 
   - barrier: true
