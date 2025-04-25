@@ -33,4 +33,7 @@ deployments:
       - cni
     skipDeleteIfTags: true
 {% endif %}
+
+  - barrier: true
+    message: Wait for cert-manager and cillium to settle
 {% endif %}
