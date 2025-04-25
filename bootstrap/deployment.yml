@@ -22,10 +22,18 @@ deployments:
   - barrier: true
     message: Wait for Prometheus CRDs to settle
 
+  - include: cert-manager
+    tags:
+      - pki
+      - tls
+
 {% if with_cilium %}
   - include: cilium
     tags:
       - cni
     skipDeleteIfTags: true
 {% endif %}
+
+  - barrier: true
+    message: Wait for cert-manager and cillium to settle
 {% endif %}

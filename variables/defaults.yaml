@@ -10,7 +10,6 @@ with_baseline: true
 with_dune_daq_services: true
 with_dune_node_ports: true
 
-with_certmanager: true
 with_cilium: true
 with_cvmfs_csi: false
 with_dns_autoscaler: true

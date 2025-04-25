@@ -1,3 +1,0 @@
-certmanager_ca_name: fake-ca
-certmanager_ca_bundle_name: fake-ca-bundle
-certmanager_ca_bundle_key: ca.pem
