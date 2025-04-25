@@ -10,6 +10,7 @@
 #  traffic encryption
 #  service-mesh
 #  multi-cluster mesh
+#  service tunneling via envoy
 #  bigTCP
 #  localRedirectPolicy
 #  autoDirectNodeRoute
