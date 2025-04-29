@@ -12,8 +12,8 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 If release name contains chart name it will be used as a full name.
 */}}
 {{- define "cvmfs-csi.fullname" -}}
-{{- if .Values.fullnameOverride -}}
-{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- if .Values.fullNameOverride -}}
+{{- .Values.fullNameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
 {{- $name := default .Chart.Name .Values.nameOverride -}}
 {{- if contains $name .Release.Name -}}
@@ -124,7 +124,7 @@ component: controllerplugin
 
 {{- define "cvmfs-csi.nodeplugin.labels" -}}
 {{- if .Values.nodeplugin.labelsOverride -}}
-{{ .Values.nodeplugin.labelsOverride }}
+{{ toYaml .Values.nodeplugin.labelsOverride }}
 {{- else -}}
 {{ include "cvmfs-csi.common.metaLabels" . }}
 component: nodeplugin
@@ -134,7 +134,7 @@ release: {{ .Release.Name }}
 
 {{- define "cvmfs-csi.controllerplugin.labels" -}}
 {{- if .Values.controllerplugin.labelsOverride -}}
-{{ .Values.controllerplugin.labelsOverride }}
+{{ toYaml .Values.controllerplugin.labelsOverride }}
 {{- else -}}
 {{ include "cvmfs-csi.common.metaLabels" . }}
 component: controllerplugin

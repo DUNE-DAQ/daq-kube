@@ -25,6 +25,17 @@ extraConfigMaps:
       # Whether repositories should share a cache directory or each have their own.
       CVMFS_SHARED_CACHE=no
       {{- end -}}
+  # /etc/cvmfs/default.d/90-local.conf
+  cvmfs-csi-default-d: {}
+  #  90-local.conf: |
+  #    # This is the OSG configuration file for the CVMFS client.
+  #    # It will override the default configuration file which uses the cern config repo
+  #    CVMFS_SEND_INFO_HEADER=yes
+  #    CVMFS_KEYS_DIR=/etc/cvmfs/keys/opensciencegrid.org
+  #    CVMFS_USE_GEOAPI=yes
+  #    CVMFS_CONFIG_REPOSITORY=config-osg.opensciencegrid.org
+  #    CVMFS_CONFIG_REPO_REQUIRED=yes
+  #    CVMFS_FALLBACK_PROXY="http://cvmfsbproxy.fnal.gov:3126;http://cvmfsbproxy.cern.ch:3126"
 
 # Cache configuration for storing CVMFS client data.
 # CVMFS CSI supports two kinds of caches:
@@ -52,25 +63,27 @@ cache:
 # Node plugin handles node-local operations, e.g. mounting and unmounting
 # CVMFS repositories.
 nodeplugin:
-
   # Component name. Used as `component` label value
   # and to generate DaemonSet name.
   name: nodeplugin
 
   # Extra volumes to be appended to nodeplugin's Pod.spec.volumes.
   extraVolumes:
-  - name: etc-cvmfs-default-conf
-    configMap:
-      name: cvmfs-csi-default-local
-  - name: etc-cvmfs-config-d
-    configMap:
-      name: cvmfs-csi-config-d
+    - name: etc-cvmfs-default-conf
+      configMap:
+        name: cvmfs-csi-default-local
+    - name: etc-cvmfs-config-d
+      configMap:
+        name: cvmfs-csi-config-d
+    - name: etc-cvmfs-default-d
+      configMap:
+        name: cvmfs-csi-default-d
 
   # CVMFS CSI image and container resources specs.
   plugin:
     image:
       repository: registry.cern.ch/kubernetes/cvmfs-csi
-      tag: v2.3.0
+      tag: "" # If no tag specified default to Chart AppVersion.
       pullPolicy: IfNotPresent
     resources: {}
 
@@ -78,39 +91,64 @@ nodeplugin:
   automount:
     image:
       repository: registry.cern.ch/kubernetes/cvmfs-csi
-      tag: v2.3.0
+      tag: "" # If no tag specified default to Chart AppVersion.
       pullPolicy: IfNotPresent
     resources: {}
     # Extra volume mounts to append to nodeplugin's
     # Pod.spec.containers[name="nodeplugin"].volumeMounts.
     extraVolumeMounts:
-    - name: etc-cvmfs-default-conf
-      mountPath: /etc/cvmfs/default.local
-      subPath: default.local
-    - name: etc-cvmfs-config-d
-      mountPath: /etc/cvmfs/config.d
+      - name: etc-cvmfs-default-conf
+        mountPath: /etc/cvmfs/default.local
+        subPath: default.local
+      - name: etc-cvmfs-config-d
+        mountPath: /etc/cvmfs/config.d
+      - name: etc-cvmfs-default-d
+        mountPath: /etc/cvmfs/default.d/90-local.conf
+        subPath: 90-local.conf
 
   # automount-reconciler image and container resources specs.
   automountReconciler:
     image:
       repository: registry.cern.ch/kubernetes/cvmfs-csi
-      tag: v2.3.0
+      tag: "" # If no tag specified default to Chart AppVersion.
       pullPolicy: IfNotPresent
     resources: {}
     # Extra volume mounts to append to nodeplugin's
     # Pod.spec.containers[name="automountReconciler"].volumeMounts.
     extraVolumeMounts:
-    - name: etc-cvmfs-default-conf
-      mountPath: /etc/cvmfs/default.local
-      subPath: default.local
-    - name: etc-cvmfs-config-d
-      mountPath: /etc/cvmfs/config.d
+      - name: etc-cvmfs-default-conf
+        mountPath: /etc/cvmfs/default.local
+        subPath: default.local
+      - name: etc-cvmfs-config-d
+        mountPath: /etc/cvmfs/config.d
+      - name: etc-cvmfs-default-d
+        mountPath: /etc/cvmfs/default.d/90-local.conf
+        subPath: 90-local.conf
+
+  # Prefetch cvmfs repos on a schedule to keep client cache warm.
+  prefetcher:
+    enabled: false
+    # Image defines the default image for prefetching jobs.
+    # This can be optionally overridden per prefetch job.
+    image:
+      repository: registry.cern.ch/kubernetes/cvmfs-csi
+      tag: "" # If no tag specified default to Chart AppVersion.
+      pullPolicy: IfNotPresent
+    # Jobs defines the pre-fetching tasks for keeping the client cache warm.
+    jobs: []
+      # - name: example-job # Names should be unique and confirm to k8s resource naming specification.
+      #   # image: "" # Optional if not specified defaults to prefetcher.image. Image must include crond.
+      #   schedule: "* * * * *"
+      #   script: |-
+      #     #!/bin/bash
+      #     echo -e "prefetching atlas.cern.ch"
+      #     ls /cvmfs/atlas.cern.ch
 
   # automount-runner image and container resources specs.
   singlemount:
     image:
       repository: registry.cern.ch/kubernetes/cvmfs-csi
-      tag: v2.3.0
+      tag: "" # If no tag specified default to Chart AppVersion.
       pullPolicy: IfNotPresent
     resources: {}
     # Extra volume mounts to append to nodeplugin's
@@ -121,7 +159,7 @@ nodeplugin:
   registrar:
     image:
       repository: registry.k8s.io/sig-storage/csi-node-driver-registrar
-      tag: v2.8.0
+      tag: v2.10.1
       pullPolicy: IfNotPresent
     resources: {}
 
@@ -132,6 +170,11 @@ nodeplugin:
     # all Pods that mount CVMFS volumes on that node must be restarted (deleted)
     # too in order to refresh the mounts.
     type: OnDelete
+
+  # Pod-level security context for nodeplugin daemonset.
+  podSecurityContext:
+    seccompProfile:
+      type: RuntimeDefault
 
   # Pod priority class name.
   priorityClassName: system-node-critical
@@ -155,24 +198,24 @@ nodeplugin:
   # New CVMFS CSI deployments do not need this. It is only necessary
   # when upgrading from v1 of the driver.
   serviceAccount:
-
     # Name of the ServiceAccount (to use and/or create).
     # If no name is provided, Helm chart will generate one.
     serviceAccountName: cvmfs-nodeplugin
 
     # Whether to create ServiceAccount in the CVMFS CSI namespace.
-    # If not, and `use` is set to true, it is expected the ServiceAccount is already present.
+    # If not, and `use` is set to true, it is expected the ServiceAccount is
+    # already present.
     create: false
 
     # Whether to use this ServiceAccount in Node plugin DaemonSet.
     use: false
 
 # CSI Controller plugin Deployment configuration.
-# CVMFS CSI supports volume provisioning, however the provisioned volumes only fulfill the role
-# of a reference to CVMFS repositories used inside the CO (e.g. Kubernetes), and are not modifying
-# the CVMFS store in any way.
+#
+# CVMFS CSI supports volume provisioning, however the provisioned volumes only
+# fulfil the role of a reference to CVMFS repositories used inside the CO
+# (e.g. Kubernetes), and are not modifying the CVMFS store in any way.
 controllerplugin:
-
   # Component name. Used as `component` label value
   # and to generate DaemonSet name.
   name: controllerplugin
@@ -186,7 +229,7 @@ controllerplugin:
   plugin:
     image:
       repository: registry.cern.ch/kubernetes/cvmfs-csi
-      tag: v2.3.0
+      tag: "" # If no tag specified default to Chart AppVersion.
       pullPolicy: IfNotPresent
     resources: {}
     extraVolumeMounts: []
@@ -195,13 +238,18 @@ controllerplugin:
   provisioner:
     image:
       repository: registry.k8s.io/sig-storage/csi-provisioner
-      tag: v3.5.0
+      tag: v4.0.1
       pullPolicy: IfNotPresent
     resources: {}
 
   # Deployment update strategy.
   deploymentStrategySpec:
     type: RollingUpdate
+
+  # Pod-level security context for controllerplugin deployment.
+  podSecurityContext:
+    seccompProfile:
+      type: RuntimeDefault
 
   # Pod priority class name.
   priorityClassName: ""
@@ -217,7 +265,6 @@ controllerplugin:
 
   # ServiceAccount to use with Controller plugin Deployment.
   serviceAccount:
-
     # Name of the ServiceAccount (to use and/or create).
     # If no name is provided, Helm chart will generate one.
     serviceAccountName: ""
@@ -228,7 +275,6 @@ controllerplugin:
 
   # RBAC rules assigned to the ServiceAccount defined above.
   rbac:
-
     # Whether to create RBACs in the CVMFS CSI namespace.
     # If not, it is expected they are already present.
     create: true
