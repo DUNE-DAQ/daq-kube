@@ -54,6 +54,7 @@ affinity:
 backup:
   enabled: true
   successfulJobsHistoryLimit: 1
+  resourcesPreset: nano
 {% endif %}
 
 metrics:
