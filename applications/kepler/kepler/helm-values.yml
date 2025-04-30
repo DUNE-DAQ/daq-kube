@@ -2,10 +2,10 @@
 resources:
   limits:
     cpu: 300m
-    memory: 500Mi
+    memory: 512Mi
   requests:
-    cpu: 10m
-    memory: 4Mi
+    cpu: 50m
+    memory: 256Mi
 
 serviceMonitor:
   enabled: true

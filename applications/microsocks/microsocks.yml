@@ -48,6 +48,16 @@ spec:
         - containerPort: 1080
           name: socks5
           protocol: TCP
+        livenessProbe:
+          tcpSocket:
+            port: socks5
+            initialDelaySeconds: 15
+            periodSeconds: 20
+        readinessProbe:
+          tcpSocket:
+            port: socks5
+            initialDelaySeconds: 15
+            periodSeconds: 20
         resources:
           limits:
             memory: 512Mi
@@ -82,7 +92,7 @@ spec:
   - name: socks5
     protocol: TCP
     port: 1080 # 1080 is the ICANN socks5 port
-    targetPort: 1080
+    targetPort: socks5
   selector:
     app.kubernetes.io/app: microsocks
     app.kubernetes.io/component: microsocks

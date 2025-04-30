@@ -15,6 +15,10 @@ serviceMonitor:
   additionalLabels:
     {{ prometheus_servicemonitor_label_name }}: {{ prometheus_servicemonitor_labels.system }}
 
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
 affinity:
  nodeAffinity:
    requiredDuringSchedulingIgnoredDuringExecution:
