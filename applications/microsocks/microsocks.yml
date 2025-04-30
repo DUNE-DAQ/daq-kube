@@ -82,7 +82,7 @@ spec:
   - name: socks5
     protocol: TCP
     port: 1080 # 1080 is the ICANN socks5 port
-    targetPort: 1080
+    targetPort: socks5
   selector:
     app.kubernetes.io/app: microsocks
     app.kubernetes.io/component: microsocks
