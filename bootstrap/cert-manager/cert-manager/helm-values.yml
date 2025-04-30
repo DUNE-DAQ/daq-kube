@@ -31,39 +31,7 @@ affinity:
 #extraArgs:
 #  - '--enable-gateway-api'
 
-# below this line from upstream docs:
-# https://cert-manager.io/docs/installation/best-practice/values.best-practice.yaml
-# Helm chart values which make cert-manager comply with CIS, BSI and NSA
-# security benchmarks.
-automountServiceAccountToken: false
-serviceAccount:
-  automountServiceAccountToken: false
-volumes:
-- name: serviceaccount-token
-  projected:
-    defaultMode: 0444
-    sources:
-    - serviceAccountToken:
-        expirationSeconds: 3607
-        path: token
-    - configMap:
-        name: kube-root-ca.crt
-        items:
-        - key: ca.crt
-          path: ca.crt
-    - downwardAPI:
-        items:
-        - path: namespace
-          fieldRef:
-            apiVersion: v1
-            fieldPath: metadata.namespace
-volumeMounts:
-- mountPath: /var/run/secrets/kubernetes.io/serviceaccount
-  name: serviceaccount-token
-  readOnly: true
-
 webhook:
-  ### BEGIN Added locally ###
   affinity:
    nodeAffinity:
      requiredDuringSchedulingIgnoredDuringExecution:
@@ -80,36 +48,10 @@ webhook:
     requests:
       cpu: 10m
       memory: 16Mi
-  ### END Added locally ###
-  automountServiceAccountToken: false
-  serviceAccount:
-    automountServiceAccountToken: false
-  volumes:
-  - name: serviceaccount-token
-    projected:
-      defaultMode: 0444
-      sources:
-      - serviceAccountToken:
-          expirationSeconds: 3607
-          path: token
-      - configMap:
-          name: kube-root-ca.crt
-          items:
-          - key: ca.crt
-            path: ca.crt
-      - downwardAPI:
-          items:
-          - path: namespace
-            fieldRef:
-              apiVersion: v1
-              fieldPath: metadata.namespace
-  volumeMounts:
-  - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
-    name: serviceaccount-token
-    readOnly: true
+  networkPolicy:
+    enabled: true
 
 cainjector:
-  ### BEGIN Added locally ###
   affinity:
    nodeAffinity:
      requiredDuringSchedulingIgnoredDuringExecution:
@@ -124,36 +66,8 @@ cainjector:
     requests:
       cpu: 10m
       memory: 16Mi
-  ### END Added locally ###
-  automountServiceAccountToken: false
-  serviceAccount:
-    automountServiceAccountToken: false
-  volumes:
-  - name: serviceaccount-token
-    projected:
-      defaultMode: 0444
-      sources:
-      - serviceAccountToken:
-          expirationSeconds: 3607
-          path: token
-      - configMap:
-          name: kube-root-ca.crt
-          items:
-          - key: ca.crt
-            path: ca.crt
-      - downwardAPI:
-          items:
-          - path: namespace
-            fieldRef:
-              apiVersion: v1
-              fieldPath: metadata.namespace
-  volumeMounts:
-  - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
-    name: serviceaccount-token
-    readOnly: true
 
 startupapicheck:
-  ### BEGIN Added locally ###
   affinity:
    nodeAffinity:
      requiredDuringSchedulingIgnoredDuringExecution:
@@ -168,30 +82,3 @@ startupapicheck:
     requests:
       cpu: 10m
       memory: 16Mi
-  ### END Added locally ###
-  automountServiceAccountToken: false
-  serviceAccount:
-    automountServiceAccountToken: false
-  volumes:
-  - name: serviceaccount-token
-    projected:
-      defaultMode: 0444
-      sources:
-      - serviceAccountToken:
-          expirationSeconds: 3607
-          path: token
-      - configMap:
-          name: kube-root-ca.crt
-          items:
-          - key: ca.crt
-            path: ca.crt
-      - downwardAPI:
-          items:
-          - path: namespace
-            fieldRef:
-              apiVersion: v1
-              fieldPath: metadata.namespace
-  volumeMounts:
-  - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
-    name: serviceaccount-token
-    readOnly: true
