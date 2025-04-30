@@ -49,6 +49,13 @@ spec:
                - key: {{ kubernetes_label.worker }}
                  operator: Exists
   kafkaExporter:
+    resources: # this is guess work
+      requests:
+        cpu: 10m
+        memory: 16Mi
+      limits:
+        cpu: 400m
+        memory: 512Mi
     topicRegex: ".*"
     groupRegex: ".*"
     template:    
