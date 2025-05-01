@@ -15,7 +15,7 @@ spec:
   - name: http
     port: 5005
     protocol: TCP
-    targetPort: 5005
+    targetPort: http
     nodePort: 30015
   selector:
     app.kubernetes.io/app: runregistry-rest
