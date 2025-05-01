@@ -15,7 +15,7 @@ spec:
     nodePort: 31002
     port: 8086
     protocol: TCP
-    targetPort: 8086
+    targetPort: api
   selector:
     app.kubernetes.io/instance: influxdb
     app.kubernetes.io/name: influxdb
