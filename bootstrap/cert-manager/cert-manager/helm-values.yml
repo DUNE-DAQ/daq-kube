@@ -49,7 +49,7 @@ webhook:
       cpu: 10m
       memory: 16Mi
   networkPolicy:
-    enabled: true
+    enabled: false
 
 cainjector:
   affinity:
