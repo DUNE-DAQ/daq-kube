@@ -40,6 +40,15 @@ spec:
             - matchExpressions:
               - key: {{ kubernetes_label.worker }}
                 operator: Exists
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app.kubernetes.io/app: microsocks
+                  app.kubernetes.io/component: microsocks
+              topologyKey: "kubernetes.io/hostname"
       containers:
       - image: ghcr.io/dune-daq/microsocks:latest
         imagePullPolicy: Always
