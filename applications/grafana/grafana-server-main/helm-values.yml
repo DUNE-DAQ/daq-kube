@@ -69,7 +69,7 @@ resources: # this is guess work
    memory: 4Gi
  requests:
    cpu: 10m
-   memory: 64Mi
+   memory: 256Mi
 
 # try not to schedule on same node as alertmanager/prometheus
 affinity:
@@ -104,10 +104,10 @@ sidecar: # this is guess work
   resources:
    limits:
      cpu: 200m
-     memory: 200Mi
+     memory: 192Mi
    requests:
      cpu: 10m
-     memory: 5Mi
+     memory: 96Mi
 
   alerts:
     enabled: true

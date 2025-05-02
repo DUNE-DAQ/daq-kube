@@ -20,8 +20,8 @@ prometheusOperator:
       cpu: 300m
       memory: 512Mi
     requests:
-      cpu: 10m
-      memory: 16Mi
+      cpu: 50m
+      memory: 96Mi
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
