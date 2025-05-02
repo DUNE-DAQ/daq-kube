@@ -68,7 +68,7 @@ resources: # this is guess work
    cpu: 1
    memory: 4Gi
  requests:
-   cpu: 10m
+   cpu: 100m
    memory: 256Mi
 
 # try not to schedule on same node as alertmanager/prometheus
@@ -106,7 +106,7 @@ sidecar: # this is guess work
      cpu: 200m
      memory: 192Mi
    requests:
-     cpu: 10m
+     cpu: 50m
      memory: 96Mi
 
   alerts:

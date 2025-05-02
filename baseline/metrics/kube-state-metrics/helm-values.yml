@@ -28,5 +28,8 @@ networkPolicy:
   egress:
     - {}
 
+podDisruptionBudget:
+  minAvailable: 1
+
 selfMonitor:
   enabled: true
