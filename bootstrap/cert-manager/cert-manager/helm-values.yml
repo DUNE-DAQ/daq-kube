@@ -28,6 +28,10 @@ affinity:
        - key: {{ kubernetes_label.worker }}
          operator: Exists
 
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 1
+
 #extraArgs:
 #  - '--enable-gateway-api'
 
@@ -39,6 +43,9 @@ webhook:
        - matchExpressions:
          - key: {{ kubernetes_label.worker }}
            operator: Exists
+  podDisruptionBudget:
+    enabled: true
+    minAvailable: 1
   deploymentAnnotations:
     "kluctl.io/is-ready": "true"
   resources:
@@ -59,6 +66,9 @@ cainjector:
        - matchExpressions:
          - key: {{ kubernetes_label.worker }}
            operator: Exists
+  podDisruptionBudget:
+    enabled: true
+    minAvailable: 1
   resources:
     limits:
       cpu: 200m
