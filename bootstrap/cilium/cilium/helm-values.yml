@@ -149,6 +149,7 @@ hubble:
     podDisruptionBudget:
       enabled: true
       minAvailable: 0
+      unhealthyPodEvictionPolicy: AlwaysAllow
     resources: # this is guess work
       limits:
         cpu: 1500m
@@ -181,6 +182,7 @@ hubble:
     podDisruptionBudget:
       enabled: true
       minAvailable: 0
+      unhealthyPodEvictionPolicy: AlwaysAllow
     backend:
       resources: # this is guess work
         limits:
@@ -217,6 +219,7 @@ operator:
   podDisruptionBudget:
     enabled: true
     minAvailable: 1
+    unhealthyPodEvictionPolicy: AlwaysAllow
   pprof:
     enabled: true
   prometheus:

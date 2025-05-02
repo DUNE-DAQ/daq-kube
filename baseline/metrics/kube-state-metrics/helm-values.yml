@@ -30,6 +30,7 @@ networkPolicy:
 
 podDisruptionBudget:
   minAvailable: 0
+  unhealthyPodEvictionPolicy: AlwaysAllow
 
 selfMonitor:
   enabled: true

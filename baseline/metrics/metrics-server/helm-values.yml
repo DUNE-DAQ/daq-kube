@@ -18,6 +18,7 @@ serviceMonitor:
 podDisruptionBudget:
   enabled: true
   minAvailable: 0
+  unhealthyPodEvictionPolicy: AlwaysAllow
 
 affinity:
  nodeAffinity:
