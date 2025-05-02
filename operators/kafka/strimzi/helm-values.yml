@@ -11,6 +11,10 @@ affinity:
        - key: {{ kubernetes_label.worker }}
          operator: Exists
 
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 0
+
 securityContext:
   runAsUser: 10000
   runAsGroup: 10000

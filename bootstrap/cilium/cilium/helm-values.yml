@@ -146,6 +146,9 @@ hubble:
         name: {{ certmanager.ca_name }}
   relay:
     enabled: true
+    podDisruptionBudget:
+      enabled: true
+      minAvailable: 0
     resources: # this is guess work
       limits:
         cpu: 1500m
@@ -175,6 +178,9 @@ hubble:
           "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.system }}"
   ui:
     enabled: true
+    podDisruptionBudget:
+      enabled: true
+      minAvailable: 0
     backend:
       resources: # this is guess work
         limits:
@@ -208,6 +214,9 @@ operator:
     requests:
       cpu: 100m
       memory: 256Mi
+  podDisruptionBudget:
+    enabled: true
+    minAvailable: 1
   pprof:
     enabled: true
   prometheus:

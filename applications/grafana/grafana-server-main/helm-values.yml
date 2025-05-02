@@ -17,6 +17,15 @@ persistence:
     enabled: true    # use EmptyDir
     sizeLimit: 300Mi # this is guess work
 
+initChownData:
+  resources:
+    limits:
+      cpu: 200m
+      memory: 192Mi
+    requests:
+      cpu: 50m
+      memory: 96Mi
+
 grafana.ini:
   dashboards:
     default_home_dashboard_path: {{ grafana_default_dashboard }}
@@ -102,12 +111,12 @@ service:
 
 sidecar: # this is guess work
   resources:
-   limits:
-     cpu: 200m
-     memory: 192Mi
-   requests:
-     cpu: 50m
-     memory: 96Mi
+    limits:
+      cpu: 200m
+      memory: 192Mi
+    requests:
+      cpu: 50m
+      memory: 96Mi
 
   alerts:
     enabled: true

@@ -29,7 +29,7 @@ networkPolicy:
     - {}
 
 podDisruptionBudget:
-  minAvailable: 1
+  minAvailable: 0
 
 selfMonitor:
   enabled: true

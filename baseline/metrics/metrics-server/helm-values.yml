@@ -17,7 +17,7 @@ serviceMonitor:
 
 podDisruptionBudget:
   enabled: true
-  minAvailable: 1
+  minAvailable: 0
 
 affinity:
  nodeAffinity:
