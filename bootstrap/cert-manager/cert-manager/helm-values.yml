@@ -30,7 +30,7 @@ affinity:
 
 podDisruptionBudget:
   enabled: true
-  minAvailable: 1
+  minAvailable: 0
 
 #extraArgs:
 #  - '--enable-gateway-api'
@@ -45,7 +45,7 @@ webhook:
            operator: Exists
   podDisruptionBudget:
     enabled: true
-    minAvailable: 1
+    minAvailable: 0
   deploymentAnnotations:
     "kluctl.io/is-ready": "true"
   resources:
@@ -68,7 +68,7 @@ cainjector:
            operator: Exists
   podDisruptionBudget:
     enabled: true
-    minAvailable: 1
+    minAvailable: 0
   resources:
     limits:
       cpu: 200m

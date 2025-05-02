@@ -37,19 +37,6 @@ networkPolicy:
           - protocol: TCP
             port: 80
 
-podSecurityContext: # https://github.com/provectus/kafka-ui-charts/pull/10
-  fsGroup: 101
-securityContext: # https://github.com/provectus/kafka-ui-charts/pull/10
-  allowPrivilegeEscalation: false
-  capabilities:
-    drop:
-    - ALL
-  runAsGroup: 101
-  runAsNonRoot: true
-  runAsUser: 100
-  seccompProfile:
-    type: RuntimeDefault
-
 affinity:
   nodeAffinity:
     requiredDuringSchedulingIgnoredDuringExecution:

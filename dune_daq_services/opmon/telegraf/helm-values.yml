@@ -86,8 +86,8 @@ affinity:
 
 resources:
   requests:
-    cpu: 10m
-    memory: 16Mi
+    cpu: 50m
+    memory: 32Mi
 
 nodeSelector:
   kubernetes.io/os: linux
