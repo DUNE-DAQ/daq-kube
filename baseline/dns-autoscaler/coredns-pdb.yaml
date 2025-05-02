@@ -9,3 +9,4 @@ spec:
     matchLabels:
       k8s-app: kube-dns
   minAvailable: 1
+  unhealthyPodEvictionPolicy: AlwaysAllow
