@@ -50,7 +50,7 @@ worker:
       memory: 384Mi
     requests:
       cpu: 10m
-      memory: 32Mi
+      memory: 64Mi
 
 topologyUpdater:
   enable: {{ node_feature_discovery.topologyUpdater.enable }}
@@ -62,7 +62,7 @@ topologyUpdater:
       memory: 384Mi
     requests:
       cpu: 10m
-      memory: 32Mi
+      memory: 64Mi
   affinity:
    nodeAffinity:
      requiredDuringSchedulingIgnoredDuringExecution:
@@ -80,7 +80,7 @@ topologyGC:
       memory: 384Mi
     requests:
       cpu: 10m
-      memory: 32Mi
+      memory: 64Mi
   affinity:
    nodeAffinity:
      requiredDuringSchedulingIgnoredDuringExecution:

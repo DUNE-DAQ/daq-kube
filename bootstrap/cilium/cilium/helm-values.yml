@@ -207,7 +207,7 @@ operator:
       memory: 1Gi
     requests:
       cpu: 100m
-      memory: 64Mi
+      memory: 256Mi
   pprof:
     enabled: true
   prometheus:

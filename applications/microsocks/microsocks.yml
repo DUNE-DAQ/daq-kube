@@ -49,6 +49,7 @@ spec:
                   app.kubernetes.io/app: microsocks
                   app.kubernetes.io/component: microsocks
               topologyKey: "kubernetes.io/hostname"
+      automountServiceAccountToken: false
       containers:
       - image: ghcr.io/dune-daq/microsocks:latest
         imagePullPolicy: Always
@@ -87,6 +88,18 @@ spec:
             - ALL
       securityContext:
         fsGroup: 10000
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: microsocks-pdb
+  namespace: microsocks
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/app: microsocks
+      app.kubernetes.io/component: microsocks
 ---
 apiVersion: v1
 kind: Service

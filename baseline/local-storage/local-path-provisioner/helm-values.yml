@@ -5,7 +5,7 @@ resources: # this is guess work
     memory: 384Mi
   requests:
     cpu: 20m
-    memory: 32Mi
+    memory: 64Mi
 
 nodePathMap: {{ local_path_provisioner.nodePathMap | tojson }}
 
