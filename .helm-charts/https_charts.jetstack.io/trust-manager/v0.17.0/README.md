@@ -338,6 +338,20 @@ topologySpreadConstraints:
 > ```
 
 Whether to filter expired certificates from the trust bundle.
+#### **app.minTLSVersion** ~ `string`
+> Default value:
+> ```yaml
+> ""
+> ```
+
+Minimum TLS version supported. If omitted, the default Go minimum version will be used.
+#### **app.ciphersSuite** ~ `string`
+> Default value:
+> ```yaml
+> ""
+> ```
+
+Comma-separated list of cipher suites for the server. If omitted, the default Go cipher suites will be used.
 #### **app.logFormat** ~ `string`
 > Default value:
 > ```yaml
@@ -352,6 +366,13 @@ The format of trust-manager logging. Accepted values are text or json.
 > ```
 
 The verbosity of trust-manager logging. This takes a value from 1-5, with the higher value being more verbose.
+#### **app.leaderElection.enabled** ~ `bool`
+> Default value:
+> ```yaml
+> true
+> ```
+
+Whether to enable leader election for trust-manager.
 #### **app.leaderElection.leaseDuration** ~ `string`
 > Default value:
 > ```yaml
@@ -596,5 +617,37 @@ This configures the maximum unavailable pods for disruptions. It can either be s
 > ```
 
 Labels to apply to all resources
+#### **commonAnnotations** ~ `object`
+> Default value:
+> ```yaml
+> {}
+> ```
+
+Annotations to apply to all resources  
+NOTE: These annotations won't be added to the CRDs.
+#### **extraObjects** ~ `array`
+> Default value:
+> ```yaml
+> []
+> ```
+
+Extra manifests to be deployed. This is useful for deploying additional resources that are not part of the chart.  
+For example:
+
+```yaml
+extraObjects:
+ - apiVersion: cilium.io/v2
+   kind: CiliumNetworkPolicy
+   metadata:
+     name: trust-manager
+     namespace: trust-manager
+   spec:
+     endpointSelector:
+       matchLabels:
+         io.cilium.k8s.policy.serviceaccount: trust-manager
+     egress:
+       - toEntities:
+           - kube-apiserver
+```
 
 <!-- /AUTO-GENERATED -->

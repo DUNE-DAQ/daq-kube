@@ -12,6 +12,9 @@
         "automountServiceAccountToken": {
           "$ref": "#/$defs/helm-values.automountServiceAccountToken"
         },
+        "commonAnnotations": {
+          "$ref": "#/$defs/helm-values.commonAnnotations"
+        },
         "commonLabels": {
           "$ref": "#/$defs/helm-values.commonLabels"
         },
@@ -23,6 +26,9 @@
         },
         "defaultPackageImage": {
           "$ref": "#/$defs/helm-values.defaultPackageImage"
+        },
+        "extraObjects": {
+          "$ref": "#/$defs/helm-values.extraObjects"
         },
         "filterExpiredCertificates": {
           "$ref": "#/$defs/helm-values.filterExpiredCertificates"
@@ -86,6 +92,9 @@
     "helm-values.app": {
       "additionalProperties": false,
       "properties": {
+        "ciphersSuite": {
+          "$ref": "#/$defs/helm-values.app.ciphersSuite"
+        },
         "leaderElection": {
           "$ref": "#/$defs/helm-values.app.leaderElection"
         },
@@ -97,6 +106,9 @@
         },
         "metrics": {
           "$ref": "#/$defs/helm-values.app.metrics"
+        },
+        "minTLSVersion": {
+          "$ref": "#/$defs/helm-values.app.minTLSVersion"
         },
         "podAnnotations": {
           "$ref": "#/$defs/helm-values.app.podAnnotations"
@@ -119,9 +131,17 @@
       },
       "type": "object"
     },
+    "helm-values.app.ciphersSuite": {
+      "default": "",
+      "description": "Comma-separated list of cipher suites for the server. If omitted, the default Go cipher suites will be used.",
+      "type": "string"
+    },
     "helm-values.app.leaderElection": {
       "additionalProperties": false,
       "properties": {
+        "enabled": {
+          "$ref": "#/$defs/helm-values.app.leaderElection.enabled"
+        },
         "leaseDuration": {
           "$ref": "#/$defs/helm-values.app.leaderElection.leaseDuration"
         },
@@ -130,6 +150,11 @@
         }
       },
       "type": "object"
+    },
+    "helm-values.app.leaderElection.enabled": {
+      "default": true,
+      "description": "Whether to enable leader election for trust-manager.",
+      "type": "boolean"
     },
     "helm-values.app.leaderElection.leaseDuration": {
       "default": "15s",
@@ -254,6 +279,11 @@
     "helm-values.app.metrics.service.type": {
       "default": "ClusterIP",
       "description": "The Service type to expose metrics.",
+      "type": "string"
+    },
+    "helm-values.app.minTLSVersion": {
+      "default": "",
+      "description": "Minimum TLS version supported. If omitted, the default Go minimum version will be used.",
       "type": "string"
     },
     "helm-values.app.podAnnotations": {
@@ -475,6 +505,11 @@
       "description": "Automounting API credentials for the trust-manager pod.",
       "type": "boolean"
     },
+    "helm-values.commonAnnotations": {
+      "default": {},
+      "description": "Annotations to apply to all resources\nNOTE: These annotations won't be added to the CRDs.",
+      "type": "object"
+    },
     "helm-values.commonLabels": {
       "default": {},
       "description": "Labels to apply to all resources",
@@ -567,6 +602,12 @@
       "default": "20230311.0",
       "description": "Override the image tag of the default package image. If no value is set, the chart's appVersion is used.",
       "type": "string"
+    },
+    "helm-values.extraObjects": {
+      "default": [],
+      "description": "Extra manifests to be deployed. This is useful for deploying additional resources that are not part of the chart.\nFor example:\nextraObjects:\n - apiVersion: cilium.io/v2\n   kind: CiliumNetworkPolicy\n   metadata:\n     name: trust-manager\n     namespace: trust-manager\n   spec:\n     endpointSelector:\n       matchLabels:\n         io.cilium.k8s.policy.serviceaccount: trust-manager\n     egress:\n       - toEntities:\n           - kube-apiserver",
+      "items": {},
+      "type": "array"
     },
     "helm-values.filterExpiredCertificates": {
       "additionalProperties": false,

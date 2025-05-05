@@ -5,6 +5,10 @@ metadata:
   namespace: {{ include "trust-manager.namespace" . }}
   labels:
     {{- include "trust-manager.labels" . | nindent 4 }}
+  {{- with .Values.commonAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -78,11 +82,14 @@ spec:
           initialDelaySeconds: 3
           periodSeconds: 7
         args:
+          - "--tls-min-version={{.Values.app.minTLSVersion}}"
+          - "--tls-cipher-suites={{.Values.app.ciphersSuite}}"
           - "--log-format={{.Values.app.logFormat}}"
           - "--log-level={{.Values.app.logLevel}}"
           - "--metrics-port={{.Values.app.metrics.port}}"
           - "--readiness-probe-port={{.Values.app.readinessProbe.port}}"
           - "--readiness-probe-path={{.Values.app.readinessProbe.path}}"
+          - "--leader-elect={{.Values.app.leaderElection.enabled}}"
           - "--leader-election-lease-duration={{.Values.app.leaderElection.leaseDuration}}"
           - "--leader-election-renew-deadline={{.Values.app.leaderElection.renewDeadline}}"
             # trust
