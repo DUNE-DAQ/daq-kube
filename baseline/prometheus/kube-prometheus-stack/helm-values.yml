@@ -39,6 +39,7 @@ prometheusOperator:
         cpu: 10m
         memory: 16Mi
   admissionWebhooks:
+    deployment:
       podDisruptionBudget:
         enabled: true
         minAvailable: 0
@@ -49,6 +50,8 @@ prometheusOperator:
       requests:
         cpu: 10m
         memory: 16Mi
+    certManager:
+      enabled: true
 
 ## do not deploy a default monitoring setup
 ## we will manage it seperately
