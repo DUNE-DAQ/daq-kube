@@ -11,8 +11,6 @@ defaultRules:
 ##
 prometheusOperator:
   enabled: true
-  admissionWebhooks:
-    enabled: true
   networkPolicy:
     enabled: true
   resources:
@@ -22,6 +20,9 @@ prometheusOperator:
     requests:
       cpu: 50m
       memory: 96Mi
+  podDisruptionBudget:
+    enabled: true
+    minAvailable: 0
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
@@ -30,6 +31,17 @@ prometheusOperator:
           - key: {{ kubernetes_label.worker }}
             operator: Exists
   prometheusConfigReloader:
+    resources:
+      limits:
+        cpu: 300m
+        memory: 512Mi
+      requests:
+        cpu: 10m
+        memory: 16Mi
+  admissionWebhooks:
+      podDisruptionBudget:
+        enabled: true
+        minAvailable: 0
     resources:
       limits:
         cpu: 300m
