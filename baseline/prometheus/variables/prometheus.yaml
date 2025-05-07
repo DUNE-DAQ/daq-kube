@@ -40,6 +40,9 @@ prometheis: # this is the plural of prometheus
       requests:
         cpu: 200m
         memory: 64Mi
+    logLevel: debug
+    scrapeInterval: 30s
+    scrapeTimeout: 25s
     storage:
       volumeClaimTemplate:
         spec:
