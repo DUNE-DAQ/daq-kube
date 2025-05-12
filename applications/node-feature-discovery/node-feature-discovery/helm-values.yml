@@ -15,6 +15,9 @@ master:
     requests:
       cpu: 10m
       memory: 128Mi
+  podDisruptionBudget:
+    enable: true
+    minAvailable: 0
   affinity:
    nodeAffinity:
      requiredDuringSchedulingIgnoredDuringExecution:
@@ -32,6 +35,9 @@ gc:
     requests:
       cpu: 10m
       memory: 64Mi
+  podDisruptionBudget:
+    enable: true
+    minAvailable: 0
   affinity:
    nodeAffinity:
      requiredDuringSchedulingIgnoredDuringExecution:
