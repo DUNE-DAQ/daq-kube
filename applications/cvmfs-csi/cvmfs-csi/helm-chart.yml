@@ -1,5 +1,5 @@
 helmChart:
-  chartVersion: 2.5.1
+  chartVersion: 2.5.2
   namespace: '{{ cvmfs_csi.namespace }}'
   output: helm-rendered.yaml
   releaseName: cvmfs-csi
