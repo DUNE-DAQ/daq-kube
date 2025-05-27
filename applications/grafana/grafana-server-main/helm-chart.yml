@@ -1,8 +1,8 @@
 helmChart:
   chartName: grafana
-  chartVersion: 8.14.2
+  chartVersion: 9.2.1
   namespace: '{{ monitoring.namespace }}'
   output: helm-rendered.yaml
   releaseName: grafana
   repo: https://grafana.github.io/helm-charts
-  updateConstraints: ~8.x
+  updateConstraints: ~9.x
