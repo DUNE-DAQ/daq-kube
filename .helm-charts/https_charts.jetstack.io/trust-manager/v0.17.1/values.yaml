@@ -56,7 +56,7 @@ image:
 
   # Kubernetes imagePullPolicy on Deployment.
   pullPolicy: IfNotPresent
-  tag: v0.17.0
+  tag: v0.17.1
 defaultPackage:
   # Whether to load the default trust package during pod initialization, and include it in main container args. This container enables the 'useDefaultCAs' source on Bundles.
   enabled: true
@@ -177,7 +177,7 @@ app:
   # Minimum TLS version supported. If omitted, the default Go minimum version will be used.
   minTLSVersion: ""
   # Comma-separated list of cipher suites for the server. If omitted, the default Go cipher suites will be used.
-  ciphersSuite: ""
+  cipherSuites: ""
   # The format of trust-manager logging. Accepted values are text or json.
   logFormat: text
   # The verbosity of trust-manager logging. This takes a value from 1-5, with the higher value being more verbose.
