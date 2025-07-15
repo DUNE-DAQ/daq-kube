@@ -1,6 +1,6 @@
 helmChart:
   chartName: kepler
-  chartVersion: 0.6.0
+  chartVersion: 0.6.1
   namespace: '{{ kepler.namespace }}'
   output: helm-rendered.yaml
   releaseName: kepler
