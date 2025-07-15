@@ -31,7 +31,7 @@ affinity:
 podDisruptionBudget:
   enabled: true
   minAvailable: 0
-  unhealthyPodEvictionPolicy: AlwaysAllow
+#  unhealthyPodEvictionPolicy: AlwaysAllow
 
 #extraArgs:
 #  - '--enable-gateway-api'
