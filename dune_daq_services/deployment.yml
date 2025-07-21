@@ -8,9 +8,6 @@ deployments:
 {% if with_dune_connectionservice %}
   - include: connectionservice
 {% endif %}
-{% if with_dune_daqconfig %}
-  - include: daqconfig
-{% endif %}
 {% if with_dune_runservices %}
   - include: runservices
 {% endif %}
