@@ -34,7 +34,6 @@ with_mongo_express: true
 
 ### Feature flags for application targets
 with_dune_connectionservice: true
-with_dune_daqconfig: true
 with_dune_ers: true
 with_dune_felix_plugin: false
 with_dune_kafka: true

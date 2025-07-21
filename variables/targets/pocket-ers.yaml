@@ -1,6 +1,5 @@
 ---
 with_dune_connectionservice: false
-with_dune_daqconfig: false
 with_dune_ers: true
 with_dune_kafka: true
 with_dune_opmon: false
