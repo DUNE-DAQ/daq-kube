@@ -1,6 +1,6 @@
 helmChart:
   chartName: metrics-server
-  chartVersion: 3.12.2
+  chartVersion: 3.13.0
   namespace: '{{ metrics.kubernetes_metrics_namespace }}'
   output: helm-rendered.yaml
   releaseName: metrics-server
