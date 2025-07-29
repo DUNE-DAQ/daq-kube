@@ -1,8 +1,8 @@
 helmChart:
   chartName: cilium
-  chartVersion: 1.17.6
+  chartVersion: 1.18.0
   namespace: kube-system
   output: helm-rendered.yaml
   releaseName: cilium
   repo: https://helm.cilium.io/
-  updateConstraints: ~1.17.x
+  updateConstraints: ~1.18.x
