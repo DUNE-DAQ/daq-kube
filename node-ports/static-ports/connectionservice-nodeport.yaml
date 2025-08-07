@@ -1,5 +1,3 @@
-{% if with_dune_daq_services %}
-{% if with_dune_connectionservice %}
 ---
 apiVersion: v1
 kind: Service
@@ -10,6 +8,7 @@ metadata:
   name: connectionservice-nodeport
   namespace: connections
 spec:
+  type: NodePort
   ports:
     - name: connectionservice
       protocol: TCP
@@ -19,6 +18,3 @@ spec:
   selector:
     app.kubernetes.io/app: connectionservice
     app.kubernetes.io/component: connectionservice
-  type: NodePort
-{% endif %}
-{% endif %}

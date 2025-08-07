@@ -5,10 +5,19 @@ deployments:
   - barrier: true
 
   - path: metrics-server
+    tags:
+      - metrics
+
   - path: kube-state-metrics
+    tags:
+      - metrics
+      - prometheus
+
   - path: prometheus-node-exporter
     tags:
+      - metrics
       - node-exporter
+      - prometheus
 
 vars:
   - file: variables/metrics.yaml

@@ -1,0 +1,8 @@
+---
+dune_online_ers:
+  namespace: ers
+  database:
+    postgresql:
+      deployment: ers-database
+      database: ApplicationDbErrorReporting
+      owner: ers

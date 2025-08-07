@@ -1,9 +1,0 @@
----
-OPMON_telegraf:
-  namespace: opmon-telegraf
-  prometheus_port: 9126
-  influxdb_username: {{ DUNE_opmon.influxdb_rw_username }}
-  influxdb_password: {{ DUNE_opmon.influxdb_rw_password }}
-  influxdb_database: {{ DUNE_opmon.influxdb_database }}
-  kafka_topics:
-    - opmon

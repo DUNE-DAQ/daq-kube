@@ -1,0 +1,8 @@
+---
+deployments:
+{% if hardware_access %}
+  - include: felix-plugin
+{% endif %}
+
+  - barrier: true
+    message: Let readout services all catch up

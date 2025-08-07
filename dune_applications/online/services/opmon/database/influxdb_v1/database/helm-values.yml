@@ -1,0 +1,45 @@
+---
+setDefaultUser:
+  enabled: true
+  user:
+    existingSecret: influxdbv1-{{ dune_online_opmon.influxdb_v1.read_write_username }}-password
+
+env:
+  - name: INFLUXDB_DB
+    value: {{ dune_online_opmon.influxdb_v1.database_name }}
+  - name: INFLUXDB_READ_USER
+    valueFrom:
+      secretKeyRef:
+        name: influxdbv1-readonly-password
+        key: username
+  - name: INFLUXDB_READ_USER_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: influxdbv1-readonly-password
+        key: password
+
+persistence:
+  enabled: true
+  size: 8Gi # this size is guess work
+
+resources: # this is guess work
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: {{ kubernetes_labels.node_worker }}
+          operator: Exists
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 100
+      podAffinityTerm:
+        labelSelector:
+          matchExpressions: # try to schedule away from Kafka
+          - key: "strimzi.io/cluster"
+            operator: Exists
+        topologyKey: kubernetes.io/hostname

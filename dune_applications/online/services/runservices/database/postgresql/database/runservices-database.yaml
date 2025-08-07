@@ -1,0 +1,64 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: {{ dune_online_runservices.database.postgresql.deployment }}
+  namespace: {{ dune_online_runservices.namespace }}
+spec:
+  instances: 1
+  resources: # this is guess work
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      cpu: 1
+      memory: 512Mi
+  storage:
+    size: 8Gi  # this is guess work
+  monitoring:
+    enablePodMonitor: true
+  certificates:
+    serverTLSSecret: {{ dune_online_runservices.database.postgresql.deployment }}-tls-cert
+    serverCASecret: {{ dune_online_runservices.database.postgresql.deployment }}-tls-cert
+  bootstrap:
+    initdb:
+      database: {{ dune_online_runservices.database.postgresql.database }}
+      owner: {{ dune_online_runservices.database.postgresql.owner }}
+      secret:
+        name: {{ dune_online_runservices.database.postgresql.deployment }}-{{ dune_online_runservices.database.postgresql.owner }}-password
+      dataChecksums: true
+  postgresql:
+    parameters:
+      shared_buffers: "64MB"  # this is guess work
+  managed:
+    roles:
+      # Prometheus exporter
+      - name: postgresql_exporter
+        ensure: present
+        comment: "Prometheus Postgresql Exporter"
+        login: true
+        superuser: false
+        connectionLimit: 25 # this is guess work
+        inRoles:
+          - pg_monitor
+        passwordSecret:
+          name: {{ dune_online_runservices.database.postgresql.deployment }}-postgresql-exporter-password
+
+      # Read-only application user
+      - name: readonly
+        ensure: present
+        comment: "Read-only user for {{ dune_online_runservices.database.postgresql.deployment }}"
+        login: true
+        superuser: false
+        inRoles:
+          - pg_read_all_data
+        passwordSecret:
+          name: {{ dune_online_runservices.database.postgresql.deployment }}-readonly-password
+
+  affinity:
+   nodeAffinity:
+     requiredDuringSchedulingIgnoredDuringExecution:
+       nodeSelectorTerms:
+       - matchExpressions:
+         - key: {{ kubernetes_labels.node_worker }}
+           operator: Exists

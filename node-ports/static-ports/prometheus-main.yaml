@@ -9,6 +9,7 @@ metadata:
   name: prometheus-main-nodeport
   namespace: monitoring
 spec:
+  type: NodePort
   ports:
   - name: service
     protocol: TCP
@@ -18,4 +19,3 @@ spec:
   selector:
     app.kubernetes.io/name: prometheus
     prometheus: main
-  type: NodePort

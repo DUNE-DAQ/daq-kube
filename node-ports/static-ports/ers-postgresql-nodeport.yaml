@@ -1,26 +1,21 @@
-{% if with_dune_daq_services %}
-{% if with_dune_ers %}
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
     app.kubernetes.io/app: ers
-    app.kubernetes.io/component: primary
-    app.kubernetes.io/instance: ers-postgresql
+    app.kubernetes.io/component: postgresql
+    app.kubernetes.io/instance: ers-database-rw
   name: ers-postgresql-nodeport
   namespace: ers
 spec:
+  type: NodePort
   ports:
-    - name: tcp-postgresql
+    - name: postgresql
       protocol: TCP
       port: 5432
-      targetPort: tcp-postgresql
+      targetPort: 5432
       nodePort: 30432
   selector:
-    app.kubernetes.io/component: primary
-    app.kubernetes.io/instance: ers-postgresql
-    app.kubernetes.io/name: postgresql
-  type: NodePort
-{% endif %}
-{% endif %}
+    cnpg.io/cluster: ers-database
+    cnpg.io/instanceRole: primary

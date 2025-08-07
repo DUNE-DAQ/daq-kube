@@ -1,5 +1,0 @@
----
-postgresql:
-  databases:
-    database_name:
-      storage_class: local-path

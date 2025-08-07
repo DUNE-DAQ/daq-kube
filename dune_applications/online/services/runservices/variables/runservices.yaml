@@ -1,0 +1,8 @@
+---
+dune_online_runservices:
+  namespace: runservices
+  database:
+    postgresql:
+      deployment: runservices-database
+      database: runservices
+      owner: runservices

@@ -1,5 +1,0 @@
-certmanager:
-  namespace: cert-manager
-  ca_name: fake-ca
-  ca_bundle_name: fake-ca-bundle
-  ca_bundle_key: ca.pem

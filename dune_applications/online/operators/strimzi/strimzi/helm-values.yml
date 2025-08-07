@@ -1,0 +1,43 @@
+---
+featureGates: ''
+
+watchAnyNamespace: true
+
+affinity:
+ nodeAffinity:
+   requiredDuringSchedulingIgnoredDuringExecution:
+     nodeSelectorTerms:
+     - matchExpressions:
+       - key: {{ kubernetes_labels.node_worker }}
+         operator: Exists
+
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 0
+  unhealthyPodEvictionPolicy: AlwaysAllow
+
+securityContext:
+  runAsUser: 10000
+  runAsGroup: 10000
+  runAsNonRoot: true
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  seccompProfile:
+    type: RuntimeDefault
+  capabilities:
+    drop:
+    - ALL
+
+podSecurityContext:
+  fsGroup: 10000
+
+extraEnvs:
+  - name: STRIMZI_POD_SECURITY_PROVIDER_CLASS
+    value: restricted
+
+dashboards:
+  enabled: true
+  label: {{ grafana_dashboard_label_name }}
+  labelValue: {{ grafana_dashboard_label_value }}
+  annotations:
+    {{ grafana_dashboard_folder_annotation }}: Kafka

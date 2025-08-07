@@ -1,0 +1,12 @@
+---
+deployments:
+  - path: namespace
+
+  - barrier: true
+
+  - include: database
+
+  - path: opmon-protobuf-dbwriter
+
+vars:
+  - file: variables/opmon.yaml

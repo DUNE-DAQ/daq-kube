@@ -1,0 +1,6 @@
+---
+deployments:
+  - include: config
+
+  - barrier: true
+    message: All configs must be present in the cluster

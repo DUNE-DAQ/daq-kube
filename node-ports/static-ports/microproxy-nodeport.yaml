@@ -1,4 +1,3 @@
-{% if with_microsocks %}
 ---
 apiVersion: v1
 kind: Service
@@ -9,6 +8,7 @@ metadata:
   name: microsocks-nodeport
   namespace: microsocks
 spec:
+  type: NodePort
   ports:
     - name: socks5
       protocol: TCP
@@ -18,5 +18,3 @@ spec:
   selector:
     app.kubernetes.io/app: microsocks
     app.kubernetes.io/component: microsocks
-  type: NodePort
-{% endif %}

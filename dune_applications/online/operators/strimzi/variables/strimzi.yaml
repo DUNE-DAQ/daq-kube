@@ -1,0 +1,3 @@
+---
+strimzi:
+  namespace: strimzi-kafka

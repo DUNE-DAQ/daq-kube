@@ -1,3 +1,0 @@
----
-minio:
-  operator_namespace: minio-operator

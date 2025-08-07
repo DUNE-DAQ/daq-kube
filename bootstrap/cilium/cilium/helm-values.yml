@@ -162,7 +162,7 @@ hubble:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
           - matchExpressions:
-            - key: {{ kubernetes_label.worker }}
+            - key: {{ kubernetes_labels.node_worker }}
               operator: Exists
       podAffinity: # copied from helm chart
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -204,7 +204,7 @@ hubble:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
           - matchExpressions:
-            - key: {{ kubernetes_label.worker }}
+            - key: {{ kubernetes_labels.node_worker }}
               operator: Exists
 
 operator:

@@ -1,0 +1,99 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: postgres-backup-cronjob-{{ dune_online_ers.database.postgresql.deployment }}
+  namespace: {{ dune_online_ers.namespace }}
+spec:
+  schedule: "0 4 * * *"  # Run daily at 4 AM
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          affinity:
+            podAntiAffinity:
+              preferredDuringSchedulingIgnoredDuringExecution:
+              - weight: 100
+                podAffinityTerm:
+                  labelSelector:
+                    matchLabels:
+                      cnpg.io/cluster: {{ dune_online_ers.database.postgresql.deployment }}
+                  topologyKey: kubernetes.io/hostname
+              - weight: 50
+                podAffinityTerm:
+                  labelSelector:
+                    matchLabels:
+                      cnpg.io/instanceRole: primary
+                      cnpg.io/cluster: {{ dune_online_ers.database.postgresql.deployment }}
+                  topologyKey: kubernetes.io/hostname
+              - weight: 20
+                podAffinityTerm:
+                  labelSelector:
+                    matchLabels:
+                      cnpg.io/instanceRole: primary
+                  topologyKey: kubernetes.io/hostname
+              - weight: 10
+                podAffinityTerm:
+                  labelSelector:
+                    matchExpressions:
+                    - key: cnpg.io/cluster
+                      operator: Exists
+                  topologyKey: kubernetes.io/hostname
+          containers:
+          - name: postgres-backup
+            image: docker.io/library/postgres:latest
+            env:
+            - name: DATABASE_URI
+              valueFrom:
+                secretKeyRef:
+                  name: {{ dune_online_ers.database.postgresql.deployment }}-readonly-password
+                  key: uri
+            command:
+            - /bin/bash
+            - -c
+            - |
+              set -e
+              
+              # Create backup directory if it doesn't exist
+              mkdir -p /backups
+              
+              # Generate timestamp for backup filename
+              TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+              BACKUP_FILE="/backups/postgres_backup_${TIMESTAMP}.sql"
+              
+              echo "Starting backup at $(date)"
+              echo "Backup file: ${BACKUP_FILE}"
+              
+              # Perform the database dump using the connection string
+              pg_dump --verbose --no-password --create --file="${BACKUP_FILE}" "${DATABASE_URI}"
+              
+              if [ $? -eq 0 ]; then
+                echo "Backup completed successfully"
+                
+                # Compress the backup
+                gzip --best "${BACKUP_FILE}"
+                echo "Backup compressed: ${BACKUP_FILE}.gz"
+                
+                # Clean up old backups (keep last 10 days)
+                echo "Cleaning up old backups..."
+                find /backups -name "postgres_backup_*.sql.gz" -mtime +10 -delete
+                
+                # List remaining backups
+                echo "Current backups:"
+                ls -la /backups/postgres_backup_*.sql.gz 2>/dev/null || echo "No backups found"
+                
+                echo "Backup process completed at $(date)"
+              else
+                echo "Backup failed!"
+                exit 1
+              fi
+            volumeMounts:
+            - name: backup-storage
+              mountPath: /backups
+          volumes:
+          - name: backup-storage
+            persistentVolumeClaim:
+              claimName: postgres-backup-ers

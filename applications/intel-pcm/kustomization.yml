@@ -19,11 +19,11 @@ patches:
        value:
          limits:
            cpu: "500m"
-           memory: "512Mi"
+           memory: "256Mi"
          requests:
            cpu: "100m"
            memory: "128Mi"
-  - target: # eventually drop this
+  - target: # eventually drop this once we are all k8s
       kind: DaemonSet
     patch: |-
       - op: add

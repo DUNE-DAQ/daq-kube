@@ -1,3 +1,0 @@
----
-nfs_subdir_external_provisioner:
-  namespace: nfs-subdir-external-provisioner

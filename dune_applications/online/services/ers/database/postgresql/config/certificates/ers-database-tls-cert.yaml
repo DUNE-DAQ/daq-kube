@@ -1,0 +1,31 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ dune_online_ers.database.postgresql.deployment }}-tls-cert
+  namespace: {{ dune_online_ers.namespace }}
+spec:
+  secretName: {{ dune_online_ers.database.postgresql.deployment }}-tls-cert
+  secretTemplate:
+    labels:
+      cnpg.io/reload: "true"
+  duration: 2160h
+  renewBefore: 360h
+  privateKey:
+    algorithm: RSA
+    size: 4096
+  usages:
+    - server auth
+  dnsNames:
+    - {{ dune_online_ers.database.postgresql.deployment }}-rw
+    - {{ dune_online_ers.database.postgresql.deployment }}-rw.{{ dune_online_ers.namespace }}
+    - {{ dune_online_ers.database.postgresql.deployment }}-rw.{{ dune_online_ers.namespace }}.svc
+    - {{ dune_online_ers.database.postgresql.deployment }}-r
+    - {{ dune_online_ers.database.postgresql.deployment }}-r.{{ dune_online_ers.namespace }}
+    - {{ dune_online_ers.database.postgresql.deployment }}-r.{{ dune_online_ers.namespace }}.svc
+    - {{ dune_online_ers.database.postgresql.deployment }}-ro
+    - {{ dune_online_ers.database.postgresql.deployment }}-ro.{{ dune_online_ers.namespace }}
+    - {{ dune_online_ers.database.postgresql.deployment }}-ro.{{ dune_online_ers.namespace }}.svc
+  issuerRef:
+    name: {{ certmanager.ca_name }}
+    kind: ClusterIssuer

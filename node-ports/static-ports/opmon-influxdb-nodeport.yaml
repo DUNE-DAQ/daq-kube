@@ -1,5 +1,3 @@
-{% if with_dune_daq_services %}
-{% if with_dune_opmon %}
 ---
 apiVersion: v1
 kind: Service
@@ -10,6 +8,7 @@ metadata:
   name: opmon-influxdb-nodeport
   namespace: opmon
 spec:
+  type: NodePort
   ports:
   - name: service
     nodePort: 31002
@@ -19,6 +18,3 @@ spec:
   selector:
     app.kubernetes.io/instance: opmon-influxdb
     app.kubernetes.io/name: influxdb
-  type: NodePort
-{% endif %}
-{% endif %}

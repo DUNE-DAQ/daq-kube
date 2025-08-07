@@ -9,6 +9,9 @@ generatorOptions:
   labels:
     {{ grafana_dashboard_label_name }}: {{ grafana_dashboard_label_value }}
 
+commonAnnotations:
+  {{ grafana_dashboard_folder_annotation }}: Kubernetes
+
 configMapGenerator:
   - name: rfmoz-grafana-dashboard-node-exporter-full
     files:

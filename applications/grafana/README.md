@@ -14,7 +14,7 @@ You should add datasources along side the application that creates them.
 
 ### kubernetes dashboards
 
-This folder includes a number of well regarded kubernetes dashboards that are loaded into grafana automatically for you.
+This folder includes a number of well regarded kubernetes dashboards that are loaded into grafana-main automatically for you.
 
 ## grafana-server-devel
 

@@ -2,7 +2,6 @@
 deployments:
   - path: namespace
     alwaysDeploy: true
-    skipDeleteIfTags: true
     tags:
       - metrics
       - monitoring
@@ -13,7 +12,6 @@ deployments:
   - barrier: true
 
   - path: kube-prometheus-stack
-    skipDeleteIfTags: true
     waitReadiness: true
     tags:
       - metrics
@@ -23,7 +21,7 @@ deployments:
       - prometheus-operator
 
   - barrier: true
-    message: Wait for Prometheus Operator to start
+    message: Prometheus Operator starting (about 2m)
 
   - path: alertmanagers
     tags:

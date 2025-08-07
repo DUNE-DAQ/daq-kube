@@ -1,0 +1,22 @@
+---
+deployments:
+{% if args.with_dune_applications %}
+  - include: configs
+
+  - include: operators
+
+  - barrier: true
+    message: Let DUNE config applications all catch up
+
+  - include: services
+{% endif %}
+
+{% if args.with_dune_readout %}
+  - include: readout
+{% endif %}
+
+  - barrier: true
+    message: Let applications all catch up
+
+vars:
+  - file: variables/dune_online.yaml

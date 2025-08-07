@@ -22,7 +22,7 @@ metadata:
   name: microsocks
   namespace: microsocks
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/app: microsocks
@@ -38,9 +38,9 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: {{ kubernetes_label.worker }}
+              - key: {{ kubernetes_labels.node_worker }}
                 operator: Exists
-        podAntiAffinity:
+        podAntiAffinity: # try to spread across different workers
           preferredDuringSchedulingIgnoredDuringExecution:
           - weight: 100
             podAffinityTerm:
@@ -70,7 +70,7 @@ spec:
           periodSeconds: 20
         resources:
           limits:
-            memory: 512Mi
+            memory: 128Mi
             cpu: 500m
           requests:
             memory: 8Mi
@@ -92,6 +92,9 @@ spec:
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
+  labels:
+    app.kubernetes.io/app: microsocks
+    app.kubernetes.io/component: microsocks
   name: microsocks-pdb
   namespace: microsocks
 spec:
@@ -101,6 +104,35 @@ spec:
     matchLabels:
       app.kubernetes.io/app: microsocks
       app.kubernetes.io/component: microsocks
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  labels:
+    app.kubernetes.io/app: microsocks
+    app.kubernetes.io/component: microsocks
+  name: microsocks
+  namespace: microsocks
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: microsocks
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 60
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 60
 ---
 apiVersion: v1
 kind: Service
@@ -124,6 +156,9 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
+  labels:
+    app.kubernetes.io/app: microsocks
+    app.kubernetes.io/component: microsocks
   name: microsocks-network-policy
   namespace: microsocks
 spec:

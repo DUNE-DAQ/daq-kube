@@ -7,6 +7,7 @@ metadata:
   namespace: {{ prometheis[thisone].namespace }}
   labels:
     app: prometheus-{{ prometheis[thisone].name }}
+    {{ prometheus_servicemonitor_label_name}}: {{ prometheus_servicemonitor_labels.system }}
     {{ prometheus_config_label_name }}: {{ prometheis[thisone].name }}
 spec:
   endpoints:

@@ -1,0 +1,21 @@
+---
+deployments:
+  - path: namespace
+    alwaysDeploy: true
+    tags:
+      - secrets
+
+  - barrier: true
+
+  - path: external-secrets
+    waitReadiness: true
+    tags:
+      - secrets
+
+  - barrier: true
+    message: Make sure external-secrets is ready (takes about 2m)
+
+  - path: secret-stores
+    tags:
+      - external-secrets
+      - secrets

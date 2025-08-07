@@ -1,0 +1,16 @@
+---
+kubernetesClusterID: 0
+
+{% if inside_kind %}
+with_cilium: false
+clusterPoolIPv4PodCIDRList:
+  - "10.244.0.0/16"
+  - "10.96.0.0/12"
+
+hardware_access: false
+{% else %}
+with_cilium: true
+clusterPoolIPv4PodCIDRList: []
+
+hardware_access: true
+{% endif %}

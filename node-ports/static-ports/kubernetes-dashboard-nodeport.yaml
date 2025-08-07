@@ -1,4 +1,3 @@
-{% if with_kubernetes_dashboard %}
 ---
 apiVersion: v1
 kind: Service
@@ -10,6 +9,7 @@ metadata:
   name: kubernetes-dashboard-nodeport
   namespace: kubernetes-dashboard
 spec:
+  type: NodePort
   ports:
   - name: https
     port: 443
@@ -20,5 +20,3 @@ spec:
     app.kubernetes.io/component: kubernetes-dashboard
     app.kubernetes.io/instance: kubernetes-dashboard
     app.kubernetes.io/name: kubernetes-dashboard
-  type: NodePort
-{% endif %}

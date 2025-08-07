@@ -2,17 +2,13 @@
 deployments:
   - path: namespace
     alwaysDeploy: true
-    skipDeleteIfTags: true
 
   - barrier: true
 
   - path: cvmfs-csi
-    skipDeleteIfTags: true
 
   - barrier: true
-    message: wait for cvmfs-csi to settle
-
-  - path: storageclass
+    message: cvmfs-csi needs to settle
 
 vars:
   - file: variables/cvmfs_csi.yaml

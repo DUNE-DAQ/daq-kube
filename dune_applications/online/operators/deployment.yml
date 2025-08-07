@@ -1,0 +1,8 @@
+---
+deployments:
+  - include: cnpg
+
+  - include: strimzi
+
+  - barrier: true
+    message: Make sure operators are settled

@@ -1,18 +1,7 @@
 ---
-clusterPoolIPv4PodCIDRList:
-  - "10.244.0.0/16"
-  - "10.96.0.0/12"
+development_instance: true
 
-kubernetesClusterID: 0
-
-smtp_server: NULL
-smtp_port: NULL
-
-cvmfs_http_proxy: DIRECT
-
-inside_kind: true
-with_cilium: false
-with_local_path_as_default_storageclass: true
-with_nfs_storage: false
-
-grafana_extra_datasources: {}
+{% if args.with_dune_applications %}
+grafana:
+  home_dashboard_path: /tmp/dashboards/DUNE/daq_overview.json
+{% endif %}

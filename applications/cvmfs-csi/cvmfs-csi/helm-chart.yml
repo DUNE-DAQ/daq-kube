@@ -4,4 +4,3 @@ helmChart:
   output: helm-rendered.yaml
   releaseName: cvmfs-csi
   repo: oci://registry.cern.ch/kubernetes/charts/cvmfs-csi
-  updateConstraints: ~2.x

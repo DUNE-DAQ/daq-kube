@@ -1,0 +1,14 @@
+---
+deployments:
+  - path: namespace
+
+  - barrier: true
+
+  - path: cnpg
+    waitReadiness: true
+
+  - barrier: true
+    message: cnpg needs to settle (about 2m)
+
+vars:
+  - file: variables/cnpg.yaml

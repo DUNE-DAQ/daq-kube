@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: runservices-oracle-static-fields
+  namespace: {{ external_secrets.lookup_namespace }}
+type: Opaque
+stringData:
+  host: pdbr-s.cern.ch
+  port: 10121
+  username: pdsp_rc
+  database: pdbr
+  transport: oracle+oracledb
+  args: service_name=protodune_prod.cern.ch
+# uri: oracle+oracledb://pdsp_rc:FIXME@pdbr-s.cern.ch:10121?service_name=protodune_prod.cern.ch

@@ -10,10 +10,28 @@ resources:
 
 patches:
   - target:
+      kind: ConfigMap
+     # not useful dashboards for us
+      name: '(kube-prometheus-stack-grafana-overview|kube-prometheus-stack-nodes-aix|kube-prometheus-stack-nodes-darwin)'
+    patch: |-
+      - op: remove
+        path: /metadata/labels/{{ grafana_dashboard_label_name }}
+  - target:
+      kind: ConfigMap
+      name: '(kube-prometheus-stack-prometheus|kube-prometheus-stack-alertmanager-overview)'
+    patch: |-
+      - op: replace
+        path: /metadata/annotations/{{ grafana_dashboard_folder_annotation }}
+        value: Prometheus
+  - target:
       kind: PrometheusRule
-      name: .*
     patch: |-
       - op: add
-        path: /metadata/annotations
-        value:
-          prometheus-operator-validated: "true"
+        path: /metadata/labels/{{ prometheus_rule_label_name | replace('/', '~1') }}
+        value: "{{ prometheus_rule_labels.system }}"
+  - target:
+      kind: ServiceMonitor
+    patch: |-
+      - op: add
+        path: /metadata/labels/{{ prometheus_servicemonitor_label_name | replace('/', '~1') }}
+        value: "{{ prometheus_servicemonitor_labels.system }}"

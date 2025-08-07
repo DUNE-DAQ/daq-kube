@@ -8,6 +8,6 @@ resources:
   - alertmanager_config_default.yml
   - alertmanager_grafana_datasource.yml
   - alertmanager_networkpolicy.yml
-  - alertmanager_servicemonitory.yml
+  - alertmanager_servicemonitors.yml
   - alertmanager_service.yml
   - alertmanager.yml

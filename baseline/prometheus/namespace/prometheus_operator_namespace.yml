@@ -6,7 +6,7 @@ metadata:
   annotations:
     kluctl.io/skip-delete-if-tags: "true"
   labels: # https://github.com/prometheus-operator/kube-prometheus/issues/1923
-    pod-security.kubernetes.io/enforce: baseline
+    pod-security.kubernetes.io/enforce: restricted
     pod-security.kubernetes.io/enforce-version: latest
     pod-security.kubernetes.io/audit: restricted
     pod-security.kubernetes.io/audit-version: latest

@@ -1,8 +1,0 @@
-helmChart:
-  chartName: trust-manager
-  chartVersion: v0.18.0
-  namespace: '{{ certmanager.namespace }}'
-  output: helm-rendered.yaml
-  releaseName: trust-manager
-  repo: https://charts.jetstack.io
-  updateConstraints: ~0.x

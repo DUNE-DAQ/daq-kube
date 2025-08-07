@@ -1,0 +1,16 @@
+---
+deployments:
+
+  - include: kafka
+
+  - include: connectionservice
+  - include: ers
+  - include: opmon
+  - include: runservices
+
+{% if target.name == 'np04-services' %}
+  - include: elisa_logbook
+{% endif %}
+
+  - barrier: true
+    message: Let services all catch up

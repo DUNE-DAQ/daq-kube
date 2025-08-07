@@ -1,0 +1,7 @@
+---
+deployments:
+{% if target.name == 'np04-services' %}
+  - include: oracle
+{% else %}
+  - include: postgresql
+{% endif %}

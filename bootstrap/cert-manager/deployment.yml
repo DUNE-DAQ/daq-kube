@@ -2,7 +2,6 @@
 deployments:
   - path: namespace
     alwaysDeploy: true
-    skipDeleteIfTags: true
 
   - barrier: true
 
