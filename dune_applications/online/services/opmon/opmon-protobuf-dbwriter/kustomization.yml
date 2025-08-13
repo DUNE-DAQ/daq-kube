@@ -32,6 +32,9 @@ patches:
       - op: replace
         path: /spec/template/spec/containers/0/env/4/value
         value: opmon-influxdb.{{ dune_online_opmon.namespace }}.svc
+      - op: replace
+        path: /spec/template/spec/affinity/nodeAffinity/requiredDuringSchedulingIgnoredDuringExecution/nodeSelectorTerms/0/matchExpressions/0/key
+        value: {{ kubernetes_labels.node_worker }}
   - target:
       kind: Namespace
     patch: |-

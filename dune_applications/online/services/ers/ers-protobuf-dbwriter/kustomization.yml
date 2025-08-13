@@ -38,6 +38,9 @@ patches:
       - op: replace
         path: /spec/template/spec/containers/0/env/9/valueFrom/secretKeyRef/name
         value: {{ dune_online_ers.database.postgresql.deployment }}-{{ dune_online_ers.database.postgresql.owner }}-password
+      - op: replace
+        path: /spec/template/spec/affinity/nodeAffinity/requiredDuringSchedulingIgnoredDuringExecution/nodeSelectorTerms/0/matchExpressions/0/key
+        value: {{ kubernetes_labels.node_worker }}
   - target:
       kind: Namespace
     patch: |-
