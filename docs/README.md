@@ -45,7 +45,7 @@ Users of [pocket](https://github.com/DUNE-DAQ/pocket) will have this downloaded 
 
 ## Select your target and deploy
 
-***NOTE:*** when setting the passwords to non-default values you should use an args-file. You can provide a set of arguments via a yaml file: `kluctl deploy -t target --args-from-file=filename.yaml`
+***NOTE:*** when setting the `user_password` to non-default values you should use an args-file. You can provide a set of arguments via a yaml file: `kluctl deploy -t target --args-from-file=filename.yaml`. This will prevent the password from being stored in shell history.
 
 The `.kluctl.yaml` file lists the deployment targets we've configured.  The `context` keyword ensures that `kluctl` will use the specified [kubectl context](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/) to deploy the manifests.
 

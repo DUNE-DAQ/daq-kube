@@ -49,20 +49,11 @@ the `applications/grafana` folder contains:
 * the grafana-server
 * dashboards for kubernetes components from two different upstream projects
 
-### DUNE\_DAQ
+### dune_applications
 
 This is where DUNE specific applications, utilities, dashboards, etc should be placed.
 
-Ideally each subsystem will have a subdirectory that contains its own items.
-
-#### Operators
-
-The [kubernetes operator pattern](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/) is a useful way to deploy highly complex applications with clear integration points.
-
-When an operator is maintained by a healthy community it should be strongly considered before using a helm manifest for the application.  The end of the influxdb operator is a point of worry.
-
-It should be safe to deploy operators on all clusters even if you do not intend to use its feature set.  Each operator has a resource cost.
-
+Ideally each subsystem will have a subdirectory that contains its own items scoped to their purpose.
 
 ### Node-ports
 
