@@ -1,4 +1,4 @@
-{% for thisone in grafana_extra_datasources %}
+{% for thisone in grafana.extra_datasources %}
 ---
 apiVersion: v1
 kind: Secret

@@ -1,8 +1,7 @@
 helmChart:
-  chartVersion: 75.15.1
+  chartVersion: 76.3.0
   namespace: '{{ prometheus_operator_namespace }}'
   output: helm-rendered.yaml
   releaseName: kube-prometheus-stack
   repo: oci://ghcr.io/prometheus-community/charts/kube-prometheus-stack
   skipCRDs: true
-  updateConstraints: ~75.x

@@ -1,0 +1,6 @@
+helmChart:
+  chartVersion: 0.19.2
+  namespace: '{{ external_secrets.namespace }}'
+  output: helm-rendered.yaml
+  releaseName: external-secrets
+  repo: oci://ghcr.io/external-secrets/charts/external-secrets

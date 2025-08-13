@@ -9,53 +9,62 @@ deployments:
   - barrier: true
     message: Ensure cluster has bootstraps
 
+{% if args.with_baseline %}
   - include: baseline
     skipDeleteIfTags: true
 
   - barrier: true
     message: Ensure baseline is loaded
+{% endif %}
 
-  - include: operators
+{% if args.with_applications %}
+  - include: applications
+    tags:
+      - services
 
   - barrier: true
-    message: Make sure operators have settled
+    message: Ensure applications are loaded
 
-  - include: applications
-
-  - include: dune_daq_services
+  - include: dune_applications
     tags:
       - dune
-      - daq
-      - services
 
+{% if args.with_node_ports %}
   - include: node-ports
     tags:
-      - dune
-      - daq
       - services
-      - ports
+      - nodeport
+{% endif %}
+{% endif %}
 
 vars:
-{% if args.in_pocket %}
-  - file: variables/targets/pocket-defaults.yaml
-{% endif %}
+  - values:
+      inside_kind: {{ args.inside_kind }}
+
+  - file: variables/defaults/alertmanager_labels.yaml
+  - file: variables/defaults/certmanager_settings.yaml
+  - file: variables/defaults/cluster_info.yaml
+  - file: variables/defaults/cvmfs_csi.yaml
+  - file: variables/defaults/development_instance.yaml
+  - file: variables/defaults/external_secrets_info.yaml
+  - file: variables/defaults/grafana_extra_settings.yaml
+  - file: variables/defaults/grafana_labels.yaml
+  - file: variables/defaults/kubernetes_labels.yaml
+  - file: variables/defaults/monitoring.yaml
+  - file: variables/defaults/prometheus_labels.yaml
+  - file: variables/defaults/prometheus_scrape_configs.yaml
+  - file: variables/defaults/smtp_server.yaml
+  - file: variables/defaults/user_password.yaml
+
+{% if 'pocket' in target.name %}
+  - file: variables/targets/pocket.yaml
+{% else %}
   - file: variables/targets/{{ target.name }}.yaml
-  - file: variables/defaults.yaml
-    noOverride: true
-
-  - file: variables/monitoring.yaml
-  - file: variables/certmanager_refs.yaml
-
-  - file: variables/alertmanager_labels.yaml
-  - file: variables/prometheus_labels.yaml
-  - file: variables/grafana_labels.yaml
-  - file: variables/grafana_default_dashboard.yaml
-  - file: variables/local_path_provisioner.yaml # for StorageClass name
-
-  - file: variables/kafka.yaml # figure out how to store these better
-  - file: variables/minio.yaml # figure out how to store these better
-  - file: variables/postgresql.yaml # figure out how to store these better
+{% endif %}
 
 ignoreForDiff:
   - kind: PrometheusRule
     fieldPath: .metadata.annotations["prometheus-operator-validated"]
+{% if 'pocket' in target.name %}
+  - fieldPath: .metadata.labels["kluctl.io/discriminator"]
+{% endif %}

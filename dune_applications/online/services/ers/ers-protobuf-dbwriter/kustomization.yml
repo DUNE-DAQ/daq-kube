@@ -1,0 +1,47 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: {{ dune_online_ers.namespace }}
+
+resources:
+  - ers-dbwriter-deployment.yaml
+
+patches:
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/0/image
+        value: {{ dune_online.unified_microservices.image }}:{{ dune_online.unified_microservices.tag }}
+      - op: replace
+        path: /spec/template/spec/containers/0/env/1/value
+        value: {{ dune_online.kafka.bootstrap_brokers[0] }}
+      - op: remove
+        path: /spec/template/spec/containers/0/env/5/valueFrom
+      - op: add
+        path: /spec/template/spec/containers/0/env/5/value
+        value: {{ dune_online_ers.database.postgresql.deployment }}-rw.{{ dune_online_ers.namespace }}.svc
+      - op: remove
+        path: /spec/template/spec/containers/0/env/6/valueFrom
+      - op: add
+        path: /spec/template/spec/containers/0/env/6/value
+        value: "5432"
+      - op: replace
+        path: /spec/template/spec/containers/0/env/7/valueFrom/secretKeyRef/name
+        value: {{ dune_online_ers.database.postgresql.deployment }}-{{ dune_online_ers.database.postgresql.owner }}-password
+      - op: replace
+        path: /spec/template/spec/containers/0/env/8/valueFrom/secretKeyRef/name
+        value: {{ dune_online_ers.database.postgresql.deployment }}-{{ dune_online_ers.database.postgresql.owner }}-password
+      - op: replace
+        path: /spec/template/spec/containers/0/env/9/valueFrom/secretKeyRef/name
+        value: {{ dune_online_ers.database.postgresql.deployment }}-{{ dune_online_ers.database.postgresql.owner }}-password
+  - target:
+      kind: Namespace
+    patch: |-
+      $patch: delete
+      kind: Kustomization
+      metadata:
+        name: DOES NOT MATTER

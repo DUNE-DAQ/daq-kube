@@ -5,12 +5,16 @@ prometheis: # this is the plural of prometheus
     namespace: {{ monitoring.namespace }}
     name: main
     serviceName: prometheus
+{% if 'pocket' in target.name %}
+    grafanaDatasourceName: prometheus-pocket
+{% else %}
     grafanaDatasourceName: prometheus-{{ target.name }}
+{% endif %}
     url: http://prometheus.{{ monitoring.namespace }}.svc.cluster.local
     port: 9090
     portName: web
     replicas: 1
-    retention: 25d
+    retention: 45d
     alertmanagers:
       - namespace: {{ alertmanagers.main.namespace }}
         name: {{ alertmanagers.main.serviceName }}
@@ -22,7 +26,7 @@ prometheis: # this is the plural of prometheus
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
           - matchExpressions:
-            - key: {{ kubernetes_label.worker }}
+            - key: {{ kubernetes_labels.node_worker }}
               operator: Exists
       podAffinity:
         preferredDuringSchedulingIgnoredDuringExecution:

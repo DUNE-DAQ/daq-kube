@@ -5,24 +5,19 @@ deployments:
       - grafana-dashboards
       - grafana-dashboards-kubernetes
 
-  - path: grafana-dashboards-kubernetes-kube-prometheus
-    tags:
-      - grafana-dashboards
-      - grafana-dashboards-kubernetes
-
   - path: grafana-dashboards-rfmoz
     tags:
       - grafana-dashboards
       - grafana-dashboards-kubernetes
 
+  - path: grafana-password
+
   - barrier: true
-    message: Ensure kubernetes dashboards are loaded
+    message: Ensure kubernetes grafana dashboards and passwords are loaded
 
-{% if with_grafana_server_main %}
   - path: grafana-server-main
-{% endif %}
 
-{% if with_grafana_server_devel %}
+{% if development_instance %}
   - path: grafana-server-devel
 {% endif %}
 

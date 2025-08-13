@@ -1,0 +1,6 @@
+---
+dune_online_opmon:
+  namespace: opmon
+  influxdb_v1:
+    database_name: influxv4 # the database should have a better name
+    read_write_username: readwrite

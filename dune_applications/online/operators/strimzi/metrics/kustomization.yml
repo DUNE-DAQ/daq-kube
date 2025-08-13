@@ -1,0 +1,35 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+    
+namespace: {{ strimzi.namespace }}
+
+resources:
+  - pod-monitors/cluster-operator-metrics.yaml
+  #- prometheus-rules/prometheus-kafka-bridge-rules.yaml
+  - prometheus-rules/prometheus-kafka-certificate-rules.yaml
+  #- prometheus-rules/prometheus-kafka-connect-rules.yaml
+  - prometheus-rules/prometheus-kafka-exporter-topic-rules-group.yaml
+  - prometheus-rules/prometheus-kafka-rules.yaml
+  #- prometheus-rules/prometheus-mirrormaker2-rules.yaml
+  - prometheus-rules/prometheus-strimzi-cluster-operator-rules.yaml
+  - prometheus-rules/prometheus-strimzi-entity-operator-rules.yaml
+
+
+patches:
+  - target:
+      kind: PodMonitor
+      name: cluster-operator-metrics
+    patch: |-
+      - op: add
+        path: /metadata/labels/{{ prometheus_podmonitor_label_name | replace('/', '~1') }}
+        value: "{{ prometheus_podmonitor_labels.kafka }}"
+      - op: add
+        path: /spec/namespaceSelector/matchNames/0
+        value: {{ strimzi.namespace }}
+  - target:
+      kind: PrometheusRule
+    patch: |-
+      - op: add
+        path: /metadata/labels/{{ prometheus_rule_label_name | replace('/', '~1') }}
+        value: "{{ prometheus_rule_labels.kafka }}"

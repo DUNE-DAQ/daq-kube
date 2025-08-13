@@ -1,5 +1,3 @@
-{% if with_dune_daq_services %}
-{% if with_dune_runservices %}
 --- 
 apiVersion: v1
 kind: Service
@@ -20,5 +18,3 @@ spec:
   selector:
     app.kubernetes.io/app: runnumber-rest
     app.kubernetes.io/component: runnumber-rest
-{% endif %}
-{% endif %}

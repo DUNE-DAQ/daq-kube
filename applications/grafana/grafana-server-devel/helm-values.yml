@@ -1,26 +1,35 @@
 ---
-adminUser: admin
-adminPassword: {{ args.grafana_admin_password }}
+admin:
+  existingSecret: grafana-admin
+  userKey: admin-user
+  passwordKey: admin-password
 
 serviceMonitor:
   enabled: true
+  labels:
+    {{ prometheus_servicemonitor_label_name }}: {{ prometheus_servicemonitor_labels.system }}
 
 networkPolicy:
   enabled: true
 
 useStatefulSet: true
-revisionHistoryLimit: 3
 
 persistence:
   enabled: true
 
+initChownData:
+  enabled: false
+
 grafana.ini:
-{% if smtp_server %}
+{% if smtp_server.address %}
   smtp:
     enabled: true
-    host: {{ smtp_server }}:{{ smtp_port }}
+    host: {{ smtp_server.address }}:{{ smtp_server.port }}
   emails:
     welcome_email_on_sign_up: true
+{% else %}
+  smtp:
+    enabled: false
 {% endif %}
   paths:
     data: /var/lib/grafana/
@@ -31,7 +40,6 @@ grafana.ini:
   server:
     enable_gzip: true
   database:
-    # maybe use postgresql so I can persist without a pvc?
     log_queries: false
     wal: true # wal for sqlite only
     query_retries: 5 # query_retries for sqlite only
@@ -42,14 +50,22 @@ grafana.ini:
   auth:
     login_maximum_inactive_lifetime_duration: 13h
     login_maximum_lifetime_duration: 10d
-    login_cookie_name: "grafana_session_devel_{{ target.name }}"
+{% if 'pocket' in target.name %}
+    login_cookie_name: "grafana_session_pocket_devel"
+{% else %}
+    login_cookie_name: "grafana_session_{{ target.name }}_devel"
+{% endif %}
   auth.anonymous:
     enabled: true # make sure to clean your cookies or else!
     org_role: Viewer
     org_name: Main Org.
     hide_version: true
   security:
+{% if 'pocket' in target.name %}
+    admin_email: root@pocket
+{% else %}
     admin_email: root@{{ target.name }}
+{% endif %}
     disable_gravatar: true
   users:
     allow_sign_up: false
@@ -72,7 +88,7 @@ affinity:
     requiredDuringSchedulingIgnoredDuringExecution:
       nodeSelectorTerms:
       - matchExpressions:
-        - key: {{ kubernetes_label.worker }}
+        - key: {{ kubernetes_labels.node_worker }}
           operator: Exists
   podAntiAffinity:
     preferredDuringSchedulingIgnoredDuringExecution:

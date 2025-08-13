@@ -1,0 +1,33 @@
+---
+resources: # this is guess work
+  limits:
+    cpu: 300m
+    memory: 128Mi
+  requests:
+    cpu: 20m
+    memory: 64Mi
+
+nodePathMap: {{ local_path_provisioner.nodePathMap | tojson }}
+
+storageClass:
+  create: true
+  name: {{ local_path_provisioner.storage_class_name }}
+  defaultClass: {{ local_path_provisioner.is_default_class }}
+  reclaimPolicy: Retain
+{%- raw %}
+  pathPattern: "{{ .PVC.Namespace }}-{{ .PVC.Name }}"
+{% endraw %}
+
+affinity:
+ nodeAffinity:
+   requiredDuringSchedulingIgnoredDuringExecution:
+     nodeSelectorTerms:
+     - matchExpressions:
+       - key: {{ kubernetes_labels.node_worker }}
+         operator: Exists
+
+### FIXME ###
+# https://github.com/rancher/local-path-provisioner/issues/518
+#podDisruptionBudget:
+#  enabled: true
+#  maxUnavailable: 0

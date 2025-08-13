@@ -1,32 +1,9 @@
 ---
 deployments:
   - path: cilium
-    skipDeleteIfTags: true
 
   - barrier: true
     message: CNI needs to settle so we can allocate IP addresses
 
 vars:
   - file: variables/cilium.yaml
-
-ignoreForDiff: ###FIXME### switch to cert manager
-  - kind: Job
-    name: hubble-generate-certs
-    namespace: kube-system
-    fieldPath: .spec.selector.matchLabels["batch.kubernetes.io/controller-uid"]
-  - kind: Job
-    name: hubble-generate-certs
-    namespace: kube-system
-    fieldPath: .spec.template.metadata.labels["batch.kubernetes.io/controller-uid"]
-  - kind: Secret
-    name: hubble-relay-client-certs
-    namespace: kube-system
-    fieldPath: .data
-  - kind: Secret
-    name: cilium-ca
-    namespace: kube-system
-    fieldPath: .data
-  - kind: Secret
-    name: hubble-server-certs
-    namespace: kube-system
-    fieldPath: .data

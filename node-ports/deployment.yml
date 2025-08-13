@@ -1,8 +1,6 @@
 ---
 deployments:
-{% if with_dune_node_ports %}
   - path: static-ports
-{% endif %}
 
   - barrier: true
     message: Let ports settle

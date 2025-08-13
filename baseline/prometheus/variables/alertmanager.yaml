@@ -27,5 +27,5 @@ alertmanagers:
        requiredDuringSchedulingIgnoredDuringExecution:
          nodeSelectorTerms:
          - matchExpressions:
-           - key: {{ kubernetes_label.worker }}
+           - key: {{ kubernetes_labels.node_worker }}
              operator: Exists

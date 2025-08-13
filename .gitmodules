@@ -2,42 +2,47 @@
 	path = .submodules/dotdc-grafana-dashboards-kubernetes
 	url = https://github.com/dotdc/grafana-dashboards-kubernetes.git
 	update = checkout
-[submodule "kepler"]
-	path = .submodules/kepler
-	url = https://github.com/sustainable-computing-io/kepler.git
-	update = checkout
-[submodule "kube-prometheus"]
-	path = .submodules/kube-prometheus
-	url = https://github.com/prometheus-operator/kube-prometheus.git
-	update = checkout
+	shallow = true
 [submodule "dune-daq-grafana-dashboards"]
 	path = .submodules/dune-daq-grafana-dashboards
 	url = https://github.com/DUNE-DAQ/grafana-dashboards.git
 	update = checkout
-[submodule "dune-daq-microservices"]
-	path = .submodules/dune-daq-microservices
-	url = https://github.com/DUNE-DAQ/microservices.git
-	update = checkout
-[submodule "dune-daq-dqmbackend"]
-	path = .submodules/dune-daq-dqm-backend
-	url = https://github.com/DUNE-DAQ/dqm-backend.git
-	update = checkout
+	shallow = true
 [submodule "dune-daq-connectivityserver"]
 	path = .submodules/dune-daq-connectivityserver
 	url = https://github.com/DUNE-DAQ/connectivityserver.git
 	update = checkout
+	shallow = true
 [submodule "dune-daq-flx-k8s-device-plugin"]
 	path = .submodules/dune-daq-flx-k8s-device-plugin
 	url = https://github.com/DUNE-DAQ/flx-k8s-device-plugin.git
-[submodule "sriov-network-device-plugin"]
-	path = .submodules/sriov-network-device-plugin
-	url = https://github.com/k8snetworkplumbingwg/sriov-network-device-plugin.git
+        update = checkout
+	shallow = true
+[submodule "dune-daq-microservices"]
+	path = .submodules/dune-daq-microservices
+	url = https://github.com/DUNE-DAQ/microservices.git
+	update = checkout
+	shallow = true
 [submodule "intel-pcm"]
 	path = .submodules/intel-pcm
 	url = https://github.com/intel/pcm.git
-[submodule ".submodules/rfmoz-grafana-dashboards"]
+	update = checkout
+	shallow = true
+[submodule "sriov-network-device-plugin"]
+	path = .submodules/sriov-network-device-plugin
+	url = https://github.com/k8snetworkplumbingwg/sriov-network-device-plugin.git
+	update = checkout
+	shallow = true
+[submodule "rfmoz-grafana-dashboards"]
 	path = .submodules/rfmoz-grafana-dashboards
 	url = https://github.com/rfmoz/grafana-dashboards.git
-[submodule ".submodules/local-path-provisioner"]
-	path = .submodules/local-path-provisioner
-	url = https://github.com/rancher/local-path-provisioner.git
+        update = checkout
+	shallow = true
+[submodule "strimzi-kafka-operator"]
+	path = .submodules/strimzi-kafka-operator
+	url = https://github.com/strimzi/strimzi-kafka-operator.git
+        update = checkout
+	shallow = true
+[submodule "prometheus-postgres_exporter"]
+	path = .submodules/prometheus-postgres_exporter
+	url = https://github.com/prometheus-community/postgres_exporter.git

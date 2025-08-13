@@ -3,16 +3,14 @@ crds:
 
 enableCertificateOwnerRef: true
 
-deploymentAnnotations:
-  "kluctl.io/is-ready": "true"
-
 prometheus:
   enabled: true
   servicemonitor:
     enabled: true
-    prometheusInstance: {{ prometheus_servicemonitor_labels.system }}
+    labels:
+      {{ prometheus_servicemonitor_label_name }}: {{ prometheus_servicemonitor_labels.system }}
 
-resources:
+resources: # this is guess work
   limits:
     cpu: 200m
     memory: 512Mi
@@ -25,16 +23,19 @@ affinity:
    requiredDuringSchedulingIgnoredDuringExecution:
      nodeSelectorTerms:
      - matchExpressions:
-       - key: {{ kubernetes_label.worker }}
+       - key: {{ kubernetes_labels.node_worker }}
          operator: Exists
 
 podDisruptionBudget:
   enabled: true
-  minAvailable: 0
+  maxUnavailable: 0
 #  unhealthyPodEvictionPolicy: AlwaysAllow
 
 #extraArgs:
 #  - '--enable-gateway-api'
+
+livenessProbe:
+  enabled: true
 
 webhook:
   affinity:
@@ -42,14 +43,14 @@ webhook:
      requiredDuringSchedulingIgnoredDuringExecution:
        nodeSelectorTerms:
        - matchExpressions:
-         - key: {{ kubernetes_label.worker }}
+         - key: {{ kubernetes_labels.node_worker }}
            operator: Exists
   podDisruptionBudget:
     enabled: true
-    minAvailable: 0
+    maxUnavailable: 0
   deploymentAnnotations:
     "kluctl.io/is-ready": "true"
-  resources:
+  resources: # this is guess work
     limits:
       cpu: 200m
       memory: 512Mi
@@ -65,12 +66,12 @@ cainjector:
      requiredDuringSchedulingIgnoredDuringExecution:
        nodeSelectorTerms:
        - matchExpressions:
-         - key: {{ kubernetes_label.worker }}
+         - key: {{ kubernetes_labels.node_worker }}
            operator: Exists
   podDisruptionBudget:
     enabled: true
-    minAvailable: 0
-  resources:
+    maxUnavailable: 0
+  resources: # this is guess work
     limits:
       cpu: 200m
       memory: 512Mi
@@ -84,9 +85,9 @@ startupapicheck:
      requiredDuringSchedulingIgnoredDuringExecution:
        nodeSelectorTerms:
        - matchExpressions:
-         - key: {{ kubernetes_label.worker }}
+         - key: {{ kubernetes_labels.node_worker }}
            operator: Exists
-  resources:
+  resources: # this is guess work
     limits:
       cpu: 200m
       memory: 512Mi

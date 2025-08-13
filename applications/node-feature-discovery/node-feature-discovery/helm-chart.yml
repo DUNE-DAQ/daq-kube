@@ -5,4 +5,3 @@ helmChart:
   output: helm-rendered.yaml
   releaseName: node-feature-discovery
   repo: https://kubernetes-sigs.github.io/node-feature-discovery/charts
-  updateConstraints: ~0.x

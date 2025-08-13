@@ -1,0 +1,18 @@
+---
+deployments:
+  - path: namespace
+
+  - barrier: true
+
+  - path: metrics
+    tags:
+      - monitoring
+
+  - path: strimzi
+    waitReadiness: true
+
+  - barrier: true
+    message: strimzi needs to settle (about 2m)
+
+vars:
+  - file: variables/strimzi.yaml

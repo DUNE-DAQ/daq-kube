@@ -2,93 +2,67 @@
 discriminator: "dune-daq-{{ target.name }}"
 
 args:
-  - name: in_pocket
+  - name: inside_kind
     default: false
 
-  ### This should be customized as an argument for your needs
-  ### Since `pocket` mode is for local development of services
-  ### on node local ephemeral non-exposed containers, default passwords
-  ### are acceptable.
-  ###
-  ### For real deployments you must set these to the correct values.
-  ### If you don't this should hopefully error out with random values.
-  ###
-  ### see: kluctl deploy -t target --args-from-file=filename.yaml
-  - name: grafana_admin_password
+  - name: with_local_path_as_default_storageclass
+    default: true
+
+  - name: with_baseline
+    default: true
+
+  - name: with_applications
+    default: true
+
+  - name: with_dune_applications
+    default: true
+
+  - name: with_dune_readout
+    default: false
+
+  - name: with_node_ports
+    default: true
+
+  - name: user_passwords
     default: run4evah
-  - name: ers_postgresql_password
-    default: run4evah
-  - name: opmon_influxdb_user_influxdb_password
-    default: run4evah
-  - name: opmon_influxdb_readwrite_password
-    default: run4evah
-  - name: opmon_influxdb_admin_password
-    default: run4evah
-  - name: runservices_postgresql_password
-    default: run4evah
-  - name: elisa_logbook_username
-    default: username
-  - name: elisa_logbook_password
-    default: password
 
 targets:
   - name: pocket
-    context: kind-pocketdune
     args:
-      in_pocket: true
+      inside_kind: true
+
+  - name: pocket-bootstrap
+    args:
+      inside_kind: true
+      with_applications: false
+      with_baseline: false
+      with_dune_applications: false
 
   - name: pocket-baseline
-    context: kind-pocketdune
     args:
-      in_pocket: true
+      inside_kind: true
+      with_applications: false
+      with_dune_applications: false
 
-  - name: pocket-connectionservice
-    discriminator: "dune-daq-pocket"
+  - name: pocket-applications
     args:
-      in_pocket: true
-
-  - name: pocket-ers
-    discriminator: "dune-daq-pocket"
-    args:
-      in_pocket: true
-
-  - name: pocket-opmon
-    discriminator: "dune-daq-pocket"
-    args:
-      in_pocket: true
-
-  - name: pocket-runservices
-    discriminator: "dune-daq-pocket"
-    args:
-      in_pocket: true
+      inside_kind: true
+      with_dune_applications: false
 
   - name: iceberg-services
     discriminator: "dune-daq-pocket"
     args:
-      in_pocket: true
+      inside_kind: true
+      user_passwords: NULL
 
   - name: np04-services
     context: kubernetes-admin@np04-services
     args:
-      # if you don't set the args to override, you get random values
-      grafana_admin_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
-      ers_postgresql_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
-      opmon_influxdb_user_influxdb_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
-      opmon_influxdb_readwrite_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
-      opmon_influxdb_admin_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
-      runservices_postgresql_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
-      elisa_logbook_username: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
-      elisa_logbook_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      user_passwords: NULL
 
   - name: np04-daq
     context: kubernetes-admin@np04-daq
     args:
-      # if you don't set the args to override, you get random values
-      grafana_admin_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
-      ers_postgresql_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
-      opmon_influxdb_user_influxdb_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
-      opmon_influxdb_readwrite_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
-      opmon_influxdb_admin_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
-      runservices_postgresql_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
-      elisa_logbook_username: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
-      elisa_logbook_password: "{{ '{:0=13}'.format(range(0, 9999999999999) | random) }}"
+      user_passwords: NULL
+      with_dune_readout: true
+      with_dune_applications: false

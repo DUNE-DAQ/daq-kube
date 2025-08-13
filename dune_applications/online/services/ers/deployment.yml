@@ -1,0 +1,12 @@
+---
+deployments:
+  - path: namespace
+
+  - barrier: true
+
+  - include: database
+
+  - path: ers-protobuf-dbwriter
+
+vars:
+  - file: variables/ers.yaml

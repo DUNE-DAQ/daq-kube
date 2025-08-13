@@ -1,35 +1,28 @@
 ---
 deployments:
-{% if with_baseline %}
-  - include: local-storage
-    skipDeleteIfTags: true
+  - include: cert-manager-ca
     tags:
-      - storage
+      - pki
+      - tls
 
   - include: metrics
-    skipDeleteIfTags: true
     tags:
       - metrics
       - monitoring
 
-{% if with_dns_autoscaler %}
   - barrier: true
     message: metrics need to settle so we can setup HPAs
 
   - path: dns-autoscaler
-    skipDeleteIfTags: true
-{% endif %}
+
+  - include: external-secrets
+    tags:
+      - secrets
 
   - include: prometheus
     tags:
       - metrics
       - monitoring
-
-  - include: cert-manager-ca
-    tags:
-      - pki
-      - tls
-{% endif %}
 
   - barrier: true
     message: Make sure baseline is completely loaded

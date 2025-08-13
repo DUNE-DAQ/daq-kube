@@ -1,0 +1,74 @@
+---
+extraArgs:
+  zap-time-encoding: "rfc3339"
+{% if development_instance %}
+  loglevel: debug
+{% else %}
+  loglevel: warn
+{% endif %}
+
+webhook:
+  certManager:
+    enabled: false # when enabled webhook gets stuck in a loop every 15m - cert expires?
+    cert:
+      issuerRef:
+        group: cert-manager.io
+        kind: ClusterIssuer
+        name: {{ certmanager.ca_name }}
+      duration: "168h"
+      renewBefore: "72h"
+  podDisruptionBudget:
+    enabled: true
+    maxUnavailable: 0
+  resources: # this is guess work
+    limits:
+      cpu: 100m
+      memory: 64Mi
+    requests:
+      cpu: 10m
+      memory: 32Mi
+
+certController:
+  podDisruptionBudget:
+    enabled: true
+    maxUnavailable: 0
+  resources: # this is guess work
+    limits:
+      cpu: 100m
+      memory: 64Mi
+    requests:
+      cpu: 10m
+      memory: 32Mi
+
+serviceMonitor:
+  enabled: true
+  additionalLabels:
+    {{ prometheus_servicemonitor_label_name }}: {{ prometheus_servicemonitor_labels.system }}
+
+grafanaDashboard:
+  enabled: true
+  sidecarLabel: {{ grafana_dashboard_label_name }}
+  sidecarLabelValue: {{ grafana_dashboard_label_value }}
+  annotations:
+    {{ grafana_dashboard_folder_annotation }}: External Secrets
+
+resources: # this is guess work
+  limits:
+    cpu: 100m
+    memory: 64Mi
+  requests:
+    cpu: 10m
+    memory: 32Mi
+
+podDisruptionBudget:
+  enabled: true
+  maxUnavailable: 0
+
+global:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: {{ kubernetes_labels.node_worker }}
+            operator: Exists

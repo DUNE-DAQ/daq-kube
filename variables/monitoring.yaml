@@ -1,5 +1,0 @@
----
-monitoring:
-  namespace: monitoring
-
-prometheus_scrape_configs: {}

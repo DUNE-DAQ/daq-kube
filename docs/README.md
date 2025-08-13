@@ -24,7 +24,7 @@ The actual value of the label isn't checked, just if it exists. Some DAQ targets
 This repository uses submodules to track external repos.  To clone this repository you should use:
 
 ```shell
-git clone https://github.com/DUNE-DAQ/daq-kube.git --recursive
+git clone https://github.com/DUNE-DAQ/daq-kube.git --recursive --depth 1
 ```
 
 **OR**
@@ -56,14 +56,17 @@ For example:
 kluctl deploy -t pocket
 ```
 
-To see what targets are defined you can run `kluctl list-targets` to see the `name` and defaults for each target.
+or:
+```shell
+kluctl render -t pocket --offline-kubernetes
+```
 
-Or to get just a list of target names `kluctl list-targets | grep 'name:'`.
+To see what targets are defined you can run `kluctl list-targets --only-names` to see the `name` and defaults for each target.
 
-For example, to just deploy the `opmon` services to `pocket`:
+For example, to just deploy the `baseline` cluster services to `pocket`:
 
 ```shell
-kluctl deploy -t pocket-opmon
+kluctl deploy -t pocket-baseline
 ```
 
 ## Access to your cluster

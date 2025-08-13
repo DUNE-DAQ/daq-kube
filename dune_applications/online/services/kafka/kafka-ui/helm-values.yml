@@ -1,0 +1,65 @@
+yamlApplicationConfig:
+  kafka:
+    clusters:
+      - name: {{ dune_online.kafka.name }}
+        bootstrapServers: {{ dune_online.kafka.name }}-kafka-bootstrap:9092
+        readOnly: false
+#        properties:
+#          security.protocol: SASL_PLAINTEXT
+#          sasl.mechanism: PLAIN
+#          sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="ddd" password="eee";
+
+env:
+  - name: DYNAMIC_CONFIG_ENABLED
+    value: "true"
+
+resources:
+  limits:
+    cpu: 400m
+    memory: 512Mi
+  requests:
+    cpu: 50m
+    memory: 256Mi
+
+networkPolicy:
+  enabled: true 
+  egressRules:
+    customRules: # host port could be basically anything - strimzi sets node-ports where it can
+      - {}
+  ingressRules:
+    customRules: # need to lock this down better
+      - {}
+
+podSecurityContext:
+  fsGroup: 10000
+
+securityContext:
+  runAsUser: 10000
+  runAsGroup: 10000
+  runAsNonRoot: true
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  seccompProfile:
+    type: RuntimeDefault
+  capabilities:
+    drop:
+    - ALL
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: {{ kubernetes_labels.node_worker }}
+          operator: Exists
+  podAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 100
+      podAffinityTerm:
+        labelSelector:
+          matchExpressions: # try to schedule near Kafka
+          - key: "strimzi.io/cluster"
+            operator: In
+            values:
+            - "{{ dune_online.kafka.name }}"
+        topologyKey: kubernetes.io/hostname

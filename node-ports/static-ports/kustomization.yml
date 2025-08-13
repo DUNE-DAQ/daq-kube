@@ -1,0 +1,29 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - alertmanager-main.yaml
+  - prometheus-main.yaml
+  - kubernetes-dashboard-nodeport.yaml
+  - grafana-server-devel-nodeport.yaml
+  - grafana-server-main-nodeport.yaml
+  - microproxy-nodeport.yaml
+
+{% if args.with_dune_applications %}
+
+  # FIXME
+  - connectionservice-nodeport.yaml
+  - elisa-logbook-nodeports.yaml
+  - ers-postgresql-nodeport.yaml
+
+  - kafka-bootstrap-nodeport.yaml
+  - kafka-servers-nodeport.yaml
+  - kafka-ui-nodeport.yaml
+  - opmon-influxdb-nodeport.yaml
+
+  - runnumber-rest-nodeport.yaml
+  - runregistry-rest-nodeport.yaml
+
+{% endif %}
+

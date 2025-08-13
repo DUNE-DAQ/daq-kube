@@ -1,8 +1,8 @@
 ---
-resources:
+resources: # this is guess work
   limits:
     cpu: 200m
-    memory: 512Mi
+    memory: 64Mi
   requests:
     cpu: 10m
     memory: 64Mi
@@ -12,13 +12,15 @@ affinity:
    requiredDuringSchedulingIgnoredDuringExecution:
      nodeSelectorTerms:
      - matchExpressions:
-       - key: {{ kubernetes_label.worker }}
+       - key: {{ kubernetes_labels.node_worker }}
          operator: Exists
 
 prometheus:
   monitor:
     enabled: true
     honorLabels: true
+    additionalLabels:
+      {{ prometheus_servicemonitor_label_name }}: {{ prometheus_servicemonitor_labels.system }}
 
 extraArgs:
   - --enable-gzip-encoding
@@ -29,7 +31,7 @@ networkPolicy:
     - {}
 
 podDisruptionBudget:
-  minAvailable: 0
+  maxUnavailable: 0
   unhealthyPodEvictionPolicy: AlwaysAllow
 
 selfMonitor:

@@ -1,0 +1,4 @@
+---
+smtp_server:
+  address: NULL
+  port: NULL

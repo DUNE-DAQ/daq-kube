@@ -1,29 +1,10 @@
 ---
-clusterPoolIPv4PodCIDRList:
-  - "10.244.0.0/16"
-  - "10.96.0.0/12"
+development_instance: true
 
-kubernetesClusterID: 0
+cvmfs_csi:
+  http_proxy: http://squid.fnal.gov:3128;DIRECT
 
-smtp_server: NULL
-smtp_port: NULL
-
-cvmfs_http_proxy: DIRECT
-
-inside_kind: true
-with_cilium: false
-with_local_path_as_default_storageclass: true
-with_nfs_storage: false
-
-grafana_extra_datasources: {}
-
-kafka:
-  with_cruisecontrol: true
-
-with_backups: true
-with_kafka_ui: false
-with_mongo_express: false
-
-with_dune_runservices_db_as: postgresql
-
-with_grafana_dune_dashboards: true
+{% if args.with_dune_applications %}
+grafana:
+  home_dashboard_path: /tmp/dashboards/DUNE/daq_overview.json
+{% endif %}

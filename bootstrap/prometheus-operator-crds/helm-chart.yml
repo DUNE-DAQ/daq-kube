@@ -1,7 +1,6 @@
 helmChart:
-  chartVersion: 22.0.1
+  chartVersion: 22.0.2
   namespace: kube-system
   output: helm-rendered.yaml
   releaseName: prometheus-operator-crds
   repo: oci://ghcr.io/prometheus-community/charts/prometheus-operator-crds
-  updateConstraints: ~22.x

@@ -2,20 +2,12 @@
 deployments:
   - path: kube-system
     alwaysDeploy: true
-    skipDeleteIfTags: true
 
   - path: debug
     alwaysDeploy: true
-    skipDeleteIfTags: true
 
-  - path: special-secrets
-    alwaysDeploy: true
-    skipDeleteIfTags: true
-
-{% if with_bootstrap %}
   - path: prometheus-operator-crds
     alwaysDeploy: true
-    skipDeleteIfTags: true
     tags:
       - metrics
       - monitoring
@@ -24,7 +16,7 @@ deployments:
       - prometheus-operator
 
   - barrier: true
-    message: Wait for Prometheus CRDs to settle
+    message: Prometheus CRDs need to settle
 
   - include: cert-manager
     tags:
@@ -33,11 +25,19 @@ deployments:
 
 {% if with_cilium %}
   - include: cilium
+    waitReadiness: true
     tags:
       - cni
     skipDeleteIfTags: true
 {% endif %}
 
   - barrier: true
-    message: Wait for cert-manager and cillium to settle
-{% endif %}
+    message: some cluster bootstrap services need to settle before storage is discovered
+
+  - include: local-storage
+    tags:
+      - csi
+      - storage
+
+  - barrier: true
+    message: bootstrap pods need to settle

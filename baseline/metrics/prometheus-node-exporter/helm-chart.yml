@@ -4,4 +4,3 @@ helmChart:
   output: helm-rendered.yaml
   releaseName: node-exporter
   repo: oci://ghcr.io/prometheus-community/charts/prometheus-node-exporter
-  updateConstraints: ~4.x

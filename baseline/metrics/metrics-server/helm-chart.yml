@@ -5,4 +5,3 @@ helmChart:
   output: helm-rendered.yaml
   releaseName: metrics-server
   repo: https://kubernetes-sigs.github.io/metrics-server/
-  updateConstraints: ~3.x

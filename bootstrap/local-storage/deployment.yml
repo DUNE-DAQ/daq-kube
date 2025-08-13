@@ -1,0 +1,14 @@
+---
+deployments:
+  - path: namespace
+    alwaysDeploy: true
+    tags:
+      - storage
+
+  - barrier: true
+
+  - path: local-path-provisioner
+    tags:
+      - storage
+vars:
+  - file: variables/local_path_provisioner.yaml

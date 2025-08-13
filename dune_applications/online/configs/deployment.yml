@@ -1,0 +1,15 @@
+---
+deployments:
+  - path: dune-grafana-dashboards
+    tags:
+      - grafana
+      - metrics
+      - monitoring
+
+  - path: postgresql-exporter-dashboards
+    tags:
+      - grafana
+      - metrics
+      - monitoring
+      - postgres
+      - prometheus

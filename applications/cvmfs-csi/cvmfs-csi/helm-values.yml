@@ -1,17 +1,21 @@
 ---
-cache:
-  local:
-    cvmfsQuotaLimit: 1000 # TODO: pick a value for this, currently guess work
+automountStorageClass:
+  create: true
 
 extraConfigMaps:
   cvmfs-csi-default-local:
-    my-default.local: |
-      # Source in the original default.local file.
-{%- raw %}
-      {{ tpl (index .Values.extraConfigMaps "cvmfs-csi-default-local" "default.local") . | nindent 2 }}
-{% endraw %}
-      # Append custom parameters below.
-      CVMFS_HTTP_PROXY="{{ cvmfs_http_proxy }}"
+    # https://github.com/cvmfs-contrib/cvmfs-csi/issues/158
+    default.local: |
+      CVMFS_HTTP_PROXY="{{ cvmfs_csi.http_proxy }}"
+      CVMFS_QUOTA_LIMIT=1000 # must match .Values.cache.local.cvmfsQuotaLimit
+      CVMFS_CACHE_BASE=/cvmfs-localcache # must match .Values.cache.local.location
+
+cache:
+  local:
+    volumeSpec:
+      hostPath:
+        path: /var/local-path-provisioner/storageClass-cvmfs.csi.cern.ch/
+    cvmfsQuotaLimit: 1000 # TODO: pick a value for this, currently guess work
 
 controllerplugin:
   plugin:
@@ -35,20 +39,11 @@ controllerplugin:
       requiredDuringSchedulingIgnoredDuringExecution:
         nodeSelectorTerms:
         - matchExpressions:
-          - key: {{ kubernetes_label.worker }}
+          - key: {{ kubernetes_labels.node_worker }}
             operator: Exists
 
 nodeplugin:
   automount:
-    extraVolumeMounts:
-    # This is a copy-paste from cvmfs-csi's values.yaml file,
-    # only changing the etc-cvmfs-default-conf mount's subPath
-    # into my-default.local.
-    - name: etc-cvmfs-default-conf
-      subPath: my-default.local
-      mountPath: /etc/cvmfs/default.local
-    - name: etc-cvmfs-config-d
-      mountPath: /etc/cvmfs/config.d
     resources: # this is guess work
       limits:
         cpu: 300m
@@ -80,3 +75,10 @@ nodeplugin:
       requests:
         cpu: 10m
         memory: 16Mi
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: {{ kubernetes_labels.node_worker }}
+            operator: Exists

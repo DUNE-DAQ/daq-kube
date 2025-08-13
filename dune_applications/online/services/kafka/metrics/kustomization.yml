@@ -1,0 +1,21 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: {{ dune_online.kafka.namespace }}
+
+resources:
+  - pod-monitors/entity-operator-metrics.yaml
+  - pod-monitors/kafka-resources-metrics.yaml
+  - kafka-metrics.yaml
+
+patches:
+  - target:
+      kind: PodMonitor
+    patch: |-
+      - op: add
+        path: /metadata/labels/{{ prometheus_podmonitor_label_name | replace('/', '~1') }}
+        value: "{{ prometheus_podmonitor_labels.kafka }}"
+      - op: add
+        path: /spec/namespaceSelector/matchNames/0
+        value: {{ dune_online.kafka.namespace }}

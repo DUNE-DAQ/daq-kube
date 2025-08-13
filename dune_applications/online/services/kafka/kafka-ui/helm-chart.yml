@@ -1,0 +1,7 @@
+helmChart:
+  chartName: kafka-ui
+  chartVersion: 1.5.1
+  namespace: '{{ dune_online.kafka.namespace }}'
+  output: helm-rendered.yaml
+  releaseName: kafka-ui
+  repo: https://kafbat.github.io/helm-charts

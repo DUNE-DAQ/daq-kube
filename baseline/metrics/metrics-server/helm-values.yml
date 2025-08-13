@@ -2,10 +2,10 @@
 metrics:
   enabled: true
 
-resources:
+resources: # this is guess work
   limits:
-    cpu: 200m
-    memory: 256Mi
+    cpu: 250m
+    memory: 96Mi
   requests:
     cpu: 100m
     memory: 96Mi
@@ -17,7 +17,7 @@ serviceMonitor:
 
 podDisruptionBudget:
   enabled: true
-  minAvailable: 0
+  maxUnavailable: 0
   unhealthyPodEvictionPolicy: AlwaysAllow
 
 affinity:
@@ -25,5 +25,5 @@ affinity:
    requiredDuringSchedulingIgnoredDuringExecution:
      nodeSelectorTerms:
      - matchExpressions:
-       - key: {{ kubernetes_label.worker }}
+       - key: {{ kubernetes_labels.node_worker }}
          operator: Exists

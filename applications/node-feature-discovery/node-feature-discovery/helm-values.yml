@@ -23,7 +23,7 @@ master:
      requiredDuringSchedulingIgnoredDuringExecution:
        nodeSelectorTerms:
        - matchExpressions:
-         - key: {{ kubernetes_label.worker }}
+         - key: {{ kubernetes_labels.node_worker }}
            operator: Exists
 gc:
   revisionHistoryLimit: 3
@@ -43,7 +43,7 @@ gc:
      requiredDuringSchedulingIgnoredDuringExecution:
        nodeSelectorTerms:
        - matchExpressions:
-         - key: {{ kubernetes_label.worker }}
+         - key: {{ kubernetes_labels.node_worker }}
            operator: Exists
 
 worker:
@@ -74,7 +74,7 @@ topologyUpdater:
      requiredDuringSchedulingIgnoredDuringExecution:
        nodeSelectorTerms:
        - matchExpressions:
-         - key: {{ kubernetes_label.worker }}
+         - key: {{ kubernetes_labels.node_worker }}
            operator: Exists
 
 topologyGC:
@@ -92,7 +92,7 @@ topologyGC:
      requiredDuringSchedulingIgnoredDuringExecution:
        nodeSelectorTerms:
        - matchExpressions:
-         - key: {{ kubernetes_label.worker }}
+         - key: {{ kubernetes_labels.node_worker }}
            operator: Exists
 
 # TODO: figure out cert-manager

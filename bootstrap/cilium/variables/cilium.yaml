@@ -1,2 +1,4 @@
 ---
-cilium_replace_kube_proxy: false
+cilium:
+  namespace: cilium-system
+  replace_kube_proxy: false

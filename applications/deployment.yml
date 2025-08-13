@@ -1,56 +1,29 @@
 ---
 deployments:
-{% if with_applications %}
-{% if with_microsocks %}
-  - path: microsocks
-{% endif %}
-
-{% if with_kepler %}
-{% if not inside_kind %}
-  - include: kepler
-    tags:
-      - monitoring
-      - metrics
-{% endif %}
-{% endif %}
-
-{% if with_node_feature_discovery %}
-  - include: node-feature-discovery
-{% if with_pcm %}
-  - path: intel-pcm
-{% endif %}
-{% endif %}
-
-{% if with_kubernetes_dashboard %}
-  - include: kubernetes-dashboard
-{% endif %}
-
-{% if with_nfs_storage %}
-  - include: nfs-storage
-    tags:
-      - nfs
-      - storage
-{% endif %}
-
-{% if with_cvmfs_csi %}
   - include: cvmfs-csi
     tags:
+      - csi
       - cvmfs
       - storage
-{% endif %}
 
-{% if with_sriov %}
+  - include: kubernetes-dashboard-application
+
+  - include: node-feature-discovery
+
+  - path: microsocks
+
+{% if hardware_access %}
   - path: sriov-network-device-plugin
     tags:
       - sriov
       - dpdk
+  - path: intel-pcm
+    tags:
+      - pcm
+      - monitoring
+      - metrics
 {% endif %}
 
-{% if with_dune_felix_plugin %}
-  - include: felix-plugin
-{% endif %}
-
-{% if with_grafana %}
   - barrier: true
     message: Let grafana dashboard config maps finish loading
 
@@ -58,8 +31,6 @@ deployments:
     tags:
       - monitoring
       - metrics
-{% endif %}
-{% endif %}
 
   - barrier: true
     message: Finish loading applications

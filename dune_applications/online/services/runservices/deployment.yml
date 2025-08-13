@@ -1,0 +1,13 @@
+---
+deployments:
+  - path: namespace
+
+  - barrier: true
+
+  - include: database
+
+  - path: runnumber-rest
+  - path: runregistry-rest
+
+vars:
+  - file: variables/runservices.yaml

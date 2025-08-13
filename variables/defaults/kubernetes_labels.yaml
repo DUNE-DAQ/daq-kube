@@ -1,0 +1,3 @@
+---
+kubernetes_labels:
+  node_worker: node-role.kubernetes.io/worker

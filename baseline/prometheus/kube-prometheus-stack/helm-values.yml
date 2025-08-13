@@ -1,6 +1,7 @@
 ---
-## 
+## Make sure things have workable names
 fullnameOverride: "kube-prometheus-stack"
+cleanPrometheusOperatorObjectNames: true
 
 ## Create default rules for monitoring the cluster
 ## 
@@ -13,61 +14,58 @@ prometheusOperator:
   enabled: true
   networkPolicy:
     enabled: true
-  resources:
+  resources: # this is guess work
     limits:
       cpu: 300m
-      memory: 512Mi
+      memory: 128Mi
     requests:
       cpu: 50m
       memory: 96Mi
   podDisruptionBudget:
     enabled: true
-    minAvailable: 0
+    maxUnavailable: 0
+    minAvailable: NULL
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
         nodeSelectorTerms:
         - matchExpressions:
-          - key: {{ kubernetes_label.worker }}
+          - key: {{ kubernetes_labels.node_worker }}
             operator: Exists
   prometheusConfigReloader:
-    resources:
+    resources: # this is guess work
       limits:
         cpu: 300m
-        memory: 512Mi
+        memory: 64Mi
       requests:
         cpu: 10m
         memory: 16Mi
-  admissionWebhooks:
-    deployment:
-      podDisruptionBudget:
-        enabled: true
-        minAvailable: 0
-    resources:
-      limits:
-        cpu: 300m
-        memory: 512Mi
-      requests:
-        cpu: 10m
-        memory: 16Mi
-    certManager:
-      enabled: true
 
 ## do not deploy a default monitoring setup
 ## we will manage it seperately
 prometheus:
   enabled: false
+  forceDeployDashboards: true
 alertmanager:
   enabled: false
+  forceDeployDashboards: true
 nodeExporter:
   enabled: false
+  forceDeployDashboards: true
 kubeStateMetrics:
   enabled: false
+  forceDeployDashboards: true
 
 ## do not deploy the grafana server here
 ## we will manage it seperately
 grafana:
   enabled: false
+  defaultDashboardsEnabled: true
+  forceDeployDashboards: true
 
-## Make sure things have workable names
-cleanPrometheusOperatorObjectNames: true
+  sidecar:
+    dashboards:
+      annotations:
+        {{ grafana_dashboard_folder_annotation }}: Kubernetes
+      label: {{ grafana_dashboard_label_name }}
+      labelValue: {{ grafana_dashboard_label_value }}

@@ -1,8 +1,8 @@
 ---
-resources:
+resources: # this is guess work
   limits:
     cpu: 500m
-    memory: 512Mi
+    memory: 64Mi
   requests:
     cpu: 50m
     memory: 64Mi
@@ -16,6 +16,9 @@ podLabels:
   jobLabel: node-exporter # changing this impacts dashboards
 
 hostNetwork: true # once we are all kubernetes change this to false
+
+hostSysFsMount:
+  mountPropagation: HostToContainer
 
 prometheus:
   podMonitor:

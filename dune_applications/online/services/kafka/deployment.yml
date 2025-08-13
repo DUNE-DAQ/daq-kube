@@ -1,0 +1,15 @@
+---
+deployments:
+  - path: namespace
+
+  - barrier: true
+
+  - path: metrics
+
+  - path: kafka-broker
+
+  - path: kafka-ui
+
+vars:
+- systemEnvVars:
+    kafka_hostname: HOSTNAME

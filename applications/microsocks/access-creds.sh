@@ -1,10 +1,14 @@
 #!/bin/bash
 
-NAMESPACE="python-tiny-proxy"
-HELM_RELEASE="python-tiny-proxy"
+NAMESPACE="microsocks"
+HELM_RELEASE="microsocks"
 
-kubectl -n ${NAMESPACE} get pods >/dev/null
 echo "--------------------------------------------------"
-echo "Python Tiny-Proxy application:"
-echo "  URL in cluster: socks5://${HELM_RELEASE}.${NAMESPACE}.svc:1080"
+kubectl get namespaces | grep -q ${NAMESPACE}
+if [[ $? -eq 0 ]]; then
+    echo "Microsocks application:"
+    echo "  URL in cluster: socks5://${HELM_RELEASE}.${NAMESPACE}.svc:1080"
+else
+    echo "Kubernetes namespace ${NAMESPACE} does not exist"
+fi
 echo "--------------------------------------------------"

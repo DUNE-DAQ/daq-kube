@@ -16,6 +16,7 @@ spec:
   commonName: {{ certmanager.ca_name }}
   secretName: root-secret
   privateKey:
+    rotationPolicy: Always
     algorithm: RSA
     size: 4096
   issuerRef:
