@@ -4,11 +4,11 @@ kind: Namespace
 metadata:
   annotations:
     kluctl.io/skip-delete-if-tags: "true"
-  labels:
-    pod-security.kubernetes.io/audit: baseline
-    pod-security.kubernetes.io/audit-version: latest
-    pod-security.kubernetes.io/enforce: baseline # unified image runs as root :(
+  labels: # unified image runs as root :(
+    pod-security.kubernetes.io/enforce: baseline
     pod-security.kubernetes.io/enforce-version: latest
+    pod-security.kubernetes.io/audit: restricted
+    pod-security.kubernetes.io/audit-version: latest
     pod-security.kubernetes.io/warn: baseline
     pod-security.kubernetes.io/warn-version: latest
   name: {{ elisa_logbook.namespace }}

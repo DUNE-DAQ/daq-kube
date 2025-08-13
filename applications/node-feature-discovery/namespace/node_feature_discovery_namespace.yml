@@ -8,7 +8,7 @@ metadata:
   labels:
     pod-security.kubernetes.io/enforce: privileged # uses host features by design
     pod-security.kubernetes.io/enforce-version: latest
-    pod-security.kubernetes.io/audit: privileged
+    pod-security.kubernetes.io/audit: restricted
     pod-security.kubernetes.io/audit-version: latest
     pod-security.kubernetes.io/warn: privileged
     pod-security.kubernetes.io/warn-version: latest
