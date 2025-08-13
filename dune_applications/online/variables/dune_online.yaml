@@ -14,3 +14,6 @@ dune_online:
   unified_microservices:
     image: ghcr.io/dune-daq/microservices
     tag: "pddp"  # note this must always be a quoted string!
+  connection_service:
+    image: ghcr.io/dune-daq/connectivityserver
+    tag: "develop"  # note this must always be a quoted string!
