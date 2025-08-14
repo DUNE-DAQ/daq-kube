@@ -46,3 +46,4 @@
 [submodule "prometheus-postgres_exporter"]
 	path = .submodules/prometheus-postgres_exporter
 	url = https://github.com/prometheus-community/postgres_exporter.git
+	shallow = true
