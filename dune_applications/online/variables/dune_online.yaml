@@ -16,4 +16,4 @@ dune_online:
     tag: "pddp"  # note this must always be a quoted string!
   connection_service:
     image: ghcr.io/dune-daq/connectivityserver
-    tag: "develop"  # note this must always be a quoted string!
+    tag: "v1.2.0"  # note this must always be a quoted string!
