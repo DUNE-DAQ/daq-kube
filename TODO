@@ -26,13 +26,14 @@ HTTPS for kafka-ui nodePort
 Switch to 'headlamp'
 * https://github.com/kubernetes-sigs/headlamp/pull/3607
 
-cert-manager/trust-manager?
+trust-manager?
 
 https://github.com/openshift/cluster-node-tuning-operator
 
 https://velero.io/
 https://github.com/restic/restic
 
+Drop the standalone postresql-exporter as it picks a random pod?
 
 tool_k9s
 
