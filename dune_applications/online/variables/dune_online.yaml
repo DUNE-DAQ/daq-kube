@@ -1,16 +1,8 @@
 dune_online:
-  elisa_logbook_hardware_types:
-    - npvd
-    - pdsp
-    - pddp
   kafka:
     namespace: kafka
     name: dune-daq
-    pool: kafka-full
-    bootstrap_brokers:
-      - dune-daq-kafka-bootstrap.kafka.svc:9092
     version: "4.0.0"
-    replicas: 1
   unified_microservices:
     image: ghcr.io/dune-daq/microservices
     tag: "pddp"  # note this must always be a quoted string!

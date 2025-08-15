@@ -11,5 +11,6 @@ deployments:
   - path: kafka-ui
 
 vars:
-- systemEnvVars:
-    kafka_hostname: HOSTNAME
+  - systemEnvVars:
+      kafka_hostname: HOSTNAME
+  - file: variables/kafka.yaml

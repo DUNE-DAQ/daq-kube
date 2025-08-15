@@ -18,7 +18,7 @@ patches:
         value: {{ dune_online.unified_microservices.image }}:{{ dune_online.unified_microservices.tag }}
       - op: replace
         path: /spec/template/spec/containers/0/env/1/value
-        value: {{ dune_online.kafka.bootstrap_brokers[0] }}
+        value: {{ dune_online.kafka.name}}-kafka-bootstrap.{{ dune_online.kafka.namespace }}.svc:9092
       - op: remove
         path: /spec/template/spec/containers/0/env/5/valueFrom
       - op: add
