@@ -1,0 +1,7 @@
+{% if not args.user_passwords %}
+{{ fail("argument user_passwords is required") }}
+{% endif %}
+
+{% if not args.elisa_password %}
+{{ fail("argument elisa_password is required") }}
+{% endif %}

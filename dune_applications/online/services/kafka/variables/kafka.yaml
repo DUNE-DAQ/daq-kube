@@ -1,0 +1,4 @@
+dune_online:
+  kafka:
+    pool: kafka-full
+    replicas: 1

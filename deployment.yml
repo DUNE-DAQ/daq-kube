@@ -41,6 +41,7 @@ vars:
   - values:
       inside_kind: {{ args.inside_kind }}
 
+  - file: variables/check_required.yaml
   - file: variables/defaults/alertmanager_labels.yaml
   - file: variables/defaults/certmanager_settings.yaml
   - file: variables/defaults/cluster_info.yaml

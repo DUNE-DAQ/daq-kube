@@ -26,6 +26,9 @@ args:
   - name: user_passwords
     default: run4evah
 
+  - name: elisa_password
+    default: run4evah # only matters for np04-services
+
 targets:
   - name: pocket
     args:
@@ -50,7 +53,7 @@ targets:
       with_dune_applications: false
 
   - name: iceberg-services
-    discriminator: "dune-daq-pocket"
+    discriminator: "iceberg-daq-pocket"
     args:
       inside_kind: true
       user_passwords: NULL
@@ -59,6 +62,7 @@ targets:
     context: kubernetes-admin@np04-services
     args:
       user_passwords: NULL
+      elisa_password: NULL
 
   - name: np04-daq
     context: kubernetes-admin@np04-daq
