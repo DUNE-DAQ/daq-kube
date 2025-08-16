@@ -1,7 +1,7 @@
 helmChart:
   chartName: influxdb
   chartVersion: 4.12.5
-  namespace: '{{ dune_online_opmon.namespace }}'
+  namespace: "{{ dune_online_opmon.namespace }}"
   output: helm-rendered.yaml
   releaseName: opmon-influxdb
   repo: https://helm.influxdata.com/

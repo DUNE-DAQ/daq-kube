@@ -9,6 +9,7 @@ There are two local variables you should be aware of `kubernetes_dashboard.disab
 When this goes to dashboard v3, there are a ton of changes I'm not ready for...
 
 To get the read only user token:
+
 ```shell
 kubectl -n kubernetes-dashboard get secret kubernetes-dashboard-read-only-token -o jsonpath="{.data.token}" | base64 --decode ; echo
 ```

@@ -19,12 +19,12 @@ master:
     enable: true
     minAvailable: 0
   affinity:
-   nodeAffinity:
-     requiredDuringSchedulingIgnoredDuringExecution:
-       nodeSelectorTerms:
-       - matchExpressions:
-         - key: {{ kubernetes_labels.node_worker }}
-           operator: Exists
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: {{ kubernetes_labels.node_worker }}
+                operator: Exists
 gc:
   revisionHistoryLimit: 3
   interval: {{ node_feature_discovery.worker.updateInterval }}
@@ -39,17 +39,17 @@ gc:
     enable: true
     minAvailable: 0
   affinity:
-   nodeAffinity:
-     requiredDuringSchedulingIgnoredDuringExecution:
-       nodeSelectorTerms:
-       - matchExpressions:
-         - key: {{ kubernetes_labels.node_worker }}
-           operator: Exists
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: {{ kubernetes_labels.node_worker }}
+                operator: Exists
 
 worker:
   config:
     core:
-     sleepInterval: {{ node_feature_discovery.worker.updateInterval }}
+      sleepInterval: {{ node_feature_discovery.worker.updateInterval }}
   resources:
     limits:
       cpu: 300m
@@ -60,7 +60,7 @@ worker:
 
 topologyUpdater:
   enable: {{ node_feature_discovery.topologyUpdater.enable }}
-  updateInterval:  {{ node_feature_discovery.topologyUpdater.updateInterval }}
+  updateInterval: {{ node_feature_discovery.topologyUpdater.updateInterval }}
   createCRDs: {{ node_feature_discovery.topologyUpdater.enable }}
   resources:
     limits:
@@ -70,12 +70,12 @@ topologyUpdater:
       cpu: 10m
       memory: 64Mi
   affinity:
-   nodeAffinity:
-     requiredDuringSchedulingIgnoredDuringExecution:
-       nodeSelectorTerms:
-       - matchExpressions:
-         - key: {{ kubernetes_labels.node_worker }}
-           operator: Exists
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: {{ kubernetes_labels.node_worker }}
+                operator: Exists
 
 topologyGC:
   enable: {{ node_feature_discovery.topologyUpdater.enable }}
@@ -88,12 +88,12 @@ topologyGC:
       cpu: 10m
       memory: 64Mi
   affinity:
-   nodeAffinity:
-     requiredDuringSchedulingIgnoredDuringExecution:
-       nodeSelectorTerms:
-       - matchExpressions:
-         - key: {{ kubernetes_labels.node_worker }}
-           operator: Exists
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: {{ kubernetes_labels.node_worker }}
+                operator: Exists
 
 # TODO: figure out cert-manager
 tls:

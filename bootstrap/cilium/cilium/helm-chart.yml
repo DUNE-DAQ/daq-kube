@@ -1,7 +1,7 @@
 helmChart:
   chartName: cilium
   chartVersion: 1.18.1
-  namespace: '{{ cilium.namespace }}'
+  namespace: "{{ cilium.namespace }}"
   output: helm-rendered.yaml
   releaseName: cilium
   repo: https://helm.cilium.io/

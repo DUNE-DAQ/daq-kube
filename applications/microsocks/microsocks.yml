@@ -37,55 +37,55 @@ spec:
         nodeAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
-            - matchExpressions:
-              - key: {{ kubernetes_labels.node_worker }}
-                operator: Exists
+              - matchExpressions:
+                  - key: {{ kubernetes_labels.node_worker }}
+                    operator: Exists
         podAntiAffinity: # try to spread across different workers
           preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 100
-            podAffinityTerm:
-              labelSelector:
-                matchLabels:
-                  app.kubernetes.io/app: microsocks
-                  app.kubernetes.io/component: microsocks
-              topologyKey: "kubernetes.io/hostname"
+            - weight: 100
+              podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/app: microsocks
+                    app.kubernetes.io/component: microsocks
+                topologyKey: "kubernetes.io/hostname"
       automountServiceAccountToken: false
       containers:
-      - image: ghcr.io/dune-daq/microsocks:latest
-        imagePullPolicy: Always
-        name: microsocks
-        ports:
-        - containerPort: 1080
-          name: socks5
-          protocol: TCP
-        livenessProbe:
-          tcpSocket:
-            port: socks5
-          initialDelaySeconds: 15
-          periodSeconds: 20
-        readinessProbe:
-          tcpSocket:
-            port: socks5
-          initialDelaySeconds: 15
-          periodSeconds: 20
-        resources:
-          limits:
-            memory: 128Mi
-            cpu: 500m
-          requests:
-            memory: 8Mi
-            cpu: 100m
-        securityContext:
-          runAsUser: 10000
-          runAsGroup: 10000
-          runAsNonRoot: true
-          allowPrivilegeEscalation: false
-          readOnlyRootFilesystem: true
-          seccompProfile:
-            type: RuntimeDefault
-          capabilities:
-            drop:
-            - ALL
+        - image: ghcr.io/dune-daq/microsocks:latest
+          imagePullPolicy: Always
+          name: microsocks
+          ports:
+            - containerPort: 1080
+              name: socks5
+              protocol: TCP
+          livenessProbe:
+            tcpSocket:
+              port: socks5
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          readinessProbe:
+            tcpSocket:
+              port: socks5
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            limits:
+              memory: 128Mi
+              cpu: 500m
+            requests:
+              memory: 8Mi
+              cpu: 100m
+          securityContext:
+            runAsUser: 10000
+            runAsGroup: 10000
+            runAsNonRoot: true
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            seccompProfile:
+              type: RuntimeDefault
+            capabilities:
+              drop:
+                - ALL
       securityContext:
         fsGroup: 10000
 ---
@@ -144,10 +144,10 @@ metadata:
   namespace: microsocks
 spec:
   ports:
-  - name: socks5
-    protocol: TCP
-    port: 1080 # 1080 is the ICANN socks5 port
-    targetPort: socks5
+    - name: socks5
+      protocol: TCP
+      port: 1080 # 1080 is the ICANN socks5 port
+      targetPort: socks5
   selector:
     app.kubernetes.io/app: microsocks
     app.kubernetes.io/component: microsocks
@@ -171,10 +171,10 @@ spec:
     - Egress
   ingress: # this policy is intentionally pretty wide open
     - from:
-      - ipBlock:
-          cidr: 0.0.0.0/0
-      - ipBlock:
-          cidr: ::/0
+        - ipBlock:
+            cidr: 0.0.0.0/0
+        - ipBlock:
+            cidr: ::/0
       ports:
         - protocol: TCP
           port: 1080

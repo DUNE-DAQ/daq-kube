@@ -1,6 +1,6 @@
 helmChart:
   chartVersion: 9.3.2
-  namespace: '{{ monitoring.namespace }}'
+  namespace: "{{ monitoring.namespace }}"
   output: helm-rendered.yaml
   releaseName: grafana-devel
   repo: oci://ghcr.io/grafana/helm-charts/grafana

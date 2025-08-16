@@ -11,4 +11,3 @@ deployments:
 
   - barrier: true
     message: Ensure all secrets are generated
-

@@ -11,11 +11,11 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - name: service
-    protocol: TCP
-    port: 9090
-    targetPort: web
-    nodePort: 31093
+    - name: service
+      protocol: TCP
+      port: 9090
+      targetPort: web
+      nodePort: 31093
   selector:
     app.kubernetes.io/name: prometheus
     prometheus: main

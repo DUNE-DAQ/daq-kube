@@ -1,15 +1,15 @@
 ---
-featureGates: ''
+featureGates: ""
 
 watchAnyNamespace: true
 
 affinity:
- nodeAffinity:
-   requiredDuringSchedulingIgnoredDuringExecution:
-     nodeSelectorTerms:
-     - matchExpressions:
-       - key: {{ kubernetes_labels.node_worker }}
-         operator: Exists
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: {{ kubernetes_labels.node_worker }}
+              operator: Exists
 
 podDisruptionBudget:
   enabled: true
@@ -26,7 +26,7 @@ securityContext:
     type: RuntimeDefault
   capabilities:
     drop:
-    - ALL
+      - ALL
 
 podSecurityContext:
   fsGroup: 10000

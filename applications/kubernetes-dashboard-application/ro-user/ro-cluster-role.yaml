@@ -65,9 +65,9 @@ roleRef:
   kind: ClusterRole
   name: kubernetes-dashboard-read-only-role
 subjects:
-- kind: ServiceAccount
-  name: kubernetes-dashboard-read-only-role
-  namespace: kubernetes-dashboard
+  - kind: ServiceAccount
+    name: kubernetes-dashboard-read-only-role
+    namespace: kubernetes-dashboard
 ---
 apiVersion: v1
 kind: Secret

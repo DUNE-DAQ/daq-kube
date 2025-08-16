@@ -1,6 +1,6 @@
 helmChart:
   chartVersion: 0.26.0
-  namespace: '{{ cnpg.namespace }}'
+  namespace: "{{ cnpg.namespace }}"
   output: helm-rendered.yaml
   releaseName: cnpg
   repo: oci://ghcr.io/cloudnative-pg/charts/cloudnative-pg

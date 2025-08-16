@@ -1,6 +1,6 @@
 helmChart:
   chartVersion: 2.5.2
-  namespace: '{{ cvmfs_csi.namespace }}'
+  namespace: "{{ cvmfs_csi.namespace }}"
   output: helm-rendered.yaml
   releaseName: cvmfs-csi
   repo: oci://registry.cern.ch/kubernetes/charts/cvmfs-csi

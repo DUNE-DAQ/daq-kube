@@ -11,11 +11,11 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - name: http
-    port: 80
-    protocol: TCP
-    targetPort: http
-    nodePort: 31014
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: http
+      nodePort: 31014
   selector:
     app.kubernetes.io/instance: kafka-ui
     app.kubernetes.io/name: kafka-ui

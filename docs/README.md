@@ -21,7 +21,8 @@ Users of [pocket](https://github.com/DUNE-DAQ/pocket) will have the worker label
 The actual value of the label isn't checked, just if it exists. Some DAQ targets will use a different label.
 
 ### Clone the repo
-This repository uses submodules to track external repos.  To clone this repository you should use:
+
+This repository uses submodules to track external repos. To clone this repository you should use:
 
 ```shell
 git clone https://github.com/DUNE-DAQ/daq-kube.git --recursive --depth 1
@@ -45,18 +46,20 @@ Users of [pocket](https://github.com/DUNE-DAQ/pocket) will have this downloaded 
 
 ## Select your target and deploy
 
-***NOTE:*** when setting the `user_password` to non-default values you should use an args-file. You can provide a set of arguments via a yaml file: `kluctl deploy -t target --args-from-file=filename.yaml`. This will prevent the password from being stored in shell history.
+**_NOTE:_** when setting the `user_password` to non-default values you should use an args-file. You can provide a set of arguments via a yaml file: `kluctl deploy -t target --args-from-file=filename.yaml`. This will prevent the password from being stored in shell history.
 
-The `.kluctl.yaml` file lists the deployment targets we've configured.  The `context` keyword ensures that `kluctl` will use the specified [kubectl context](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/) to deploy the manifests.
+The `.kluctl.yaml` file lists the deployment targets we've configured. The `context` keyword ensures that `kluctl` will use the specified [kubectl context](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/) to deploy the manifests.
 
-***NOTE:*** You cannot deploy a target to a kubernetes context other than the one defined in `.kluctl.yaml`.  You may need to rename or set you kubernetes context in `~/.kube/config`.
+**_NOTE:_** You cannot deploy a target to a kubernetes context other than the one defined in `.kluctl.yaml`. You may need to rename or set you kubernetes context in `~/.kube/config`.
 
 For example:
+
 ```shell
 kluctl deploy -t pocket
 ```
 
 or:
+
 ```shell
 kluctl render -t pocket --offline-kubernetes
 ```
@@ -72,6 +75,7 @@ kluctl deploy -t pocket-baseline
 ## Access to your cluster
 
 You can review the default credentials for your cluster by running when `kubectl` is in your `$PATH` and has this cluster as the default context with:
+
 ```shell
 print-creds.sh
 ```
@@ -80,13 +84,13 @@ The deployment also sets up an instance of a `microsocks` SOCKS5 proxy server th
 
 ### Node Ports
 
-The list of node-ports in use can be found under `node-ports`.  It contains the exact manifests being run and should thus be the most up to date list of node-ports. These are controled with `kluctl` variables.
+The list of node-ports in use can be found under `node-ports`. It contains the exact manifests being run and should thus be the most up to date list of node-ports. These are controled with `kluctl` variables.
 
 ### Proxy
 
 Inside the cluster, port `1080` is available for use as a SOCKS5 proxy.
 
-If the node-ports were deployed, there is a node-port set for `microsocks` that should grant access to the cluster.  If you delegate DNS to the SOCKS5 proxy, you can use this proxy server to test and recieve any in-cluster resources.
+If the node-ports were deployed, there is a node-port set for `microsocks` that should grant access to the cluster. If you delegate DNS to the SOCKS5 proxy, you can use this proxy server to test and recieve any in-cluster resources.
 
 ## HOW TO
 

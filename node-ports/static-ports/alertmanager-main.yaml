@@ -11,11 +11,11 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - name: service
-    protocol: TCP
-    port: 9093
-    targetPort: web
-    nodePort: 31092
+    - name: service
+      protocol: TCP
+      port: 9093
+      targetPort: web
+      nodePort: 31092
   selector:
     app.kubernetes.io/name: alertmanager
     alertmanager: main

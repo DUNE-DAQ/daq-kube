@@ -14,7 +14,7 @@ Kluctl caches helm charts it uses locally, this is where the cache lives.
 
 ### .submodules
 
-This contains all the submodule git repos we are including.  Specific elements from them should be linked into place so folks don't need to hunt for what repos we depend upon.
+This contains all the submodule git repos we are including. Specific elements from them should be linked into place so folks don't need to hunt for what repos we depend upon.
 
 ### Bootstrap
 
@@ -32,22 +32,22 @@ This is a somewhat opinionated feature list.
 
 The `baseline/metrics` folder contains:
 
-* kubernetes `metrics-server` for providing kubernetes metrics to kubernetes
-* kubernetes prometheus exporter (`kube-state-metrics`) for providing kubernetes metrics to prometheus
-* `prometheus-node-exporter` for providing host metrics to prometheus
+- kubernetes `metrics-server` for providing kubernetes metrics to kubernetes
+- kubernetes prometheus exporter (`kube-state-metrics`) for providing kubernetes metrics to prometheus
+- `prometheus-node-exporter` for providing host metrics to prometheus
 
 ### Applications
 
 These are items that external communities are maintaining.
 
-Applications are optional components of the cluster.  Odds are you'll want them, but they should be controlled via arguments.  They should be treated similarly to feature flags from `autoconf` so there is an obvious method for enabling or disabling a specific application.
+Applications are optional components of the cluster. Odds are you'll want them, but they should be controlled via arguments. They should be treated similarly to feature flags from `autoconf` so there is an obvious method for enabling or disabling a specific application.
 
 #### Example
 
 the `applications/grafana` folder contains:
 
-* the grafana-server
-* dashboards for kubernetes components from two different upstream projects
+- the grafana-server
+- dashboards for kubernetes components from two different upstream projects
 
 ### dune_applications
 
@@ -57,7 +57,7 @@ Ideally each subsystem will have a subdirectory that contains its own items scop
 
 ### Node-ports
 
-This is where DUNE Node Ports are kept.  By putting them in one place, we hope to make management and allocation easier.
+This is where DUNE Node Ports are kept. By putting them in one place, we hope to make management and allocation easier.
 
 ## HOW TO
 
