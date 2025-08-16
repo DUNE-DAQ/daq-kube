@@ -5,6 +5,7 @@ You can get the grafana password with `kubectl -n monitoring get secret grafana-
 It should be running in cluster at http://grafana.monitoring.svc/
 
 ### Configuration
+
 The grafana container we are using has the ability to dynamically import items.
 
 To add a new datasource build a `secret` like what is found in [`baseline/prometheus/prometheis/prometheus_grafana_datasource.yml`](https://github.com/DUNE-DAQ/daq-kube/blob/develop/baseline/prometheus/prometheis/prometheus_grafana_datasource.yml)

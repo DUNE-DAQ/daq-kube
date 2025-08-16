@@ -19,12 +19,12 @@ resources: # this is guess work
     memory: 96Mi
 
 affinity:
- nodeAffinity:
-   requiredDuringSchedulingIgnoredDuringExecution:
-     nodeSelectorTerms:
-     - matchExpressions:
-       - key: {{ kubernetes_labels.node_worker }}
-         operator: Exists
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: {{ kubernetes_labels.node_worker }}
+              operator: Exists
 
 podDisruptionBudget:
   enabled: true
@@ -39,12 +39,12 @@ livenessProbe:
 
 webhook:
   affinity:
-   nodeAffinity:
-     requiredDuringSchedulingIgnoredDuringExecution:
-       nodeSelectorTerms:
-       - matchExpressions:
-         - key: {{ kubernetes_labels.node_worker }}
-           operator: Exists
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: {{ kubernetes_labels.node_worker }}
+                operator: Exists
   podDisruptionBudget:
     enabled: true
     maxUnavailable: 0
@@ -62,12 +62,12 @@ webhook:
 
 cainjector:
   affinity:
-   nodeAffinity:
-     requiredDuringSchedulingIgnoredDuringExecution:
-       nodeSelectorTerms:
-       - matchExpressions:
-         - key: {{ kubernetes_labels.node_worker }}
-           operator: Exists
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: {{ kubernetes_labels.node_worker }}
+                operator: Exists
   podDisruptionBudget:
     enabled: true
     maxUnavailable: 0
@@ -81,12 +81,12 @@ cainjector:
 
 startupapicheck:
   affinity:
-   nodeAffinity:
-     requiredDuringSchedulingIgnoredDuringExecution:
-       nodeSelectorTerms:
-       - matchExpressions:
-         - key: {{ kubernetes_labels.node_worker }}
-           operator: Exists
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: {{ kubernetes_labels.node_worker }}
+                operator: Exists
   resources: # this is guess work
     limits:
       cpu: 200m

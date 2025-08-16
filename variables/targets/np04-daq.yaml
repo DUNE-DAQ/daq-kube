@@ -16,4 +16,3 @@ grafana:
 
 kubernetes_label:
   worker: node-role.kubernetes.io/control-plane # my heart breaks!
-

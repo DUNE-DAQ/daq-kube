@@ -1,7 +1,7 @@
---- 
+---
 apiVersion: v1
 kind: Service
-metadata:    
+metadata:
   name: runnumber-rest-nodeport
   labels:
     app.kubernetes.io/app: runnumber-rest
@@ -10,11 +10,11 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - name: http
-    port: 5000
-    protocol: TCP
-    targetPort: http
-    nodePort: 30016
+    - name: http
+      port: 5000
+      protocol: TCP
+      targetPort: http
+      nodePort: 30016
   selector:
     app.kubernetes.io/app: runnumber-rest
     app.kubernetes.io/component: runnumber-rest

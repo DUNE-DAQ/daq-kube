@@ -47,8 +47,8 @@ spec:
         limits:
           cpu: 400m
           memory: 384Mi
-    template:    
-      pod:       
+    template:
+      pod:
         affinity:
          nodeAffinity:
            preferredDuringSchedulingIgnoredDuringExecution:
@@ -74,8 +74,8 @@ spec:
         memory: 128Mi
     topicRegex: ".*"
     groupRegex: ".*"
-    template:    
-      pod:       
+    template:
+      pod:
         affinity:
          nodeAffinity:
            preferredDuringSchedulingIgnoredDuringExecution:
@@ -100,8 +100,8 @@ spec:
       limits:
         cpu: 400m
         memory: 512Mi
-    template:    
-      pod:       
+    template:
+      pod:
         affinity:
          nodeAffinity:
             preferredDuringSchedulingIgnoredDuringExecution:

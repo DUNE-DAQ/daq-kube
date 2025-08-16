@@ -5,3 +5,7 @@
 {% if not args.elisa_password %}
 {{ fail("argument elisa_password is required") }}
 {% endif %}
+
+{% if not args.oracle_password %}
+{{ fail("argument oracle_password is required") }}
+{% endif %}

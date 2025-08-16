@@ -1,3 +1,9 @@
 ---
-elisa_logbook:
+dune_online_elisa_logbook:
   namespace: elisa-logbook
+  username: rcpd
+  password: {{ args.elisa_password }}
+  hardware_types:
+    - npvd
+    - pdsp
+    - pddp

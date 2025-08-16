@@ -4,7 +4,7 @@ fullnameOverride: "kube-prometheus-stack"
 cleanPrometheusOperatorObjectNames: true
 
 ## Create default rules for monitoring the cluster
-## 
+##
 defaultRules:
   create: true
 
@@ -29,9 +29,9 @@ prometheusOperator:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
         nodeSelectorTerms:
-        - matchExpressions:
-          - key: {{ kubernetes_labels.node_worker }}
-            operator: Exists
+          - matchExpressions:
+              - key: {{ kubernetes_labels.node_worker }}
+                operator: Exists
   prometheusConfigReloader:
     resources: # this is guess work
       limits:

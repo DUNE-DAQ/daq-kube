@@ -1,6 +1,6 @@
 helmChart:
   chartVersion: 7.1.1
-  namespace: '{{ dune_online_ers.namespace }}'
+  namespace: "{{ dune_online_ers.namespace }}"
   output: helm-rendered.yaml
   releaseName: ers-postgresql-exporter
   repo: oci://ghcr.io/prometheus-community/charts/prometheus-postgres-exporter

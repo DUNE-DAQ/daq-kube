@@ -22,7 +22,7 @@ resources:
     memory: 256Mi
 
 networkPolicy:
-  enabled: true 
+  enabled: true
   egressRules:
     customRules: # host port could be basically anything - strimzi sets node-ports where it can
       - {}

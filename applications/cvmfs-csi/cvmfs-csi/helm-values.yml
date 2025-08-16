@@ -38,9 +38,9 @@ controllerplugin:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
         nodeSelectorTerms:
-        - matchExpressions:
-          - key: {{ kubernetes_labels.node_worker }}
-            operator: Exists
+          - matchExpressions:
+              - key: {{ kubernetes_labels.node_worker }}
+                operator: Exists
 
 nodeplugin:
   automount:
@@ -79,6 +79,6 @@ nodeplugin:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
         nodeSelectorTerms:
-        - matchExpressions:
-          - key: {{ kubernetes_labels.node_worker }}
-            operator: Exists
+          - matchExpressions:
+              - key: {{ kubernetes_labels.node_worker }}
+                operator: Exists

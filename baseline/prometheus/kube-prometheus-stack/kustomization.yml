@@ -11,14 +11,14 @@ resources:
 patches:
   - target:
       kind: ConfigMap
-     # not useful dashboards for us
-      name: '(kube-prometheus-stack-grafana-overview|kube-prometheus-stack-nodes-aix|kube-prometheus-stack-nodes-darwin)'
+      # not useful dashboards for us
+      name: "(kube-prometheus-stack-grafana-overview|kube-prometheus-stack-nodes-aix|kube-prometheus-stack-nodes-darwin)"
     patch: |-
       - op: remove
         path: /metadata/labels/{{ grafana_dashboard_label_name }}
   - target:
       kind: ConfigMap
-      name: '(kube-prometheus-stack-prometheus|kube-prometheus-stack-alertmanager-overview)'
+      name: "(kube-prometheus-stack-prometheus|kube-prometheus-stack-alertmanager-overview)"
     patch: |-
       - op: replace
         path: /metadata/annotations/{{ grafana_dashboard_folder_annotation }}

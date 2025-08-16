@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - helm-rendered.yaml
 
-namespace: '{{ kubernetes_dashboard.namespace }}'
+namespace: "{{ kubernetes_dashboard.namespace }}"
 
 labels:
   - pairs:

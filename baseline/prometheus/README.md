@@ -27,12 +27,12 @@ spec:
   metricsPath: /federate
   params:
     match[]:
-    - '{__name__=~".+"}[1m]'
+      - '{__name__=~".+"}[1m]'
   scrapeInterval: 1m
   scrapeTimeout: 1m
   staticConfigs:
-  - labels:
-      cluster: np04-daq
-    targets:
-    - np04-srv-016.cern.ch:31093
+    - labels:
+        cluster: np04-daq
+      targets:
+        - np04-srv-016.cern.ch:31093
 ```

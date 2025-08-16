@@ -26,6 +26,9 @@ args:
   - name: user_passwords
     default: run4evah
 
+  - name: oracle_password
+    default: run4evah # only matters for np04-services
+
   - name: elisa_password
     default: run4evah # only matters for np04-services
 
@@ -63,6 +66,7 @@ targets:
     args:
       user_passwords: NULL
       elisa_password: NULL
+      oracle_password: NULL
 
   - name: np04-daq
     context: kubernetes-admin@np04-daq

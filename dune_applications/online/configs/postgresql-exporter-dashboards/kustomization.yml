@@ -14,4 +14,4 @@ commonAnnotations:
 
 configMapGenerator:
   - name: postgres-exporter-overview-dashboard
-    files: [ dashboards/postgres-overview.json ]
+    files: [dashboards/postgres-overview.json]

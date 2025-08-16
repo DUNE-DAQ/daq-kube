@@ -10,11 +10,11 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - name: service
-    nodePort: 31002
-    port: 8086
-    protocol: TCP
-    targetPort: api
+    - name: service
+      nodePort: 31002
+      port: 8086
+      protocol: TCP
+      targetPort: api
   selector:
     app.kubernetes.io/instance: opmon-influxdb
     app.kubernetes.io/name: influxdb

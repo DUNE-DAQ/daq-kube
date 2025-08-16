@@ -93,8 +93,8 @@ envoy:
 
 prometheus:
   enabled: true
-  controllerGroupMetrics: 
-  - all
+  controllerGroupMetrics:
+    - all
   serviceMonitor:
     enabled: true
     interval: "30s"
@@ -120,10 +120,10 @@ hubble:
       - flow
       - icmp
       - flows-to-world
-#      - httpV2:exemplars=true
-#      - labelsContext=source_ip,source_namespace,source_workload,destination_ip,destination_namespace,destination_workload,traffic_direction
-#      - kafka_requests_total
-#      - kafka_request_duration_seconds
+    #      - httpV2:exemplars=true
+    #      - labelsContext=source_ip,source_namespace,source_workload,destination_ip,destination_namespace,destination_workload,traffic_direction
+    #      - kafka_requests_total
+    #      - kafka_request_duration_seconds
     serviceMonitor:
       enabled: true
       interval: "30s"
@@ -161,15 +161,15 @@ hubble:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
-          - matchExpressions:
-            - key: {{ kubernetes_labels.node_worker }}
-              operator: Exists
+            - matchExpressions:
+                - key: {{ kubernetes_labels.node_worker }}
+                  operator: Exists
       podAffinity: # copied from helm chart
         requiredDuringSchedulingIgnoredDuringExecution:
-        - topologyKey: kubernetes.io/hostname
-          labelSelector:
-            matchLabels:
-              k8s-app: cilium
+          - topologyKey: kubernetes.io/hostname
+            labelSelector:
+              matchLabels:
+                k8s-app: cilium
     prometheus:
       enabled: true
       serviceMonitor:
@@ -203,9 +203,9 @@ hubble:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
-          - matchExpressions:
-            - key: {{ kubernetes_labels.node_worker }}
-              operator: Exists
+            - matchExpressions:
+                - key: {{ kubernetes_labels.node_worker }}
+                  operator: Exists
 
 operator:
   enabled: true

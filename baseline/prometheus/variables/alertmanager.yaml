@@ -23,9 +23,9 @@ alertmanagers:
         cpu: 50m
         memory: 128M
     affinity:
-     nodeAffinity:
-       requiredDuringSchedulingIgnoredDuringExecution:
-         nodeSelectorTerms:
-         - matchExpressions:
-           - key: {{ kubernetes_labels.node_worker }}
-             operator: Exists
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+            - matchExpressions:
+                - key: {{ kubernetes_labels.node_worker }}
+                  operator: Exists

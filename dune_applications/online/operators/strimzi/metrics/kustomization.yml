@@ -1,7 +1,7 @@
 ---
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-    
+
 namespace: {{ strimzi.namespace }}
 
 resources:
@@ -14,7 +14,6 @@ resources:
   #- prometheus-rules/prometheus-mirrormaker2-rules.yaml
   - prometheus-rules/prometheus-strimzi-cluster-operator-rules.yaml
   - prometheus-rules/prometheus-strimzi-entity-operator-rules.yaml
-
 
 patches:
   - target:

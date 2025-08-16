@@ -11,11 +11,11 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - name: https
-    port: 443
-    protocol: TCP
-    targetPort: https
-    nodePort: 31001
+    - name: https
+      port: 443
+      protocol: TCP
+      targetPort: https
+      nodePort: 31001
   selector:
     app.kubernetes.io/component: kubernetes-dashboard
     app.kubernetes.io/instance: kubernetes-dashboard

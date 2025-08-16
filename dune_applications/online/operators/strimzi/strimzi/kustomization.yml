@@ -10,8 +10,8 @@ resources:
 patches:
   - target:
       kind: ConfigMap
-     # not useful dashboards for us, some dashboards are left in for possible use later on
-      name: '(strimzi-kafka-bridge|strimzi-kafka-connect|strimzi-kafka-mirror-maker-2|strimzi-kafka-oauth|strimzi-zookeeper)'
+      # not useful dashboards for us, some dashboards are left in for possible use later on
+      name: "(strimzi-kafka-bridge|strimzi-kafka-connect|strimzi-kafka-mirror-maker-2|strimzi-kafka-oauth|strimzi-zookeeper)"
     patch: |-
       - op: remove
         path: /metadata/labels/{{ grafana_dashboard_label_name }}
