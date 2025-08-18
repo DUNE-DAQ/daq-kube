@@ -57,6 +57,7 @@ targets:
 
   - name: iceberg-services
     discriminator: "iceberg-daq-pocket"
+    context: kind-pocketdune
     args:
       inside_kind: true
       user_passwords: NULL

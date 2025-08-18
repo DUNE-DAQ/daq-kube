@@ -9,6 +9,14 @@ resources:
 
 patches:
   - target:
+      kind: Namespace
+    patch: |-
+      $patch: delete
+      kind: Kustomization
+      metadata:
+        name: DOES NOT MATTER
+
+  - target:
       group: apps
       version: v1
       kind: Deployment
@@ -16,6 +24,15 @@ patches:
       - op: replace
         path: /spec/template/spec/containers/0/image
         value: {{ dune_online.unified_microservices.image }}:{{ dune_online.unified_microservices.tag }}
+      - op: replace
+        path: /spec/template/spec/affinity/nodeAffinity/requiredDuringSchedulingIgnoredDuringExecution/nodeSelectorTerms/0/matchExpressions/0/key
+        value: {{ kubernetes_labels.node_worker }}
+
+  - target:
+      group: apps
+      version: v1
+      kind: Deployment
+    patch: |-
       - op: replace
         path: /spec/template/spec/containers/0/env/1/value
         value: {{ dune_online.kafka.name}}-kafka-bootstrap.{{ dune_online.kafka.namespace }}.svc:9092
@@ -38,13 +55,3 @@ patches:
       - op: replace
         path: /spec/template/spec/containers/0/env/9/valueFrom/secretKeyRef/name
         value: {{ dune_online_ers.database.postgresql.deployment }}-{{ dune_online_ers.database.postgresql.owner }}-password
-      - op: replace
-        path: /spec/template/spec/affinity/nodeAffinity/requiredDuringSchedulingIgnoredDuringExecution/nodeSelectorTerms/0/matchExpressions/0/key
-        value: {{ kubernetes_labels.node_worker }}
-  - target:
-      kind: Namespace
-    patch: |-
-      $patch: delete
-      kind: Kustomization
-      metadata:
-        name: DOES NOT MATTER

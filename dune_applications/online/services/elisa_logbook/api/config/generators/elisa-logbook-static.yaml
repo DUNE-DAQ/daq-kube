@@ -1,0 +1,10 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: elisa-logbook-static
+  namespace: {{ external_secrets.lookup_namespace }}
+type: kubernetes.io/basic-auth
+stringData:
+  username: {{ dune_online.elisa_logbook.username }}
+  password: "{{ dune_online.elisa_logbook.password }}"

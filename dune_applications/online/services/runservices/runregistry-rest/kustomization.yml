@@ -9,6 +9,14 @@ resources:
 
 patches:
   - target:
+      kind: Namespace
+    patch: |-
+      $patch: delete
+      kind: Kustomization
+      metadata:
+        name: DOES NOT MATTER
+
+  - target:
       group: apps
       version: v1
       kind: Deployment
@@ -17,15 +25,14 @@ patches:
         path: /spec/template/spec/containers/0/image
         value: {{ dune_online.unified_microservices.image }}:{{ dune_online.unified_microservices.tag }}
       - op: replace
-        path: /spec/template/spec/containers/0/env/1/valueFrom/secretKeyRef/name
-        value: {{ dune_online_runservices.database.postgresql.deployment }}-{{ dune_online_runservices.database.postgresql.owner }}-password
-      - op: replace
         path: /spec/template/spec/affinity/nodeAffinity/requiredDuringSchedulingIgnoredDuringExecution/nodeSelectorTerms/0/matchExpressions/0/key
         value: {{ kubernetes_labels.node_worker }}
+
   - target:
-      kind: Namespace
+      group: apps
+      version: v1
+      kind: Deployment
     patch: |-
-      $patch: delete
-      kind: Kustomization
-      metadata:
-        name: DOES NOT MATTER
+      - op: replace
+        path: /spec/template/spec/containers/0/env/1/valueFrom/secretKeyRef/name
+        value: {{ dune_online_runservices.database.postgresql.deployment }}-{{ dune_online_runservices.database.postgresql.owner }}-password

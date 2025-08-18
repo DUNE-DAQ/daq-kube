@@ -9,3 +9,11 @@ dune_online:
   connection_service:
     image: ghcr.io/dune-daq/connectivityserver
     tag: "v1.2.0" # note this must always be a quoted string!
+  elisa_logbook: # needs to be defined here so we can use in deployment templates
+    namespace: elisa-logbook
+    username: rcpd
+    password: {{ args.elisa_password }}
+    hardware_types:
+      - npvd
+      - pdsp
+      - pddp

@@ -8,24 +8,18 @@ deployments:
 
   - barrier: true
 
-{% for thishardware in dune_online.hardware_types %}
-# this will render the files, so then add a third step to kustomize and load them?
-  - path: elisa_logbook
+{% for thishardware in dune_online.elisa_logbook.hardware_types %}
+  - path: elisa_logbook_api
     vars:
       - values:
-          deploymentname: elisa-logbook-{{ thishardware }}
           thishardware: {{ thishardware }}
           logbooktype: production
 
   - path: elisa_logbook_nodeports
     vars:
       - values:
-          deploymentname: elisa-logbook-{{ thishardware }}
           thishardware: {{ thishardware }}
           logbooktype: production
           baseport: 3190
           service_count: {{ loop.index0 }}
 {% endfor %}
-
-vars:
-  - file: variables/elisa_logbook.yaml
