@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: postgres-backup-cronjob-{{ dune_online_ers.database.postgresql.deployment }}
+  name: postgres-backup-{{ dune_online_ers.database.postgresql.deployment }}
   namespace: {{ dune_online_ers.namespace }}
 spec:
   schedule: "0 4 * * *"  # Run daily at 4 AM

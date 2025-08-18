@@ -4,6 +4,10 @@ kind: Kustomization
 resources:
   - helm-rendered.yaml
 
+metadata:
+  annotations:
+    kluctl.io/wait-readiness: "true"
+
 labels:
   - pairs:
       app.kubernetes.io/instance: cilium

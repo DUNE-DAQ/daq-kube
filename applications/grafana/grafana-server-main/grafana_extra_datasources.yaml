@@ -9,5 +9,5 @@ metadata:
     {{ grafana_datasource_label_name }}: "{{ grafana_datasource_label_value }}"
 stringData:
    grafana-extra-datasource-{{ thisone }}.yaml: |-
-     {{ grafana_extra_datasources[thisone] }}
+     {{ grafana.extra_datasources[thisone] }}
 {% endfor %}

@@ -1,0 +1,11 @@
+---
+deployments:
+  - path: generators
+
+  - barrier: true
+    message: Ensure all generators are loaded
+
+  - path: secrets
+
+  - barrier: true
+    message: Ensure all secrets are generated

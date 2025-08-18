@@ -25,7 +25,6 @@ deployments:
 
 {% if with_cilium %}
   - include: cilium
-    waitReadiness: true
     tags:
       - cni
     skipDeleteIfTags: true
