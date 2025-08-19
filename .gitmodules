@@ -47,3 +47,6 @@
 	path = .submodules/prometheus-postgres_exporter
 	url = https://github.com/prometheus-community/postgres_exporter.git
 	shallow = true
+[submodule "lstn-grafana-dashboards-postgresql"]
+	path = .submodules/lstn-grafana-dashboards-postgresql
+	url = https://github.com/lstn/misc-grafana-dashboards.git
