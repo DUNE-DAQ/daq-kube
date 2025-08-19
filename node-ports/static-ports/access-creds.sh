@@ -1,6 +1,5 @@
 #!/bin/bash
 
-echo "FIXME: query the cluster to see what we loaded?"
 echo "--------------------------------------------------"
 echo "Node Ports deployed:"
 kubectl get svc --all-namespaces -o jsonpath='{range .items[?(@.spec.type=="NodePort")]}{.metadata.name}.{.metadata.namespace}.svc is : {range .spec.ports[*]}{.nodePort}{"\n"}{end}{end}' | sort
