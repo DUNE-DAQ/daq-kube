@@ -2,19 +2,13 @@
 automountStorageClass:
   create: true
 
-extraConfigMaps:
-  cvmfs-csi-default-local:
-    # https://github.com/cvmfs-contrib/cvmfs-csi/issues/158
-    default.local: |
-      CVMFS_HTTP_PROXY="{{ cvmfs_csi.http_proxy }}"
-      CVMFS_QUOTA_LIMIT=1000 # must match .Values.cache.local.cvmfsQuotaLimit
-      CVMFS_CACHE_BASE=/cvmfs-localcache # must match .Values.cache.local.location
+cmvfsHttpProxy: "{{ cvmfs_csi.http_proxy }}"
 
 cache:
   local:
     volumeSpec:
       hostPath:
-        path: /var/local-path-provisioner/storageClass-cvmfs.csi.cern.ch/
+        path: {{ node_local_path_base }}/storageClass-cvmfs.csi.cern.ch/
     cvmfsQuotaLimit: 1000 # TODO: pick a value for this, currently guess work
 
 controllerplugin:

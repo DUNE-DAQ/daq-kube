@@ -52,6 +52,7 @@ vars:
   - file: variables/defaults/grafana_labels.yaml
   - file: variables/defaults/kubernetes_labels.yaml
   - file: variables/defaults/monitoring.yaml
+  - file: variables/defaults/node_local_path_base.yaml
   - file: variables/defaults/prometheus_labels.yaml
   - file: variables/defaults/prometheus_scrape_configs.yaml
   - file: variables/defaults/smtp_server.yaml
