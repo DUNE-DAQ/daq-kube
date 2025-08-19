@@ -50,3 +50,4 @@
 [submodule "lstn-grafana-dashboards-postgresql"]
 	path = .submodules/lstn-grafana-dashboards-postgresql
 	url = https://github.com/lstn/misc-grafana-dashboards.git
+	shallow = true
