@@ -1,5 +1,5 @@
 helmChart:
-  chartVersion: 22.0.2
+  chartVersion: 23.0.0
   namespace: kube-system
   output: helm-rendered.yaml
   releaseName: prometheus-operator-crds
