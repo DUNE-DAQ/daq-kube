@@ -16,7 +16,5 @@ deployments:
         name: certificates.cert-manager.io
       - kind: CustomResourceDefinition
         name: certificaterequests.cert-manager.io
-      - kind: MutatingWebhookConfiguration
-        name: cert-manager-webhook
 
   - path: cert-manager-ca
