@@ -1,11 +1,11 @@
 {% if not args.user_passwords %}
-{{ fail("argument user_passwords is required, set -a user_passwords or args from file") }}
+{{ fail("argument user_passwords is required, set '-a user_passwords=' or args from file") }}
 {% endif %}
 
 {% if not args.elisa_password %}
-{{ fail("argument elisa_password is required, set -a elisa_password or args from file") }}
+{{ fail("argument elisa_password is required, set '-a elisa_password=' or args from file") }}
 {% endif %}
 
 {% if not args.oracle_password %}
-{{ fail("argument oracle_password is required, set -a oracle_password or args from file") }}
+{{ fail("argument oracle_password is required, set '-a oracle_password=' or args from file") }}
 {% endif %}
