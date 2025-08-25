@@ -1,15 +1,3 @@
 ---
 deployments:
-  - path: namespace
-    alwaysDeploy: true
-
-  - barrier: true
-    message: We need a namespace to deploy into
-    waitReadinessObjects:
-      - kind: Namespace
-        name: "{{ cilium.namespace }}"
-
   - path: cilium
-
-  - barrier: true
-    message: CNI needs to settle so we can allocate IP addresses

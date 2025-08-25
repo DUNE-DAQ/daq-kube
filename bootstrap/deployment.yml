@@ -6,6 +6,9 @@ deployments:
   - path: debug
     alwaysDeploy: true
 
+  - path: common-namespaces
+    alwaysDeploy: true
+
   - path: prometheus-operator-crds
     alwaysDeploy: true
     tags:
@@ -15,8 +18,14 @@ deployments:
       - prometheus
       - prometheus-operator
 
+  - path: cert-manager-crds
+    alwaysDeploy: true
+    tags:
+      - pki
+      - tls
+
   - barrier: true
-    message: Prometheus CRDs need to settle
+    message: Prometheus and CertManager CRDs need to settle
 
   - include: cert-manager
     tags:
@@ -31,7 +40,7 @@ deployments:
 {% endif %}
 
   - barrier: true
-    message: some cluster bootstrap services need to settle before storage is discovered
+    message: some cluster bootstrap services need to settle right now or else nothing works
 
   - include: local-storage
     tags:
