@@ -8,5 +8,15 @@ deployments:
   - path: cert-manager
     waitReadiness: false
 
+  - barrier: true
+    waitReadinessObjects:
+      - kind: CustomResourceDefinition
+        name: clusterissuers.cert-manager.io
+      - kind: CustomResourceDefinition
+        name: certificates.cert-manager.io
+      - kind: CustomResourceDefinition
+        name: certificaterequests.cert-manager.io
+      - kind: MutatingWebhookConfiguration
+        name: cert-manager-webhook
+
   - path: cert-manager-ca
-    waitReadiness: false

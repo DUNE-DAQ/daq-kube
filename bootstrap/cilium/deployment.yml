@@ -3,6 +3,9 @@ deployments:
   - path: namespace
 
   - barrier: true
+    waitReadinessObjects:
+      - kind: Namespace
+        name: "{{ cilium.namespace }}"
 
   - path: cilium
 
