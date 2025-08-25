@@ -2,10 +2,9 @@
 deployments:
   - path: namespace
     alwaysDeploy: true
-    tags:
-      - secrets
 
   - barrier: true
+    message: We need a namespace to deploy into
 
   - path: external-secrets
     waitReadiness: true

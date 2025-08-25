@@ -4,11 +4,16 @@ deployments:
     alwaysDeploy: true
 
   - barrier: true
+    message: We need a namespace to deploy into
+    waitReadinessObjects:
+      - kind: Namespace
+        name: "{{ certmanager.namespace }}"
 
   - path: cert-manager
     waitReadiness: false
 
   - barrier: true
+    message: We need the cert-manager CRDs to continue
     waitReadinessObjects:
       - kind: CustomResourceDefinition
         name: clusterissuers.cert-manager.io
