@@ -40,3 +40,6 @@ deployments:
 
   - barrier: true
     message: bootstrap pods need to settle
+
+vars:
+  - file: variables/cilium.yaml
