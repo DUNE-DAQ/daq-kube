@@ -148,7 +148,6 @@ hubble:
     enabled: true
     podDisruptionBudget:
       enabled: true
-      minAvailable: 0
       unhealthyPodEvictionPolicy: AlwaysAllow
     resources: # this is guess work
       limits:
@@ -181,7 +180,6 @@ hubble:
     enabled: true
     podDisruptionBudget:
       enabled: true
-      minAvailable: 0
       unhealthyPodEvictionPolicy: AlwaysAllow
     backend:
       resources: # this is guess work
@@ -218,7 +216,6 @@ operator:
       memory: 256Mi
   podDisruptionBudget:
     enabled: true
-    minAvailable: 1
     unhealthyPodEvictionPolicy: AlwaysAllow
   pprof:
     enabled: true
