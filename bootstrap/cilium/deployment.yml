@@ -1,5 +1,9 @@
 ---
 deployments:
+  - path: namespace
+
+  - barrier: true
+
   - path: cilium
 
   - barrier: true
