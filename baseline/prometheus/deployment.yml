@@ -2,14 +2,9 @@
 deployments:
   - path: namespace
     alwaysDeploy: true
-    tags:
-      - metrics
-      - monitoring
-      - alertmanager
-      - prometheus
-      - prometheus-operator
 
   - barrier: true
+    message: We need a namespace to deploy into
 
   - path: kube-prometheus-stack
     waitReadiness: true

@@ -1,12 +1,15 @@
 ---
 deployments:
   - path: namespace
+    alwaysDeploy: true
 
   - barrier: true
+    message: We need a namespace to deploy into
 
   - include: api
 
   - barrier: true
+    message: The elisa log book API needs to settle
 
 {% for thishardware in dune_online.elisa_logbook.hardware_types %}
   - path: elisa_logbook_api

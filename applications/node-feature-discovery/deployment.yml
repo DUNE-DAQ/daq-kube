@@ -4,6 +4,7 @@ deployments:
     alwaysDeploy: true
 
   - barrier: true
+    message: We need a namespace to deploy into
 
   - path: node-feature-discovery
 

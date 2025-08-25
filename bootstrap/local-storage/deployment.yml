@@ -2,10 +2,9 @@
 deployments:
   - path: namespace
     alwaysDeploy: true
-    tags:
-      - storage
 
   - barrier: true
+    message: We need a namespace to deploy into
 
   - path: local-path-provisioner
     tags:

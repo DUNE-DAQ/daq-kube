@@ -44,6 +44,7 @@ vars:
   - file: variables/check_required.yaml
   - file: variables/defaults/alertmanager_labels.yaml
   - file: variables/defaults/certmanager_settings.yaml
+  - file: variables/defaults/cilium.yaml
   - file: variables/defaults/cluster_info.yaml
   - file: variables/defaults/cvmfs_csi.yaml
   - file: variables/defaults/development_instance.yaml
