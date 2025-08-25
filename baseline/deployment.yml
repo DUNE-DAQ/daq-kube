@@ -1,10 +1,5 @@
 ---
 deployments:
-  - include: cert-manager-ca
-    tags:
-      - pki
-      - tls
-
   - include: metrics
     tags:
       - metrics
