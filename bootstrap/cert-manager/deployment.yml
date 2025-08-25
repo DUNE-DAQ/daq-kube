@@ -7,3 +7,6 @@ deployments:
 
   - path: cert-manager
     waitReadiness: false
+
+  - path: cert-manager-ca
+    waitReadiness: false
