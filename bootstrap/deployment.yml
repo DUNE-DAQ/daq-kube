@@ -6,6 +6,9 @@ deployments:
   - path: debug
     alwaysDeploy: true
 
+  - path: common-namespaces
+    alwaysDeploy: true
+
   - path: prometheus-operator-crds
     alwaysDeploy: true
     tags:
