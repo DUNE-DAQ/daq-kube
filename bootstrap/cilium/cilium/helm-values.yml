@@ -207,6 +207,7 @@ hubble:
 
 operator:
   enabled: true
+  rollOutPods: true
   resources: # this is guess work
     limits:
       cpu: 1000m
