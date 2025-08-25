@@ -33,7 +33,7 @@ deployments:
       - tls
 
 {% if with_cilium %}
-  - include: cilium
+  - path: cilium
     tags:
       - cni
     skipDeleteIfTags: true

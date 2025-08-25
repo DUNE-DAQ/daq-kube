@@ -1,4 +1,5 @@
 ---
 cilium:
   namespace: cilium-system
+  secrets_namespace: cilium-secrets
   replace_kube_proxy: false
