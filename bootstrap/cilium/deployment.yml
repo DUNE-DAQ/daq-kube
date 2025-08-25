@@ -1,6 +1,3 @@
 ---
 deployments:
   - path: cilium
-
-  - barrier: true
-    message: CNI needs to settle so we can allocate IP addresses

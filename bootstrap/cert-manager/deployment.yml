@@ -1,22 +1,5 @@
 ---
 deployments:
   - path: cert-manager
-    waitReadiness: false
-
-  - waitReadinessObjects:
-      - kind: Deployment
-        namespace: kube-system
-        name: cilium-operator
-
-  - barrier: true
-    message: We need the cert-manager CRDs to continue
-    waitReadiness: false
-    waitReadinessObjects:
-      - kind: CustomResourceDefinition
-        name: clusterissuers.cert-manager.io
-      - kind: CustomResourceDefinition
-        name: certificates.cert-manager.io
-      - kind: CustomResourceDefinition
-        name: certificaterequests.cert-manager.io
 
   - path: cert-manager-ca
