@@ -55,7 +55,7 @@ The `.kluctl.yaml` file lists the deployment targets we've configured. The `cont
 For example:
 
 ```shell
-kluctl deploy -t pocket
+kluctl deploy -t pocket --write-command-result=false
 ```
 
 or:
@@ -69,8 +69,10 @@ To see what targets are defined you can run `kluctl list-targets --only-names` t
 For example, to just deploy the `baseline` cluster services to `pocket`:
 
 ```shell
-kluctl deploy -t pocket-baseline
+kluctl deploy -t pocket-baseline --write-command-result=false
 ```
+
+NOTE: kluctl may emit an error `Secret "cr-daq-kube-c5ed57d4-9341-4c5e-95ac-ccc41b252359" is invalid: data: Too long: may not be more than 1048576 bytes`.  This can be ignored.
 
 ## Access to your cluster
 
