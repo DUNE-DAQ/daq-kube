@@ -5,6 +5,7 @@ metadata:
   name: "{{ cilium.namespace }}"
   annotations:
     kluctl.io/skip-delete-if-tags: "true"
+    cert-manager.io/disable-validation: "true"
   labels: # needs ebpf and other root powers
     pod-security.kubernetes.io/enforce: privileged
     pod-security.kubernetes.io/enforce-version: latest
