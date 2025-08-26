@@ -1,5 +1,0 @@
----
-deployments:
-  - path: cert-manager
-
-  - path: cert-manager-ca

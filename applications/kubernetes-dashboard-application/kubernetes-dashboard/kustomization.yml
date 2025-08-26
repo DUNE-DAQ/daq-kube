@@ -11,3 +11,4 @@ labels:
       app.kubernetes.io/component: kubernetes-dashboard
       app.kubernetes.io/instance: kubernetes-dashboard
     includeSelectors: true
+    includeTemplates: true
