@@ -80,7 +80,7 @@ resources: # this is guess work
    memory: 4Gi
  requests:
    cpu: 10m
-   memory: 256Mi
+   memory: 128Mi
 
 # try not to schedule on same node as alertmanager/prometheus
 affinity:
