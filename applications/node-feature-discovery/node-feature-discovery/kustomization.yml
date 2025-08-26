@@ -9,3 +9,4 @@ labels:
       app.kubernetes.io/component: node-feature-discovery
       app.kubernetes.io/instance: node-feature-discovery
     includeSelectors: true
+    includeTemplates: true

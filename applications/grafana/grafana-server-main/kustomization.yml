@@ -12,3 +12,4 @@ labels:
       app.kubernetes.io/component: {{ grafana.component_value }}
       app.kubernetes.io/instance: grafana-main
     includeSelectors: true
+    includeTemplates: true
