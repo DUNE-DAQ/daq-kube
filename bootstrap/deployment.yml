@@ -2,15 +2,19 @@
 deployments:
   - path: kube-system
     alwaysDeploy: true
+    skipDeleteIfTags: true
 
   - path: debug
     alwaysDeploy: true
+    skipDeleteIfTags: true
 
   - path: common-namespaces
     alwaysDeploy: true
+    skipDeleteIfTags: true
 
   - path: prometheus-operator-crds
     alwaysDeploy: true
+    skipDeleteIfTags: true
     tags:
       - metrics
       - monitoring
@@ -18,29 +22,23 @@ deployments:
       - prometheus
       - prometheus-operator
 
-  - path: cert-manager-crds
-    alwaysDeploy: true
-    tags:
-      - pki
-      - tls
-
   - barrier: true
-    message: Prometheus and CertManager CRDs need to settle
-
-  - include: cert-manager
-    tags:
-      - pki
-      - tls
+    message: CRDs need to settle
 
 {% if with_cilium %}
   - path: cilium
     tags:
       - cni
     skipDeleteIfTags: true
-{% endif %}
 
   - barrier: true
-    message: some cluster bootstrap services need to settle right now or else nothing works
+    message: If the CNI doesn't settle you can't launch any containers
+{% endif %}
+
+  - path: cert-manager
+    tags:
+      - pki
+      - tls
 
   - include: local-storage
     tags:
@@ -48,4 +46,16 @@ deployments:
       - storage
 
   - barrier: true
-    message: bootstrap pods need to settle
+    message: some cluster bootstrap services need to settle right now or else nothing works
+
+  - path: cert-manager-ca
+    skipDeleteIfTags: true
+    tags:
+      - pki
+      - tls
+
+  - barrier: true
+    message: Cluster CA(s) need to generate
+
+  - barrier: true
+    message: bootstrap need to settle
