@@ -5,6 +5,8 @@ deployments:
 
   - barrier: true
     message: We need a namespace to deploy into
+    waitReadinessObjects:
+      - kind: Namespace
 
   - path: cvmfs-csi
 
