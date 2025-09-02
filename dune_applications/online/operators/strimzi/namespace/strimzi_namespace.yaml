@@ -5,6 +5,7 @@ metadata:
   name: {{ strimzi.namespace }}
   annotations:
     kluctl.io/skip-delete-if-tags: "true"
+    kluctl.io/wait-readiness: "true"
   labels: # https://github.com/strimzi/strimzi-kafka-operator/issues/8425
     pod-security.kubernetes.io/enforce: restricted
     pod-security.kubernetes.io/enforce-version: latest

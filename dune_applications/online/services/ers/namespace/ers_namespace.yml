@@ -5,6 +5,7 @@ metadata:
   name: {{ dune_online_ers.namespace }}
   annotations:
     kluctl.io/skip-delete-if-tags: "true"
+    kluctl.io/wait-readiness: "true"
   labels: # unified dune microservice image uses root
     pod-security.kubernetes.io/enforce: baseline
     pod-security.kubernetes.io/enforce-version: latest

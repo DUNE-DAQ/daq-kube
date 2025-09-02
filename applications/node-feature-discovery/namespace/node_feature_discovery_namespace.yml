@@ -5,6 +5,7 @@ metadata:
   name: "{{ node_feature_discovery.namespace }}"
   annotations:
     kluctl.io/skip-delete-if-tags: "true"
+    kluctl.io/wait-readiness: "true"
   labels:
     pod-security.kubernetes.io/enforce: privileged # uses host features by design
     pod-security.kubernetes.io/enforce-version: latest

@@ -4,6 +4,7 @@ kind: Namespace
 metadata:
   annotations:
     kluctl.io/skip-delete-if-tags: "true"
+    kluctl.io/wait-readiness: "true"
   labels: # unified image runs as root :(
     pod-security.kubernetes.io/enforce: baseline
     pod-security.kubernetes.io/enforce-version: latest
