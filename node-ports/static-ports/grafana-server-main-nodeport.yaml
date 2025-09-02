@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app.kubernetes.io/instance: grafana-main
+    app.kubernetes.io/instance: grafana
     app.kubernetes.io/name: grafana
   name: grafana-server-main-nodeport
   namespace: monitoring
@@ -16,5 +16,5 @@ spec:
       targetPort: grafana
       nodePort: 31003
   selector:
-    app.kubernetes.io/instance: grafana-main
+    app.kubernetes.io/instance: grafana
     app.kubernetes.io/name: grafana
