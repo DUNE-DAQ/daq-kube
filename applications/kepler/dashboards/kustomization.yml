@@ -1,0 +1,19 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: {{ kepler.namespace }}
+
+generatorOptions:
+  disableNameSuffixHash: true
+  labels:
+    {{ grafana_dashboard_label_name }}: {{ grafana_dashboard_label_value }}
+
+commonAnnotations:
+  {{ grafana_dashboard_folder_annotation }}: Kubernetes
+
+configMapGenerator:
+  - name: kepler-default-dashboard
+    files:
+      - dashboards/dashboard.json
+

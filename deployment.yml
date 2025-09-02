@@ -15,7 +15,6 @@ deployments:
 
   - barrier: true
     message: Ensure baseline is loaded
-{% endif %}
 
 {% if args.with_applications %}
   - include: applications
@@ -34,6 +33,7 @@ deployments:
     tags:
       - services
       - nodeport
+{% endif %}
 {% endif %}
 {% endif %}
 

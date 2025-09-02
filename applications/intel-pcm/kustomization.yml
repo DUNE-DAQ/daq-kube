@@ -6,6 +6,12 @@ resources:
 
 patches:
   - target:
+      kind: Namespace
+    patch: |-
+      - op: add
+        path: /metadata/annotations/kluctl.io~1wait-readiness
+        value: "true"
+  - target:
       kind: PodMonitor
     patch: |-
       - op: add

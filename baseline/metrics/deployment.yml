@@ -3,6 +3,9 @@ deployments:
   - path: namespace
     alwaysDeploy: true
 
+  - barrier: true
+    message: We need a namespace to deploy into
+
   - path: metrics-server
     tags:
       - metrics
