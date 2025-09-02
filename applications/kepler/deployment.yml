@@ -1,0 +1,9 @@
+---
+deployments:
+  - path: namespace
+    alwaysDeploy: true
+
+  - path: kepler
+
+vars:
+  - file: variables/kepler.yaml

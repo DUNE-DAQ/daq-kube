@@ -1,0 +1,6 @@
+helmChart:
+  # https://github.com/sustainable-computing-io/kepler/issues/2302
+  path: ./kepler-0.10.2
+  namespace: "{{ kepler.namespace }}"
+  output: helm-rendered.yaml
+  releaseName: kepler

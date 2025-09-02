@@ -1,0 +1,13 @@
+---
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+serviceMonitor:
+  enabled: true
+  labels:
+    {{ prometheus_servicemonitor_label_name }}: {{ prometheus_servicemonitor_labels.system }}
