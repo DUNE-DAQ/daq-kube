@@ -5,6 +5,7 @@ metadata:
   name: {{ prometheus_operator_namespace }}
   annotations:
     kluctl.io/skip-delete-if-tags: "true"
+    kluctl.io/wait-readiness: "true"
   labels: # https://github.com/prometheus-operator/kube-prometheus/issues/1923
     pod-security.kubernetes.io/enforce: restricted
     pod-security.kubernetes.io/enforce-version: latest

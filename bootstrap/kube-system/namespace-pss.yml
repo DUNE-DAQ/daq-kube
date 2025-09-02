@@ -5,6 +5,7 @@ metadata:
   name: kube-system
   annotations:
     kluctl.io/skip-delete: "true"
+    kluctl.io/wait-readiness: "true"
   labels: # this needs unrestricted rights to work
     pod-security.kubernetes.io/enforce: privileged
     pod-security.kubernetes.io/enforce-version: latest

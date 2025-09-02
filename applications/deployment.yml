@@ -17,11 +17,18 @@ deployments:
     tags:
       - sriov
       - dpdk
+
   - path: intel-pcm
     tags:
-      - pcm
       - monitoring
       - metrics
+      - pcm
+
+  - include: kepler
+    tags:
+      - monitoring
+      - metrics
+      - power
 {% endif %}
 
   - barrier: true

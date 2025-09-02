@@ -5,6 +5,7 @@ metadata:
   name: "{{ local_path_provisioner.namespace }}"
   annotations:
     kluctl.io/skip-delete-if-tags: "true"
+    kluctl.io/wait-readiness: "true"
   labels: # needs local host path and chown as root
     pod-security.kubernetes.io/enforce: privileged
     pod-security.kubernetes.io/enforce-version: latest
