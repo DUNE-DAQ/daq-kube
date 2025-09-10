@@ -2,7 +2,6 @@ dune_online:
   kafka:
     namespace: kafka
     name: dune-daq
-    version: "4.0.0"
   unified_microservices:
     image: ghcr.io/dune-daq/microservices
     tag: "pddp" # note this must always be a quoted string!
