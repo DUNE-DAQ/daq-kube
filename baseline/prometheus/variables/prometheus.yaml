@@ -14,7 +14,7 @@ prometheis: # this is the plural of prometheus
     port: 9090
     portName: web
     replicas: 1
-    retention: 45d
+    retention: 145d
     alertmanagers:
       - namespace: {{ alertmanagers.main.namespace }}
         name: {{ alertmanagers.main.serviceName }}
@@ -53,8 +53,8 @@ prometheis: # this is the plural of prometheus
           accessModes: ["ReadWriteOnce"]
           resources:
             requests:
-              storage: 55Gi # this is guess work
-    retentionSize: 50GB
+              storage: 100Gi # this is guess work
+    retentionSize: 90GB
 
     # these selectors should probably be set to rational filters
     serviceMonitorNamespaceSelector: {}
