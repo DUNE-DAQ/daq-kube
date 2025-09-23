@@ -15,6 +15,7 @@
 #  localRedirectPolicy
 #  autoDirectNodeRoute
 #  BGP
+#  endpointRoutes
 #  routingMode
 #  cilium-NodePort
 #  cilium-wellKnownIdentities
@@ -65,6 +66,7 @@ bpf:
     enabled: true
   preallocateMaps: true
   tproxy: true
+
 bpfClockProbe: true
 
 gatewayAPI:
@@ -135,6 +137,13 @@ hubble:
     labelValue: "{{ grafana_dashboard_label_value }}"
     annotations:
       "{{ grafana_dashboard_folder_annotation }}": Cilium
+  resources:
+    requests:
+      cpu: 50m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
   tls:
     auto:
       enabled: true
@@ -151,11 +160,11 @@ hubble:
       unhealthyPodEvictionPolicy: AlwaysAllow
     resources: # this is guess work
       limits:
-        cpu: 1500m
-        memory: 2Gi
+        cpu: 500m
+        memory: 512Mi
       requests:
         cpu: 50m
-        memory: 64Mi
+        memory: 128Mi
     affinity:
       nodeAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
@@ -184,16 +193,16 @@ hubble:
     backend:
       resources: # this is guess work
         limits:
-          cpu: 1500m
-          memory: 2Gi
+          cpu: 500m
+          memory: 512Mi
         requests:
-          cpu: 10m
+          cpu: 20m
           memory: 64Mi
     frontend:
       resources: # this is guess work
         limits:
-          cpu: 1500m
-          memory: 2Gi
+          cpu: 500m
+          memory: 512Mi
         requests:
           cpu: 10m
           memory: 64Mi
@@ -207,6 +216,7 @@ hubble:
 
 operator:
   enabled: true
+  priorityClassName: system-node-critical
   rollOutPods: true
   resources: # this is guess work
     limits:
@@ -234,6 +244,7 @@ operator:
     annotations:
       "{{ grafana_dashboard_folder_annotation }}": Cilium
 
+priorityClassName: system-node-critical
 nodeinit:
   enabled: true
   priorityClassName: system-node-critical
