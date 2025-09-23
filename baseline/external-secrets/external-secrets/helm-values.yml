@@ -42,6 +42,7 @@ certController:
 
 serviceMonitor:
   enabled: true
+  renderMode: alwaysRender
   additionalLabels:
     {{ prometheus_servicemonitor_label_name }}: {{ prometheus_servicemonitor_labels.system }}
 
