@@ -28,6 +28,8 @@ Switch to 'headlamp'
 
 trust-manager?
 
+cert-manager csi driver
+
 https://github.com/openshift/cluster-node-tuning-operator
 
 https://velero.io/
@@ -72,9 +74,6 @@ kubectl contexts
 vnc desktop?
 
 network policy for default charts
-
-Add kepler if useful. Nobody has actually asked for it yet....
-* https://github.com/sustainable-computing-io/kepler-helm-chart/issues/94
 
 https://artifacthub.io/packages/olm/community-operators/community-kubevirt-hyperconverged
 https://artifacthub.io/packages/krew/krew-index/virt
