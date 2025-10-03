@@ -1,5 +1,5 @@
 helmChart:
-  chartVersion: 0.20.1
+  chartVersion: 0.20.2
   namespace: '{{ external_secrets.namespace }}'
   output: helm-rendered.yaml
   releaseName: external-secrets
