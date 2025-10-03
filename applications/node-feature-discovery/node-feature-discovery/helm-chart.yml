@@ -1,7 +1,6 @@
 helmChart:
-  chartName: node-feature-discovery
-  chartVersion: 0.17.4
+  chartVersion: 0.18.0
   namespace: '{{ node_feature_discovery.namespace }}'
   output: helm-rendered.yaml
   releaseName: node-feature-discovery
-  repo: https://kubernetes-sigs.github.io/node-feature-discovery/charts
+  repo: oci://registry.k8s.io/nfd/charts/node-feature-discovery
