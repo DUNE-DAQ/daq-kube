@@ -1,5 +1,5 @@
 helmChart:
-  chartVersion: 0.18.0
+  chartVersion: 0.18.1
   namespace: '{{ node_feature_discovery.namespace }}'
   output: helm-rendered.yaml
   releaseName: node-feature-discovery
