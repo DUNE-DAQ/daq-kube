@@ -1,7 +1,7 @@
 helmChart:
   chartName: cert-manager
-  chartVersion: v1.18.2
-  namespace: "{{ certmanager.namespace }}"
+  chartVersion: v1.19.0
+  namespace: '{{ certmanager.namespace }}'
   output: helm-rendered.yaml
   releaseName: cert-manager
   repo: https://charts.jetstack.io
