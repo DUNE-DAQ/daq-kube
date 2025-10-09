@@ -26,9 +26,6 @@ kind: Kafka
 metadata:
   name: {{ dune_online.kafka.name }}
   namespace: {{ dune_online.kafka.namespace }}
-  annotations:
-    strimzi.io/kraft: enabled
-    strimzi.io/node-pools: enabled
 spec:
   entityOperator:
     topicOperator:
