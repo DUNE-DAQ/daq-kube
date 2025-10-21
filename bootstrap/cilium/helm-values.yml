@@ -61,7 +61,6 @@ pmtuDiscovery:
   enabled: true
 
 bpf:
-  datapathMode: netkit
   distributedLRU:
     enabled: true
   preallocateMaps: true
