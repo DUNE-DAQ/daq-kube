@@ -15,4 +15,4 @@ grafana:
 {% endif %}
 
 kubernetes_label:
-  worker: node-role.kubernetes.io/control-plane # my heart breaks!
+  node_worker: node-role.kubernetes.io/control-plane # my heart breaks!
