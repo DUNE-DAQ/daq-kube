@@ -1,6 +1,6 @@
 helmChart:
-  chartVersion: 0.11.2
-  namespace: "{{ kepler.namespace }}"
+  chartVersion: 0.11.3
+  namespace: '{{ kepler.namespace }}'
   output: helm-rendered.yaml
   releaseName: kepler
   repo: oci://quay.io/sustainable_computing_io/charts/kepler
