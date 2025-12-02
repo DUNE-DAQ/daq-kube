@@ -120,10 +120,6 @@ spec:
                  operator: Exists
 {% endif %}
   kafka:
-    resources:
-      requests: # this is guess work
-        cpu: 100m
-        memory: 1Gi
     template:
       pod:
         affinity:
