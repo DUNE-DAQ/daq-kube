@@ -1,5 +1,5 @@
 ---
-apiVersion: kafka.strimzi.io/v1beta2
+apiVersion: kafka.strimzi.io/v1
 kind: KafkaNodePool
 metadata:
   name: {{ dune_online.kafka.pool }}
@@ -12,16 +12,20 @@ spec:
     - controller
     - broker
   storage:
-    type: ephemeral # no persistance requested for kafka topics
+    type: jbod
+    volumes:
+      - id: 0
+        type: ephemeral # no persistance requested for kafka topics
+        kraftMetadata: shared
   resources:
     requests:
       memory: 1Gi
       cpu: 200m
     limits:
       memory: 64Gi
-      cpu: "12"
+      cpu: 12
 ---
-apiVersion: kafka.strimzi.io/v1beta2
+apiVersion: kafka.strimzi.io/v1
 kind: Kafka
 metadata:
   name: {{ dune_online.kafka.name }}
@@ -52,10 +56,10 @@ spec:
            - weight: 50
              preference:
               matchExpressions:
-              - key: "kafka.strimzi.io/name"
+              - key: kafka.strimzi.io/name
                 operator: In
                 values:
-                - "strimzi-cluster-operator"
+                - strimzi-cluster-operator
            requiredDuringSchedulingIgnoredDuringExecution:
              nodeSelectorTerms:
              - matchExpressions:
@@ -79,7 +83,7 @@ spec:
            - weight: 50
              preference:
               matchExpressions:
-              - key: "kafka.strimzi.io/cluster"
+              - key: kafka.strimzi.io/cluster
                 operator: In
                 values:
                 - {{ dune_online.kafka.name }}
@@ -128,7 +132,7 @@ spec:
             - weight: 50
               preference:
                 matchExpressions:
-                - key: "kafka.strimzi.io/operator"
+                - key: kafka.strimzi.io/operator
                   operator: NotIn
                   values:
                   - "true"
@@ -144,26 +148,29 @@ spec:
         kafka.root.logger.level: WARN
 {% endif %}
     jvmOptions: # Tuning suggest 8Gi max?
-      -Xms: 1024m
-      -Xmx: 8192m
+      "-Xms": 1024m
+      "-Xmx": 8192m
     listeners:
       - name: plain
         port: 9092
         type: internal
         tls: false
         configuration:
+          createBootstrapService: true
           useServiceDnsDomain: true
       - name: tls
         port: 9093
         type: internal
         tls: true
         configuration:
+          createBootstrapService: true
           useServiceDnsDomain: true
       - name: external
         port:  9094
         type: nodeport
         tls: false
         configuration:
+          createBootstrapService: true
           bootstrap:
             nodePort: 30092
           brokers:
@@ -176,7 +183,7 @@ spec:
 {% endfor %}
     config:
       auto.create.topics.enable: true
-      log.cleanup.policy: "delete" # Cannot use 'compact' due to empty key in our data format
+      log.cleanup.policy: delete # Cannot use 'compact' due to empty key in our data format
       log.retention.bytes: 6442450944 # no default upper size limit, set to 6Gi
 
       message.max.bytes: 402653184 # if you change this you need to review the kafka docs
