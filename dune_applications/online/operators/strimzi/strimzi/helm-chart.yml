@@ -1,6 +1,6 @@
 helmChart:
-  chartVersion: 0.49.0
-  namespace: "{{ strimzi.namespace }}"
+  chartVersion: 0.49.1
+  namespace: '{{ strimzi.namespace }}'
   output: helm-rendered.yaml
   releaseName: strimzi-operator
   repo: oci://quay.io/strimzi-helm/strimzi-kafka-operator
