@@ -1,7 +1,7 @@
 helmChart:
-  chartVersion: 0.26.1
+  chartVersion: 0.27.0
   namespace: '{{ cnpg.namespace }}'
   output: helm-rendered.yaml
   releaseName: cnpg
   repo: oci://ghcr.io/cloudnative-pg/charts/cloudnative-pg
-  updateConstraints: ~0.26.x
+  updateConstraints: ~0.27.x
