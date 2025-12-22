@@ -51,6 +51,11 @@ spec:
                     app.kubernetes.io/component: microsocks
                 topologyKey: "kubernetes.io/hostname"
       automountServiceAccountToken: false
+{% if inside_kind %}
+      hostUsers: true
+{% else %}
+      hostUsers: false
+{% endif %}
       containers:
         - image: ghcr.io/dune-daq/microsocks:latest
           imagePullPolicy: Always
