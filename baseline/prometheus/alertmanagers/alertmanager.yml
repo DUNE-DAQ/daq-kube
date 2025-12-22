@@ -10,6 +10,11 @@ metadata:
     {{ alertmanager_config_label_name }}: {{ alertmanagers[thisone].name }}
 spec:
   replicas: {{ alertmanagers[thisone].replicas }}
+{% if inside_kind %}
+  hostUsers: true
+{% else %}
+  hostUsers: false
+{% endif %}
   # https://github.com/prometheus-operator/prometheus-operator/issues/5519
   securityContext:
     runAsNonRoot: true

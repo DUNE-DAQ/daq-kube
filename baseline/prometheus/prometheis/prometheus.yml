@@ -19,7 +19,11 @@ spec:
   - name: prometheus
     startupProbe:
       failureThreshold: 300
-
+{% if inside_kind %}
+  hostUsers: true
+{% else %}
+  hostUsers: false
+{% endif %}
   # https://github.com/prometheus-operator/prometheus-operator/issues/5519
   securityContext:
     runAsNonRoot: true

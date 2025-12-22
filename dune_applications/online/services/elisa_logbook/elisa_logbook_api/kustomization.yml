@@ -27,6 +27,13 @@ patches:
       - op: replace
         path: /spec/template/spec/affinity/nodeAffinity/requiredDuringSchedulingIgnoredDuringExecution/nodeSelectorTerms/0/matchExpressions/0/key
         value: {{ kubernetes_labels.node_worker }}
+      - op: add
+        path: /spec/template/spec/hostUsers
+{% if inside_kind %}
+        value: true
+{% else %}
+        value: false
+{% endif %}
 
   - target:
       group: apps
@@ -36,6 +43,20 @@ patches:
       - op: replace
         path: /metadata/name
         value: elisa-logbook-{{ thishardware }}
+      - op: replace
+        path: /metadata/labels/elisa-logbook-hardware
+        value: {{ thishardware }}
+      - op: replace
+        path: /spec/selector/matchLabels/elisa-logbook-hardware
+        value: {{ thishardware }}
+      - op: replace
+        path: /spec/template/metadata/labels/elisa-logbook-hardware
+        value: {{ thishardware }}
+      - op: remove
+        path: /spec/template/spec/containers/0/env/1/valueFrom
+      - op: add
+        path: /spec/template/spec/containers/0/env/1/value
+        value: {{ thishardware }}
 
   - target:
       group: apps
@@ -51,29 +72,3 @@ patches:
       - op: replace
         path: /spec/template/metadata/labels/elisa-logbook-type
         value: {{ logbooktype }}
-
-  - target:
-      group: apps
-      version: v1
-      kind: Deployment
-    patch: |-
-      - op: replace
-        path: /metadata/labels/elisa-logbook-hardware
-        value: {{ thishardware }}
-      - op: replace
-        path: /spec/selector/matchLabels/elisa-logbook-hardware
-        value: {{ thishardware }}
-      - op: replace
-        path: /spec/template/metadata/labels/elisa-logbook-hardware
-        value: {{ thishardware }}
-
-  - target:
-      group: apps
-      version: v1
-      kind: Deployment
-    patch: |-
-      - op: remove
-        path: /spec/template/spec/containers/0/env/1/valueFrom
-      - op: add
-        path: /spec/template/spec/containers/0/env/1/value
-        value: {{ thishardware }}
