@@ -42,8 +42,8 @@ prometheis: # this is the plural of prometheus
     # but the wal log is memory hungry
     resources:
       requests:
-        cpu: 200m
-        memory: 64Mi
+        cpu: 300m
+        memory: 512Mi
     logLevel: debug
     scrapeInterval: 30s
     scrapeTimeout: 25s

@@ -29,7 +29,7 @@ affinity:
 
 podDisruptionBudget:
   enabled: true
-  maxUnavailable: 0
+  minAvailable: 1
 #  unhealthyPodEvictionPolicy: AlwaysAllow
 
 #extraArgs:
@@ -48,7 +48,7 @@ webhook:
                 operator: Exists
   podDisruptionBudget:
     enabled: true
-    maxUnavailable: 0
+    minAvailable: 1
   deploymentAnnotations:
     "kluctl.io/is-ready": "true"
   resources: # this is guess work
@@ -71,7 +71,7 @@ cainjector:
                 operator: Exists
   podDisruptionBudget:
     enabled: true
-    maxUnavailable: 0
+    minAvailable: 1
   resources: # this is guess work
     limits:
       cpu: 200m

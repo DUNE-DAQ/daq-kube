@@ -19,26 +19,26 @@ webhook:
       renewBefore: "72h"
   podDisruptionBudget:
     enabled: true
-    maxUnavailable: 0
+    minAvailable: 1
   resources: # this is guess work
     limits:
       cpu: 100m
-      memory: 64Mi
+      memory: 96Mi
     requests:
       cpu: 10m
-      memory: 32Mi
+      memory: 64Mi
 
 certController:
   podDisruptionBudget:
     enabled: true
-    maxUnavailable: 0
+    minAvailable: 1
   resources: # this is guess work
     limits:
       cpu: 100m
-      memory: 64Mi
+      memory: 96Mi
     requests:
       cpu: 10m
-      memory: 32Mi
+      memory: 64Mi
 
 serviceMonitor:
   enabled: true
@@ -56,14 +56,14 @@ grafanaDashboard:
 resources: # this is guess work
   limits:
     cpu: 100m
-    memory: 64Mi
+    memory: 96Mi
   requests:
     cpu: 10m
-    memory: 32Mi
+    memory: 64Mi
 
 podDisruptionBudget:
   enabled: true
-  maxUnavailable: 0
+  minAvailable: 1
 
 global:
   affinity:
