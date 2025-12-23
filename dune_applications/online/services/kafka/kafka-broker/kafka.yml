@@ -19,7 +19,7 @@ spec:
         kraftMetadata: shared
   resources:
     requests:
-      memory: 1Gi
+      memory: 1280Mi
       cpu: 200m
     limits:
       memory: 64Gi
@@ -36,7 +36,7 @@ spec:
       resources: # this is guess work
         requests:
           cpu: 10m
-          memory: 64Mi
+          memory: 128Mi
         limits:
           cpu: 400m
           memory: 384Mi
@@ -44,7 +44,7 @@ spec:
       resources: # this is guess work
         requests:
           cpu: 10m
-          memory: 64Mi
+          memory: 128Mi
         limits:
           cpu: 400m
           memory: 384Mi
