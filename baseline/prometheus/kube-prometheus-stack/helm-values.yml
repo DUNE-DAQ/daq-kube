@@ -23,8 +23,7 @@ prometheusOperator:
       memory: 96Mi
   podDisruptionBudget:
     enabled: true
-    maxUnavailable: 0
-    minAvailable: NULL
+    minAvailable: 1
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:

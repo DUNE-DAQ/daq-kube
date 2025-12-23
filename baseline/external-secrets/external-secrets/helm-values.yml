@@ -19,7 +19,7 @@ webhook:
       renewBefore: "72h"
   podDisruptionBudget:
     enabled: true
-    maxUnavailable: 0
+    minAvailable: 1
   resources: # this is guess work
     limits:
       cpu: 100m
@@ -31,7 +31,7 @@ webhook:
 certController:
   podDisruptionBudget:
     enabled: true
-    maxUnavailable: 0
+    minAvailable: 1
   resources: # this is guess work
     limits:
       cpu: 100m
@@ -63,7 +63,7 @@ resources: # this is guess work
 
 podDisruptionBudget:
   enabled: true
-  maxUnavailable: 0
+  minAvailable: 1
 
 global:
   affinity:
