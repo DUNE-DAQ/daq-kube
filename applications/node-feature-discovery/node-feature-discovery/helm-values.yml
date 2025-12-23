@@ -1,6 +1,4 @@
 ---
-enableNodeFeatureApi: {{ node_feature_discovery.enableNodeFeatureApi }}
-
 prometheus:
   enable: true
   labels:

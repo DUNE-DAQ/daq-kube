@@ -12,6 +12,12 @@ spec:
     spec:
       template:
         spec:
+          automountServiceAccountToken: false
+{% if inside_kind %}
+          hostUsers: true
+{% else %}
+          hostUsers: false
+{% endif %}
           restartPolicy: OnFailure
           affinity:
             podAntiAffinity:
@@ -45,6 +51,24 @@ spec:
           containers:
           - name: postgres-backup
             image: docker.io/library/postgres:latest
+            resources:
+              limits:
+                memory: 4Gi
+                cpu: 1
+              requests:
+                memory: 256Mi
+                cpu: 100m
+            securityContext:
+              runAsUser: 10000
+              runAsGroup: 10000
+              runAsNonRoot: true
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              seccompProfile:
+                type: RuntimeDefault
+              capabilities:
+                drop:
+                  - ALL
             env:
             - name: DATABASE_URI
               valueFrom:
@@ -56,8 +80,6 @@ spec:
             - -c
             - |
               set -e
-              # Create backup directory if it doesn't exist
-              mkdir -p /backups
               # Generate timestamp for backup filename
               TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
               BACKUP_FILE="/backups/postgres_backup_${TIMESTAMP}.sql"
@@ -65,7 +87,7 @@ spec:
               echo "Backup file: ${BACKUP_FILE}"
               # Perform the database dump using the connection string
               pg_dump --verbose --no-password --create --file="${BACKUP_FILE}" "${DATABASE_URI}"
-              if [ $? -eq 0 ]; then
+              if [[ $? -eq 0 ]]; then
                 echo "Backup completed successfully"
                 # Compress the backup
                 gzip --best "${BACKUP_FILE}"
@@ -90,3 +112,5 @@ spec:
           - name: backup-storage
             persistentVolumeClaim:
               claimName: postgres-backup-ers
+          securityContext:
+            fsGroup: 10000

@@ -8,5 +8,3 @@ node_feature_discovery:
 
   worker:
     updateInterval: 2h
-
-  enableNodeFeatureApi: true

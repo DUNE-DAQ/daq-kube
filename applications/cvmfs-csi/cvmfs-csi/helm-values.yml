@@ -45,6 +45,14 @@ nodeplugin:
       requests:
         cpu: 10m
         memory: 16Mi
+  automountReconciler:
+    resources: # this is guess work
+      limits:
+        cpu: 300m
+        memory: 512Mi
+      requests:
+        cpu: 10m
+        memory: 16Mi
   plugin:
     resources: # this is guess work
       limits:

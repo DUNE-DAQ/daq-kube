@@ -40,6 +40,15 @@ prometheusOperator:
       requests:
         cpu: 10m
         memory: 16Mi
+  admissionWebhooks:
+    patch:
+      resources: # this is guess work
+        limits:
+          cpu: 500m
+          memory: 384Mi
+        requests:
+          cpu: 10m
+          memory: 64Mi
 
 ## do not deploy a default monitoring setup
 ## we will manage it seperately
