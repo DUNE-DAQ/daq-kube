@@ -127,7 +127,7 @@ sidecar: # this is guess work
       memory: 384Mi # initial maps are all in memory
     requests:
       cpu: 50m
-      memory: 16Mi
+      memory: 256Mi
 
   alerts:
     enabled: true
