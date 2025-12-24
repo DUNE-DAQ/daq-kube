@@ -9,13 +9,7 @@ resources:
 
 daemonset:
   nodeSelector:
-    requiredDuringSchedulingIgnoredDuringExecution:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: feature.node.kubernetes.io/cpu-cpuid.HYPERVISOR
-          operator: In
-          values:
-          - "false"
+    feature.node.kubernetes.io/cpu-cpuid.HYPERVISOR: "false"
 
 serviceMonitor:
   enabled: true
