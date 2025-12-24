@@ -45,6 +45,10 @@ cluster:
   name: "{{ target.name }}"
   id: {{ kubernetesClusterID }}
 
+cni:
+  install: true
+  binPath: /opt/cni/bin  # may need to change to /usr/libexec/cni
+
 # ipv4NativeRoutingCIDR is required for cluster mesh
 # but I don't know what to set it to...
 
