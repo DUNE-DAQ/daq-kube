@@ -10,13 +10,13 @@ metadata:
     {{ alertmanager_config_label_name }}: {{ alertmanagers[thisone].name }}
 spec:
   replicas: {{ alertmanagers[thisone].replicas }}
-{% if inside_kind %}
+  resources: {{ alertmanagers[thisone].resources | tojson }}
+  affinity: {{ alertmanagers[thisone].affinity | tojson }}
+
+  {% if alertmanagers[thisone].storage is defined %}
+  # need consistent IDs for storage
+  storage: {{ alertmanagers[thisone].storage | tojson }}
   hostUsers: true
-{% else %}
-  # TODO: Figure out how to make this `false`
-  hostUsers: true
-{% endif %}
-  # https://github.com/prometheus-operator/prometheus-operator/issues/5519
   securityContext:
     runAsNonRoot: true
     runAsUser: 65536
@@ -25,11 +25,20 @@ spec:
     fsGroupChangePolicy: "OnRootMismatch"
     seccompProfile:
       type: RuntimeDefault
-
-  resources: {{ alertmanagers[thisone].resources | tojson }}
-  affinity: {{ alertmanagers[thisone].affinity | tojson }}
-  {% if alertmanagers[thisone].storage is defined %}
-  storage: {{ alertmanagers[thisone].storage | tojson }}
+  {% elif inside_kind %}
+  # no hostUsers support in kind right now - last checked in v0.31.0
+  hostUsers: true
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 65536
+    runAsGroup: 65536
+    seccompProfile:
+      type: RuntimeDefault
+  {% else %}
+  hostUsers: false
+  securityContext:
+    seccompProfile:
+      type: RuntimeDefault
   {% endif %}
 
   alertmanagerConfiguration:
