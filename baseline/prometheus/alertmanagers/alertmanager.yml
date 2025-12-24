@@ -13,7 +13,8 @@ spec:
 {% if inside_kind %}
   hostUsers: true
 {% else %}
-  hostUsers: false
+  # TODO: Figure out how to make this `false`
+  hostUsers: true
 {% endif %}
   # https://github.com/prometheus-operator/prometheus-operator/issues/5519
   securityContext:
