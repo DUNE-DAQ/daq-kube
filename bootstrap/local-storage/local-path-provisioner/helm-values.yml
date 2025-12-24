@@ -26,8 +26,21 @@ affinity:
        - key: {{ kubernetes_labels.node_worker }}
          operator: Exists
 
+podSecurityContext:
+  runAsNonRoot: true
+
+securityContext:
+  allowPrivilegeEscalation: false
+  seccompProfile:
+    type: RuntimeDefault
+  capabilities:
+    drop: ["ALL"]
+  runAsUser: 65534
+  runAsGroup: 65534
+  readOnlyRootFilesystem: true
+
 ### FIXME ###
 # https://github.com/rancher/local-path-provisioner/issues/518
 #podDisruptionBudget:
 #  enabled: true
-#  maxUnavailable: 0
+#  minAvailable: 0

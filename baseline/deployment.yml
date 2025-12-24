@@ -19,5 +19,7 @@ deployments:
       - metrics
       - monitoring
 
+  - include: node-feature-discovery
+
   - barrier: true
     message: Make sure baseline is completely loaded

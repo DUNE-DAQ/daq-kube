@@ -8,8 +8,6 @@ deployments:
 
   - include: kubernetes-dashboard-application
 
-  - include: node-feature-discovery
-
   - path: microsocks
 
 {% if hardware_access %}
