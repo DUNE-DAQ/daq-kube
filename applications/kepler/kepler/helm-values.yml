@@ -7,6 +7,16 @@ resources:
     cpu: 100m
     memory: 128Mi
 
+daemonset:
+  nodeSelector:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: feature.node.kubernetes.io/cpu-cpuid.HYPERVISOR
+          operator: In
+          values:
+          - "false"
+
 serviceMonitor:
   enabled: true
   labels:
