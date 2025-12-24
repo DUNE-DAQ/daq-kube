@@ -19,21 +19,6 @@ spec:
   - name: prometheus
     startupProbe:
       failureThreshold: 300
-{% if inside_kind %}
-  hostUsers: true
-{% else %}
-  # TODO: Figure out how to make this `false`
-  hostUsers: true
-{% endif %}
-  # https://github.com/prometheus-operator/prometheus-operator/issues/5519
-  securityContext:
-    runAsNonRoot: true
-    runAsUser: 65536
-    runAsGroup: 65536
-    fsGroup: 65536
-    fsGroupChangePolicy: "OnRootMismatch"
-    seccompProfile:
-      type: RuntimeDefault
 
   portName: {{ prometheis[thisone].portName }}
   replicas: {{ prometheis[thisone].replicas }}
@@ -44,11 +29,36 @@ spec:
 
   resources: {{ prometheis[thisone].resources | tojson }}
   affinity: {{ prometheis[thisone].affinity | tojson }}
+
   {% if prometheis[thisone].storage is defined %}
+  # need consistent IDs for storage
   storage: {{ prometheis[thisone].storage | tojson }}
   {% if prometheis[thisone].retentionSize is defined %}
   retentionSize: {{ prometheis[thisone].retentionSize | tojson }}
   {% endif %}
+  hostUsers: true
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 65536
+    runAsGroup: 65536
+    fsGroup: 65536
+    fsGroupChangePolicy: "OnRootMismatch"
+    seccompProfile:
+      type: RuntimeDefault
+  {% elif inside_kind %}
+  # no hostUsers support in kind right now - last checked in v0.31.0
+  hostUsers: true
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 65536
+    runAsGroup: 65536
+    seccompProfile:
+      type: RuntimeDefault
+  {% else %}
+  hostUsers: false
+  securityContext:
+    seccompProfile:
+      type: RuntimeDefault
   {% endif %}
 
   ################################
