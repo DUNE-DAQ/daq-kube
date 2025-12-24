@@ -248,6 +248,14 @@ operator:
       "{{ grafana_dashboard_folder_annotation }}": Cilium
 
 priorityClassName: system-node-critical
+
 nodeinit:
   enabled: true
   priorityClassName: system-node-critical
+  resources: # this is guess work
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+    requests:
+      cpu: 100m
+      memory: 256Mi
