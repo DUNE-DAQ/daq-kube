@@ -29,6 +29,9 @@ affinity:
 podSecurityContext:
   runAsNonRoot: true
 
+# NOTE: launches a helper pod with hostPath volume
+#       thus namespace must permit PSS privileged
+#       last checked kubernetes 1.35
 securityContext:
   allowPrivilegeEscalation: false
   seccompProfile:
