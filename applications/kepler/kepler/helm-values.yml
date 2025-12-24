@@ -1,13 +1,13 @@
 ---
-resources:
-  limits:
-    cpu: 500m
-    memory: 512Mi
-  requests:
-    cpu: 100m
-    memory: 128Mi
-
 daemonset:
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
   nodeSelector:
     feature.node.kubernetes.io/cpu-cpuid.HYPERVISOR: "false"
 
