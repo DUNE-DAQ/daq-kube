@@ -176,12 +176,7 @@ spec:
     - Ingress
     - Egress
   ingress: # this policy is intentionally pretty wide open
-    - from:
-        - ipBlock:
-            cidr: 0.0.0.0/0
-        - ipBlock:
-            cidr: ::/0
-      ports:
+    - ports:
         - protocol: TCP
           port: 1080
   egress:
