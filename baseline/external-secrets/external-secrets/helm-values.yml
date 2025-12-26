@@ -65,6 +65,9 @@ podDisruptionBudget:
   enabled: true
   minAvailable: 1
 
+livenessProbe:
+  enabled: true
+
 global:
   affinity:
     nodeAffinity:
