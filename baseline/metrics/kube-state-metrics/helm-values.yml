@@ -25,10 +25,34 @@ prometheus:
 extraArgs:
   - --enable-gzip-encoding
 
+# enable when:
+#   https://github.com/prometheus-community/helm-charts/pull/6274
+#   https://github.com/prometheus-community/helm-charts/pull/6402
+#   https://github.com/prometheus-community/helm-charts/pull/6302
+kubeRBACProxy:
+  enabled: false
+  resources:
+    limits:
+      cpu: 100m
+      memory: 64Mi
+     requests:
+       cpu: 10m
+       memory: 32Mi
+
 networkPolicy:
   enabled: true
-  egress:
-    - {}
+  egress:  # access to API and DNS
+    - ports:
+      - port: 80
+        protocol: TCP
+      - port: 443
+        protocol: TCP
+      - port: 53
+        protocol: TCP
+      - port: 53
+        protocol: UDP
+      - port: 6443
+        protocol: TCP
 
 podDisruptionBudget:
   minAvailable: 1
