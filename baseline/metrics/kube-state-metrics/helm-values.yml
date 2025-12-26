@@ -35,9 +35,9 @@ kubeRBACProxy:
     limits:
       cpu: 100m
       memory: 64Mi
-     requests:
-       cpu: 10m
-       memory: 32Mi
+    requests:
+      cpu: 100m
+      memory: 32Mi
 
 networkPolicy:
   enabled: true
