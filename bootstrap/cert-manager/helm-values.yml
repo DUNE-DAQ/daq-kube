@@ -1,6 +1,5 @@
 crds:
   enabled: false
-#  renderMode: alwaysRender
 
 enableCertificateOwnerRef: true
 
