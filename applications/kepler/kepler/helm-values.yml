@@ -11,6 +11,20 @@ daemonset:
   nodeSelector:
     feature.node.kubernetes.io/cpu-cpuid.HYPERVISOR: "false"
 
+  livenessProbe:
+    httpGet:
+      path: /metrics
+      port: http
+    initialDelaySeconds: 10
+    periodSeconds: 120
+
+  readinessProbe:
+    httpGet:
+      path: /metrics
+      port: http
+    initialDelaySeconds: 10
+    periodSeconds: 120
+
 serviceMonitor:
   enabled: true
   labels:
