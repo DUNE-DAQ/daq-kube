@@ -42,8 +42,6 @@ securityContext:
   runAsGroup: 65534
   readOnlyRootFilesystem: true
 
-### FIXME ###
-# https://github.com/rancher/local-path-provisioner/issues/518
-#podDisruptionBudget:
-#  enabled: true
-#  minAvailable: 0
+podDisruptionBudget:
+  enabled: true
+  minAvailable: 0
