@@ -4,6 +4,9 @@ setDefaultUser:
   user:
     existingSecret: influxdbv1-{{ dune_online_opmon.influxdb_v1.read_write_username }}-password
 
+image:
+  repository: docker.io/influxdb    # use fully qualified name
+
 env:
   - name: INFLUXDB_DB
     value: {{ dune_online_opmon.influxdb_v1.database_name }}
