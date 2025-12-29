@@ -18,7 +18,7 @@ storageClass:
   defaultClass: {{ local_path_provisioner.is_default_class }}
   reclaimPolicy: Retain
 {%- raw %}
-  pathPattern: "{{ .PVC.Namespace }}-{{ .PVC.Name }}"
+  pathPattern: "{{ .PVC.Namespace }}/{{ .PVC.Name }}/"
 {% endraw %}
 
 affinity:
