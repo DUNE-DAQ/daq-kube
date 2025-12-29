@@ -19,7 +19,7 @@ controllerplugin:
         memory: 512Mi
       requests:
         cpu: 10m
-        memory: 16Mi
+        memory: 32Mi
   provisioner:
     resources: # this is guess work
       limits:
@@ -27,7 +27,7 @@ controllerplugin:
         memory: 512Mi
       requests:
         cpu: 10m
-        memory: 16Mi
+        memory: 32Mi
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
