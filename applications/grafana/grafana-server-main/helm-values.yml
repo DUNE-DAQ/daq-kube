@@ -116,6 +116,10 @@ affinity:
               operator: Exists
           topologyKey: kubernetes.io/hostname
 
+podDisruptionBudget:
+  maxUnavailable: 1
+  unhealthyPodEvictionPolicy: AlwaysAllow
+
 service:
   labels:
     grafana: grafana
