@@ -9,6 +9,9 @@ resources: # this is guess work
 
 nodePathMap: {{ local_path_provisioner.nodePathMap | tojson }}
 
+privateRegistry:
+  registryUrl: docker.io  # force container name to be fully qualified
+
 storageClass:
   create: true
   name: {{ local_path_provisioner.storage_class_name }}
