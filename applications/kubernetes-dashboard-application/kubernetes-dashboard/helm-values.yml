@@ -8,6 +8,9 @@
 
 fullnameOverride: 'kubernetes-dashboard'
 
+image:
+  repository: docker.io/kubernetesui/dashboard   # use fully qualified container name
+
 cert-manager:
   enabled: false
 
