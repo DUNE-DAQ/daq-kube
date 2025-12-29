@@ -19,6 +19,8 @@ nginx:
 
 metricsScraper:
   enabled: true
+  image:
+    repository: docker.io/kubernetesui/metrics-scraper   # use fully qualified container name
 
 networkPolicy:
   enabled: true
