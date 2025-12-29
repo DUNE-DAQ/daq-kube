@@ -59,6 +59,12 @@ networkPolicy:
         protocol: UDP
       - port: 6443
         protocol: TCP
+  ingress:
+    - ports:
+      - port: 8080
+        protocol: TCP
+      - port: 8081
+        protocol: TCP
 
 podDisruptionBudget:
   minAvailable: 1
