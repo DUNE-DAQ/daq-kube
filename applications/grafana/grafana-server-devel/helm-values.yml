@@ -119,3 +119,7 @@ affinity:
 service:
   labels:
     grafana: grafana-devel
+
+podDisruptionBudget:
+  maxUnavailable: 1
+  unhealthyPodEvictionPolicy: AlwaysAllow
