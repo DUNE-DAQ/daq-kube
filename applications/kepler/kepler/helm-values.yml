@@ -25,6 +25,9 @@ daemonset:
     initialDelaySeconds: 10
     periodSeconds: 120
 
+networkPolicy:
+  enabled: true
+
 serviceMonitor:
   enabled: true
   labels:
