@@ -29,9 +29,11 @@ patches:
           requests:
             cpu: "100m"
             memory: "128Mi"
+{% if target.name == 'np04-daq' %}
   - target: # eventually drop this once we are all k8s
       kind: DaemonSet
     patch: |-
       - op: add
         path: /spec/template/spec/hostNetwork
         value: true
+{% endif %}
