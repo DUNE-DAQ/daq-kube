@@ -92,8 +92,6 @@ spec:
             capabilities:
               drop:
                 - ALL
-      securityContext:
-        fsGroup: 10000
 ---
 apiVersion: policy/v1
 kind: PodDisruptionBudget
