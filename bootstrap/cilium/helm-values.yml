@@ -59,16 +59,6 @@ cni:
 # ipv4NativeRoutingCIDR is required for cluster mesh
 # but I don't know what to set it to...
 
-monitor:
-  enabled: true
-  resources:
-    requests:
-      cpu: 100m
-      memory: 128Mi
-    limits:
-      cpu: 500m
-      memory: 512Mi
-
 pprof:
   enabled: true
 
