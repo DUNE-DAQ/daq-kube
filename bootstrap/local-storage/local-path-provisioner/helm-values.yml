@@ -29,6 +29,12 @@ affinity:
        - key: {{ kubernetes_labels.node_worker }}
          operator: Exists
 
+{% if inside_kind %}
+hostUsers: true
+{% else %}
+hostUsers: false
+{% endif %}
+
 podSecurityContext:
   runAsNonRoot: true
 
