@@ -16,6 +16,9 @@ podDisruptionBudget:
   minAvailable: 0
   unhealthyPodEvictionPolicy: AlwaysAllow
 
+operatorNetworkPolicy:
+  enabled: true
+
 securityContext:
   runAsUser: 10000
   runAsGroup: 10000
