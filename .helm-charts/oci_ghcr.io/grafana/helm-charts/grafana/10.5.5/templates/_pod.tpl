@@ -1294,6 +1294,8 @@ containers:
         {{- with .Values.persistence.subPath }}
         subPath: {{ tpl . $root }}
         {{- end }}
+      - name: search
+        mountPath: "/var/lib/grafana-search"
       {{- with .Values.dashboards }}
       {{- range $provider, $dashboards := . }}
       {{- range $key, $value := $dashboards }}
@@ -1474,6 +1476,8 @@ containers:
         value: {{ (get .Values "grafana.ini").paths.plugins }}
       - name: GF_PATHS_PROVISIONING
         value: {{ (get .Values "grafana.ini").paths.provisioning }}
+      - name: GF_UNIFIED_STORAGE_INDEX_PATH
+        value: {{ (get .Values "grafana.ini").unified_storage.index_path }}
       {{- if (.Values.resources.limits).memory }}
       - name: GOMEMLIMIT
         valueFrom:
@@ -1618,6 +1622,8 @@ volumes:
     emptyDir: {}
     {{- end }}
   {{- end }}
+  - name: search
+    emptyDir: {}
   {{- if .Values.sidecar.alerts.enabled }}
   - name: sc-alerts-volume
     {{- if .Values.sidecar.alerts.sizeLimit }}
