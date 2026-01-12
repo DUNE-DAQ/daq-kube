@@ -40,18 +40,15 @@ spec:
   {% if inside_kind %}
   # no hostUsers support in kind right now - last checked in v0.31.0
   hostUsers: true
-  {% elif prometheis[thisone].storage is defined %}
-  # need consistent IDs for storage, container create failed: setgroups
-  hostUsers: true
   {% else %}
   hostUsers: false
   {% endif %}
 
   securityContext:
     runAsNonRoot: true
-    runAsUser: 65536
-    runAsGroup: 65536
-    fsGroup: 65536
+    runAsUser: 65530
+    runAsGroup: 65530
+    fsGroup: 65530
     fsGroupChangePolicy: "OnRootMismatch"
     seccompProfile:
       type: RuntimeDefault
