@@ -20,6 +20,12 @@ persistence:
     enabled: true    # use EmptyDir
     sizeLimit: 300Mi # this is guess work
 
+{% if inside_kind %}
+hostUsers: true
+{% else %}
+hostUsers: false
+{% endif %}
+
 initChownData:
   enabled: false
 
