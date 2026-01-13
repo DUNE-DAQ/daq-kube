@@ -2,7 +2,11 @@ crds:
   enabled: false
 
 global:
+{% if inside_kind %}
+  hostUsers: true
+{% else %}
   hostUsers: false
+{% endif %}
 
 enableCertificateOwnerRef: true
 
