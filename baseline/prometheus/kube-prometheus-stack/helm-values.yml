@@ -14,6 +14,13 @@ prometheusOperator:
   enabled: true
   networkPolicy:
     enabled: true
+
+{% if inside_kind %}
+  hostUsers: true
+{% else %}
+  hostUsers: false
+{% endif %}
+
   resources: # this is guess work
     limits:
       cpu: 300m

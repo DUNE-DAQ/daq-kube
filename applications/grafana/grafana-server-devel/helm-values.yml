@@ -17,6 +17,12 @@ useStatefulSet: true
 persistence:
   enabled: true
 
+{% if inside_kind %}
+hostUsers: true
+{% else %}
+hostUsers: false
+{% endif %}
+
 initChownData:
   enabled: false
 

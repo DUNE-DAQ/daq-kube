@@ -1,6 +1,6 @@
 helmChart:
   chartName: cilium
-  chartVersion: 1.18.5
+  chartVersion: 1.18.6
   namespace: '{{ cilium.namespace }}'
   output: helm-rendered.yaml
   releaseName: cilium
