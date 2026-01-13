@@ -15,7 +15,25 @@ fullnameOverride: node-exporter
 podLabels:
   jobLabel: node-exporter # changing this impacts dashboards
 
-hostNetwork: true # once we are all kubernetes change this to false
+{% if target.name == "np04-daq" %}
+hostNetwork: true # once we are all kubernetes, drop this
+hostUsers: true
+{% else %}
+hostUsers: false
+{% endif %}
+
+containerSecurityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  privileged: false
+  readOnlyRootFilesystem: true
+  runAsGroup: 1010
+  runAsUser: 1010
+  runAsNonRoot: true
+  seccompProfile:
+    type: RuntimeDefault
 
 hostSysFsMount:
   mountPropagation: HostToContainer
