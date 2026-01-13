@@ -82,6 +82,7 @@ gatewayAPI:
     enabled: true
 
 envoy:
+  enabled: false # we don't use this right now
   serviceMonitor:
     enabled: true
     labels:
