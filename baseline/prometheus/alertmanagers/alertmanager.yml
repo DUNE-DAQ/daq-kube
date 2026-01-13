@@ -16,30 +16,23 @@ spec:
   {% if alertmanagers[thisone].storage is defined %}
   # need consistent IDs for storage
   storage: {{ alertmanagers[thisone].storage | tojson }}
+  {% endif %}
+
+  {% if inside_kind %}
+  # no hostUsers support in kind right now - last checked in v0.31.0
   hostUsers: true
+  {% else %}
+  hostUsers: false
+  {% endif %}
+
   securityContext:
     runAsNonRoot: true
-    runAsUser: 65536
-    runAsGroup: 65536
-    fsGroup: 65536
+    runAsUser: 65531
+    runAsGroup: 65531
+    fsGroup: 65531
     fsGroupChangePolicy: "OnRootMismatch"
     seccompProfile:
       type: RuntimeDefault
-  {% elif inside_kind %}
-  # no hostUsers support in kind right now - last checked in v0.31.0
-  hostUsers: true
-  securityContext:
-    runAsNonRoot: true
-    runAsUser: 65536
-    runAsGroup: 65536
-    seccompProfile:
-      type: RuntimeDefault
-  {% else %}
-  hostUsers: false
-  securityContext:
-    seccompProfile:
-      type: RuntimeDefault
-  {% endif %}
 
   alertmanagerConfiguration:
     name: alertmanager-{{ alertmanagers[thisone].name }}-defaults

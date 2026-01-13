@@ -1,6 +1,9 @@
 crds:
   enabled: false
 
+global:
+  hostUsers: false
+
 enableCertificateOwnerRef: true
 
 prometheus:
