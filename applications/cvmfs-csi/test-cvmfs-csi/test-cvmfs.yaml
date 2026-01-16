@@ -20,10 +20,11 @@ metadata:
   annotations:
     kluctl.io/wait-readiness: "false"
 spec:
-  backoffLimit: 0
+  backoffLimit: 7 # Too many levels of symbolic links, means we must retry
   template:
     spec:
       restartPolicy: Never
+      hostUsers: true # cvmfs can't chown
       containers:
         - name: cvmfs-verifier
           image: docker.io/library/busybox:latest
@@ -33,23 +34,23 @@ spec:
             - -c
             - |
               set -e
+              repo="config-osg.opensciencegrid.org"
               echo "=== Filesystem details ==="
               df -h /cvmfs
               echo ""
               echo "=== Waiting for autofs setup ==="
-              ls -lah /cvmfs
               sleep 5
+              ls -lah /cvmfs || true
               echo ""
-              echo "=== Checking a CVMFS repo ==="
+              echo "=== Checking CVMFS connectivity ==="
               for i in $(seq 1 9); do
-                echo "Attempt $i: CVMFS repo /cvmfs/config-osg.opensciencegrid.org"
-                ls -lahF /cvmfs/config-osg.opensciencegrid.org && break
-                echo "Mount not ready, retrying..."
-                sleep 8
+                sleep 3
+                echo "Attempt $i: CVMFS repo ${repo}"
+                ls -lahF /cvmfs/${repo} && break
               done
               echo ""
-              echo "Test job terminated"
-              echo ""
+              echo "Please review results"
+              ls -lahF /cvmfs/${repo}
           volumeMounts:
             - name: cvmfs-vol
               mountPath: /cvmfs
