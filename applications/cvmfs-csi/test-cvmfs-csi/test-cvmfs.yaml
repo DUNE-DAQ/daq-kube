@@ -76,3 +76,10 @@ spec:
         - name: cvmfs-vol
           persistentVolumeClaim:
             claimName: cvmfs-test-pvc
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                  - key: {{ kubernetes_labels.node_worker }}
+                    operator: Exists

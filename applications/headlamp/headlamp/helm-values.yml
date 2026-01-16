@@ -1,0 +1,30 @@
+resources: # this is guess work
+ limits:
+   cpu: 1
+   memory: 1Gi
+ requests:
+   cpu: 100m
+   memory: 128Mi
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: {{ kubernetes_labels.node_worker }}
+              operator: Exists
+
+podDisruptionBudget:
+  enabled: true
+
+securityContext:
+  runAsNonRoot: true
+  privileged: false
+  runAsUser: 100
+  runAsGroup: 101
+  seccompProfile:
+    type: RuntimeDefault
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
