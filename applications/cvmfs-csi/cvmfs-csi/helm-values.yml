@@ -1,7 +1,4 @@
 ---
-automountStorageClass:
-  create: true
-
 cmvfsHttpProxy: "{{ cvmfs_csi.http_proxy }}"
 
 cache:
