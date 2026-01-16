@@ -1,0 +1,77 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: cvmfs-test-pvc
+  namespace: "{{ cvmfs_csi.namespace }}"
+spec:
+  accessModes:
+    - ReadOnlyMany
+  storageClassName: cvmfs
+  resources:
+    requests:
+      storage: 1Gi
+  volumeMode: Filesystem
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: cvmfs-verifier-job
+  namespace: "{{ cvmfs_csi.namespace }}"
+  annotations:
+    kluctl.io/wait-readiness: "false"
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: cvmfs-verifier
+          image: docker.io/library/busybox:latest
+          imagePullPolicy: IfNotPresent
+          command:
+            - /bin/sh
+            - -c
+            - |
+              set -e
+              echo "=== Filesystem details ==="
+              df -h /cvmfs
+              echo ""
+              echo "=== Waiting for autofs setup ==="
+              ls -lah /cvmfs
+              sleep 5
+              echo ""
+              echo "=== Checking a CVMFS repo ==="
+              for i in $(seq 1 9); do
+                echo "Attempt $i: CVMFS repo /cvmfs/config-osg.opensciencegrid.org"
+                ls -lahF /cvmfs/config-osg.opensciencegrid.org && break
+                echo "Mount not ready, retrying..."
+                sleep 8
+              done
+              echo ""
+              echo "Test job terminated"
+              echo ""
+          volumeMounts:
+            - name: cvmfs-vol
+              mountPath: /cvmfs
+              readOnly: true
+          resources:
+            limits:
+              memory: 1Gi
+              cpu: 1000m
+            requests:
+              memory: 64Mi
+              cpu: 100m
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            runAsNonRoot: true
+            runAsUser: 11000
+            runAsGroup: 11000
+            seccompProfile:
+              type: RuntimeDefault
+      volumes:
+        - name: cvmfs-vol
+          persistentVolumeClaim:
+            claimName: cvmfs-test-pvc
