@@ -1,0 +1,13 @@
+---
+deployments:
+  - path: namespace
+    alwaysDeploy: true
+
+  - barrier: true
+    message: We need a namespace to deploy into
+
+  - path: headlamp
+  - path: ro-user
+
+vars:
+  - file: variables/headlamp.yaml

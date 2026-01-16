@@ -1,0 +1,7 @@
+helmChart:
+  chartName: headlamp
+  chartVersion: 0.39.0
+  namespace: "{{ headlamp.namespace }}"
+  output: helm-rendered.yaml
+  releaseName: headlamp
+  repo: https://kubernetes-sigs.github.io/headlamp
