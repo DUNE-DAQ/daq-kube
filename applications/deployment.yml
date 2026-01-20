@@ -1,16 +1,25 @@
 ---
 deployments:
+{% if args.with_dune_readout %}
   - include: cvmfs-csi
     tags:
       - csi
       - cvmfs
       - storage
+{% endif %}
 
   - include: kubernetes-dashboard-application
 
   - path: microsocks
 
 {% if hardware_access %}
+  - include: kepler
+    tags:
+      - monitoring
+      - metrics
+      - power
+
+{% if args.with_dune_readout %}
   - path: sriov-network-device-plugin
     tags:
       - sriov
@@ -21,12 +30,7 @@ deployments:
       - monitoring
       - metrics
       - pcm
-
-  - include: kepler
-    tags:
-      - monitoring
-      - metrics
-      - power
+{% endif %}
 {% endif %}
 
   - barrier: true
