@@ -15,11 +15,10 @@ fullnameOverride: node-exporter
 podLabels:
   jobLabel: node-exporter # changing this impacts dashboards
 
+hostPID: true
+hostUsers: true # if hostPID is true, hostUsers must be too
 {% if target.name == "np04-daq" %}
 hostNetwork: true # once we are all kubernetes, drop this
-hostUsers: true
-{% else %}
-hostUsers: false
 {% endif %}
 
 containerSecurityContext:
