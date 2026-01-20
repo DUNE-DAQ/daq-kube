@@ -1,3 +1,6 @@
+FIGURE OUT PLUGINS
+https://github.com/headlamp-k8s/plugins/tree/main
+
 resources: # this is guess work
  limits:
    cpu: 1
