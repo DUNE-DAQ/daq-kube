@@ -57,12 +57,12 @@ prometheis: # this is the plural of prometheus
               storage: 75Gi
 {% else %}
             requests:
-              storage: 225Gi
+              storage: 185Gi
 {% endif %}
 {% if 'pocket' in target.name %}
     retentionSize: 60GB
 {% else %}
-    retentionSize: 210GB
+    retentionSize: 170GB
 {% endif %}
 
     # these selectors should probably be set to rational filters
