@@ -10,6 +10,6 @@ dune_online_runservices:
       deployment: service_name=protodune_prod.cern.ch
       database: pdbr
       owner: pdsp_rc
-      password: {{ args.oracle_password }}
+      password: "{{ args.oracle_password }}"
       host: pdbr-s.cern.ch
       port: 10121

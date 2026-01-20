@@ -11,7 +11,7 @@ dune_online:
   elisa_logbook: # needs to be defined here so we can use in deployment templates
     namespace: elisa-logbook
     username: rcpd
-    password: {{ args.elisa_password }}
+    password: "{{ args.elisa_password }}"
     hardware_types:
       - npvd
       - pdsp
