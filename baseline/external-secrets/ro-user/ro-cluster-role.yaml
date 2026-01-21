@@ -1,0 +1,81 @@
+---
+# Custom cluster-level resources for read-only access
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    rbac.authorization.k8s.io/aggregate-to-cluster-view: "true"
+  name: read-only-cluster-resources
+rules:
+  - apiGroups:
+      - ""
+    resources:
+      - nodes
+      - persistentvolumes
+      - namespaces
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - storage.k8s.io
+    resources:
+      - storageclasses
+      - volumeattachments
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - rbac.authorization.k8s.io
+    resources:
+      - clusterrolebindings
+      - clusterroles
+    verbs:
+      - get
+      - list
+      - watch
+---
+# Aggregated ClusterRole combining view + cluster-view
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: read-only-user
+aggregationRule:
+  clusterRoleSelectors:
+    - matchLabels:
+        rbac.authorization.k8s.io/aggregate-to-view: "true"
+    - matchLabels:
+        rbac.authorization.k8s.io/aggregate-to-cluster-view: "true"
+rules: []
+---
+# ServiceAccount for read-only access
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: read-only-user
+  namespace: {{ external_secrets.lookup_namespace }}
+---
+# Bind the read-only role to the service account
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: read-only-user-binding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: read-only-user
+subjects:
+  - kind: ServiceAccount
+    name: read-only-user
+    namespace: {{ external_secrets.lookup_namespace }}
+---
+# Token secret for authentication
+apiVersion: v1
+kind: Secret
+metadata:
+  name: read-only-user-token
+  namespace: {{ external_secrets.lookup_namespace }}
+  annotations:
+    kubernetes.io/service-account.name: read-only-user
+type: kubernetes.io/service-account-token

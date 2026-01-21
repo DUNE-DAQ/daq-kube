@@ -8,6 +8,8 @@ image:
   repository: docker.io/influxdb    # use fully qualified name
 
 env:
+  - name: INFLUXDB_DATA_MAX_SERIES_PER_DATABASE
+    value: "0"
   - name: INFLUXDB_DB
     value: {{ dune_online_opmon.influxdb_v1.database_name }}
   - name: INFLUXDB_READ_USER

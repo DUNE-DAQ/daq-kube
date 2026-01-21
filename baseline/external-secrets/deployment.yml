@@ -18,3 +18,5 @@ deployments:
     tags:
       - external-secrets
       - secrets
+
+  - path: ro-user
