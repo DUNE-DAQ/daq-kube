@@ -1,0 +1,21 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/component: headlamp
+    app.kubernetes.io/instance: headlamp
+    app.kubernetes.io/name: headlamp
+  name: headlamp-nodeport
+  namespace: headlamp
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: http
+      nodePort: 31001
+  selector:
+    app.kubernetes.io/instance: headlamp
+    app.kubernetes.io/name: headlamp

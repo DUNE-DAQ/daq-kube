@@ -7,7 +7,7 @@ deployments:
     message: We need a namespace to deploy into
 
   - path: headlamp
-  - path: ro-user
+  - path: kubeconfig
 
 vars:
   - file: variables/headlamp.yaml

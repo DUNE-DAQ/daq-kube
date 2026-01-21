@@ -5,7 +5,7 @@ kind: Kustomization
 resources:
   - alertmanager-main.yaml
   - prometheus-main.yaml
-  - kubernetes-dashboard-nodeport.yaml
+  - headlamp-nodeport.yaml
   - grafana-server-devel-nodeport.yaml
   - grafana-server-main-nodeport.yaml
   - microproxy-nodeport.yaml
