@@ -24,6 +24,12 @@ operatorNetworkPolicy:
   egress:
   - {}
 
+{% if inside_kind %}
+hostUsers: true
+{% else %}
+hostUsers: false
+{% endif %}
+
 securityContext:
   runAsUser: 10000
   runAsGroup: 10000
