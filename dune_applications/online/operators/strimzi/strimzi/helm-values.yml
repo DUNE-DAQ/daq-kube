@@ -18,6 +18,17 @@ podDisruptionBudget:
 
 operatorNetworkPolicy:
   enabled: true
+  # it is impossible to define a rational port list in advance
+  # kafka and its services will take a list of ports, but they
+  # are dynamically moving about in "cloud scale" ways
+  egress:
+  - {}
+
+{% if inside_kind %}
+hostUsers: true
+{% else %}
+hostUsers: false
+{% endif %}
 
 securityContext:
   runAsUser: 10000

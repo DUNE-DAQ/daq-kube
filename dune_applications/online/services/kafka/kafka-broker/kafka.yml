@@ -50,6 +50,11 @@ spec:
           memory: 384Mi
     template:
       pod:
+{% if inside_kind %}
+        hostUsers: true
+{% else %}
+        hostUsers: false
+{% endif %}
         affinity:
          nodeAffinity:
            preferredDuringSchedulingIgnoredDuringExecution:
@@ -77,6 +82,11 @@ spec:
     groupRegex: ".*"
     template:
       pod:
+{% if inside_kind %}
+        hostUsers: true
+{% else %}
+        hostUsers: false
+{% endif %}
         affinity:
          nodeAffinity:
            preferredDuringSchedulingIgnoredDuringExecution:
@@ -103,6 +113,11 @@ spec:
         memory: 512Mi
     template:
       pod:
+{% if inside_kind %}
+        hostUsers: true
+{% else %}
+        hostUsers: false
+{% endif %}
         affinity:
          nodeAffinity:
             preferredDuringSchedulingIgnoredDuringExecution:
@@ -122,6 +137,11 @@ spec:
   kafka:
     template:
       pod:
+{% if inside_kind %}
+        hostUsers: true
+{% else %}
+        hostUsers: false
+{% endif %}
         affinity:
          nodeAffinity:
            preferredDuringSchedulingIgnoredDuringExecution:
