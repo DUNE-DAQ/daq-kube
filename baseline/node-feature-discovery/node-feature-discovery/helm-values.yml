@@ -4,6 +4,8 @@ prometheus:
   labels:
     {{ prometheus_podmonitor_label_name }}: {{ prometheus_podmonitor_labels.system }}
 
+postDeleteCleanup: false
+
 master:
   revisionHistoryLimit: 3
   resources:
