@@ -1,0 +1,18 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  labels:
+    app.kubernetes.io/component: cnpg-metrics
+    app.kubernetes.io/instance: {{ dune_online_ers.database.postgresql.deployment }}
+    app.kubernetes.io/name: postgresql
+    {{ prometheus_podmonitor_label_name }}: {{ prometheus_podmonitor_labels.postgresql }}
+  name: {{ dune_online_ers.database.postgresql.deployment }}-cnpg
+  namespace: {{ dune_online_ers.namespace }}
+spec:
+  podMetricsEndpoints:
+  - port: metrics
+  selector:
+    matchLabels:
+      cnpg.io/cluster: {{ dune_online_ers.database.postgresql.deployment }}
+      cnpg.io/podRole: instance

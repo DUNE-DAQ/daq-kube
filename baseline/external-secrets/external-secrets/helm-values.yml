@@ -17,6 +17,8 @@ webhook:
         name: {{ certmanager.ca_name }}
       duration: "168h"
       renewBefore: "72h"
+      privateKey:
+        rotationPolicy: Always
   podDisruptionBudget:
     enabled: true
     minAvailable: 1
@@ -27,6 +29,11 @@ webhook:
     requests:
       cpu: 10m
       memory: 64Mi
+{% if inside_kind %}
+  hostUsers: true
+{% else %}
+  hostUsers: false
+{% endif %}
 
 certController:
   podDisruptionBudget:
@@ -39,6 +46,11 @@ certController:
     requests:
       cpu: 10m
       memory: 64Mi
+{% if inside_kind %}
+  hostUsers: true
+{% else %}
+  hostUsers: false
+{% endif %}
 
 serviceMonitor:
   enabled: true
@@ -60,6 +72,12 @@ resources: # this is guess work
   requests:
     cpu: 10m
     memory: 64Mi
+
+{% if inside_kind %}
+hostUsers: true
+{% else %}
+hostUsers: false
+{% endif %}
 
 podDisruptionBudget:
   enabled: true

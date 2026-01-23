@@ -15,8 +15,6 @@ spec:
       memory: 512Mi
   storage:
     size: 8Gi  # this is guess work
-  monitoring:
-    enablePodMonitor: true
   certificates:
     serverTLSSecret: {{ dune_online_ers.database.postgresql.deployment }}-tls-cert
     serverCASecret: {{ dune_online_ers.database.postgresql.deployment }}-tls-cert
