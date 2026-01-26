@@ -15,10 +15,13 @@ webhook:
         group: cert-manager.io
         kind: ClusterIssuer
         name: {{ certmanager.ca_name }}
-      duration: "168h"
-      renewBefore: "72h"
+      duration: 2160h
+      renewBefore: 360h
       privateKey:
+        algorithm: RSA
+        size: 4096
         rotationPolicy: Always
+      signatureAlgorithm: SHA512WithRSA
   podDisruptionBudget:
     enabled: true
     minAvailable: 1
