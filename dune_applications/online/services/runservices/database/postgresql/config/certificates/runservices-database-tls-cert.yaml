@@ -15,6 +15,7 @@ spec:
     algorithm: RSA
     size: 4096
     rotationPolicy: Always
+  signatureAlgorithm: SHA512WithRSA
   usages:
     - server auth
   dnsNames:
