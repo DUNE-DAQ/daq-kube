@@ -43,3 +43,6 @@ patches:
       - op: replace
         path: /spec/template/spec/containers/0/env/1/valueFrom/secretKeyRef/name
         value: {{ dune_online_runservices.database.postgresql.deployment }}-{{ dune_online_runservices.database.postgresql.owner }}-password
+      - op: replace
+        path: /spec/template/spec/containers/0/env/1/valueFrom/secretKeyRef/key
+        value: pyuri
