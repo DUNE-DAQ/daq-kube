@@ -43,16 +43,6 @@ patches:
       - op: replace
         path: /spec/template/spec/containers/0/env/1/value
         value: {{ dune_online.kafka.name}}-kafka-bootstrap.{{ dune_online.kafka.namespace }}.svc:9092
-      - op: remove
-        path: /spec/template/spec/containers/0/env/2/value
-      - op: add
-        path: /spec/template/spec/containers/0/env/2/valueFrom
-        value: { 'secretKeyRef': { 'name': 'influxdbv1-{{ dune_online_opmon.influxdb_v1.read_write_username }}-password', 'key': 'influxdb-user' }}
-      - op: remove
-        path: /spec/template/spec/containers/0/env/3/value
-      - op: add
-        path: /spec/template/spec/containers/0/env/3/valueFrom
-        value: { 'secretKeyRef': { 'name': 'influxdbv1-{{ dune_online_opmon.influxdb_v1.read_write_username }}-password', 'key': 'influxdb-password' }}
       - op: replace
-        path: /spec/template/spec/containers/0/env/4/value
-        value: opmon-influxdb.{{ dune_online_opmon.namespace }}.svc
+        path: /spec/template/spec/containers/0/securityContext/runAsUser
+        value: 65534

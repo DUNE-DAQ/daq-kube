@@ -43,22 +43,12 @@ patches:
       - op: replace
         path: /spec/template/spec/containers/0/env/1/value
         value: {{ dune_online.kafka.name}}-kafka-bootstrap.{{ dune_online.kafka.namespace }}.svc:9092
-      - op: remove
-        path: /spec/template/spec/containers/0/env/5/valueFrom
-      - op: add
-        path: /spec/template/spec/containers/0/env/5/value
-        value: {{ dune_online_ers.database.postgresql.deployment }}-rw.{{ dune_online_ers.namespace }}.svc
-      - op: remove
-        path: /spec/template/spec/containers/0/env/6/valueFrom
-      - op: add
-        path: /spec/template/spec/containers/0/env/6/value
-        value: "5432"
       - op: replace
-        path: /spec/template/spec/containers/0/env/7/valueFrom/secretKeyRef/name
+        path: /spec/template/spec/containers/0/env/5/valueFrom/secretKeyRef/name
         value: {{ dune_online_ers.database.postgresql.deployment }}-{{ dune_online_ers.database.postgresql.owner }}-password
       - op: replace
-        path: /spec/template/spec/containers/0/env/8/valueFrom/secretKeyRef/name
-        value: {{ dune_online_ers.database.postgresql.deployment }}-{{ dune_online_ers.database.postgresql.owner }}-password
+        path: /spec/template/spec/containers/0/env/5/valueFrom/secretKeyRef/key
+        value: pyuri
       - op: replace
-        path: /spec/template/spec/containers/0/env/9/valueFrom/secretKeyRef/name
-        value: {{ dune_online_ers.database.postgresql.deployment }}-{{ dune_online_ers.database.postgresql.owner }}-password
+        path: /spec/template/spec/containers/0/securityContext/runAsUser
+        value: 65534

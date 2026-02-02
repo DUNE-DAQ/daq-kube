@@ -4,7 +4,7 @@ dune_online:
     name: dune-daq
   unified_microservices:
     image: ghcr.io/dune-daq/microservices
-    tag: "sha-adeb0cd" # note this must always be a quoted string!
+    tag: "sha-1aa1a56" # note this must always be a quoted string!
   connection_service:
     image: ghcr.io/dune-daq/connectivityserver
     tag: "v1.3.0" # note this must always be a quoted string!
