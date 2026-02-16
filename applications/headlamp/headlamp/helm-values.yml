@@ -1,5 +1,47 @@
-FIGURE OUT PLUGINS
-https://github.com/headlamp-k8s/plugins/tree/main
+config:
+  inCluster: false  # actually true, but we are tricking with kubeconfig
+  extraArgs:
+    - "-kubeconfig=/tmp/.kube/config"
+
+env:
+- name: HOME
+  value: /tmp/headlamp
+
+volumeMounts:
+  - name: tmp
+    mountPath: /tmp
+  - name: empty
+    mountPath: /headlamp/static-plugins
+  - name: kubeconfig
+    mountPath: /tmp/.kube
+    readOnly: true
+
+volumes:
+  - name: tmp
+    emptyDir:
+      sizeLimit: 64Mi
+  - name: empty
+    emptyDir:
+      sizeLimit: 4Mi
+  - name: kubeconfig
+    secret:
+      secretName: headlamp-kubeconfig
+      items:
+        - key: config
+          path: config
+
+securityContext:
+  allowPrivilegeEscalation: false
+  runAsNonRoot: true
+  privileged: false
+  runAsUser: 1002
+  runAsGroup: 1002
+  seccompProfile:
+    type: RuntimeDefault
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
 
 resources: # this is guess work
  limits:
@@ -19,15 +61,3 @@ affinity:
 
 podDisruptionBudget:
   enabled: true
-
-securityContext:
-  runAsNonRoot: true
-  privileged: false
-  runAsUser: 100
-  runAsGroup: 101
-  seccompProfile:
-    type: RuntimeDefault
-  capabilities:
-    drop:
-      - ALL
-  readOnlyRootFilesystem: true

@@ -8,7 +8,7 @@ deployments:
       - storage
 {% endif %}
 
-  - include: kubernetes-dashboard-application
+  - include: headlamp
 
   - path: microsocks
 
