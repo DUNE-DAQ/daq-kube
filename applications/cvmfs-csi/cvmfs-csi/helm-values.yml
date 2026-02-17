@@ -28,6 +28,8 @@ controllerplugin:
       requests:
         cpu: 10m
         memory: 32Mi
+  networkPolicy:
+    enabled: true
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:
@@ -77,6 +79,8 @@ nodeplugin:
       requests:
         cpu: 10m
         memory: 16Mi
+  networkPolicy:
+    enabled: true
   affinity:
     nodeAffinity:
       requiredDuringSchedulingIgnoredDuringExecution:

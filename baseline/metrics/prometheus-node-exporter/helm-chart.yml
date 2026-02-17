@@ -1,5 +1,5 @@
 helmChart:
-  chartVersion: 4.51.0
+  chartVersion: 4.51.1
   namespace: '{{ metrics.node_exporter_namespace }}'
   output: helm-rendered.yaml
   releaseName: node-exporter
