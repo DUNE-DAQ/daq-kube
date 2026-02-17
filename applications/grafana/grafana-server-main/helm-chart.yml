@@ -3,4 +3,4 @@ helmChart:
   namespace: '{{ monitoring.namespace }}'
   output: helm-rendered.yaml
   releaseName: grafana
-  repo: oci://ghcr.io/grafana/helm-charts/grafana
+  repo: oci://ghcr.io/grafana-community/helm-charts/grafana
