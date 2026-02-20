@@ -1,5 +1,5 @@
 helmChart:
-  chartVersion: 0.50.0
+  chartVersion: 0.50.1
   namespace: '{{ strimzi.namespace }}'
   output: helm-rendered.yaml
   releaseName: strimzi-operator
