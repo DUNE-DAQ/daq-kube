@@ -14,7 +14,6 @@ prometheis: # this is the plural of prometheus
     port: 9090
     portName: web
     replicas: 1
-    retention: 185d
     alertmanagers:
       - namespace: {{ alertmanagers.main.namespace }}
         name: {{ alertmanagers.main.serviceName }}
@@ -47,6 +46,7 @@ prometheis: # this is the plural of prometheus
     logLevel: debug
     scrapeInterval: 30s
     scrapeTimeout: 25s
+    retention: 95d
     storage:
       volumeClaimTemplate:
         spec:
