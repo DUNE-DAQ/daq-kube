@@ -30,6 +30,7 @@ networkPolicy:
 
 serviceMonitor:
   enabled: true
+  interval: 35s
   labels:
     {{ prometheus_servicemonitor_label_name }}: {{ prometheus_servicemonitor_labels.system }}
   metricRelabelings:
