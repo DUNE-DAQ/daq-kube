@@ -1,6 +1,6 @@
 helmChart:
   chartName: headlamp
-  chartVersion: 0.40.0
+  chartVersion: 0.40.1
   namespace: '{{ headlamp.namespace }}'
   output: helm-rendered.yaml
   releaseName: headlamp

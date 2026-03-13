@@ -1,5 +1,5 @@
 helmChart:
-  chartVersion: 0.0.34
+  chartVersion: 0.0.35
   namespace: '{{ local_path_provisioner.namespace }}'
   output: helm-rendered.yaml
   releaseName: local-path-provisioner
