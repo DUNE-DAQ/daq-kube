@@ -1,5 +1,5 @@
 helmChart:
-  chartVersion: 7.5.1
+  chartVersion: 7.5.2
   namespace: '{{ dune_online_ers.namespace }}'
   output: helm-rendered.yaml
   releaseName: ers-postgresql-exporter
