@@ -1,5 +1,5 @@
 helmChart:
-  chartVersion: 1.6.2
+  chartVersion: 1.6.4
   namespace: '{{ dune_online.kafka.namespace }}'
   output: helm-rendered.yaml
   releaseName: kafka-ui
