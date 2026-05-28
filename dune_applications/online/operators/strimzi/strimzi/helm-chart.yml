@@ -1,7 +1,7 @@
 helmChart:
-  chartVersion: 0.50.1
+  chartVersion: 1.0.0
   namespace: '{{ strimzi.namespace }}'
   output: helm-rendered.yaml
   releaseName: strimzi-operator
   repo: oci://quay.io/strimzi-helm/strimzi-kafka-operator
-  updateConstraints: ~0.50.x
+  updateConstraints: ~1.0.x
