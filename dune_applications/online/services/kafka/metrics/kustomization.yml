@@ -7,7 +7,7 @@ namespace: {{ dune_online.kafka.namespace }}
 resources:
   - pod-monitors/entity-operator-metrics.yaml
   - pod-monitors/kafka-resources-metrics.yaml
-  - kafka-metrics.yaml
+  - default-metrics/kafka-metrics.yaml
 
 patches:
   - target:
@@ -19,3 +19,19 @@ patches:
       - op: add
         path: /spec/namespaceSelector/matchNames/0
         value: {{ dune_online.kafka.namespace }}
+  - target:
+      kind: KafkaNodePool
+    patch: |-
+      $patch: delete
+      kind: Kustomization
+      metadata:
+        name: DOES NOT MATTER
+  - target:
+      kind: Kafka
+    patch: |-
+      $patch: delete
+      kind: Kustomization
+      metadata:
+        name: DOES NOT MATTER
+
+
