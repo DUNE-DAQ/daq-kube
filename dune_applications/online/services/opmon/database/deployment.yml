@@ -1,3 +1,4 @@
 ---
 deployments:
   - include: influxdb_v1
+  - include: postgresql_timescaledb

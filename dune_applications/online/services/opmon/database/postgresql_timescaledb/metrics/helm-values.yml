@@ -1,0 +1,68 @@
+fullnameOverride: {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}-prometheus-postgresql-exporter
+
+config:
+  datasource:
+    host: {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}-r.{{ dune_online_opmon.namespace }}.svc # 'r' targets any instance, 'ro' targets read-only instances only
+    user: postgresql_exporter
+    sslmode: require
+    database: {{ dune_online_opmon.database.postgresql_timescaledb.database }}
+    passwordSecret:
+      name: {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}-postgresql-exporter-password
+      key: password
+
+networkPolicy:
+  enabled: true
+
+serviceMonitor:
+  enabled: true
+  labels:
+    {{ prometheus_servicemonitor_label_name }}: {{ prometheus_servicemonitor_labels.postgresql }}
+
+podDisruptionBudget:
+  enabled: true
+  unhealthyPodEvictionPolicy: AlwaysAllow
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 1G
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: {{ kubernetes_labels.node_worker }}
+          operator: Exists
+  podAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+              - key: cnpg.io/cluster
+                operator: In
+                values:
+                  - my-cluster
+              - key: role
+                operator: In
+                values:
+                  - replica
+          topologyKey: kubernetes.io/hostname
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 50
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+              - key: cnpg.io/cluster
+                operator: In
+                values:
+                  - my-cluster
+              - key: role
+                operator: In
+                values:
+                  - primary
+          topologyKey: kubernetes.io/hostname

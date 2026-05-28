@@ -4,3 +4,10 @@ dune_online_opmon:
   influxdb_v1:
     database_name: opmon_protobuf_v1
     read_write_username: readwrite
+  database:
+    postgresql_timescaledb:
+      deployment: opmon-timescaledb
+      database: opmon
+      owner: opmon
+      postgresql_image_name: postgresql-minimal-trixie
+      postgresql_major_version: 18

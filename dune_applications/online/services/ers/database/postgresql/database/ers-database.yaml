@@ -24,7 +24,6 @@ spec:
       owner: {{ dune_online_ers.database.postgresql.owner }}
       secret:
         name: {{ dune_online_ers.database.postgresql.deployment }}-{{ dune_online_ers.database.postgresql.owner }}-password
-      dataChecksums: true
   postgresql:
     parameters:
       shared_buffers: "64MB"  # this is guess work
