@@ -44,8 +44,8 @@ prometheis: # this is the plural of prometheus
         cpu: 300m
         memory: 512Mi
     logLevel: debug
-    scrapeInterval: 30s
-    scrapeTimeout: 25s
+    scrapeInterval: 45s
+    scrapeTimeout: 35s
     retention: 95d
     storage:
       volumeClaimTemplate:
