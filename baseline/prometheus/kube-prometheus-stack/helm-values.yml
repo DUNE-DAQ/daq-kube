@@ -3,6 +3,9 @@
 fullnameOverride: "kube-prometheus-stack"
 cleanPrometheusOperatorObjectNames: true
 
+global:
+  createAggregateClusterRoles: true
+
 ## Create default rules for monitoring the cluster
 ##
 defaultRules:
