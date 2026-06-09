@@ -12,6 +12,10 @@ deployments:
     alwaysDeploy: true
     skipDeleteIfTags: true
 
+  - path: ro-cluster-role
+    alwaysDeploy: true
+    skipDeleteIfTags: true
+
   - path: prometheus-operator-crds
     alwaysDeploy: true
     skipDeleteIfTags: true
@@ -28,6 +32,7 @@ deployments:
     tags:
       - pki
       - tls
+
 
   - barrier: true
     message: CRDs need to settle
