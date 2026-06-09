@@ -1,0 +1,6 @@
+helmChart:
+  chartVersion: 8.0.0
+  namespace: '{{ dune_online_opmon.namespace }}'
+  output: helm-rendered.yaml
+  releaseName: opmon-postgresql-timescaledb-exporter
+  repo: oci://ghcr.io/prometheus-community/charts/prometheus-postgres-exporter

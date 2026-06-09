@@ -55,3 +55,6 @@
 	path = .submodules/kepler
 	url = https://github.com/sustainable-computing-io/kepler.git
 	shallow = true
+[submodule "cnpg-artifacts"]
+	path = .submodules/cnpg-artifacts
+	url = https://github.com/cloudnative-pg/artifacts.git

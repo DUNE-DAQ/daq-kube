@@ -12,5 +12,10 @@ deployments:
   - barrier: true
     message: cnpg needs to settle (about 2m)
 
+  - path: cnpg-artifacts/image-catalogs
+    onlyRender: true
+
+  - path: cnpg-artifacts/image-catalogs-extensions
+
 vars:
   - file: variables/cnpg.yaml

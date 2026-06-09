@@ -1,0 +1,116 @@
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: postgres-backup-{{ dune_online_opmon.database.postgresql_timescaledb.deployment }}
+  namespace: {{ dune_online_opmon.namespace }}
+spec:
+  schedule: "0 4 * * *"  # Run daily at 4 AM
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          automountServiceAccountToken: false
+{% if inside_kind %}
+          hostUsers: true
+{% else %}
+          hostUsers: false
+{% endif %}
+          restartPolicy: OnFailure
+          affinity:
+            podAntiAffinity:
+              preferredDuringSchedulingIgnoredDuringExecution:
+              - weight: 100
+                podAffinityTerm:
+                  labelSelector:
+                    matchLabels:
+                      cnpg.io/cluster: {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}
+                  topologyKey: kubernetes.io/hostname
+              - weight: 50
+                podAffinityTerm:
+                  labelSelector:
+                    matchLabels:
+                      cnpg.io/instanceRole: primary
+                      cnpg.io/cluster: {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}
+                  topologyKey: kubernetes.io/hostname
+              - weight: 20
+                podAffinityTerm:
+                  labelSelector:
+                    matchLabels:
+                      cnpg.io/instanceRole: primary
+                  topologyKey: kubernetes.io/hostname
+              - weight: 10
+                podAffinityTerm:
+                  labelSelector:
+                    matchExpressions:
+                    - key: cnpg.io/cluster
+                      operator: Exists
+                  topologyKey: kubernetes.io/hostname
+          containers:
+          - name: postgres-backup
+            image: docker.io/library/postgres:latest
+            resources:
+              limits:
+                memory: 4Gi
+                cpu: 1
+              requests:
+                memory: 256Mi
+                cpu: 100m
+            securityContext:
+              runAsUser: 10000
+              runAsGroup: 10000
+              runAsNonRoot: true
+              allowPrivilegeEscalation: false
+              readOnlyRootFilesystem: true
+              seccompProfile:
+                type: RuntimeDefault
+              capabilities:
+                drop:
+                  - ALL
+            env:
+            - name: DATABASE_URI
+              valueFrom:
+                secretKeyRef:
+                  name: {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}-readonly-password
+                  key: uri
+            command:
+            - /bin/bash
+            - -c
+            - |
+              set -e
+              # Generate timestamp for backup filename
+              TIMESTAMP=$(date +"%Y%m%d_%H%M%S")
+              BACKUP_FILE="/backups/postgres_backup_${TIMESTAMP}.sql"
+              echo "Starting backup at $(date)"
+              echo "Backup file: ${BACKUP_FILE}"
+              # Perform the database dump using the connection string
+              pg_dump --verbose --no-password --create --file="${BACKUP_FILE}" "${DATABASE_URI}"
+              if [[ $? -eq 0 ]]; then
+                echo "Backup completed successfully"
+                # Compress the backup
+                gzip --best "${BACKUP_FILE}"
+                echo "Backup compressed: ${BACKUP_FILE}.gz"
+                # Clean up old backups (keep last 10 days)
+                echo "Cleaning up old backups..."
+                find /backups -name "postgres_backup_*.sql.gz" -mtime +10 -delete
+                # List remaining backups
+                echo "Current backups:"
+                ls -la /backups/postgres_backup_*.sql.gz 2>/dev/null || echo "No backups found"
+                # Report state
+                echo "Backup process completed at $(date)"
+              else
+                # Report state
+                echo "Backup failed!"
+                exit 1
+              fi
+            volumeMounts:
+            - name: backup-storage
+              mountPath: /backups
+          volumes:
+          - name: backup-storage
+            persistentVolumeClaim:
+              claimName: postgres-backup-opmon-postgresql-timescaledb
+          securityContext:
+            fsGroup: 10000

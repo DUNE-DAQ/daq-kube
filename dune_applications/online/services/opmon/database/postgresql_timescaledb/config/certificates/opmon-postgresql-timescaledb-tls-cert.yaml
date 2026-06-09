@@ -1,0 +1,33 @@
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}-tls-cert
+  namespace: {{ dune_online_opmon.namespace }}
+spec:
+  secretName: {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}-tls-cert
+  secretTemplate:
+    labels:
+      cnpg.io/reload: "true"
+  duration: 2160h
+  renewBefore: 360h
+  privateKey:
+    algorithm: RSA
+    size: 4096
+    rotationPolicy: Always
+  signatureAlgorithm: SHA512WithRSA
+  usages:
+    - server auth
+  dnsNames:
+    - {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}-rw
+    - {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}-rw.{{ dune_online_opmon.namespace }}
+    - {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}-rw.{{ dune_online_opmon.namespace }}.svc
+    - {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}-r
+    - {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}-r.{{ dune_online_opmon.namespace }}
+    - {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}-r.{{ dune_online_opmon.namespace }}.svc
+    - {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}-ro
+    - {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}-ro.{{ dune_online_opmon.namespace }}
+    - {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}-ro.{{ dune_online_opmon.namespace }}.svc
+  issuerRef:
+    name: {{ certmanager.ca_name }}
+    kind: ClusterIssuer

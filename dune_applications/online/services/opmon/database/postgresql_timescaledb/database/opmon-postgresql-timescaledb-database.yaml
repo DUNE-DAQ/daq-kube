@@ -1,0 +1,85 @@
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}
+  namespace: {{ dune_online_opmon.namespace }}
+spec:
+  instances: 1
+  resources: # this is guess work
+    requests:
+      cpu: 200m
+      memory: 512Mi
+    limits:
+      cpu: 1
+      memory: 512Mi
+  storage:
+    size: 8Gi  # this is guess work
+  certificates:
+    serverTLSSecret: {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}-tls-cert
+    serverCASecret: {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}-tls-cert
+  bootstrap:
+    initdb:  # due to extention image vs name mismatch, list it explicitly later
+      database: {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}
+      owner: {{ dune_online_opmon.database.postgresql_timescaledb.owner }}
+      secret:
+        name: {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}-{{ dune_online_opmon.database.postgresql_timescaledb.owner }}-password
+  imageCatalogRef:
+    apiGroup: postgresql.cnpg.io
+    kind: ClusterImageCatalog
+    name: {{ dune_online_opmon.database.postgresql_timescaledb.postgresql_image_name }}
+    major: {{ dune_online_opmon.database.postgresql_timescaledb.postgresql_major_version }}
+  postgresql:
+    parameters:
+      shared_buffers: "64MB"  # this is guess work
+      max_locks_per_transaction: '128'  # this is guess work
+      timescaledb.telemetry_level: 'off'
+    shared_preload_libraries:
+      - timescaledb
+    extensions:
+      - name: timescaledb-oss
+  managed:
+    roles:
+      # Prometheus exporter
+      - name: postgresql_exporter
+        ensure: present
+        comment: "Prometheus Postgresql Exporter"
+        login: true
+        superuser: false
+        connectionLimit: 25 # this is guess work
+        inRoles:
+          - pg_monitor
+        passwordSecret:
+          name: {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}-postgresql-exporter-password
+
+      # Read-only application user
+      - name: readonly
+        ensure: present
+        comment: "Read-only user for {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}"
+        login: true
+        superuser: false
+        inRoles:
+          - pg_read_all_data
+        passwordSecret:
+          name: {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}-readonly-password
+
+  affinity:
+   nodeAffinity:
+     requiredDuringSchedulingIgnoredDuringExecution:
+       nodeSelectorTerms:
+       - matchExpressions:
+         - key: {{ kubernetes_labels.node_worker }}
+           operator: Exists
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Database
+metadata:
+  name: {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}
+  namespace: {{ dune_online_opmon.namespace }}
+spec:
+  name: {{ dune_online_opmon.database.postgresql_timescaledb.database }}
+  cluster:
+    name: {{ dune_online_opmon.database.postgresql_timescaledb.deployment }}
+  owner: {{ dune_online_opmon.database.postgresql_timescaledb.owner }}
+  extensions:
+  - name: timescaledb
