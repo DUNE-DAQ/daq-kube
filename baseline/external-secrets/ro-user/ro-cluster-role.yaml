@@ -55,7 +55,6 @@ aggregationRule:
         rbac.authorization.k8s.io/aggregate-to-view: "true"
     - matchLabels:
         rbac.authorization.k8s.io/aggregate-to-cluster-view: "true"
-rules: []
 ---
 # ServiceAccount for read-only access
 apiVersion: v1
