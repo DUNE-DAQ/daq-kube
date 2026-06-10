@@ -2,6 +2,7 @@
 featureGates: ""
 
 watchAnyNamespace: true
+createAggregateRoles: true
 
 affinity:
   nodeAffinity:
