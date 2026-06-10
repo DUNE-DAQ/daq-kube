@@ -21,10 +21,10 @@ patches:
         value: {{ dune_online.kafka.namespace }}
       - op: replace
         path: /spec/podMetricsEndpoints/0/scrapeTimeout
-        value "30s"
+        value: "30s"
       - op: replace
         path: /spec/podMetricsEndpoints/0/interval
-        value "60s"
+        value: "60s"
   - target:
       kind: KafkaNodePool
     patch: |-
