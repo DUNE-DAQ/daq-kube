@@ -13,6 +13,9 @@ monitoring:
     annotations:
       {{ grafana_dashboard_folder_annotation }}: Postgresql
 
+rbac:
+  aggregateClusterRoles: true
+
 resources:
   limits:
     memory: 384Mi
