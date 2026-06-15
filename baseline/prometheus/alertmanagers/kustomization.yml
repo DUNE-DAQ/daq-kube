@@ -2,8 +2,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: {{ monitoring.namespace }}
-
 resources:
   - alertmanager_config_default.yml
   - alertmanager_grafana_datasource.yml
@@ -11,3 +9,17 @@ resources:
   - alertmanager_servicemonitors.yml
   - alertmanager_service.yml
   - alertmanager.yml
+
+patches:
+  - target:
+      group: monitoring.coreos.com
+      version: v1
+      kind: Alertmanager
+    patch: |-
+      - op: replace
+        path: /spec/hostUsers
+{% if inside_kind %}
+        value: true
+{% else %}
+        value: false
+{% endif %}

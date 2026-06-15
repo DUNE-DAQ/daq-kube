@@ -1,0 +1,28 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - prometheus_clusterrolebinding.yml
+  - prometheus_clusterrole.yml
+  - prometheus_grafana_datasource.yml
+  - prometheus_networkpolicy.yml
+  - prometheus_scrapeconfig.yml
+  - prometheus_serviceaccount.yml
+  - prometheus_servicemonitor.yml
+  - prometheus_service.yml
+  - prometheus.yml
+
+patches:
+  - target:
+      group: monitoring.coreos.com
+      version: v1
+      kind: Prometheus
+    patch: |-
+      - op: replace
+        path: /spec/hostUsers
+{% if inside_kind %}
+        value: true
+{% else %}
+        value: false
+{% endif %}
