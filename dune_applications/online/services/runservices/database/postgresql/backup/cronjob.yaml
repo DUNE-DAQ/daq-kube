@@ -13,11 +13,7 @@ spec:
       template:
         spec:
           automountServiceAccountToken: false
-{% if inside_kind %}
-          hostUsers: true
-{% else %}
           hostUsers: false
-{% endif %}
           restartPolicy: OnFailure
           affinity:
             podAntiAffinity:

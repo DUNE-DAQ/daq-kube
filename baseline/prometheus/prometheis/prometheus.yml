@@ -37,13 +37,7 @@ spec:
   {% endif %}
   {% endif %}
 
-  {% if inside_kind %}
-  # no hostUsers support in kind right now - last checked in v0.31.0
-  hostUsers: true
-  {% else %}
   hostUsers: false
-  {% endif %}
-
   securityContext:
     runAsNonRoot: true
     runAsUser: 65530
