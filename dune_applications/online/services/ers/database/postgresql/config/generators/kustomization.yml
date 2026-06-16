@@ -1,8 +1,0 @@
----
-apiVersion: kustomize.config.k8s.io/v1beta1
-kind: Kustomization
-
-namespace: {{ dune_online_ers.namespace }}
-
-resources:
-  - uuid_secretStore.yaml

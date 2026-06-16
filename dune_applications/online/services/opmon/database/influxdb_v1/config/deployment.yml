@@ -1,10 +1,5 @@
 ---
 deployments:
-  - path: generators
-
-  - barrier: true
-    message: Ensure all generators are published
-
   - path: secrets
 
   - barrier: true

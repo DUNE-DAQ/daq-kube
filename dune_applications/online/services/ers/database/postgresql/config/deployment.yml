@@ -1,11 +1,9 @@
 ---
 deployments:
-  - path: generators
-
   - path: certificates
 
   - barrier: true
-    message: Ensure all generators and certificates are generated
+    message: Ensure all certificates are ready
 
   - path: secrets
 
