@@ -10,13 +10,7 @@ config:
 {% endif %}
   unsafeUseServiceAccountToken: true
 
-env:
-- name: HOME
-  value: /tmp/headlamp
-
 volumeMounts:
-  - name: tmp
-    mountPath: /tmp
   - name: empty
     mountPath: /headlamp/static-plugins
   - name: kubeconfig
@@ -24,9 +18,6 @@ volumeMounts:
     readOnly: true
 
 volumes:
-  - name: tmp
-    emptyDir:
-      sizeLimit: 64Mi
   - name: empty
     emptyDir:
       sizeLimit: 4Mi
