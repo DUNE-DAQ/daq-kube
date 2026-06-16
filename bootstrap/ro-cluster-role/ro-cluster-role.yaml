@@ -18,10 +18,26 @@ rules:
       - list
       - watch
   - apiGroups:
-      - storage.k8s.io
+      - apiextensions.k8s.io
     resources:
-      - storageclasses
-      - volumeattachments
+      - customresourcedefinitions
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - admissionregistration.k8s.io
+    resources:
+      - mutatingwebhookconfigurations
+      - validatingwebhookconfigurations
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - coordination.k8s.io
+    resources:
+      - leases
     verbs:
       - get
       - list
@@ -36,9 +52,37 @@ rules:
       - list
       - watch
   - apiGroups:
-      - apiextensions.k8s.io
+      - scheduling.k8s.io
     resources:
-      - customresourcedefinitions
+      - priorityclasses
+      - runtimeclasses
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - storage.k8s.io
+    resources:
+      - storageclasses
+      - volumeattachments
+    verbs:
+      - get
+      - list
+      - watch
+---
+# Custom namespace-level resources for read-only access
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    rbac.authorization.k8s.io/aggregate-to-view: "true"
+  name: read-only-resources
+rules:
+  - apiGroups:
+      - rbac.authorization.k8s.io
+    resources:
+      - rolebindings
+      - roles
     verbs:
       - get
       - list
