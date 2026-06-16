@@ -3,6 +3,13 @@ config:
   extraArgs:
     - "-kubeconfig=/tmp/.kube/config"
 
+{%- if 'pocket' in target.name %}
+  inClusterContextName: pocket
+{%- else %}
+  inClusterContextName: "{{ target.name }}"
+{% endif %}
+  unsafeUseServiceAccountToken: true
+
 env:
 - name: HOME
   value: /tmp/headlamp
@@ -29,6 +36,11 @@ volumes:
       items:
         - key: config
           path: config
+
+serviceAccount:
+  name: headlamp-read-only
+clusterRoleBinding:
+  clusterRoleName: read-only-user
 
 securityContext:
   allowPrivilegeEscalation: false
@@ -61,3 +73,27 @@ affinity:
 
 podDisruptionBudget:
   enabled: true
+
+extraManifests:
+  - |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      name: headlamp-use-proxy
+    rules:
+      - apiGroups: [""]
+        resources: ["services/proxy"]
+        verbs: ["get"]
+  - |
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      name: headlamp-use-proxy
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: headlamp-use-proxy
+    subjects:
+      - kind: ServiceAccount
+        name: headlamp-read-only
+        namespace: headlamp
