@@ -1,8 +1,7 @@
 helmChart:
-  chartName: cert-manager
   chartVersion: v1.20.2
   namespace: '{{ certmanager.namespace }}'
   output: helm-rendered.yaml
   releaseName: cert-manager
-  repo: https://charts.jetstack.io
+  repo: oci://quay.io/jetstack/charts/cert-manager
   updateConstraints: ~1.x

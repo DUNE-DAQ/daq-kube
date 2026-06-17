@@ -1,8 +1,7 @@
 helmChart:
-  chartName: cilium
   chartVersion: 1.19.5
   namespace: '{{ cilium.namespace }}'
   output: helm-rendered.yaml
   releaseName: cilium
-  repo: https://helm.cilium.io/
+  repo: oci://quay.io/cilium/charts/cilium
   updateConstraints: ~1.19.x
