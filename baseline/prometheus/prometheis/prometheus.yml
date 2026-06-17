@@ -37,6 +37,10 @@ spec:
   {% endif %}
   {% endif %}
 
+  {% if prometheis[thisone].podMetadata is defined %}
+  podMetadata: {{ prometheis[thisone].podMetadata  | tojson }}
+  {% endif %}
+
   hostUsers: false
   securityContext:
     runAsNonRoot: true
