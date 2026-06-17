@@ -19,6 +19,10 @@ prometheis: # this is the plural of prometheus
         name: {{ alertmanagers.main.serviceName }}
         port: {{ alertmanagers.main.portName }}
 
+    podMetadata:
+      labels:
+        headlamp-prometheus: "true"
+
     # try to schedule on same node as alertmanager
     affinity:
       nodeAffinity:
