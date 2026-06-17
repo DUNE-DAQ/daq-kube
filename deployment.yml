@@ -56,6 +56,7 @@ vars:
   - file: variables/defaults/node_local_path_base.yaml
   - file: variables/defaults/prometheus_labels.yaml
   - file: variables/defaults/prometheus_scrape_configs.yaml
+  - file: variables/defaults/reflector.yaml
   - file: variables/defaults/smtp_server.yaml
   - file: variables/defaults/user_password.yaml
 
