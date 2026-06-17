@@ -23,7 +23,7 @@ metadata:
   name: microsocks
   namespace: microsocks
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/app: microsocks

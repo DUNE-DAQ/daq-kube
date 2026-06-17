@@ -1,0 +1,6 @@
+helmChart:
+  chartVersion: 10.0.49
+  namespace: '{{ reflector.namespace }}'
+  output: helm-rendered.yaml
+  releaseName: reflector
+  repo: oci://ghcr.io/emberstack/helm-charts/reflector
