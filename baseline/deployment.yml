@@ -10,10 +10,6 @@ deployments:
 
   - path: dns-autoscaler
 
-  - include: reflector
-    tags:
-      - secrets
-
   - include: external-secrets
     tags:
       - secrets
