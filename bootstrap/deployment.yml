@@ -33,9 +33,13 @@ deployments:
       - pki
       - tls
 
-
   - barrier: true
     message: CRDs need to settle
+
+  - include: reflector
+
+  - barrier: true
+    message: Ensure reflector is ready
 
 {% if with_cilium %}
   - path: cilium
