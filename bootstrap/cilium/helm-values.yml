@@ -48,13 +48,6 @@ cluster:
 cni:
   install: true
   binPath: /opt/cni/bin  # may need to change to /usr/libexec/cni
-  resources:  # https://github.com/cilium/cilium/pull/43495
-    requests:
-      cpu: 100m
-      memory: 10Mi
-    limits:
-      cpu: 1
-      memory: 1Gi
 
 # ipv4NativeRoutingCIDR is required for cluster mesh
 # but I don't know what to set it to...
