@@ -213,8 +213,21 @@ hubble:
 
 ### Cilium handles CNI only - Disable non-CNI features
 kubeProxyReplacement: false
+l7Proxy: false
+
+l2NeighDiscovery:
+  enabled: false
+
+vtep:
+  enabled: false
+
+localRedirectPolicies:
+  enabled: false
 
 bandwidthManager:
+  enabled: false
+
+ipMasqAgent:
   enabled: false
 
 bgpControlPlane:
@@ -226,10 +239,16 @@ endpointRoutes:
 ingressController:
   enabled: false
 
+socketLB:
+  enabled: false
+
 envoy:
   enabled: false
 
 gatewayAPI:
+  enabled: false
+
+egressGateway:
   enabled: false
 
 ipam:
