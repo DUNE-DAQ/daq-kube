@@ -1,109 +1,43 @@
 ---
-# What about:
-#  kube-proxy replacement
-#  bpf: flags in helm chart
-#  netkit
-#  masquerade
-#  ingress
-#  gateway-api
-#  socketLB
-#  traffic encryption
-#  service-mesh
-#  multi-cluster mesh
-#  service tunneling via envoy
-#  bigTCP
-#  localRedirectPolicy
-#  autoDirectNodeRoute
-#  BGP
-#  endpointRoutes
-#  routingMode
-#  cilium-NodePort
-#  cilium-wellKnownIdentities
-#  cilium-etcd
-#  cilium-preflight
-
-resources: # this is guess work
-  limits:
-    cpu: 4000m
-    memory: 8Gi
-  requests:
-    cpu: 300m
-    memory: 512Mi
-
-ipam:
-  mode: cluster-pool
-  operator:
-    clusterPoolIPv4PodCIDRList: {{ clusterPoolIPv4PodCIDRList | tojson }}
-
-resourceQuotas:
-  enabled: true
-
-annotateK8sNode: true
-logSystemLoad: true
-
 cluster:
   name: "{{ target.name }}"
-  id: {{ kubernetesClusterID }}
 
 cni:
   install: true
-  binPath: /opt/cni/bin  # may need to change to /usr/libexec/cni
+  binPath: /opt/cni/bin  # cri-o on fedora uses : /usr/libexec/cni
 
-# ipv4NativeRoutingCIDR is required for cluster mesh
-# but I don't know what to set it to...
+bpf:
+  masquerade: true
+  distributedLRU:
+    enabled: true
+  mapDynamicSizeRatio: 0.05
+  preallocateMaps: true
 
-pprof:
-  enabled: true
-
-bandwidthManager:
-  enabled: true
+# Top-level key - not nested under bpf
+bpfClockProbe: true
 
 pmtuDiscovery:
   enabled: true
 
-bpf:
-  distributedLRU:
-    enabled: true
-  preallocateMaps: true
-  tproxy: true
-
-bpfClockProbe: true
-
-gatewayAPI:
-  enabled: true
-  hostNetwork:
-    enabled: true
-
-envoy:
-  enabled: false # we don't use this right now
-  serviceMonitor:
-    enabled: true
-    labels:
-      "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.system }}"
-  resources: # this is guess work
-    limits:
-      cpu: 4000m
-      memory: 4Gi
-    requests:
-      cpu: 100m
-      memory: 512Mi
-  prometheus:
-    serviceMonitor:
-      enabled: true
-      interval: "30s"
-      labels:
-        "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.system }}"
-
 prometheus:
   enabled: true
-  controllerGroupMetrics:
-    - all
   serviceMonitor:
     enabled: true
     interval: "30s"
     trustCRDsExist: true
     labels:
       "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.system }}"
+  # controllerGroupMetrics: "all" generates high cardinality at scale.
+  # The list below covers operator health, policy churn, and endpoint
+  # lifecycle - sufficient for a production cluster without flooding
+  # Prometheus.
+  # Expand as you add features
+  controllerGroupMetrics:
+    - write-cnp-status
+    - cilium-node-gc
+    - cilium-endpoint-gc
+    - endpoint-regeneration
+    - policy-import
 
 dashboards:
   enabled: true
@@ -111,6 +45,76 @@ dashboards:
   labelValue: "{{ grafana_dashboard_label_value }}"
   annotations:
     "{{ grafana_dashboard_folder_annotation }}": Cilium
+
+resourceQuotas:
+  enabled: true
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+  requests:
+    cpu: 300m
+    memory: 512Mi
+
+priorityClassName: system-node-critical
+
+initResources:
+  limits:
+    cpu: 1000m
+    memory: 1Gi
+  requests:
+    cpu: 100m
+    memory: 32Mi
+
+cgroup:
+  autoMount:
+    enabled: true
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 1Gi
+      requests:
+        cpu: 100m
+        memory: 32Mi
+
+nodeinit:
+  enabled: true
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+
+operator:
+  enabled: true
+  rollOutPods: true
+  replicas: 2
+  resources:
+    limits:
+      cpu: 1000m
+      memory: 1Gi
+    requests:
+      cpu: 100m
+      memory: 256Mi
+  podDisruptionBudget:
+    enabled: true
+    unhealthyPodEvictionPolicy: AlwaysAllow
+  prometheus:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+      interval: "30s"
+      labels:
+        "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.system }}"
+  dashboards:
+    enabled: true
+    label: "{{ grafana_dashboard_label_name }}"
+    labelValue: "{{ grafana_dashboard_label_value }}"
+    annotations:
+      "{{ grafana_dashboard_folder_annotation }}": Cilium
 
 hubble:
   enabled: true
@@ -123,10 +127,7 @@ hubble:
       - flow
       - icmp
       - flows-to-world
-    #      - httpV2:exemplars=true
-    #      - labelsContext=source_ip,source_namespace,source_workload,destination_ip,destination_namespace,destination_workload,traffic_direction
-    #      - kafka_requests_total
-    #      - kafka_request_duration_seconds
+    enableOpenMetrics: true
     serviceMonitor:
       enabled: true
       interval: "30s"
@@ -138,28 +139,23 @@ hubble:
     labelValue: "{{ grafana_dashboard_label_value }}"
     annotations:
       "{{ grafana_dashboard_folder_annotation }}": Cilium
-  resources:
-    requests:
-      cpu: 50m
-      memory: 128Mi
-    limits:
-      cpu: 500m
-      memory: 512Mi
   tls:
     auto:
       enabled: true
       method: certmanager
+      # 3660 days (~10 years). Long validity reduces rotation risk
+      # for a long-lived cluster. Rotate manually if CA is compromised.
       certValidityDuration: 3660
       certManagerIssuerRef:
         group: cert-manager.io
         kind: ClusterIssuer
-        name: {{ certmanager.ca_name }}
+        name: "{{ certmanager.ca_name }}"
   relay:
     enabled: true
     podDisruptionBudget:
       enabled: true
       unhealthyPodEvictionPolicy: AlwaysAllow
-    resources: # this is guess work
+    resources:
       limits:
         cpu: 500m
         memory: 512Mi
@@ -171,9 +167,9 @@ hubble:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
             - matchExpressions:
-                - key: {{ kubernetes_labels.node_worker }}
+                - key: "{{ kubernetes_labels.node_worker }}"
                   operator: Exists
-      podAffinity: # copied from helm chart
+      podAffinity:
         requiredDuringSchedulingIgnoredDuringExecution:
           - topologyKey: kubernetes.io/hostname
             labelSelector:
@@ -192,19 +188,15 @@ hubble:
       enabled: true
       unhealthyPodEvictionPolicy: AlwaysAllow
     backend:
-      resources: # this is guess work
+      resources:
         limits:
           cpu: 500m
           memory: 512Mi
         requests:
           cpu: 20m
           memory: 64Mi
-      livenessProbe:  # https://github.com/cilium/cilium/issues/43501
-        enabled: false
-      readinessProbe: # https://github.com/cilium/cilium/issues/43501
-        enabled: false
     frontend:
-      resources: # this is guess work
+      resources:
         limits:
           cpu: 500m
           memory: 512Mi
@@ -216,66 +208,29 @@ hubble:
         requiredDuringSchedulingIgnoredDuringExecution:
           nodeSelectorTerms:
             - matchExpressions:
-                - key: {{ kubernetes_labels.node_worker }}
+                - key: "{{ kubernetes_labels.node_worker }}"
                   operator: Exists
 
-operator:
-  enabled: true
-  priorityClassName: system-node-critical
-  rollOutPods: true
-  resources: # this is guess work
-    limits:
-      cpu: 1000m
-      memory: 1Gi
-    requests:
-      cpu: 100m
-      memory: 256Mi
-  podDisruptionBudget:
-    enabled: true
-    unhealthyPodEvictionPolicy: AlwaysAllow
-  pprof:
-    enabled: true
-  prometheus:
-    enabled: true
-    serviceMonitor:
-      enabled: true
-      interval: "30s"
-      labels:
-        "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.system }}"
-  dashboards:
-    enabled: true
-    label: "{{ grafana_dashboard_label_name }}"
-    labelValue: "{{ grafana_dashboard_label_value }}"
-    annotations:
-      "{{ grafana_dashboard_folder_annotation }}": Cilium
+### Cilium handles CNI only - Disable non-CNI features
+kubeProxyReplacement: false
 
-priorityClassName: system-node-critical
+bandwidthManager:
+  enabled: false
 
-initResources: # this is guess work
-  limits:
-    cpu: 1000m
-    memory: 1Gi
-  requests:
-    cpu: 100m
-    memory: 32Mi
+bgpControlPlane:
+  enabled: false
 
-cgroup:
-  autoMount:
-    resources:
-      limits:
-        cpu: 1000m
-        memory: 1Gi
-      requests:
-        cpu: 100m
-        memory: 32Mi
+endpointRoutes:
+  enabled: false
 
-nodeinit:
-  enabled: true
-  priorityClassName: system-node-critical
-  resources: # this is guess work
-    limits:
-      cpu: 1000m
-      memory: 1Gi
-    requests:
-      cpu: 100m
-      memory: 256Mi
+ingressController:
+  enabled: false
+
+envoy:
+  enabled: false
+
+gatewayAPI:
+  enabled: false
+
+ipam:
+  mode: kubernetes
