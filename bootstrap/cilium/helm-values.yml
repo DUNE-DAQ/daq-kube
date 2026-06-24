@@ -27,17 +27,8 @@ prometheus:
     trustCRDsExist: true
     labels:
       "{{ prometheus_servicemonitor_label_name }}": "{{ prometheus_servicemonitor_labels.system }}"
-  # controllerGroupMetrics: "all" generates high cardinality at scale.
-  # The list below covers operator health, policy churn, and endpoint
-  # lifecycle - sufficient for a production cluster without flooding
-  # Prometheus.
-  # Expand as you add features
   controllerGroupMetrics:
-    - write-cnp-status
-    - cilium-node-gc
-    - cilium-endpoint-gc
-    - endpoint-regeneration
-    - policy-import
+    - all
 
 dashboards:
   enabled: true
@@ -122,11 +113,13 @@ hubble:
   metrics:
     enabled:
       - dns:query
+      - dns:response
       - drop
       - tcp
       - flow
       - icmp
       - flows-to-world
+      - http
     enableOpenMetrics: true
     serviceMonitor:
       enabled: true
