@@ -20,7 +20,10 @@ pmtuDiscovery:
   enabled: true
 
 kubeProxyReplacement: false
-k8sServiceHost: auto
+# if we enable kube-proxy replacement
+# we need to use k8sServiceHostRef not k8sServiceHost: auto
+# we can't do helm lookups in argocd/fluxcd until we're deployed
+# which is clearly a problem when bootstrapping a cluster
 
 prometheus:
   enabled: true
