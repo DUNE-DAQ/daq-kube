@@ -19,6 +19,9 @@ bpfClockProbe: true
 pmtuDiscovery:
   enabled: true
 
+kubeProxyReplacement: false
+k8sServiceHost: auto
+
 prometheus:
   enabled: true
   serviceMonitor:
