@@ -4,6 +4,10 @@ deployments:
     alwaysDeploy: true
     skipDeleteIfTags: true
 
+  - path: ro-cluster-role
+    alwaysDeploy: true
+    skipDeleteIfTags: true
+
   - include: metrics
     tags:
       - metrics
