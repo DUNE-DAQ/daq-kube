@@ -8,10 +8,6 @@ deployments:
     alwaysDeploy: true
     skipDeleteIfTags: true
 
-  - path: ro-cluster-role
-    alwaysDeploy: true
-    skipDeleteIfTags: true
-
   - path: prometheus-operator-crds
     alwaysDeploy: true
     skipDeleteIfTags: true
