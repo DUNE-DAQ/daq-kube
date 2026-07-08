@@ -4,10 +4,6 @@ deployments:
     alwaysDeploy: true
     skipDeleteIfTags: true
 
-  - path: debug
-    alwaysDeploy: true
-    skipDeleteIfTags: true
-
   - path: common-namespaces
     alwaysDeploy: true
     skipDeleteIfTags: true
