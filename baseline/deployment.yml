@@ -1,5 +1,9 @@
 ---
 deployments:
+  - path: debug
+    alwaysDeploy: true
+    skipDeleteIfTags: true
+
   - include: metrics
     tags:
       - metrics
