@@ -13,10 +13,10 @@ config:
 networkPolicy:
   enabled: true
 
-serviceMonitor:
+podMonitor:
   enabled: true
   labels:
-    {{ prometheus_servicemonitor_label_name }}: {{ prometheus_servicemonitor_labels.postgresql }}
+    {{ prometheus_podmonitor_label_name }}: {{ prometheus_podmonitor_labels.postgresql }}
 
 podDisruptionBudget:
   enabled: true
