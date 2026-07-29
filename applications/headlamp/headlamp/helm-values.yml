@@ -1,19 +1,11 @@
 config:
 {%- if 'pocket' in target.name %}
   inClusterContextName: pocket
-{%- else %}
-  inClusterContextName: "{{ target.name }}"
 {% endif %}
   unsafeUseServiceAccountToken: true
 
-volumeMounts:
-  - name: empty
-    mountPath: /headlamp/static-plugins
-
-volumes:
-  - name: empty
-    emptyDir:
-      sizeLimit: 4Mi
+staticPlugins:
+  enabled: false
 
 serviceAccount:
   name: headlamp-read-only
