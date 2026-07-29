@@ -1,5 +1,5 @@
 helmChart:
-  chartVersion: 10.0.60
+  chartVersion: 10.0.61
   namespace: '{{ reflector.namespace }}'
   output: helm-rendered.yaml
   releaseName: reflector
