@@ -27,6 +27,12 @@ spec:
   postgresql:
     parameters:
       shared_buffers: "64MB"  # this is guess work
+      max_replication_slots: "10"  # this is guess work
+      max_wal_senders: "10"  # this is guess work
+      wal_keep_size: "1GB"  # this is guess work
+  replicationSlots:
+    highAvailability:
+      enabled: true
   managed:
     roles:
       # Prometheus exporter
