@@ -8,6 +8,7 @@ cni:
 
 bpf:
   masquerade: true
+  datapathMode: auto
   distributedLRU:
     enabled: true
   mapDynamicSizeRatio: 0.05
