@@ -31,21 +31,6 @@ hostUsers: true
 hostUsers: false
 {% endif %}
 
-securityContext:
-  runAsUser: 10000
-  runAsGroup: 10000
-  runAsNonRoot: true
-  allowPrivilegeEscalation: false
-  readOnlyRootFilesystem: true
-  seccompProfile:
-    type: RuntimeDefault
-  capabilities:
-    drop:
-      - ALL
-
-podSecurityContext:
-  fsGroup: 10000
-
 extraEnvs:
   - name: STRIMZI_POD_SECURITY_PROVIDER_CLASS
     value: restricted
