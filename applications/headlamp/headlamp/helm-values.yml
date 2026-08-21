@@ -4,6 +4,12 @@ config:
 {% endif %}
   unsafeUseServiceAccountToken: true
 
+% if inside_kind %}
+hostUsers: true
+{% else %}
+hostUsers: false
+{% endif %}
+
 staticPlugins:
   enabled: false
 
