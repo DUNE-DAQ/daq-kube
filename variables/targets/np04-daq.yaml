@@ -7,7 +7,7 @@ clusterPoolIPv4PodCIDRList:
   - "10.244.0.0/16"
 
 cvmfs_csi:
-  http_proxy: http://ca-proxy.cern.ch:3128;DIRECT
+  http_proxy: http://np04-web-proxy.cern.cy:3128;http://ca-proxy.cern.ch:3128;DIRECT
 
 {% if args.with_dune_applications %}
 grafana:
