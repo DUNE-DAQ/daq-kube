@@ -1,0 +1,174 @@
+# Default values for kepler.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: quay.io/sustainable_computing_io/kepler
+  pullPolicy: IfNotPresent
+  tag: ""
+
+nameOverride: ""
+fullnameOverride: ""
+
+namespace:
+  create: false
+  name: kepler
+
+serviceAccount:
+  create: true
+  name: kepler
+
+rbac:
+  create: true
+
+service:
+  type: ClusterIP
+  port: 28282
+  targetPort: http
+  protocol: TCP
+
+daemonset:
+  hostPID: true
+  tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: Exists
+      effect: NoSchedule
+    - key: node-role.kubernetes.io/master
+      operator: Exists
+      effect: NoSchedule
+
+  nodeSelector: {}
+  affinity: {}
+
+  hostUsers: true
+  securityContext:
+    privileged: true
+    runAsNonRoot: false
+
+  resources:
+    {}
+    # limits:
+    #   cpu: 500m
+    #   memory: 512Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  # Probes use the dedicated /probe/* endpoints, which are cheap to serve.
+  # Avoid pointing them at /metrics: every scrape triggers a power computation.
+  livenessProbe:
+    httpGet:
+      path: /probe/livez
+      port: http
+    initialDelaySeconds: 10
+    periodSeconds: 60
+
+  startupProbe: {}
+
+  readinessProbe:
+    httpGet:
+      path: /probe/readyz
+      port: http
+    initialDelaySeconds: 5
+    periodSeconds: 10
+
+  # Chart-only knobs for the NVML init-container pattern. These do NOT live
+  # under .Values.config because that tree is dumped verbatim into
+  # /etc/kepler/config.yaml (templates/configmap.yaml), and the Kepler binary
+  # doesn't (and shouldn't) know about driver paths or init-image names.
+  nvidia:
+    # Path on the host where the NVIDIA GPU Operator exposes the driver
+    # container root FS. Override if your GPU Operator uses a non-default path.
+    driverPath: /run/nvidia/driver
+    # Init container used to copy NVML libraries into an emptyDir.
+    # Override repository/tag for airgapped or private-registry environments.
+    nvmlInitImage:
+      repository: busybox
+      tag: 1.36.1
+
+config:
+  log:
+    level: debug
+    format: text
+  host:
+    sysfs: /host/sys
+    procfs: /host/proc
+  monitor:
+    interval: 5s
+    staleness: 500ms
+    maxTerminated: 100
+    minTerminatedEnergyThreshold: 10
+  cpu:
+    # Ordered preference list of CPU power-meter backends. The first backend
+    # that initializes successfully and reports zones is used.
+    # Built-in backends: rapl, hwmon, fake.
+    preferredMeters: [rapl, hwmon]
+  rapl:
+    zones: []
+  exporter:
+    stdout:
+      enabled: false
+    prometheus:
+      enabled: true
+      debugCollectors:
+        - go
+  web:
+    configFile: ""
+    listenAddresses:
+      - :28282
+  debug:
+    pprof:
+      enabled: false
+  kube:
+    enabled: false
+    config: ""
+    nodeName: ""
+    podInformer:
+      mode: kubelet          # "kubelet" (default) or "apiserver"
+      pollInterval: 15s      # Poll interval for kubelet mode (default: 15s)
+  dev:
+    fake-cpu-meter:
+      enabled: false # DEPRECATED: set cpu.preferredMeters: ["fake"] instead. Overrides cpu.preferredMeters and emits a deprecation warning when true.
+      zones: []
+  # EXPERIMENTAL FEATURES - These features are experimental and may be unstable
+  # and are disabled by default
+  experimental:
+    platform:
+      redfish:
+        enabled: false  # Enable experimental Redfish BMC power monitoring
+        configFile: /etc/kepler/redfish.yaml  # Path to Redfish BMC configuration file
+        nodeName: ""  # Node name to use (overrides Kubernetes node name and hostname fallback)
+    hwmon:
+      forceEnabled: false # DEPRECATED: set cpu.preferredMeters: ["hwmon"] instead. Emits a deprecation warning when true.
+      zones: [] # List of zones to enable (default enable all)
+      chipRules: [] # User-defined chip pairing rules (override/add to hardcoded defaults)
+    gpu:
+      # Enabling this also triggers the chart's NVML init container and
+      # LD_LIBRARY_PATH injection (daemonset.nvidia.*). Leave false if you
+      # do not want GPU power monitoring.
+      enabled: false # Enable experimental GPU power monitoring
+      idlePower: 0 # GPU idle power in Watts (0 = auto-detect)
+      dcgmEndpoint: "" # dcgm-exporter metrics URL for MIG (auto-discovered if empty)
+
+# ServiceMonitor for Prometheus Operator
+serviceMonitor:
+  enabled: false
+  interval: 5s
+  path: /metrics
+  labels: {}
+  annotations: {}
+
+# A networkPolicy for Kepler
+networkPolicy:
+  enabled: false
+  ingress:
+    - ports:
+        - protocol: TCP
+          port: 28282
+  egress: []
+
+# Additional labels to add to all resources
+labels: {}
+
+# Additional annotations to add to all resources
+annotations: {}
