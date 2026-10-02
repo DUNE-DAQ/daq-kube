@@ -4,7 +4,7 @@ config:
 {% endif %}
   unsafeUseServiceAccountToken: true
 
-% if inside_kind %}
+{% if inside_kind %}
 hostUsers: true
 {% else %}
 hostUsers: false
