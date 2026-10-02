@@ -119,12 +119,11 @@ hubble:
   preferIpv6: false
   metrics:
     enabled:
-      - dns:query
-      - dns:response
+      - dns
       - drop
       - tcp
-      - flow
       - icmp
+      - flow
       - flows-to-world
       - http
     enableOpenMetrics: true
