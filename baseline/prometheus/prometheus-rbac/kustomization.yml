@@ -1,0 +1,10 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - clusterrole.yml
+  - clusterrolebinding-main.yml
+  - serviceaccount-controlplane.yml
+  - secret-controlplane.yml
+  - clusterrolebinding-controlplane.yml

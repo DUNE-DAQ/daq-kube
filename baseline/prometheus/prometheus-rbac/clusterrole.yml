@@ -16,6 +16,10 @@ rules:
       - endpoints
       - pods
     verbs: ["get", "list", "watch"]
+  - apiGroups: ["discovery.k8s.io"]
+    resources:
+      - endpointslices
+    verbs: ["get", "list", "watch"]
   - apiGroups:
       - "networking.k8s.io"
     resources:
@@ -23,3 +27,7 @@ rules:
     verbs: ["get", "list", "watch"]
   - nonResourceURLs: ["/metrics", "/metrics/cadvisor"]
     verbs: ["get"]
+  - apiGroups: [ "" ]
+    resources:
+      - services/node-exporter
+    verbs: [ "get", "list", "watch" ]
