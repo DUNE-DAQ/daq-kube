@@ -60,6 +60,67 @@ prometheusOperator:
           cpu: 10m
           memory: 64Mi
 
+
+## Control-plane ServiceMonitor authorization
+## These use the secret created by prometheus-rbac
+## Each block goes at root level, under component name
+##
+kubelet:
+  serviceMonitor:
+    authorization:
+      type: Bearer
+      credentials:
+        name: {{ prometheus_control_plane_token_secret_name }}
+        key: token
+
+kubeApiServer:
+  serviceMonitor:
+    authorization:
+      type: Bearer
+      credentials:
+        name: {{ prometheus_control_plane_token_secret_name }}
+        key: token
+
+kubeControllerManager:
+  serviceMonitor:
+    authorization:
+      type: Bearer
+      credentials:
+        name: {{ prometheus_control_plane_token_secret_name }}
+        key: token
+
+kubeScheduler:
+  serviceMonitor:
+    authorization:
+      type: Bearer
+      credentials:
+        name: {{ prometheus_control_plane_token_secret_name }}
+        key: token
+
+kubeProxy:
+  serviceMonitor:
+    authorization:
+      type: Bearer
+      credentials:
+        name: {{ prometheus_control_plane_token_secret_name }}
+        key: token
+
+kubeEtcd:
+  serviceMonitor:
+    authorization:
+      type: Bearer
+      credentials:
+        name: {{ prometheus_control_plane_token_secret_name }}
+        key: token
+
+coreDns:
+  serviceMonitor:
+    authorization:
+      type: Bearer
+      credentials:
+        name: {{ prometheus_control_plane_token_secret_name }}
+        key: token
+
 ## do not deploy a default monitoring setup
 ## we will manage it seperately
 prometheus:

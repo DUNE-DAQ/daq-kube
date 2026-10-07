@@ -6,6 +6,16 @@ deployments:
   - barrier: true
     message: We need a namespace to deploy into
 
+  - path: prometheus-rbac
+    message: We need service accounts for packaged serviceMonitors to load
+    tags:
+      - metrics
+      - monitoring
+      - prometheus
+
+  - barrier: true
+    message: We need RBAC before kube-prometheus-stack
+
   - path: kube-prometheus-stack
     waitReadiness: true
     tags:

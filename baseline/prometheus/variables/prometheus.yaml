@@ -1,5 +1,8 @@
 ---
 prometheus_operator_namespace: kube-prometheus
+prometheus_control_plane_service_account_name: kube-prometheus-stack-control-plane
+prometheus_control_plane_token_secret_name: kube-prometheus-stack-control-plane-token
+
 prometheis: # this is the plural of prometheus
   main:
     namespace: {{ monitoring.namespace }}
