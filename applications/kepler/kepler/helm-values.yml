@@ -8,9 +8,6 @@ daemonset:
       cpu: 100m
       memory: 128Mi
 
-  nodeSelector:
-    feature.node.kubernetes.io/cpu-cpuid.HYPERVISOR: "false"
-
   livenessProbe:
     httpGet:
       path: /metrics
@@ -27,6 +24,14 @@ daemonset:
 
 networkPolicy:
   enabled: true
+  egress:
+    - ports:
+      - protocol: TCP
+        port: 443
+      - protocol: TCP
+        port: 53
+      - protocol: UDP
+        port: 53
 
 serviceMonitor:
   enabled: true
