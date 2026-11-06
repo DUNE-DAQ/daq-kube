@@ -1,5 +1,5 @@
 helmChart:
-  chartVersion: v1.21.2
+  chartVersion: v1.21.3
   namespace: '{{ certmanager.namespace }}'
   output: helm-rendered.yaml
   releaseName: cert-manager

@@ -7,7 +7,6 @@ deployments:
     message: We need a namespace to deploy into
 
   - path: kepler
-  - path: dashboards
 
 vars:
   - file: variables/kepler.yaml
