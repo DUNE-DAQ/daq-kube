@@ -47,5 +47,6 @@ dashboards:
   enabled: true
   labels:
     {{ grafana_dashboard_label_name }}: {{ grafana_dashboard_label_value }}
+    {{ grafana_devel_dashboard_label_name }}: {{ grafana_dashboard_label_value }}
   annotations:
     {{ grafana_dashboard_folder_annotation }}: Kubernetes

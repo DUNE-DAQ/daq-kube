@@ -21,3 +21,5 @@ This folder includes a number of well regarded kubernetes dashboards that are lo
 This is a playground environment for testing the development of new dashboards.
 
 It is accessible within the cluster under the name `grafana-devel.monitoring.svc` on port 3000.
+
+To load a dashboard ConfigMap into grafana-devel as well, add the `{{ grafana_devel_dashboard_label_name }}: {{ grafana_dashboard_label_value }}` label next to the regular dashboard label.
