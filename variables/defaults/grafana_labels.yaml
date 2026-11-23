@@ -2,6 +2,9 @@
 grafana_dashboard_label_name: grafana_dashboard
 grafana_dashboard_label_value: "import"
 
+# opt-in label for dashboards that grafana-devel should also load
+grafana_devel_dashboard_label_name: grafana_devel_dashboard
+
 grafana_datasource_label_name: grafana_datasource
 grafana_datasource_label_value: "import"
 

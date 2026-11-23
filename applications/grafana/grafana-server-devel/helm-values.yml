@@ -17,6 +17,27 @@ useStatefulSet: true
 persistence:
   enabled: true
 
+# load only dashboards that opt in with the grafana-devel label
+sidecar:
+  resources:
+    limits:
+      cpu: 200m
+      memory: 384Mi
+    requests:
+      cpu: 50m
+      memory: 256Mi
+
+  dashboards:
+    enabled: true
+    label: "{{ grafana_devel_dashboard_label_name }}"
+    labelValue: "{{ grafana_dashboard_label_value }}"
+    searchNamespace: ALL
+    folderAnnotation: {{ grafana_dashboard_folder_annotation }}
+    provider:
+      allowUiUpdates: false
+      disableDelete: true
+      foldersFromFilesStructure: true
+
 {% if inside_kind %}
 hostUsers: true
 {% else %}
