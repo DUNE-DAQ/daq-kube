@@ -6,6 +6,7 @@ setDefaultUser:
 
 image:
   repository: docker.io/influxdb    # use fully qualified name
+  tag: "1.8" # No arm build of old `-alpine` image
 
 env:
   - name: INFLUXDB_DATA_MAX_SERIES_PER_DATABASE
